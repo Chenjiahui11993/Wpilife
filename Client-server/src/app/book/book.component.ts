@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class BookComponent implements OnInit {
   selectedDept: string[] = ['cs'];
-  Departments = ['Computer Science', 'Computer and Electrical Engineering', 'ESL', 'Data Science', 'MSIT', 'Marketing', 'Others'];
+  Departments = ['Computer Science', 'Electrical Engineering', 'ESL', 'Data Science', 'MSIT', 'Marketing', 'Others'];
   AllBooks: BookModel[] = [];
   selectedBook: BookModel [] = [];
   constructor(private bookService: BookService, private router: Router, private activateRouter: ActivatedRoute) {
@@ -18,8 +18,8 @@ export class BookComponent implements OnInit {
 
   ngOnInit() {
   }
-  ToProductDetail(id: number) {
-    console.log(this.selectedDept);
+  ToBookDetail(id: number) {
+    this.router.navigate(['/book-list', id]);
   }
   onChange(value: any) {
     this.selectedBook = [];

@@ -6,9 +6,9 @@ export class BookModel {
   price: number;
   date: string;
   contactInfo: string;
-  img: string;
+  img: string[];
   constructor(id: number, name: string, department: string, owwnerID: number,
-              price: number, date: string, contactInfo: string, img: string) {
+              price: number, date: string, contactInfo: string, img: string[]) {
      this.id = id;
      this.name = name;
      this.department = department;

@@ -117,14 +117,13 @@
 							  {{Department}}
 							</mat-list-option>
 						  </mat-selection-list>
-						  <button class="btn btn-primary"></button>
 					</div>
 
 					<div class="col-md-3 text-center" *ngFor="let Book of AllBooks | paginate: {       id:'Book',
 						                                                                               itemsPerPage: 6, 
 			                                                                                           currentPage: p }">
-						<div class="product" (click)="ToProductDetail(Book.id)">
-							<div class="product-grid" [style.background]="'url('+Book.img+')'">
+						<div class="product" (click)="ToBookDetail(Book.id)">
+							<div class="product-grid" [style.background]="'url('+Book.img[0]+')'">
 							</div>
 							<div class="desc">
 								<h3>

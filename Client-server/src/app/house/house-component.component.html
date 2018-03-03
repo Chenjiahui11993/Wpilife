@@ -101,7 +101,7 @@
 																							   itemsPerPage: 6, 
 																							   currentPage: hp }">
 						<div class="product" (click)="toHouseDetail(house.id)" >
-							<div class="product-grid" [style.background]="'url('+house.imagePath+')'">
+							<div class="product-grid" [style.background]="'url('+house.imagePath[0]+')'">
 								<div class="inner">
 									<p>
 										<a class="icon">

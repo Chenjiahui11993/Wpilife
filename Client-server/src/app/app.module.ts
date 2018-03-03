@@ -24,10 +24,12 @@ import { HouseDetailComponent } from './house/house-detail/house-detail.componen
 import { HouseDescComponent } from './house/house-detail/house-desc/house-desc.component';
 import { HouseContactComponent } from './house/house-detail/house-contact/house-contact.component';
 import { BookComponent } from './book/book.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-import {MatListModule} from '@angular/material/list';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { MatListModule} from '@angular/material/list';
 import { BookService } from './Service/book-service';
+import { BookDetailComponent } from './book/book-detail/book-detail.component';
+import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { BookService } from './Service/book-service';
     HouseDetailComponent,
     HouseDescComponent,
     HouseContactComponent,
-    BookComponent
+    BookComponent,
+    BookDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { BookService } from './Service/book-service';
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatListModule
+    MatListModule,
+    MatTabsModule
   ],
   providers: [
               ProductService,
