@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PageScrollConfig } from 'ng2-page-scroll';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  constructor() {
+    PageScrollConfig.defaultDuration = 500;
+  }
 }

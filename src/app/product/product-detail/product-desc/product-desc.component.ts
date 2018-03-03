@@ -1,0 +1,29 @@
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../../Service/product-service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ProductModel } from '../../product-model';
+@Component({
+  selector: 'app-product-desc',
+  templateUrl: './product-desc.component.html',
+  styleUrls: ['./product-desc.component.css']
+})
+export class ProductDescComponent implements OnInit {
+  ProductDetail: ProductModel;
+  id: number;
+  price: number;
+  desc: string;
+  constructor(private productService: ProductService, private activateRouter: ActivatedRoute, private router: Router) { }
+
+  ngOnInit() {
+    this.activateRouter.params
+    .subscribe(
+      (params: Params) => {
+      this.id = params['id'];
+      }
+    );
+    this.ProductDetail = this.productService.getProduct(this.id - 1);
+    this.price = this.ProductDetail.price;
+    this.desc = this.ProductDetail.desc;
+    console.log(this.desc);
+    }
+}
