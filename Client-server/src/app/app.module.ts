@@ -30,6 +30,8 @@ import { MatListModule} from '@angular/material/list';
 import { BookService } from './Service/book-service';
 import { BookDetailComponent } from './book/book-detail/book-detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { NewStudentsComponent } from './new-students/new-students.component';
+import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     HouseDescComponent,
     HouseContactComponent,
     BookComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    NewStudentsComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatButtonModule,
     MatCheckboxModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatRadioModule
   ],
   providers: [
               ProductService,

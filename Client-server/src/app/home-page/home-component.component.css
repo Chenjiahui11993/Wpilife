@@ -4,8 +4,6 @@ body, html {
 	-webkit-font-smoothing: antialiased !important;
 	color: #5a5a5a;
 }
-h1 {
-}
 h1 strong {
 	font-weight: 900;
 }
@@ -454,3 +452,13 @@ nav#footer p {
 #footer i.fa:hover {
 	color: #D2527F;
 }
+.mat-tab-labels{
+	justify-content: center; /* align items in Main Axis */
+	width: 100%;
+}
+.cat .mat-tab-body-content{
+	height: 100%;
+	width: 100%;
+    overflow: hidden;
+}
+

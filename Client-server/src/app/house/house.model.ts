@@ -2,7 +2,7 @@ export class HouseModel {
 id: number;
 Address: string;
 description: string;
-imagePath: string[];
+img: string[];
 price: number;
 date: string;
 ownerinfo: string;
@@ -10,7 +10,7 @@ constructor(id: number, Address: string, desc: string, img: string[], price: num
     this.id = id;
     this.Address = Address;
     this.description = desc;
-    this.imagePath = img;
+    this.img = img;
     this.price = price;
     this.date = data;
     this.ownerinfo = ownerinfo;

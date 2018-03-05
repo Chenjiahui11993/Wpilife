@@ -2,323 +2,377 @@
 <html lang="en">
 
 <body>
-<!-- Navigation
+  <!-- Navigation
     ==========================================-->
-   <app-nav></app-nav>
+  <app-nav></app-nav>
 
-<!-- Header -->
+  <!-- Header -->
 
-<app-header></app-header>
-<!-- Services Section -->
-<div id="services-section" class="text-center">
-  <div class="container">
-    <div class="section-title center">
-      <h2>Shopping <strong>Section</strong></h2>
-      <hr>
-      <div class="clearfix"></div>
-      <p>There you can find almost whatever you want.</p>
-    </div>
-    <div class="space"></div>
-    <div class="row">
-      <div class="col-md-3 col-sm-6 service"> <i [routerLink]="['house-list']" class="fa fa-home"></i>
-        <h4><strong>House/Apartment Rent</strong></h4>
-        <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>
+  <app-header></app-header>
+  <!-- Services Section -->
+  <div id="services-section" class="text-center">
+    <div class="container">
+      <div class="section-title center">
+        <h2>Shopping
+          <strong>Section</strong>
+        </h2>
+        <hr>
+        <div class="clearfix"></div>
+        <p>There you can find almost whatever you want.</p>
       </div>
-      <div class="col-md-3 col-sm-6 service"> <i [routerLink]="'book-list'" class="fa fa-mobile"></i>
-        <h4><strong>Book</strong></h4>
-        <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque.</p>
-      </div>
-      <div class="col-md-3 col-sm-6 service"> <i [routerLink]="'product-list'" class="fa fa-pie-chart"></i>
-        <h4><strong>Household Item</strong></h4>
-        <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>
-      </div>
-      <div class="col-md-3 col-sm-6 service"> <i class="fa fa-line-chart"></i>
-        <h4><strong>Others</strong></h4>
-        <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque.</p>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Portfolio Section -->
-<div id="works-section">
-  <div class="container"> <!-- Container -->
-    <div class="section-title text-center center">
-      <h2>Recent <strong>Product</strong></h2>
-      <hr>
-      <div class="clearfix"></div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
-    </div>
-    <div class="categories">
-      <ul class="cat">
-        <li>
-          <ol class="type">
-            <li><a href="#" data-filter="*" class="active">All</a></li>
-            <li><a href="#" data-filter=".web">House</a></li>
-            <li><a href="#" data-filter=".app">Book</a></li>
-            <li><a href="#" data-filter=".branding">Household Item</a></li>
-          </ol>
-        </li>
-      </ul>
-      <div class="clearfix"></div>
-    </div>
-    <div class="row">
-      <div class="portfolio-items">
-        <div class="col-sm-6 col-md-3 col-lg-3 web">
-          <div class="portfolio-item">
-            <div class="hover-bg"> <a href="../../assets/01.jpg" rel="prettyPhoto">
-              <div class="hover-text">
-                <h4>Project Title</h4>
-                <small>Web Design</small>
-                <div class="clearfix"></div>
-                <i class="fa fa-plus"></i> </div>
-              <img src="../../assets/01.jpg" class="img-responsive" alt="Project Title"> </a> </div>
-          </div>
+      <div class="space"></div>
+      <div class="row">
+        <div class="col-md-3 col-sm-6 service">
+          <i [routerLink]="['house-list']" class="fa fa-home"></i>
+          <h4>
+            <strong>House/Apartment Rent</strong>
+          </h4>
+          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>
         </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 app">
-          <div class="portfolio-item">
-            <div class="hover-bg"> <a href="../../assets/02.jpg" rel="prettyPhoto">
-              <div class="hover-text">
-                <h4>Project Title</h4>
-                <small>App Development</small>
-                <div class="clearfix"></div>
-                <i class="fa fa-plus"></i> </div>
-              <img src="../../assets/02.jpg" class="img-responsive" alt="Project Title"> </a> </div>
-          </div>
+        <div class="col-md-3 col-sm-6 service">
+          <i [routerLink]="'book-list'" class="fa fa-mobile"></i>
+          <h4>
+            <strong>Book</strong>
+          </h4>
+          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque.</p>
         </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 web">
-          <div class="portfolio-item">
-            <div class="hover-bg"> <a href="../../assets/03.jpg" rel="prettyPhoto">
-              <div class="hover-text">
-                <h4>Project Title</h4>
-                <small>Web Design</small>
-                <div class="clearfix"></div>
-                <i class="fa fa-plus"></i> </div>
-              <img src="../../assets/03.jpg" class="img-responsive" alt="Project Title"> </a> </div>
-          </div>
+        <div class="col-md-3 col-sm-6 service">
+          <i [routerLink]="'product-list'" class="fa fa-pie-chart"></i>
+          <h4>
+            <strong>Household Item</strong>
+          </h4>
+          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>
         </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 web">
-          <div class="portfolio-item">
-            <div class="hover-bg"> <a href="../../assets/04.jpg" rel="prettyPhoto">
-              <div class="hover-text">
-                <h4>Project Title</h4>
-                <small>Web Design</small>
-                <div class="clearfix"></div>
-                <i class="fa fa-plus"></i> </div>
-              <img src="../../assets/04.jpg" class="img-responsive" alt="Project Title"> </a> </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 web">
-          <div class="portfolio-item">
-            <div class="hover-bg"> <a href="../../assets/05.jpg" rel="prettyPhoto">
-              <div class="hover-text">
-                <h4>Project Title</h4>
-                <small>Web Design</small>
-                <div class="clearfix"></div>
-                <i class="fa fa-plus"></i> </div>
-              <img src="../../assets/04.jpg" class="img-responsive" alt="Project Title"> </a> </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 branding">
-          <div class="portfolio-item">
-            <div class="hover-bg"> <a href="../../assets/06.jpg" rel="prettyPhoto">
-              <div class="hover-text">
-                <h4>Project Title</h4>
-                <small>Branding</small>
-                <div class="clearfix"></div>
-                <i class="fa fa-plus"></i> </div>
-              <img src="../../assets/06.jpg" class="img-responsive" alt="Project Title"> </a> </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 branding app">
-          <div class="portfolio-item">
-            <div class="hover-bg"> <a href="../../assets/07.jpg" rel="prettyPhoto">
-              <div class="hover-text">
-                <h4>Project Title</h4>
-                <small>App Development, Branding</small>
-                <div class="clearfix"></div>
-                <i class="fa fa-plus"></i> </div>
-              <img src="../../assets/07.jpg" class="img-responsive" alt="Project Title"> </a> </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 web">
-          <div class="portfolio-item">
-            <div class="hover-bg"> <a href="../../assets/08.jpg" rel="prettyPhoto">
-              <div class="hover-text">
-                <h4>Project Title</h4>
-                <small>Web Design</small>
-                <div class="clearfix"></div>
-                <i class="fa fa-plus"></i> </div>
-              <img src="../../assets/08.jpg" class="img-responsive" alt="Project Title"> </a> </div>
-          </div>
+        <div class="col-md-3 col-sm-6 service">
+          <i class="fa fa-line-chart"></i>
+          <h4>
+            <strong>Others</strong>
+          </h4>
+          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque.</p>
         </div>
       </div>
     </div>
   </div>
-</div>
-<!-- About Section -->
-<div id="about-section">
-  <div class="container">
-    <div class="section-title text-center center">
-      <h2><strong>New</strong> Students</h2>
-      <hr>
-      <div class="clearfix"></div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
-    </div>
-    <div class="row">
-      <div class="col-md-6"> <img src="../../assets/about.png" class="img-responsive"> </div>
-      <div class="col-md-6">
-        <div class="about-text"> <i class="fa fa-users"></i>
-          <h4>Survival Guide</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis bibendum.</p>
-          <i class="fa fa-puzzle-piece"></i>
-          <h4>Airport pickup</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis bibendum.</p>
-          <i class="fa fa-check-square-o"></i>
-          <h4>Temporary Residence</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at.</p>
-        </div>
+  <!-- Portfolio Section -->
+  <div id="works-section">
+    <div class="container">
+      <!-- Container -->
+      <div class="section-title text-center center">
+        <h2>Recent
+          <strong>Product</strong>
+        </h2>
+        <hr>
+        <div class="clearfix"></div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
       </div>
+      <div class="categories">
+        <ul class="cat">
+          <mat-tab-group>
+            <mat-tab label="All" >
+           <br>
+           <br>
+           <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let list of allList; let i of index">
+              <div class="portfolio-item" >
+                <div class="hover-bg" *ngIf="i>1">
+                  <a [routerLink]="['house-list', list.id]">
+                    <div class="hover-text">
+                      <h4>{{list.Address}}</h4>
+                      <small>{{list.price}}</small>
+                      <div class="clearfix"></div>
+                      <i class="fa fa-plus"></i>
+                    </div>
+                    <img [src]="list.img[0]" class="img-responsive" alt="Project Title"> </a>
+                </div>
+                <div class="hover-bg" *ngIf="i <= 4&&i > 1">
+                    <a [routerLink]="['book-list', list.id]">
+                      <div class="hover-text">
+                        <h4>{{list.name}}</h4>
+                        <small>{{list.department}}</small>
+                        <div class="clearfix"></div>
+                        <i class="fa fa-plus"></i>
+                      </div>
+                      <img [src]="list.img[0]" class="img-responsive" alt="Project Title"> </a>
+                  </div>
+                  <div class="hover-bg" *ngIf="i <= 7&&i > 4">
+                      <a [routerLink]="['product-list', list.id]">
+                        <div class="hover-text">
+                          <h4>{{list.name}}</h4>
+                          <small>{{list.price}}</small>
+                          <div class="clearfix"></div>
+                          <i class="fa fa-plus"></i>
+                        </div>
+                        <img [src]="list.img[0]" class="img-responsive" alt="Project Title"> </a>
+                    </div>
+              </div>
+            </div>
+            </mat-tab>
+            <mat-tab label="House">
+                <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let house of houseModel;let i of index">
+                    <div class="portfolio-item" >
+                      <div class="hover-bg">
+                        <a [routerLink]="['house-list', house.id]">
+                          <div class="hover-text">
+                            <h4>{{house.Address}}</h4>
+                            <small>{{house.price}}</small>
+                            <div class="clearfix"></div>
+                            <i class="fa fa-plus"></i>
+                          </div>
+                          <img [src]="house.img[0]" class="img-responsive" alt="Project Title"> </a>
+                      </div>
+                    </div>
+                  </div>
+            </mat-tab>
+            <mat-tab label="Book">
+                <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let book of bookModel">
+                    <div class="portfolio-item" >
+                      <div class="hover-bg">
+                        <a [routerLink]="['book-list', book.id]" >
+                          <div class="hover-text">
+                            <h4>{{book.name}}</h4>
+                            <small>{{book.department}}</small>
+                            <div class="clearfix"></div>
+                            <i class="fa fa-plus"></i>
+                          </div>
+                          <img [src]="book.img[0]" class="img-responsive" alt="Project Title"> </a>
+                      </div>
+                    </div>
+                  </div>
+            </mat-tab>
+            <mat-tab label="Household Item">
+                <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let product of productModel">
+                    <div class="portfolio-item" >
+                      <div class="hover-bg">
+                        <a [routerLink]="['product-list', product.id]">
+                          <div class="hover-text">
+                            <h4>{{product.name}}</h4>
+                            <small>{{product.price}}</small>
+                            <div class="clearfix"></div>
+                            <i class="fa fa-plus"></i>
+                          </div>
+                          <img [src]="product.img[0]" class="img-responsive" alt="Project Title"> </a>
+                      </div>
+                    </div>
+                  </div>  
+            </mat-tab>
+          </mat-tab-group>
+
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
     </div>
   </div>
-</div>
-
-<!-- Team Section -->
-<div id="team-section" class="text-center">
-  <div class="container">
-    <div class="section-title center">
-      <h2>Meet the <strong>team</strong></h2>
-      <hr>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
-    </div>
-    <div id="row">
-      <div class="col-md-3 col-sm-6 team">
-        <div class="thumbnail"> <img src="../../assets/t01.jpg" alt="..." class="img-circle team-img">
-          <div class="caption">
-            <h3>Jessica Wally</h3>
-            <p>Founder</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-        </div>
+  <!-- About Section -->
+  <div id="about-section">
+    <div class="container">
+      <div class="section-title text-center center">
+        <h2>
+          <strong>New</strong> Students</h2>
+        <hr>
+        <div class="clearfix"></div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
       </div>
-      <div class="col-md-3 col-sm-6 team">
-        <div class="thumbnail"> <img src="../../assets/t02.jpg" alt="..." class="img-circle team-img">
-          <div class="caption">
-            <h3>Mike Sloan</h3>
-            <p>Web Designer</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 team">
-        <div class="thumbnail"> <img src="../../assets/t03.jpg" alt="..." class="img-circle team-img">
-          <div class="caption">
-            <h3>Michele Doe</h3>
-            <p>Web Designer</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 team">
-        <div class="thumbnail"> <img src="../../assets/t04.jpg" alt="..." class="img-circle team-img">
-          <div class="caption">
-            <h3>Larry Evans</h3>
-            <p>Project Manager</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <div class="row">
+        <div class="col-md-6">
+          <img src="../../assets/about.png" class="img-responsive"> </div>
+        <div class="col-md-6">
+          <div class="about-text" [routerLink]="['survival-guide']">
+            <i class="fa fa-users"></i>
+            <h4>Survival Guide</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh
+              ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis
+              bibendum.</p>
+            <i class="fa fa-puzzle-piece"></i>
+            <h4>Airport pickup</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh
+              ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis
+              bibendum.</p>
+            <i class="fa fa-check-square-o"></i>
+            <h4>Temporary Residence</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh
+              ante facilisis bibendum dolor feugiat at.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Testimonials Section -->
-<div id="testimonials-section" class="text-center">
-  <div class="container">
-    <div class="section-title center">
-      <h2>What <strong>clients</strong> say</h2>
-      <hr>
+  <!-- Team Section -->
+  <div id="team-section" class="text-center">
+    <div class="container">
+      <div class="section-title center">
+        <h2>Meet the
+          <strong>team</strong>
+        </h2>
+        <hr>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
+      </div>
+      <div id="row">
+        <div class="col-md-3 col-sm-6 team">
+          <div class="thumbnail">
+            <img src="../../assets/t01.jpg" alt="..." class="img-circle team-img">
+            <div class="caption">
+              <h3>Jessica Wally</h3>
+              <p>Founder</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 team">
+          <div class="thumbnail">
+            <img src="../../assets/t02.jpg" alt="..." class="img-circle team-img">
+            <div class="caption">
+              <h3>Mike Sloan</h3>
+              <p>Web Designer</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 team">
+          <div class="thumbnail">
+            <img src="../../assets/t03.jpg" alt="..." class="img-circle team-img">
+            <div class="caption">
+              <h3>Michele Doe</h3>
+              <p>Web Designer</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 team">
+          <div class="thumbnail">
+            <img src="../../assets/t04.jpg" alt="..." class="img-circle team-img">
+            <div class="caption">
+              <h3>Larry Evans</h3>
+              <p>Project Manager</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="row">
+  </div>
+
+  <!-- Testimonials Section -->
+  <div id="testimonials-section" class="text-center">
+    <div class="container">
+      <div class="section-title center">
+        <h2>What
+          <strong>clients</strong> say</h2>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div id="testimonial" class="owl-carousel owl-theme">
+            <div class="item">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
+                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
+              <p>
+                <strong>John DOE</strong>, CEO, Company.</p>
+            </div>
+            <div class="item">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
+                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
+              <p>
+                <strong>Jenny DOE</strong>, CEO, Company.</p>
+            </div>
+            <div class="item">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
+                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
+              <p>
+                <strong>John DOEn</strong>, CEO, Company.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div id="contact-section" class="text-center">
+    <div class="container">
+      <div class="section-title center">
+        <h2>
+          <strong>Contact</strong> us</h2>
+        <hr>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
+      </div>
       <div class="col-md-8 col-md-offset-2">
-        <div id="testimonial" class="owl-carousel owl-theme">
-          <div class="item">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
-            <p><strong>John DOE</strong>, CEO, Company.</p>
-          </div>
-          <div class="item">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
-            <p><strong>Jenny DOE</strong>, CEO, Company.</p>
-          </div>
-          <div class="item">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
-            <p><strong>John DOEn</strong>, CEO, Company.</p>
-          </div>
+        <div class="col-md-4">
+          <i class="fa fa-map-marker fa-2x"></i>
+          <p>321 Awesome Street
+            <br> New York, NY 17022</p>
         </div>
+        <div class="col-md-4">
+          <i class="fa fa-envelope-o fa-2x"></i>
+          <p>info@companyname.com</p>
+        </div>
+        <div class="col-md-4">
+          <i class="fa fa-phone fa-2x"></i>
+          <p> +1 800 123 1234</p>
+        </div>
+        <hr>
+        <div class="clearfix"></div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- Contact Section -->
-<div id="contact-section" class="text-center">
-  <div class="container">
-    <div class="section-title center">
-      <h2><strong>Contact</strong> us</h2>
-      <hr>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
-    </div>
-    <div class="col-md-8 col-md-offset-2">
-      <div class="col-md-4"> <i class="fa fa-map-marker fa-2x"></i>
-        <p>321 Awesome Street<br>
-          New York, NY 17022</p>
-      </div>
-      <div class="col-md-4"> <i class="fa fa-envelope-o fa-2x"></i>
-        <p>info@companyname.com</p>
-      </div>
-      <div class="col-md-4"> <i class="fa fa-phone fa-2x"></i>
-        <p> +1 800 123 1234</p>
-      </div>
-      <hr>
-      <div class="clearfix"></div>
-    </div>
-    <div class="col-md-8 col-md-offset-2">
-      <hr>
-      <h3>Leave us a message</h3>
-      <form>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <input type="email" class="form-control" placeholder="Name">
+      <div class="col-md-8 col-md-offset-2">
+        <hr>
+        <h3>Leave us a message</h3>
+        <form>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Name">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email">
+              </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <input type="email" class="form-control" placeholder="Email">
-            </div>
+          <div class="form-group">
+            <textarea class="form-control" rows="4" placeholder="Message"></textarea>
           </div>
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" rows="4" placeholder="Message"></textarea>
-        </div>
-        <button type="submit" class="btn btn-default">Send Message</button>
-      </form>
+          <button type="submit" class="btn btn-default">Send Message</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
-<nav id="footer">
-  <div class="container">
-    <div class="pull-left fnav">
-      <p>Copyright &copy; 2015 Creativ. More Templates <a href="http://www.moobnn.com/" target="_blank" title="模板在线">模板在线</a> <a href="http://guantaow.taobao.com" target="_blank">厚朴网络 淘宝店</a> - Collect from <a href="http://www.moobnn.com/" title="模板在线" target="_blank">模板在线</a> <a href="http://guantaow.taobao.com" target="_blank">厚朴网络 淘宝店</a></p>
+  <nav id="footer">
+    <div class="container">
+      <div class="pull-left fnav">
+        <p>Copyright &copy; 2015 Creativ. More Templates
+          <a href="http://www.moobnn.com/" target="_blank" title="模板在线">模板在线</a>
+          <a href="http://guantaow.taobao.com" target="_blank">厚朴网络 淘宝店</a> - Collect from
+          <a href="http://www.moobnn.com/" title="模板在线" target="_blank">模板在线</a>
+          <a href="http://guantaow.taobao.com" target="_blank">厚朴网络 淘宝店</a>
+        </p>
+      </div>
+      <div class="pull-right fnav">
+        <ul class="footer-social">
+          <li>
+            <a href="#">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-dribbble"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-linkedin"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="pull-right fnav">
-      <ul class="footer-social">
-        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  </nav>
 </body>
+
 </html>

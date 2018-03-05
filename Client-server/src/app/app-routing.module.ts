@@ -12,6 +12,7 @@ import { HouseDescComponent } from './house/house-detail/house-desc/house-desc.c
 import { HouseContactComponent } from './house/house-detail/house-contact/house-contact.component';
 import { BookComponent } from './book/book.component';
 import { BookDetailComponent } from './book/book-detail/book-detail.component';
+import { NewStudentsComponent } from './new-students/new-students.component';
 
 const appRouter: Routes = [
     { path: '',  component: HomeComponentComponent },
@@ -27,7 +28,8 @@ const appRouter: Routes = [
     { path: ':id/desc', component: ProductDescComponent },
     { path: ':id/contact', component: ProductContactComponent }
     ]},
-    { path: 'test', component: TestComponent}
+    { path: 'test', component: TestComponent},
+    { path: 'survival-guide', component: NewStudentsComponent}
 ];
 @NgModule({
     imports: [ RouterModule.forRoot(appRouter) ],
