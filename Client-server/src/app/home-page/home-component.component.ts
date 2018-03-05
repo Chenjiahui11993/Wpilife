@@ -42,5 +42,22 @@ export class HomeComponentComponent implements OnInit, OnChanges {
   ngOnChanges() {
    console.log('shuaxinla');
   }
-
+  isHouse(i) {
+     console.log('执行了');
+    if (i.type === 'HOUSE') {
+     return true;
+    }
+  }
+  isBook(i) {
+    console.log('执行了');
+    if (i.type === 'BOOK') {
+      return true;
+    }
+  }
+  isProduct(i) {
+    if (i.type === 'Product') {
+      console.log('执行了');
+      return true;
+    }
+  }
 }
