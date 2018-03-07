@@ -11,7 +11,7 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
 import { HeaderComponent } from './header/header.component';
 import { NavComponent } from './nav/nav.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCarouselModule } from 'ngx-carousel';
 import {NgxPaginationModule} from 'ngx-pagination';
 import 'hammerjs';
@@ -25,13 +25,15 @@ import { HouseDescComponent } from './house/house-detail/house-desc/house-desc.c
 import { HouseContactComponent } from './house/house-detail/house-contact/house-contact.component';
 import { BookComponent } from './book/book.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { MatButtonModule, MatCheckboxModule,  MatIconModule, MatInputModule} from '@angular/material';
 import { MatListModule} from '@angular/material/list';
 import { BookService } from './Service/book-service';
 import { BookDetailComponent } from './book/book-detail/book-detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NewStudentsComponent } from './new-students/new-students.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { SellComponent } from './sell/sell.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,8 @@ import { MatRadioModule } from '@angular/material/radio';
     HouseContactComponent,
     BookComponent,
     BookDetailComponent,
-    NewStudentsComponent
+    NewStudentsComponent,
+    SellComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,11 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCheckboxModule,
     MatListModule,
     MatTabsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatInputModule
   ],
   providers: [
               ProductService,

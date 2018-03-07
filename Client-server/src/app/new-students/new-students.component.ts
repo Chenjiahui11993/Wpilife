@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-new-students',
   templateUrl: './new-students.component.html',
-  styleUrls: ['../product/product.component.css',
-              './new-students.component.css']
+  styleUrls: ['./new-students.component.css',
+              '../product/product.component.css'
+              ]
 })
 export class NewStudentsComponent implements OnInit {
   Indexs = [

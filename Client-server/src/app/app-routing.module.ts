@@ -13,9 +13,11 @@ import { HouseContactComponent } from './house/house-detail/house-contact/house-
 import { BookComponent } from './book/book.component';
 import { BookDetailComponent } from './book/book-detail/book-detail.component';
 import { NewStudentsComponent } from './new-students/new-students.component';
+import { SellComponent } from './sell/sell.component';
 
 const appRouter: Routes = [
     { path: '',  component: HomeComponentComponent },
+    { path: 'sell', component: SellComponent },
     { path: 'book-list', component: BookComponent },
     { path: 'book-list/:id', component: BookDetailComponent },
     { path: 'house-list', component: HouseComponentComponent },

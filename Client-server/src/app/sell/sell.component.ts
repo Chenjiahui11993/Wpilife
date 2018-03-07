@@ -10,11 +10,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  selector: 'app-sell',
+  templateUrl: './sell.component.html',
+  styleUrls: ['../product/product.component.css',
+               './sell.component.css'     ]
 })
-export class TestComponent {
+export class SellComponent implements OnInit {
+  constructor() {}
   answer: string;
   type: string;
   selected = new FormControl('valid', [
@@ -34,5 +36,7 @@ export class TestComponent {
   productType = '';
  show() {
  console.log(this.selected);
+ }
+ ngOnInit() {
  }
 }
