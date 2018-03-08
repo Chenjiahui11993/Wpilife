@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'app-new-students',
   templateUrl: './new-students.component.html',
-  styleUrls: ['./new-students.component.css',
-              '../product/product.component.css'
-              ]
+  styleUrls: ['./new-students.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NewStudentsComponent implements OnInit {
   Indexs = [

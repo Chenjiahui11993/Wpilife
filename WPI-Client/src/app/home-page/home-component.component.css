@@ -24,7 +24,7 @@ h5 {
 	font-weight: 700;
 	line-height: 20px;
 }
-p {
+#services-section p,#works-section p,#about-section p,#team-section p,#testimonials-section p #contact-section p {
 	font-family: 'Open Sans', sans-serif;
 }
 p.intro {
@@ -374,7 +374,7 @@ ol.type li a:hover {
 	color: #D2527F;
 	margin-bottom: 10px;
 }
-label {
+#contact-section label {
 	font-size: 12px;
 	font-weight: 400;
 	font-family: 'Open Sans', sans-serif;
