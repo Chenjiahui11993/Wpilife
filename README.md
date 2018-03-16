@@ -5,4 +5,4 @@ Angular, bootstrap3, html5,css3.
 
 #Back-end: 
 
-Node.js, Express MySql
+Node.js, Express MongoDB

@@ -2,7 +2,9 @@ import { ProductModel } from '../product/product-model';
 export class ProductService {
     pageNumber: number;
     productModel: ProductModel[] = [new ProductModel('1', 'First product name', 500, 1,
-                                                     'first product', ['../../../assets/product-single-1.jpg'], 'Product'),
+                                                     'first product', ['../../../assets/product-single-1.jpg',
+                                                     '../../../assets/01.jpg', '../../../assets/product-single-3.jpg',
+                                                     '../../../assets/product-single-4.jpg'], 'Product'),
                                     new ProductModel('2', 'Second product name', 500, 2,
                                                      'second product', ['../../../assets/01.jpg'], 'Product'),
                                     new ProductModel('3', 'Third product name', 500, 3,

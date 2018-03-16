@@ -34,6 +34,7 @@ import { NewStudentsComponent } from './new-students/new-students.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { SellComponent } from './sell/sell.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +73,8 @@ import { SellComponent } from './sell/sell.component';
     MatSelectModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
   providers: [
               ProductService,

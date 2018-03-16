@@ -65,45 +65,7 @@ ul, ol {
 /* Navigation */
 
 /* Home Style */
-header {
-	background: url(../../assets/header-bg.jpg) no-repeat bottom center fixed;
-	background-size: cover;
-	color: #cfcfcf;
-	position: relative;
-	height: 100%;
-}
-header p {
-	color: #ffffff;
-	font-size: 22px;
-}
-.intro-text {
-	position: relative;
-	padding-top: 250px;
-	padding-right: 0;
-	padding-left: 0;
-	padding-bottom: 200px;
-}
-.intro-text H1 {
-	font-size: 40px;
-	text-transform: uppercase;
-	color: #fff;
-}
-.color {
-	color: #D2527F;
-}
-a.fa.fa-angle-down {
-	padding: 10px 15px;
-	color: #fff;
-	font-size: 24px;
-	margin-top: 100px;
-	border: 0px solid #E74C3C;
-	transition: all 0.5s;
-	border-radius: 50%;
-	background-color: #D2527F;
-}
-a.fa.fa-angle-down:hover {
-	background: #9D3D5F;
-}
+
 /* About Section */
 #about-section {
 	padding: 80px 0;
