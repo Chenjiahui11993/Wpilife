@@ -106,3 +106,30 @@ a.fa.fa-angle-down {
 a.fa.fa-angle-down:hover {
 	background: #9D3D5F;
 }
+@media (max-width: 768px) {
+	.content {
+		padding: 40% 0 0;
+	}
+	}
+	
+	@media (max-width: 603px) {
+	#menu.navbar-default {
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+	label {
+		float: none !important
+	}
+	.pull-left.fnav, .pull-right.fnav {
+		float: none !important;
+		text-align: center;
+	}
+	.hover-bg .hover-text {
+		padding: 12% 10%;
+	}
+	}
+	
+	@media (max-width: 360px) {
+	.hover-bg .hover-text {
+		padding: 22% 10%;
+	}
+	}

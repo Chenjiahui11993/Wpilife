@@ -1,57 +1,48 @@
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/toPromise';
 import { HouseModel } from '../house/house.model';
+import { Injectable } from '@angular/core';
+@Injectable()
 export class HouseService {
     currentPage: number;
-    houses: HouseModel[] = [
-        new HouseModel(1, '23 bowdoin St apt1', 'poor house', ['https://i.ytimg.com/vi/Xx6t0gmQ_Tw/maxresdefault.jpg'], 1500,
-         '2018.8', 'wechat', 'HOUSE'),
-        new HouseModel(2, '23 bowdoin St apt2', 'much poor house',
-         ['https://cdn.torontolife.com/wp-content/uploads/2017/08/toronto-house-for-sale-53-burnhamthorpe-crescent-1-1200x628.jpg'],
-         1000, '2018.8', 'wechat', 'HOUSE'),
-        new HouseModel(3, '23 bowdoin St apt3', ' the sorest poor house',
-        ['http://www.eplans.com/house-plans/media/catalog/product/a/m/ama879-fr-re-co.jpg'],
-        500, '2018.8', 'wechat', 'HOUSE'),
-        new HouseModel(4, '23 bowdoin St apt3', ' the sorest poor house',
-        ['http://www.eplans.com/house-plans/media/catalog/product/a/m/ama879-fr-re-co.jpg'],
-        500, '2018.8', 'wechat', 'HOUSE'),
-        new HouseModel(5, '23 bowdoin St apt3', ' the sorest poor house',
-        ['http://www.eplans.com/house-plans/media/catalog/product/a/m/ama879-fr-re-co.jpg'],
-        500, '2018.8', 'wechat', 'HOUSE'),
-        new HouseModel(6, '23 bowdoin St apt3', ' the sorest poor house',
-        ['http://www.eplans.com/house-plans/media/catalog/product/a/m/ama879-fr-re-co.jpg'],
-        500, '2018.8', 'wechat', 'HOUSE'),
-        new HouseModel(7, '23 bowdoin St apt3', ' the sorest poor house',
-        ['http://www.eplans.com/house-plans/media/catalog/product/a/m/ama879-fr-re-co.jpg'],
-        500, '2018.8', 'wechat', 'HOUSE'),
-        new HouseModel(8, '23 bowdoin St apt3', ' the sorest poor house',
-        ['http://www.eplans.com/house-plans/media/catalog/product/a/m/ama879-fr-re-co.jpg'],
-        500, '2018.8', 'wechat', 'HOUSE'),
-        new HouseModel(9, '23 bowdoin St apt3', ' the sorest poor house',
-        ['http://www.eplans.com/house-plans/media/catalog/product/a/m/ama879-fr-re-co.jpg'],
-        500, '2018.8', 'wechat', 'HOUSE'),
-        new HouseModel(10, '23 bowdoin St apt3', ' the sorest poor house',
-        ['http://www.eplans.com/house-plans/media/catalog/product/a/m/ama879-fr-re-co.jpg'],
-        500, '2018.8', 'wechat', 'HOUSE'),
-        new HouseModel(11, '23 bowdoin St apt3', ' the sorest poor house',
-        ['http://www.eplans.com/house-plans/media/catalog/product/a/m/ama879-fr-re-co.jpg'],
-        500, '2018.8', 'wechat', 'HOUSE'),
-        new HouseModel(12, '23 bowdoin St apt3', ' the sorest poor house',
-        ['http://www.eplans.com/house-plans/media/catalog/product/a/m/ama879-fr-re-co.jpg'],
-        500, '2018.8', 'wechat', 'HOUSE'),
-      ];
-    getAllHouses(): HouseModel[] {
-        return this.houses;
+    newHouse: HouseModel;
+    private _housesSource = new BehaviorSubject<HouseModel[]>([]);
+    constructor(private httpClient: HttpClient) { }
+    getAllHouses(): Observable<HouseModel[]> {
+        this.httpClient.get('api/v1/houses')
+            .toPromise()
+            .then((houses: any) => {
+                this._housesSource.next(houses);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+        return this._housesSource.asObservable();
     }
-    gethouse(id: number): HouseModel {
-        return this.houses[id];
+    gethouse(id: number): Promise<HouseModel> {
+       return this.httpClient.get(`api/v1/houses/${id}`)
+        .toPromise()
+        .then((res: any) => res);
     }
-    setNewllHouse(id: number, address: string, desc: string, imgPath: string[]
-                 , price: number, date: string, ownerinfo: string, type: string) {
-       this.houses.push(new HouseModel(id, address, desc, imgPath, price, date, ownerinfo, type ));
+    setNewllHouse(address: string, desc: string
+        , price: number, ownerinfo: string, contactInfo: string) {
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        this.newHouse = new HouseModel(address, desc, price, ownerinfo, contactInfo);
+        this.httpClient.post('api/v1/houses', this.newHouse, options)
+        .toPromise()
+        .then((newHouses) => {
+            this.getAllHouses();
+        })
+        .catch((e) => {
+            console.log(e);
+        });
     }
     setCurrentPage(currentPage: number) {
-    this.currentPage = currentPage;
+        this.currentPage = currentPage;
     }
     getCurrentPage(): number {
-     return this.currentPage;
+        return this.currentPage;
     }
 }

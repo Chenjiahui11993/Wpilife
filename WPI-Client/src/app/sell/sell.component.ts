@@ -1,6 +1,9 @@
-import { Component, OnInit} from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../Service/product-service';
+import { HouseService } from '../Service/house-service';
+import { BookService } from '../Service/book-service';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -13,13 +16,24 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-sell',
   templateUrl: './sell.component.html',
   styleUrls: ['../product/product.component.css',
-               './sell.component.css'     ]
+    './sell.component.css']
 })
 export class SellComponent implements OnInit {
-  constructor() {}
-  answer: string;
+  Departments = ['Computer Science', 'Electrical Engineering', 'ESL', 'Data Science', 'MSIT', 'Marketing', 'Others'];
+  constructor(private productService: ProductService, private houseService: HouseService, private bookService: BookService) { }
+  name: string;
+  address: string;
+  price: number;
+  ownerID = 0; // TODO: AUTH
+  desc: string;
   type: string;
+  department: string;
+  contactInfo: string;
+  imgUrl: string[];
   selected = new FormControl('valid', [
+    Validators.required
+  ]);
+  selectedBook = new FormControl('valid', [
     Validators.required
   ]);
   productNameError = new FormControl('', [
@@ -31,12 +45,50 @@ export class SellComponent implements OnInit {
   productContactError = new FormControl('', [
     Validators.required
   ]);
-  options = ['Household Item', 'Book', 'House', 'Others'];
+  options = ['Book', 'House', 'Others'];
   matcher = new MyErrorStateMatcher();
-  productType = '';
- show() {
- console.log(this.selected);
- }
- ngOnInit() {
- }
+  addProduct(type) {
+    if (this.type === 'Others') {
+      this.productService.setProduct(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl);
+    }
+    if (this.type === 'House') {
+      this.houseService.setNewllHouse(this.address, this.desc, this.price, 'ownerOne', this.contactInfo);
+    }
+    if (this.type === 'Book') {
+      this.bookService.setBook(this.name, this.department, 0, this.price, this.contactInfo, this.imgUrl);
+    }
+  }
+  isOthers(option) {
+    if (option === 'Others') {
+      return true;
+    }
+  }
+  isHouse(option) {
+    if (option === 'House') {
+      return true;
+    }
+  }
+  isBook(option) {
+    if (option === 'Book') {
+      return true;
+    }
+  }
+  isDisable() {
+    if (this.productNameError.hasError('required') || this.productContactError.hasError('required') ||
+      this.productPriceError.hasError('required') || this.selected.hasError('require')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  isBookDisable() {
+    if (this.productNameError.hasError('required') || this.productContactError.hasError('required') ||
+      this.productPriceError.hasError('required') || this.selected.hasError('require') || this.selectedBook.hasError('require'))  {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  ngOnInit() {
+  }
 }

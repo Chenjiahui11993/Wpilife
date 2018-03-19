@@ -21,7 +21,11 @@ export class ProductDescComponent implements OnInit {
       this.id = params['id'];
       }
     );
-    this.ProductDetail = this.productService.getProduct(this.id - 1);
+    this.productService.getProduct(this.id - 1)
+    .then((product) => this.ProductDetail = product)
+    .catch((e) => {
+      console.log(e);
+    });
     this.price = this.ProductDetail.price;
     this.desc = this.ProductDetail.desc;
     console.log(this.desc);

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 import { ProductService } from '../Service/product-service';
 import { ProductModel } from '../product/product-model';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -8,18 +9,22 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./product.component.css'],
   providers: []
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy {
  path = '../../assets/product-1.jpg';
- typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
  public p: number;
  temp: number;
+ subscriptionProducts: Subscription;
   constructor(private productService: ProductService, private router: Router, private activatedRouter: ActivatedRoute) {
     this.p = this.productService.getCurrentPage();
     console.log(this.p);
    }
   allProducts: ProductModel[] = [];
   ngOnInit() {
-    this.allProducts = this.productService.getAllProduct();
+    this.subscriptionProducts = this.productService.getAllProduct()
+    .subscribe(allProducts => this.allProducts = allProducts);
+  }
+  ngOnDestroy() {
+    this.subscriptionProducts.unsubscribe();
   }
   ToProductDetail(id: number) {
     this.temp = id / 6;

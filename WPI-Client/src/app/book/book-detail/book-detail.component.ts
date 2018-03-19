@@ -30,10 +30,19 @@ export class BookDetailComponent implements OnInit {
     this.activatedRoute.params
     .subscribe(
       (params: Params) => {
-        this.id = params['id'];
+        this.id = +params['id'];
       }
     );
-    this.bookModel = this.bookService.getBook((this.id - 1));
+    this.bookService.getBook(this.id)
+    .then((book) => {
+      this.bookModel = book;
+      console.log(this.bookModel);
+      return this.bookModel;
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+   // console.log(this.bookModel);
+    console.log(typeof this.id);
   }
-
 }

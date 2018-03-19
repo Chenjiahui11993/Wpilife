@@ -6,13 +6,13 @@ export class ProductModel {
     desc: string;
     img: string[];
     type: string;
- constructor(id: string, name: string, price: number, ownerID: number, desc: string, img: string[], type: string ) {
-    this.id = id;
+    contactInfo: string;
+ constructor( name: string, price: number, ownerID: number, desc: string, contactInfo: string, img: string[] ) {
     this.name = name;
     this.price = price;
     this.ownerID = ownerID;
     this.desc = desc;
     this.img = img;
-    this.type = type;
+    this.contactInfo = contactInfo;
  }
 }

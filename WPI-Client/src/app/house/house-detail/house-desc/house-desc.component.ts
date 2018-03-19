@@ -19,7 +19,8 @@ export class HouseDescComponent implements OnInit {
        this.id = params['id'];
       }
     );
-    this.house = this.houseService.gethouse(this.id - 1);
+   this.houseService.gethouse(this.id - 1)
+   .then(house => this.house = house);
   }
 
 }

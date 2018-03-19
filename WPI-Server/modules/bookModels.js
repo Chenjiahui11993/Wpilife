@@ -10,5 +10,5 @@ const bookSchema = mongoose.Schema({
     contactInfo: String,
     imgUrl: String
 });
-const bookModel = mongoose.model('booktmodels', bookSchema);
+const bookModel = mongoose.model('bookmodels', bookSchema);
 module.exports = bookModel;

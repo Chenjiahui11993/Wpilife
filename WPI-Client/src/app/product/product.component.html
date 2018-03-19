@@ -98,18 +98,8 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-md-3 choice">
-						<mat-selection-list #shoes>
-							<mat-list-option *ngFor="let shoe of typesOfShoes">
-							  {{shoe}}
-							</mat-list-option>
-						  </mat-selection-list>
-					</div>
-
-					<div class="col-md-3 text-center" *ngFor="let product of allProducts | paginate: { id:'product',
-						                                                                               itemsPerPage: 6, 
-			                                                                                           currentPage: p }">
+				<div class="row">				
+					<div class="col-md-3 text-center" *ngFor="let product of allProducts | paginate: { id:'product',						                                                                               itemsPerPage: 6, 		                                                                                           currentPage: p }">
 						<div class="product" (click)="ToProductDetail(product.id)">
 							<div class="product-grid" [style.background]="'url('+product.img+')'">
 							</div>

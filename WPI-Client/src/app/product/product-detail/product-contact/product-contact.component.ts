@@ -20,7 +20,11 @@ export class ProductContactComponent implements OnInit {
       this.id = params['id'];
       }
     );
-    this.ProductDetail = this.productService.getProduct(this.id - 1);
+    this.productService.getProduct(this.id - 1)
+    .then((product) => this.ProductDetail = product)
+    .catch((e) => {
+      console.log(e);
+    });
     this.owner = this.ProductDetail.ownerID;
     console.log(this.owner);
   }

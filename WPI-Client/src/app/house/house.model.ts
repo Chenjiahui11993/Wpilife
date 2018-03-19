@@ -7,14 +7,12 @@ price: number;
 date: string;
 ownerinfo: string;
 type: string;
-constructor(id: number, Address: string, desc: string, img: string[], price: number, data: string, ownerinfo: string, type: string) {
-    this.id = id;
+contactInfo: string;
+constructor( Address: string, desc: string, price: number, ownerinfo: string, contactInfo: string) {
     this.Address = Address;
     this.description = desc;
-    this.img = img;
     this.price = price;
-    this.date = data;
     this.ownerinfo = ownerinfo;
-    this.type = type;
+    this.contactInfo = contactInfo;
 }
 }

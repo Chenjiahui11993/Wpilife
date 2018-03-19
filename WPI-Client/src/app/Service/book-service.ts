@@ -1,39 +1,46 @@
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/toPromise';
 import { BookModel } from '../book/book-model';
+import { Injectable } from '@angular/core';
+@Injectable()
 export class BookService {
-    bookModel: BookModel[] = [
-                             new BookModel(1, 'Database', 'Computer Science', 1, 10, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK'),
-                             new BookModel(2, 'Database', 'Electrical Engineering', 1, 11, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK'),
-                             new BookModel(3, 'Database', 'ESL', 1, 12, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK'),
-                             new BookModel(4, 'Database', 'Data Science', 1, 13, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK'),
-                             new BookModel(5, 'Database', 'MSIT', 1, 14, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK'),
-                             new BookModel(6, 'Database', 'Marketing', 1, 15, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK'),
-                             new BookModel(7, 'Database', 'Computer Science', 1, 16, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK'),
-                             new BookModel(8, 'Database', 'Computer Science', 1, 17, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK'),
-                             new BookModel(9, 'Database', 'Computer Science', 1, 18, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK'),
-                             new BookModel(10, 'Database', 'Computer Science', 1, 19, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK'),
-                             new BookModel(11, 'Database', 'Computer Science', 1, 20, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK'),
-                             new BookModel(12, 'Database', 'Computer Science', 1, 21, '2018.3.2', 'wechat:123456',
-                             ['http://www.metuchenlibrary.org/wp-content/uploads/2014/08/esl.jpg'], 'BOOK')];
+    newBook: BookModel;
+    private _bookSource = new BehaviorSubject<BookModel[]>([]);
+    constructor(private httpClient: HttpClient) { }
     currentPageNumber: number;
-    getALLBooks(): BookModel[] {
-        return this.bookModel;
+    getALLBooks(): Observable<BookModel[]> {
+        this.httpClient.get('api/v1/books')
+            .toPromise()
+            .then((res: any) => {
+                this._bookSource.next(res);
+            })
+            .catch((e) => {
+                return Promise.reject(e.body || e);
+            });
+         return this._bookSource.asObservable();
     }
-   getBook(id: number): BookModel {
-       return this.bookModel[id];
-   }
-   setBook(id: number, name: string, department: string, owwnerID: number,
-           price: number, date: string, contactInfo: string, img: string[], type: string) {
-    this.bookModel.push(new BookModel(id, name, department, owwnerID, price, date, contactInfo, img, type));
-   }
+    getBook(id: number): Promise<BookModel> {
+        return this.httpClient.get(`api/v1/books/${id}`)
+            .toPromise()
+            .then((res: any) => res)
+            .catch((e) => {
+                return Promise.reject(e.body || e);
+            });
+    }
+    setBook(name: string, department: string, owwnerID: number,
+        price: number, contactInfo: string, img: string[]) {
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        this.newBook = new BookModel(name, department, owwnerID, price, contactInfo, img);
+        return this.httpClient.post('api/v1/books', this.newBook, options)
+            .toPromise()
+            .then((newBook) => {
+                this.getALLBooks();
+            })
+            .catch((e) => {
+                return Promise.reject(e.body || e);
+            });
+
+    }
 }
