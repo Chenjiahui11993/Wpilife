@@ -95,8 +95,8 @@
 						<div class="carouselBox">
 							<div #test2 id="img1">
 							<ngx-carousel [inputs]="Config">
-								<ngx-item *ngFor="let product of ProductDetail.img" class="bannerStyle " NgxCarouselItem>		
-									<img [src]="product" alt="user" width="100%" >	
+								<ngx-item *ngFor="let img of ProductDetail.imgUrl" class="bannerStyle " NgxCarouselItem>		
+									<img [src]="img" alt="user" width="100%" >	
 								</ngx-item>
 								<i NgxCarouselPrev class="leftRs fa fa-arrow-left fa-3x" aria-hidden="true"></i>
 								<i NgxCarouselNext class="rightRs fa fa-arrow-right fa-3x" aria-hidden="true"></i>

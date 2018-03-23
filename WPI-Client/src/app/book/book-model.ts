@@ -6,7 +6,7 @@ export class BookModel {
   price: number;
   date: string;
   contactInfo: string;
-  img: string[];
+  imgUrl: string[];
   type: string;
   constructor(name: string, department: string, owwnerID: number,
               price: number, contactInfo: string, img: string[]) {
@@ -15,6 +15,6 @@ export class BookModel {
      this.owwnerID = owwnerID;
      this.price = price;
      this.contactInfo = contactInfo;
-     this.img = img;
+     this.imgUrl = img;
   }
 }

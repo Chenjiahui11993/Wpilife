@@ -65,65 +65,26 @@
         <div class="clearfix"></div>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
       </div>
-      <div class="categories">
-        <ul class="cat">
-          <mat-tab-group>
-            <mat-tab label="All" >
-           <br>
-           <br>
-           <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let list of allList; let i of index">
-              <div class="portfolio-item" >
-                <div class="hover-bg" *ngIf="isHouse(i)">
-                  <a [routerLink]="['house-list', list.id]">
-                    <div class="hover-text">
-                      <h4>{{list.Address}}</h4>
-                      <small>{{list.price}}</small>
-                      <div class="clearfix"></div>
-                      <i class="fa fa-plus"></i>
-                    </div>
-                    <img [src]="list.img[0]" class="img-responsive" alt="Project Title"> </a>
-                </div>
-                <div class="hover-bg" *ngIf="isBook(i)">
-                    <a [routerLink]="['book-list', list.id]">
-                      <div class="hover-text">
-                        <h4>{{list.name}}</h4>
-                        <small>{{list.department}}</small>
-                        <div class="clearfix"></div>
-                        <i class="fa fa-plus"></i>
-                      </div>
-                      <img [src]="list.img[0]" class="img-responsive" alt="Project Title"> </a>
-                  </div>
-                  <div class="hover-bg" *ngIf="isProduct(i)">
-                      <a [routerLink]="['product-list', list.id]">
-                        <div class="hover-text">
-                          <h4>{{list.name}}</h4>
-                          <small>{{list.price}}</small>
-                          <div class="clearfix"></div>
-                          <i class="fa fa-plus"></i>
+      <div class="categories">   
+          <mat-tab-group>   
+              <mat-tab label="House">
+                  <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let house of showHouses;let i of index">
+                      <div class="portfolio-item" >
+                        <div class="hover-bg">
+                          <a [routerLink]="['book-list', house.id]" >
+                            <div class="hover-text">
+                              <h4>{{house.Address}}</h4>
+                              <small>{{house.price}}</small>
+                              <div class="clearfix"></div>
+                              <i class="fa fa-plus"></i>
+                            </div>
+                            <img [src]="house.imgUrl[0]" class="img-responsive" alt="Project Title"> </a>
                         </div>
-                        <img [src]="list.img[0]" class="img-responsive" alt="Project Title"> </a>
-                    </div>
-              </div>
-            </div>
-            </mat-tab>
-            <mat-tab label="House">
-                <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let house of houseModel;let i of index">
-                    <div class="portfolio-item" >
-                      <div class="hover-bg">
-                        <a [routerLink]="['house-list', house.id]">
-                          <div class="hover-text">
-                            <h4>{{house.Address}}</h4>
-                            <small>{{house.price}}</small>
-                            <div class="clearfix"></div>
-                            <i class="fa fa-plus"></i>
-                          </div>
-                          <img [src]="house.img[0]" class="img-responsive" alt="Project Title"> </a>
                       </div>
                     </div>
-                  </div>
-            </mat-tab>
+              </mat-tab>
             <mat-tab label="Book">
-                <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let book of bookModel">
+                <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let book of showBooks;let i of index">
                     <div class="portfolio-item" >
                       <div class="hover-bg">
                         <a [routerLink]="['book-list', book.id]" >
@@ -133,13 +94,13 @@
                             <div class="clearfix"></div>
                             <i class="fa fa-plus"></i>
                           </div>
-                          <img [src]="book.img[0]" class="img-responsive" alt="Project Title"> </a>
+                          <img [src]="book.imgUrl[0]" class="img-responsive" alt="Project Title"> </a>
                       </div>
                     </div>
                   </div>
             </mat-tab>
-            <mat-tab label="Household Item">
-                <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let product of productModel">
+            <mat-tab label="Others">
+                <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let product of showProducts;let i of index">
                     <div class="portfolio-item" >
                       <div class="hover-bg">
                         <a [routerLink]="['product-list', product.id]">
@@ -149,15 +110,13 @@
                             <div class="clearfix"></div>
                             <i class="fa fa-plus"></i>
                           </div>
-                          <!--
-                          <img [src]="product.img[0]" class="img-responsive" alt="Project Title"> --> </a>
+                          <img [src]="product.imgUrl[0]" class="img-responsive" alt="Project Title">  </a>
                       </div>
                     </div>
                   </div>  
             </mat-tab>
           </mat-tab-group>
 
-        </ul>
         <div class="clearfix"></div>
       </div>
 
@@ -300,12 +259,12 @@
       <div class="col-md-8 col-md-offset-2">
         <div class="col-md-4">
           <i class="fa fa-map-marker fa-2x"></i>
-          <p>321 Awesome Street
-            <br> New York, NY 17022</p>
+          <p>100 Insitute Road
+            <br> Worcester, MA 01609</p>
         </div>
         <div class="col-md-4">
           <i class="fa fa-envelope-o fa-2x"></i>
-          <p>info@companyname.com</p>
+          <p>hbchenjh@gmail.com</p>
         </div>
         <div class="col-md-4">
           <i class="fa fa-phone fa-2x"></i>

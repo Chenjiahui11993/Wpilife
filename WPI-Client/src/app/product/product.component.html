@@ -97,11 +97,11 @@
 						</p>
 					</div>
 				</div>
-
+				
 				<div class="row">				
-					<div class="col-md-3 text-center" *ngFor="let product of allProducts | paginate: { id:'product',						                                                                               itemsPerPage: 6, 		                                                                                           currentPage: p }">
+					<div class="col-md-4 text-center" *ngFor="let product of allProducts | paginate: { id:'product', itemsPerPage: 6, currentPage: p }">
 						<div class="product" (click)="ToProductDetail(product.id)">
-							<div class="product-grid" [style.background]="'url('+product.img+')'">
+							<div class="product-grid" [style.background-image]="'url('+product.imgUrl[0]+')'">			
 							</div>
 							<div class="desc">
 								<h3>

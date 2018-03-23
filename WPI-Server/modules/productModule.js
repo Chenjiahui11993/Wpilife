@@ -7,7 +7,7 @@ const productSchema = mongoose.Schema({
     ownerID: Number,
     description: String,
     contactInfo: String,
-    imgUrl: String
+    imgUrl: []
 });
 const productModel = mongoose.model('productmodels', productSchema);
 module.exports = productModel;

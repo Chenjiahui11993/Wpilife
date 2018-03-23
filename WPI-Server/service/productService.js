@@ -1,7 +1,7 @@
 const productModel = require('../modules/productModule');
 const getProducts = () => {
     return new Promise((resolve, reject) => {
-        productModel.find({ }, (err, problems) => {
+        productModel.find({}, (err, problems) => {
             if (err) {
                 reject(err);
             } else {

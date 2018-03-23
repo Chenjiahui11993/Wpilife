@@ -19,7 +19,7 @@ export class HouseContactComponent implements OnInit {
        this.id = params['id'];
       }
     );
-    this.houseService.gethouse(this.id - 1)
+    this.houseService.gethouse(this.id)
     .then(house => this.house = house);
     console.log(this.house.ownerinfo);
   }

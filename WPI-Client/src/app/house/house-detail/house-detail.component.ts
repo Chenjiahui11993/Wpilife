@@ -33,8 +33,11 @@ export class HouseDetailComponent implements OnInit {
         this.id = params['id'];
       }
     );
-   this.houseService.gethouse((this.id - 1))
-   .then(house => this.houseDetail = house)
+   this.houseService.gethouse((this.id))
+   .then(house =>  {
+     this.houseDetail = house;
+     console.log(this.houseDetail);
+    })
    .catch((e) => {
      console.log(e);
    });

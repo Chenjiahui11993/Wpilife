@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const fs = require('fs');
 const jsonParser = bodyParser.json();
 const problemService = require('../service/productService');
 const bookService = require('../service/bookService');
 const houseService = require('../service/houseService');
+var multer  = require('multer');
+const path = require('path');
+var upload = multer({ dest: 'upload/' });
 
 // deal with household item
 router.get('/products', (req, res) => {
@@ -59,5 +63,27 @@ router.post('/houses', jsonParser, (req, res) => {
         .catch((e) => {
             console.log(e);
         });
-})
+});
+router.post('/image', upload.array('logo', 2), function(req, res, next){
+    var files = req.files;
+    files.forEach((file) => {
+     name = file.originalname;
+     extensionName = name.split('.');
+     newfilename =`${file.filename}.${extensionName[1]}`;
+     fs.renameSync(path.join(__dirname, `../upload/${file.filename}`),  path.join(__dirname, `../upload/${newfilename}`));
+     file.filename = newfilename;
+    }); 
+    res.send(files);
+    console.log(files);
+    //console.log(file.filename);
+    console.log(req.body);
+});
+router.get('/images/:id', (req, res) => {
+    var id = req.params['id'];
+    var img = fs.readFileSync(path.join(__dirname, `../upload/${id}`), 'binary');
+    console.log('123');
+    res.writeHead(200, {'Content-Type': 'image/png' });
+    res.end(img, 'binary')
+    //res.sendFile('index.html', {root: path.join(__dirname, '../../public/')})
+});
 module.exports = router;

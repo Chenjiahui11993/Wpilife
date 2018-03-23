@@ -11,6 +11,7 @@ export class ProductContactComponent implements OnInit {
   ProductDetail: ProductModel;
   id: number;
   owner: number;
+  contact: string;
   constructor(private productService: ProductService, private activateRouter: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -20,13 +21,15 @@ export class ProductContactComponent implements OnInit {
       this.id = params['id'];
       }
     );
-    this.productService.getProduct(this.id - 1)
-    .then((product) => this.ProductDetail = product)
+    this.productService.getProduct(this.id)
+    .then((product) => {
+      this.ProductDetail = product;
+      this.owner = this.ProductDetail.ownerID;
+      this.contact = this.ProductDetail.contactInfo;
+    })
     .catch((e) => {
       console.log(e);
     });
-    this.owner = this.ProductDetail.ownerID;
-    console.log(this.owner);
   }
 
 }

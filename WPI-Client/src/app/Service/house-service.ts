@@ -27,9 +27,9 @@ export class HouseService {
         .then((res: any) => res);
     }
     setNewllHouse(address: string, desc: string
-        , price: number, ownerinfo: string, contactInfo: string) {
+        , price: number, ownerinfo: string, contactInfo: string, img: string[]) {
         const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        this.newHouse = new HouseModel(address, desc, price, ownerinfo, contactInfo);
+        this.newHouse = new HouseModel(address, desc, price, ownerinfo, contactInfo, img);
         this.httpClient.post('api/v1/houses', this.newHouse, options)
         .toPromise()
         .then((newHouses) => {

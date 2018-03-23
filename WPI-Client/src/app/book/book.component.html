@@ -102,30 +102,26 @@
 					<div class="col-md-3 choice">
 						<div class="product">
 							<h3>
-							<i>Please select department:</i>
+								<i>Please select department:</i>
 							</h3>
 						</div>
 						<div>
-						 selected:{{selectedDept}}
+							selected:{{selectedDept}}
 						</div>
-						<mat-selection-list #Dept											
-											[(ngModel)]="selectedDept" 
-											(selectionChange)="onChange()">
-							<mat-list-option 							
-							                *ngFor="let Department of Departments"
-							                [value]="Department">
-							  {{Department}}
+						<mat-selection-list #Dept [(ngModel)]="selectedDept" (selectionChange)="onChange()">
+							<mat-list-option *ngFor="let Department of Departments" [value]="Department">
+								{{Department}}
 							</mat-list-option>
-						  </mat-selection-list>
+						</mat-selection-list>
 					</div>
 
-					<div class="col-md-3 text-center" *ngFor="let Book of AllBooks | paginate: {       id:'Book',
-						                                                                               itemsPerPage: 6, 
-			                                                                                           currentPage: p }">
+					<div class="col-md-3 text-center" *ngFor="let Book of AllBooks | paginate: {id:'Book',
+						                                                                        itemsPerPage: 6, 
+			                                                                                    currentPage: p }">
 						<div class="product" (click)="ToBookDetail(Book.id)">
-							<!--
-							<div class="product-grid" [style.background]="'url('+Book.img[0]+')'"> 
-							</div>-->
+
+							<div class="product-grid" [style.background-image]="'url('+Book.imgUrl[0]+')'">
+							</div>
 							<div class="desc">
 								<h3>
 									<i>{{Book.name}}</i>

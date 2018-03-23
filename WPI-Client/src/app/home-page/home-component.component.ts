@@ -23,51 +23,34 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
   subscriptionProducts: Subscription;
   subscriptionBooks: Subscription;
   subscriptionHouse: Subscription;
-  allList = [];
+  showBooks: BookModel[] = [];
+  showProducts: ProductModel[] = [];
+  showHouses: HouseModel[] = [];
   constructor(private houserService: HouseService, private bookService: BookService, private productService: ProductService) { }
 
   ngOnInit() {
     this.subscriptionHouse = this.houserService.getAllHouses()
-      .subscribe(allhouse => this.houseModel = allhouse);
-    this.houseLength = this.houseModel.length;
+      .subscribe(allhouse => {
+        this.houseModel = allhouse;
+        this.houseLength = this.houseModel.length;
+        this.showHouses = this.houseModel.slice((this.houseLength - 8), this.houseLength);
+      });
     this.subscriptionBooks = this.bookService.getALLBooks()
       .subscribe((allBooks) => {
         this.bookModel = allBooks;
+        this.bookLength = this.bookModel.length;
+        this.showBooks = this.bookModel.slice((this.bookLength - 8), this.bookLength);
       });
-    this.bookLength = this.bookModel.length;
-    this.bookModel.slice((this.productLength - 9), (this.productLength - 1));
     this.subscriptionProducts = this.productService.getAllProduct()
-      .subscribe((allProduct) => this.productModel = allProduct);
-    this.productLength = this.productModel.length;
-    this.productModel.slice((this.productLength - 9), (this.productLength - 1));
-    this.allList[0] = this.houseModel[7];
-    this.allList[1] = this.houseModel[6];
-    this.allList[2] = this.bookModel[7];
-    this.allList[3] = this.bookModel[6];
-    this.allList[4] = this.bookModel[5];
-    this.allList[5] = this.productModel[7];
-    this.allList[6] = this.productModel[6];
-    this.allList[7] = this.productModel[5];
+      .subscribe((allProduct) => {
+        this.productModel = allProduct;
+        this.productLength = this.productModel.length;
+        this.showProducts = this.productModel.slice((this.productLength - 8), this.productLength);
+      });
   }
   ngOnDestroy() {
     this.subscriptionProducts.unsubscribe();
-  }
-  isHouse(i) {
-    console.log('执行了');
-    if (i.type === 'HOUSE') {
-      return true;
-    }
-  }
-  isBook(i) {
-    console.log('执行了');
-    if (i.type === 'BOOK') {
-      return true;
-    }
-  }
-  isProduct(i) {
-    if (i.type === 'Product') {
-      console.log('执行了');
-      return true;
-    }
+    this.subscriptionBooks.unsubscribe();
+    this.subscriptionHouse.unsubscribe();
   }
 }

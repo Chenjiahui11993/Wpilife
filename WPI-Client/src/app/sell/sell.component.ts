@@ -4,6 +4,7 @@ import { HouseService } from '../Service/house-service';
 import { BookService } from '../Service/book-service';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { HttpClient } from '@angular/common/http';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -20,7 +21,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SellComponent implements OnInit {
   Departments = ['Computer Science', 'Electrical Engineering', 'ESL', 'Data Science', 'MSIT', 'Marketing', 'Others'];
-  constructor(private productService: ProductService, private houseService: HouseService, private bookService: BookService) { }
+  constructor(private productService: ProductService, private houseService: HouseService,
+    private bookService: BookService, private httpClient: HttpClient) { }
   name: string;
   address: string;
   price: number;
@@ -29,7 +31,11 @@ export class SellComponent implements OnInit {
   type: string;
   department: string;
   contactInfo: string;
-  imgUrl: string[];
+  imgUrl = [];
+  times = [];
+  selectedFile = null;
+  i = 0;
+  fd = new FormData();
   selected = new FormControl('valid', [
     Validators.required
   ]);
@@ -47,14 +53,23 @@ export class SellComponent implements OnInit {
   ]);
   options = ['Book', 'House', 'Others'];
   matcher = new MyErrorStateMatcher();
+  upload() {
+    this.httpClient.post('api/v1/image', this.fd)
+      .subscribe((res: any) => {
+        for (let i = 0; i < res.length; i++) {
+          this.imgUrl[i] = `http://localhost:3000/api/v1/images/${res[i].filename}`;
+        }
+        this.addProduct(this.type);
+      });
+  }
   addProduct(type) {
-    if (this.type === 'Others') {
+    if (type === 'Others') {
       this.productService.setProduct(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl);
     }
-    if (this.type === 'House') {
-      this.houseService.setNewllHouse(this.address, this.desc, this.price, 'ownerOne', this.contactInfo);
+    if (type === 'House') {
+      this.houseService.setNewllHouse(this.address, this.desc, this.price, 'ownerOne', this.contactInfo, this.imgUrl);
     }
-    if (this.type === 'Book') {
+    if (type === 'Book') {
       this.bookService.setBook(this.name, this.department, 0, this.price, this.contactInfo, this.imgUrl);
     }
   }
@@ -83,10 +98,26 @@ export class SellComponent implements OnInit {
   }
   isBookDisable() {
     if (this.productNameError.hasError('required') || this.productContactError.hasError('required') ||
-      this.productPriceError.hasError('required') || this.selected.hasError('require') || this.selectedBook.hasError('require'))  {
+      this.productPriceError.hasError('required') || this.selected.hasError('require') || this.selectedBook.hasError('require')) {
       return true;
     } else {
       return false;
+    }
+  }
+  onSecondSelect(k) { // add plus signal
+    this.i = this.i + 1;
+    this.times.push(1);
+    console.log(this.times);
+  }
+  onFileSelect(event) {
+    if (event.target.files.length === 0 && this.times.length === 0) { // when use click cancel when upload file
+      this.fd.delete('logo');
+      return 0;
+    } else if ( event.target.files.length !== 0) {
+      this.selectedFile = <File>event.target.files;
+      for (const file of this.selectedFile) {
+        this.fd.append('logo', file, file.name);
+      }
     }
   }
   ngOnInit() {
