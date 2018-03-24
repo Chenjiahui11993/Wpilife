@@ -81,7 +81,6 @@ router.post('/image', upload.array('logo', 2), function(req, res, next){
 router.get('/images/:id', (req, res) => {
     var id = req.params['id'];
     var img = fs.readFileSync(path.join(__dirname, `../upload/${id}`), 'binary');
-    console.log('123');
     res.writeHead(200, {'Content-Type': 'image/png' });
     res.end(img, 'binary')
     //res.sendFile('index.html', {root: path.join(__dirname, '../../public/')})

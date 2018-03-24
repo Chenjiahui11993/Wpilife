@@ -157,7 +157,7 @@
                     <div *ngFor="let time of times">
                       <input type="file" multiple name="logo" (change)="onFileSelect($event)">
                     </div>
-                    <div>
+                    <div class="plus">
                       <i class="fa fa-plus" aria-hidden="true" (click)="onSecondSelect()"></i>
                     </div>
                     <button class="btn btn-primary" (click)="upload()" [disabled]="isBookDisable()">Submit</button>
@@ -209,7 +209,7 @@
                     <div *ngFor="let time of times">
                       <input type="file" multiple name="logo" (change)="onFileSelect($event)">
                     </div>
-                    <div>
+                    <div class="plus">
                       <i class="fa fa-plus" aria-hidden="true" (click)="onSecondSelect()"></i>
                     </div>
                     <button class="btn btn-primary" (click)="upload()" [disabled]="isBookDisable()">Submit</button>
@@ -271,8 +271,8 @@
                      <div *ngFor="let time of times">
                       <input type="file" multiple name="logo" (change)="onFileSelect($event)" >
                     </div>
-                    <div>
-                      <i class="fa fa-plus" aria-hidden="true" (click)="onSecondSelect(i)"></i>
+                    <div class="plus" (click)="onSecondSelect(i)">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
                     </div>
                     <button class="btn btn-primary" (click)="upload()" [disabled]="isBookDisable()">Submit</button>
                   </form>

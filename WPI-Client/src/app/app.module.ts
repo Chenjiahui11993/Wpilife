@@ -19,6 +19,7 @@ import { TestComponent } from './test/test.component';
 import { ProductDescComponent } from './product/product-detail/product-desc/product-desc.component';
 import { ProductContactComponent } from './product/product-detail/product-contact/product-contact.component';
 import { ProductService } from '../app/Service/product-service';
+import { CollaborationService } from '../app/Service/collaboration.service';
 import { HouseService } from './Service/house-service';
 import { HouseDetailComponent } from './house/house-detail/house-detail.component';
 import { HouseDescComponent } from './house/house-detail/house-desc/house-desc.component';
@@ -35,6 +36,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { SellComponent } from './sell/sell.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
+import { CodingComponent } from './coding/coding.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +56,9 @@ import { HttpClientModule } from '@angular/common/http';
     BookComponent,
     BookDetailComponent,
     NewStudentsComponent,
-    SellComponent
+    SellComponent,
+    FooterComponent,
+    CodingComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,8 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
               ProductService,
               HouseService,
-              BookService
+              BookService,
+              CollaborationService
   ],
   bootstrap: [AppComponent]
 })

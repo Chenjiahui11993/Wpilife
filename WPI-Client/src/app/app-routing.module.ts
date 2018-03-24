@@ -14,10 +14,13 @@ import { BookComponent } from './book/book.component';
 import { BookDetailComponent } from './book/book-detail/book-detail.component';
 import { NewStudentsComponent } from './new-students/new-students.component';
 import { SellComponent } from './sell/sell.component';
+import { CodingComponent } from './coding/coding.component';
+
 
 const appRouter: Routes = [
     { path: '',  component: HomeComponentComponent },
     { path: 'sell', component: SellComponent },
+    { path: 'editor', component: CodingComponent },
     { path: 'book-list', component: BookComponent },
     { path: 'book-list/:id', component: BookDetailComponent },
     { path: 'house-list', component: HouseComponentComponent },
