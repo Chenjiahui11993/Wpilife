@@ -15,8 +15,9 @@
         <li><a pageScroll href="#works-section" >Carpooling</a></li>
         <li><a pageScroll href="#about-section" >New Students</a></li>
         <li><a pageScroll href="#team-section" >Event</a></li>
-        <li><a pageScroll href="#testimonials-section">Testimonials</a></li>
-        <li><a pageScroll href="#contact-section" >Contact</a></li>
+        <li *ngIf="auth.isAuthenticated()"><a id="login" [routerLink]="['profile']" >Profile</a></li>
+        <li  *ngIf="!auth.isAuthenticated()"><a id="login" (click)="auth.login()" >Login/SignUp</a></li>
+        <li  *ngIf="auth.isAuthenticated()"><a id="login" (click)="auth.logout()" >Log Out</a></li>
       </ul>
     </div>
     <!-- /.navbar-collapse --> 

@@ -15,29 +15,46 @@ import { BookDetailComponent } from './book/book-detail/book-detail.component';
 import { NewStudentsComponent } from './new-students/new-students.component';
 import { SellComponent } from './sell/sell.component';
 import { CodingComponent } from './coding/coding.component';
+import { CallbackComponent } from './callback/callback.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthGuardService } from './Service/auth.guard.service';
+import { SuccessComponent } from './success/success.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 const appRouter: Routes = [
-    { path: '',  component: HomeComponentComponent },
+    { path: '', component: HomeComponentComponent },
     { path: 'sell', component: SellComponent },
     { path: 'editor', component: CodingComponent },
     { path: 'book-list', component: BookComponent },
     { path: 'book-list/:id', component: BookDetailComponent },
     { path: 'house-list', component: HouseComponentComponent },
-    { path: 'house-list/:id', component: HouseDetailComponent, children: [
-    {  path: ':id/desc', component: HouseDescComponent },
-    { path: ':id/contact', component: HouseContactComponent}
-    ]},
+    {
+        path: 'house-list/:id', component: HouseDetailComponent, children: [
+            { path: ':id/desc', component: HouseDescComponent },
+            { path: ':id/contact', component: HouseContactComponent }
+        ]
+    },
     { path: 'product-list', component: ProductComponent },
-    { path: 'product-list/:id', component: ProductDetailComponent, children: [
-    { path: ':id/desc', component: ProductDescComponent },
-    { path: ':id/contact', component: ProductContactComponent }
-    ]},
-    { path: 'test', component: TestComponent},
-    { path: 'survival-guide', component: NewStudentsComponent}
+    {
+        path: 'product-list/:id', component: ProductDetailComponent, children: [
+            { path: ':id/desc', component: ProductDescComponent },
+            { path: ':id/contact', component: ProductContactComponent }
+        ]
+    },
+    { path: 'test', component: TestComponent },
+    { path: 'survival-guide', component: NewStudentsComponent },
+    { path: 'callback', component: CallbackComponent },
+    {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [AuthGuardService]
+    },
+    { path: 'success', component: SuccessComponent },
+    { path: '**', component: NotFoundComponent }
 ];
 @NgModule({
-    imports: [ RouterModule.forRoot(appRouter) ],
+    imports: [RouterModule.forRoot(appRouter)],
     exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

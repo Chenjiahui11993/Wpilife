@@ -71,7 +71,7 @@
                   <div class="col-sm-6 col-md-3 col-lg-3 web" *ngFor="let house of showHouses;let i of index">
                       <div class="portfolio-item" >
                         <div class="hover-bg">
-                          <a [routerLink]="['book-list', house.id]" >
+                          <a [routerLink]="['house-list', house.id]" >
                             <div class="hover-text">
                               <h4>{{house.Address}}</h4>
                               <small>{{house.price}}</small>

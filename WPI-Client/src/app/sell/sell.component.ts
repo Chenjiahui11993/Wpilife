@@ -4,8 +4,8 @@ import { HouseService } from '../Service/house-service';
 import { BookService } from '../Service/book-service';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../Service/auth.service';
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -21,12 +21,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SellComponent implements OnInit {
   Departments = ['Computer Science', 'Electrical Engineering', 'ESL', 'Data Science', 'MSIT', 'Marketing', 'Others'];
-  constructor(private productService: ProductService, private houseService: HouseService,
-    private bookService: BookService, private httpClient: HttpClient) { }
   name: string;
   address: string;
   price: number;
-  ownerID = 0; // TODO: AUTH
+  ownerID: string; // TODO: AUTH
   desc: string;
   type: string;
   department: string;
@@ -35,6 +33,7 @@ export class SellComponent implements OnInit {
   times = [];
   selectedFile = null;
   i = 0;
+  profile: any;
   fd = new FormData();
   selected = new FormControl('valid', [
     Validators.required
@@ -53,24 +52,42 @@ export class SellComponent implements OnInit {
   ]);
   options = ['Book', 'House', 'Others'];
   matcher = new MyErrorStateMatcher();
+  constructor(private productService: ProductService, private houseService: HouseService,
+    private bookService: BookService, private httpClient: HttpClient, public authService: AuthService) { }
+  ngOnInit() {
+    if (this.authService.userProfile && this.authService.isAuthenticated()) {
+      this.profile = this.authService.userProfile;
+      this.ownerID = this.profile.name;
+      console.log(this.profile);
+    } else if (this.authService.isAuthenticated()) {
+      this.authService.getProfile((err, profile) => {
+        this.profile = profile;
+        this.ownerID = this.profile.name;
+      });
+    }
+    console.log(this.ownerID);
+  }
   upload() {
     this.httpClient.post('api/v1/image', this.fd)
       .subscribe((res: any) => {
+     //   console.log(res);
         for (let i = 0; i < res.length; i++) {
-          this.imgUrl[i] = `http://localhost:3000/api/v1/images/${res[i].filename}`;
+          console.log(res);
+          this.imgUrl[i] = `${window.location.origin}/api/v1/images/${res[i]}`;
+          console.log(this.imgUrl[i]);
         }
         this.addProduct(this.type);
       });
   }
   addProduct(type) {
     if (type === 'Others') {
-      this.productService.setProduct(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl);
+      this.productService.setProduct(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, true);
     }
     if (type === 'House') {
-      this.houseService.setNewllHouse(this.address, this.desc, this.price, 'ownerOne', this.contactInfo, this.imgUrl);
+      this.houseService.setNewllHouse(this.address, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl);
     }
     if (type === 'Book') {
-      this.bookService.setBook(this.name, this.department, 0, this.price, this.contactInfo, this.imgUrl);
+      this.bookService.setBook(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, this.department);
     }
   }
   isOthers(option) {
@@ -113,13 +130,12 @@ export class SellComponent implements OnInit {
     if (event.target.files.length === 0 && this.times.length === 0) { // when use click cancel when upload file
       this.fd.delete('logo');
       return 0;
-    } else if ( event.target.files.length !== 0) {
+    } else if (event.target.files.length !== 0) {
       this.selectedFile = <File>event.target.files;
       for (const file of this.selectedFile) {
         this.fd.append('logo', file, file.name);
       }
     }
   }
-  ngOnInit() {
-  }
+
 }

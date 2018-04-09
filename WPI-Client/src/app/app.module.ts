@@ -38,6 +38,13 @@ import { SellComponent } from './sell/sell.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
 import { CodingComponent } from './coding/coding.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthService } from './Service/auth.service';
+import { CallbackComponent } from './callback/callback.component';
+import { AuthGuardService } from './Service/auth.guard.service';
+import { ErrorComponent } from './error/error.component';
+import { SuccessComponent } from './success/success.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +65,12 @@ import { CodingComponent } from './coding/coding.component';
     NewStudentsComponent,
     SellComponent,
     FooterComponent,
-    CodingComponent
+    CodingComponent,
+    ProfileComponent,
+    CallbackComponent,
+    ErrorComponent,
+    SuccessComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +97,9 @@ import { CodingComponent } from './coding/coding.component';
               ProductService,
               HouseService,
               BookService,
-              CollaborationService
+              CollaborationService,
+              AuthService,
+              AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

@@ -4,12 +4,13 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/toPromise';
 import { HouseModel } from '../house/house.model';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 @Injectable()
 export class HouseService {
     currentPage: number;
     newHouse: HouseModel;
     private _housesSource = new BehaviorSubject<HouseModel[]>([]);
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient, private router: Router) { }
     getAllHouses(): Observable<HouseModel[]> {
         this.httpClient.get('api/v1/houses')
             .toPromise()
@@ -22,22 +23,39 @@ export class HouseService {
         return this._housesSource.asObservable();
     }
     gethouse(id: number): Promise<HouseModel> {
-       return this.httpClient.get(`api/v1/houses/${id}`)
-        .toPromise()
-        .then((res: any) => res);
+        return this.httpClient.get(`api/v1/houses/${id}`)
+            .toPromise()
+            .then((res: any) => res);
     }
-    setNewllHouse(address: string, desc: string
-        , price: number, ownerinfo: string, contactInfo: string, img: string[]) {
-        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        this.newHouse = new HouseModel(address, desc, price, ownerinfo, contactInfo, img);
+    getUserhouse(id: string): Promise<HouseModel[]> {
+        return this.httpClient.get(`api/v1/userHouses/${id}`)
+            .toPromise()
+            .then((res: any) => res);
+    }
+    setNewllHouse(address: string, price: number, ownerinfo: string, desc: string
+        , contactInfo: string, img: string[]) {
+        const options = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+                .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+        };
+        this.newHouse = new HouseModel(address, price, ownerinfo, desc, contactInfo, img, true);
         this.httpClient.post('api/v1/houses', this.newHouse, options)
-        .toPromise()
-        .then((newHouses) => {
-            this.getAllHouses();
-        })
-        .catch((e) => {
-            console.log(e);
-        });
+            .toPromise()
+            .then((newHouses) => {
+                this.getAllHouses();
+                this.router.navigate(['/success']);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+    deleteHouse(id: number) {
+        return this.httpClient.delete(`api/v1/userHouses/${id}`)
+            .toPromise()
+            .then((res: any) => {
+                this.router.navigate(['/']);
+                console.log(res);
+            });
     }
     setCurrentPage(currentPage: number) {
         this.currentPage = currentPage;

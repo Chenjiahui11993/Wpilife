@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const houseSchema = mongoose.Schema({
     id: Number,
-    type: String,
+    type: Boolean,
     price: Number,
-    ownerID: Number,
+    ownerID: String,
     description: String,
     Address: String,
     contactInfo: String,

@@ -10,7 +10,7 @@ import { ProductModel } from '../../product-model';
 export class ProductContactComponent implements OnInit {
   ProductDetail: ProductModel;
   id: number;
-  owner: number;
+  owner: string;
   contact: string;
   constructor(private productService: ProductService, private activateRouter: ActivatedRoute, private router: Router) { }
 

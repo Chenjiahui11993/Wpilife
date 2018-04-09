@@ -4,11 +4,12 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/toPromise';
 import { BookModel } from '../book/book-model';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 @Injectable()
 export class BookService {
     newBook: BookModel;
     private _bookSource = new BehaviorSubject<BookModel[]>([]);
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient, private router: Router) { }
     currentPageNumber: number;
     getALLBooks(): Observable<BookModel[]> {
         this.httpClient.get('api/v1/books')
@@ -19,7 +20,7 @@ export class BookService {
             .catch((e) => {
                 return Promise.reject(e.body || e);
             });
-         return this._bookSource.asObservable();
+        return this._bookSource.asObservable();
     }
     getBook(id: number): Promise<BookModel> {
         return this.httpClient.get(`api/v1/books/${id}`)
@@ -29,16 +30,38 @@ export class BookService {
                 return Promise.reject(e.body || e);
             });
     }
-    setBook(name: string, department: string, owwnerID: number,
-        price: number, contactInfo: string, img: string[]) {
-        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        this.newBook = new BookModel(name, department, owwnerID, price, contactInfo, img);
+    getUserBooks(id: string): Promise<BookModel[]> {
+        return this.httpClient.get(`api/v1/userBooks/${id}`)
+            .toPromise()
+            .then((res: any) => res)
+            .catch((e) => {
+                return Promise.reject(e.body || e);
+            });
+    }
+    deleteBook(id: number) {
+        return this.httpClient.delete(`api/v1/userBook/${id}`)
+            .toPromise()
+            .then((res: any) => {
+                this.router.navigate(['/']);
+                console.log(res);
+            });
+    }
+    setBook(name: string, price: number, ownerID: string, desc: string,
+        contactInfo: string, img: string[], department: string) {
+        const options = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+                .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+        };
+        console.log(localStorage.getItem('access_token'));
+        this.newBook = new BookModel(name, price, ownerID, desc, contactInfo, img, department, true);
         return this.httpClient.post('api/v1/books', this.newBook, options)
             .toPromise()
             .then((newBook) => {
-                this.getALLBooks();
+                // this.getALLBooks().subscribe();
+                this.router.navigate(['/success']);
             })
             .catch((e) => {
+                this.router.navigate(['/error']);
                 return Promise.reject(e.body || e);
             });
 

@@ -36,7 +36,7 @@ export class ProductDetailComponent implements OnInit {
   this.productService.getProduct((this.id))
   .then((product) => {
     this.ProductDetail = product;
-    console.log('2222' + this.ProductDetail);
+   //  console.log('2222' + this.ProductDetail);
   })
   .catch((e) => {
     console.log(e);

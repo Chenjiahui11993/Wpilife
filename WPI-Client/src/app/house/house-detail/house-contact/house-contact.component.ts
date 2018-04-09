@@ -10,8 +10,8 @@ import { HouseModel} from '../../house.model';
 export class HouseContactComponent implements OnInit {
   id: number;
   house: HouseModel;
-  constructor(private houseService: HouseService, private router: Router, private activateRoute: ActivatedRoute) { }
-
+  constructor(private houseService: HouseService, private router: Router, private activateRoute: ActivatedRoute) {
+  }
   ngOnInit() {
     this.activateRoute.params
     .subscribe(
@@ -21,7 +21,7 @@ export class HouseContactComponent implements OnInit {
     );
     this.houseService.gethouse(this.id)
     .then(house => this.house = house);
-    console.log(this.house.ownerinfo);
+    console.log(this.house.ownerID);
   }
   }
 

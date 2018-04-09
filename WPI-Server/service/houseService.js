@@ -1,7 +1,7 @@
 const houseModel = require('../modules/houseModels');
 const getAllHouse = () => {
     return new Promise((resolve, reject) => {
-        houseModel.find({}, (err, house) => {
+        houseModel.find({type: true}, (err, house) => {
             if (err) {
                 reject(err);
             } else {
@@ -17,6 +17,29 @@ const getOneHouse = (id) => {
                 reject(err);
             } else {
                 resolve(house);
+            }
+        });
+    });
+}
+const getUserHouse = (id) => {
+    return new Promise((resolve, reject) => {
+        houseModel.find({ ownerID: id, type: true }, (err, house) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(house);
+            }
+        });
+    });
+}
+const deleteUserHouse = (id) => {
+    return new Promise((resolve, reject) => {
+        var update = { type: false }
+        houseModel.update({ id: id }, update, (err, res) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(res);
             }
         });
     });
@@ -39,5 +62,7 @@ const addHouse = (newHouse) => {
 module.exports = {
     addHouse,
     getAllHouse,
-    getOneHouse
+    getOneHouse,
+    getUserHouse,
+    deleteUserHouse
 }

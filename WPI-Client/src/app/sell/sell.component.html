@@ -91,13 +91,13 @@
         <div class="row animate-box">
           <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
             <span>Cool Stuff</span>
-            <h2>House.</h2>
+            <h2>Sell.</h2>
             <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam
               dolor eius.
             </p>
           </div>
         </div>
-        <div class="row">
+        <div *ngIf="authService.isAuthenticated() else login" class="row">
           <div class="container">
             <div class="row">
               <div class="col-lg-12 ">
@@ -275,12 +275,20 @@
                       <i class="fa fa-plus" aria-hidden="true"></i>
                     </div>
                     <button class="btn btn-primary" (click)="upload()" [disabled]="isBookDisable()">Submit</button>
+                    <h3>
+                      {{ownerID}}
+                    </h3>
                   </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <ng-template #login>
+          <h4>
+            Please <a id="login" (click)="authService.login()">Login</a> First to post your stuff to sell
+          </h4>
+        </ng-template>
       </div>
     </div>
 

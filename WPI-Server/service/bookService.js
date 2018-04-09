@@ -1,7 +1,7 @@
 const bookModel = require('../modules/bookModels');
 const getAllBooks = () => {
     return new Promise((resolve, reject) => {
-        bookModel.find({}, (err, books) => {
+        bookModel.find({type: true}, (err, books) => {
             if (err) {
                 reject(err);
             } else {
@@ -13,6 +13,29 @@ const getAllBooks = () => {
 const getOneBook = (id) => {
     return new Promise((resolve, reject) => {
         bookModel.findOne({id: id }, (err, problems) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(problems);
+            }
+        });
+    });
+}
+const deleteUserBook = (id) => {
+    return new Promise((resolve, reject) => {
+        var update = { type: false }
+        bookModel.update({ id: id }, update, (err, res) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(res);
+            }
+        });
+    });
+}
+const getUserBook = (id) => {
+    return new Promise((resolve, reject) => {
+        bookModel.find({ownerID: id }, (err, problems) => {
             if (err) {
                 reject(err);
             } else {
@@ -38,6 +61,7 @@ const addBook = (newBook) => {
 module.exports = {
     getAllBooks,
     getOneBook,
-    addBook
-
+    addBook,
+    getUserBook,
+    deleteUserBook
 }

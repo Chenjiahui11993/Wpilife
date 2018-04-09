@@ -5,15 +5,16 @@ description: string;
 imgUrl: string[];
 price: number;
 date: string;
-ownerinfo: string;
-type: string;
+ownerID: string;
+type: Boolean;
 contactInfo: string;
-constructor( Address: string, desc: string, price: number, ownerinfo: string, contactInfo: string, img: string[]) {
+constructor( Address: string, price: number, ownerID: string, desc: string, contactInfo: string, img: string[], type: Boolean) {
     this.Address = Address;
-    this.description = desc;
     this.price = price;
-    this.ownerinfo = ownerinfo;
+    this.description = desc;
+    this.ownerID = ownerID;
     this.contactInfo = contactInfo;
     this.imgUrl = img;
+    this.type = type;
 }
 }

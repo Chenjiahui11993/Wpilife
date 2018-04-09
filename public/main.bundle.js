@@ -17,6 +17,159 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 
 /***/ }),
 
+/***/ "../../../../../src/app/Service/auth.guard.service.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var auth_service_1 = __webpack_require__("../../../../../src/app/Service/auth.service.ts");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var AuthGuardService = /** @class */ (function () {
+    function AuthGuardService(authService, router) {
+        this.authService = authService;
+        this.router = router;
+    }
+    AuthGuardService.prototype.canActivate = function (next, state) {
+        if (this.authService.isAuthenticated()) {
+            return true;
+        }
+        else {
+            this.router.navigate(['/sell']);
+            return false;
+        }
+    };
+    AuthGuardService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router])
+    ], AuthGuardService);
+    return AuthGuardService;
+}());
+exports.AuthGuardService = AuthGuardService;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/Service/auth.service.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var auth0_variables_1 = __webpack_require__("../../../../../src/app/Service/auth0-variables.ts");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var auth0 = __webpack_require__("../../../../auth0-js/src/index.js");
+var AuthService = /** @class */ (function () {
+    function AuthService(router) {
+        this.router = router;
+        this.auth0 = new auth0.WebAuth({
+            clientID: auth0_variables_1.AUTH_CONFIG.clientID,
+            domain: auth0_variables_1.AUTH_CONFIG.domain,
+            responseType: 'token id_token',
+            audience: "https://" + auth0_variables_1.AUTH_CONFIG.domain + "/api/v2/",
+            redirectUri: auth0_variables_1.AUTH_CONFIG.callbackURL,
+            scope: 'openid profile postBooks'
+        });
+    }
+    AuthService.prototype.login = function () {
+        this.auth0.authorize();
+    };
+    AuthService.prototype.handleAuthentication = function () {
+        var _this = this;
+        this.auth0.parseHash(function (err, authResult) {
+            if (authResult && authResult.accessToken && authResult.idToken) {
+                _this.setSession(authResult);
+                console.log('hahaha');
+                _this.router.navigate(['/']);
+            }
+            else if (err) {
+                _this.router.navigate(['/']);
+                console.log(err);
+                alert("Error: " + err.error + ". Check the console for further details.");
+            }
+        });
+    };
+    AuthService.prototype.setSession = function (authResult) {
+        // Set the time that the access token will expire at
+        var expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+        localStorage.setItem('access_token', authResult.accessToken);
+        localStorage.setItem('id_token', authResult.idToken);
+        localStorage.setItem('expires_at', expiresAt);
+    };
+    AuthService.prototype.logout = function () {
+        // Remove tokens and expiry time from localStorage
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('id_token');
+        localStorage.removeItem('expires_at');
+        // Go back to the home route
+        this.router.navigate(['/']);
+    };
+    AuthService.prototype.isAuthenticated = function () {
+        // Check whether the current time is past the
+        // access token's expiry time
+        var expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+        return new Date().getTime() < expiresAt;
+    };
+    // get User profile
+    AuthService.prototype.getProfile = function (cb) {
+        var accessToken = localStorage.getItem('access_token');
+        if (!accessToken) {
+            throw new Error('Access Token must exist to fetch profile');
+        }
+        var self = this;
+        this.auth0.client.userInfo(accessToken, function (err, profile) {
+            if (profile) {
+                self.userProfile = profile;
+            }
+            cb(err, profile);
+        });
+    };
+    AuthService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [router_1.Router])
+    ], AuthService);
+    return AuthService;
+}());
+exports.AuthService = AuthService;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/Service/auth0-variables.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AUTH_CONFIG = {
+    clientID: 'uzLB9DST8Ug7tZUOgZwVPHXliqxwKh1S',
+    domain: 'wpilife.auth0.com',
+    callbackURL: 'http://localhost:3000/callback'
+};
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/Service/book-service.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37,9 +190,11 @@ var BehaviorSubject_1 = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubj
 __webpack_require__("../../../../rxjs/_esm5/add/operator/toPromise.js");
 var book_model_1 = __webpack_require__("../../../../../src/app/book/book-model.ts");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var BookService = /** @class */ (function () {
-    function BookService(httpClient) {
+    function BookService(httpClient, router) {
         this.httpClient = httpClient;
+        this.router = router;
         this._bookSource = new BehaviorSubject_1.BehaviorSubject([]);
     }
     BookService.prototype.getALLBooks = function () {
@@ -62,22 +217,45 @@ var BookService = /** @class */ (function () {
             return Promise.reject(e.body || e);
         });
     };
-    BookService.prototype.setBook = function (name, department, owwnerID, price, contactInfo, img) {
+    BookService.prototype.getUserBooks = function (id) {
+        return this.httpClient.get("api/v1/userBooks/" + id)
+            .toPromise()
+            .then(function (res) { return res; })
+            .catch(function (e) {
+            return Promise.reject(e.body || e);
+        });
+    };
+    BookService.prototype.deleteBook = function (id) {
         var _this = this;
-        var options = { headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' }) };
-        this.newBook = new book_model_1.BookModel(name, department, owwnerID, price, contactInfo, img);
+        return this.httpClient.delete("api/v1/userBook/" + id)
+            .toPromise()
+            .then(function (res) {
+            _this.router.navigate(['/']);
+            console.log(res);
+        });
+    };
+    BookService.prototype.setBook = function (name, price, ownerID, desc, contactInfo, img, department) {
+        var _this = this;
+        var options = {
+            headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
+                .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+        };
+        console.log(localStorage.getItem('access_token'));
+        this.newBook = new book_model_1.BookModel(name, price, ownerID, desc, contactInfo, img, department, true);
         return this.httpClient.post('api/v1/books', this.newBook, options)
             .toPromise()
             .then(function (newBook) {
-            _this.getALLBooks();
+            // this.getALLBooks().subscribe();
+            _this.router.navigate(['/success']);
         })
             .catch(function (e) {
+            _this.router.navigate(['/error']);
             return Promise.reject(e.body || e);
         });
     };
     BookService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, router_1.Router])
     ], BookService);
     return BookService;
 }());
@@ -153,9 +331,11 @@ var BehaviorSubject_1 = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubj
 __webpack_require__("../../../../rxjs/_esm5/add/operator/toPromise.js");
 var house_model_1 = __webpack_require__("../../../../../src/app/house/house.model.ts");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var HouseService = /** @class */ (function () {
-    function HouseService(httpClient) {
+    function HouseService(httpClient, router) {
         this.httpClient = httpClient;
+        this.router = router;
         this._housesSource = new BehaviorSubject_1.BehaviorSubject([]);
     }
     HouseService.prototype.getAllHouses = function () {
@@ -175,17 +355,35 @@ var HouseService = /** @class */ (function () {
             .toPromise()
             .then(function (res) { return res; });
     };
-    HouseService.prototype.setNewllHouse = function (address, desc, price, ownerinfo, contactInfo, img) {
+    HouseService.prototype.getUserhouse = function (id) {
+        return this.httpClient.get("api/v1/userHouses/" + id)
+            .toPromise()
+            .then(function (res) { return res; });
+    };
+    HouseService.prototype.setNewllHouse = function (address, price, ownerinfo, desc, contactInfo, img) {
         var _this = this;
-        var options = { headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' }) };
-        this.newHouse = new house_model_1.HouseModel(address, desc, price, ownerinfo, contactInfo, img);
+        var options = {
+            headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
+                .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+        };
+        this.newHouse = new house_model_1.HouseModel(address, price, ownerinfo, desc, contactInfo, img, true);
         this.httpClient.post('api/v1/houses', this.newHouse, options)
             .toPromise()
             .then(function (newHouses) {
             _this.getAllHouses();
+            _this.router.navigate(['/success']);
         })
             .catch(function (e) {
             console.log(e);
+        });
+    };
+    HouseService.prototype.deleteHouse = function (id) {
+        var _this = this;
+        return this.httpClient.delete("api/v1/userHouses/" + id)
+            .toPromise()
+            .then(function (res) {
+            _this.router.navigate(['/']);
+            console.log(res);
         });
     };
     HouseService.prototype.setCurrentPage = function (currentPage) {
@@ -196,7 +394,7 @@ var HouseService = /** @class */ (function () {
     };
     HouseService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, router_1.Router])
     ], HouseService);
     return HouseService;
 }());
@@ -225,9 +423,11 @@ var BehaviorSubject_1 = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubj
 __webpack_require__("../../../../rxjs/_esm5/add/operator/toPromise.js");
 var product_model_1 = __webpack_require__("../../../../../src/app/product/product-model.ts");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var ProductService = /** @class */ (function () {
-    function ProductService(httpClient) {
+    function ProductService(httpClient, router) {
         this.httpClient = httpClient;
+        this.router = router;
         this._productSource = new BehaviorSubject_1.BehaviorSubject([]);
     }
     ProductService.prototype.getProduct = function (id) {
@@ -236,6 +436,25 @@ var ProductService = /** @class */ (function () {
             .then(function (res) { return res; })
             .catch(function (e) {
             return Promise.reject(e.body || e);
+        });
+    };
+    ProductService.prototype.getUserProduct = function (id) {
+        console.log(id);
+        console.log('xixixix');
+        return this.httpClient.get("api/v1/userproducts/" + id)
+            .toPromise()
+            .then(function (res) { return res; })
+            .catch(function (e) {
+            return Promise.reject(e.body || e);
+        });
+    };
+    ProductService.prototype.deleteProduct = function (id) {
+        var _this = this;
+        return this.httpClient.delete("api/v1/userProduct/" + id)
+            .toPromise()
+            .then(function (res) {
+            _this.router.navigate(['/']);
+            console.log(res);
         });
     };
     ProductService.prototype.getAllProduct = function () {
@@ -250,14 +469,19 @@ var ProductService = /** @class */ (function () {
         });
         return this._productSource.asObservable();
     };
-    ProductService.prototype.setProduct = function (name, price, ownerID, desc, contactInfo, img) {
+    ProductService.prototype.setProduct = function (name, price, ownerID, desc, contactInfo, img, type) {
         var _this = this;
-        var options = { headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' }) };
-        this.newProduct = new product_model_1.ProductModel(name, price, ownerID, desc, contactInfo, img);
+        var options = {
+            headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
+                .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+        };
+        type = true;
+        this.newProduct = new product_model_1.ProductModel(name, price, ownerID, desc, contactInfo, img, type);
         return this.httpClient.post('api/v1/products', this.newProduct, options)
             .toPromise()
             .then(function (newProducts) {
             _this.getAllProduct();
+            _this.router.navigate(['/success']);
             return newProducts; // get New Product list
         })
             .catch(function (e) {
@@ -272,7 +496,7 @@ var ProductService = /** @class */ (function () {
     };
     ProductService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, router_1.Router])
     ], ProductService);
     return ProductService;
 }());
@@ -310,6 +534,11 @@ var book_detail_component_1 = __webpack_require__("../../../../../src/app/book/b
 var new_students_component_1 = __webpack_require__("../../../../../src/app/new-students/new-students.component.ts");
 var sell_component_1 = __webpack_require__("../../../../../src/app/sell/sell.component.ts");
 var coding_component_1 = __webpack_require__("../../../../../src/app/coding/coding.component.ts");
+var callback_component_1 = __webpack_require__("../../../../../src/app/callback/callback.component.ts");
+var profile_component_1 = __webpack_require__("../../../../../src/app/profile/profile.component.ts");
+var auth_guard_service_1 = __webpack_require__("../../../../../src/app/Service/auth.guard.service.ts");
+var success_component_1 = __webpack_require__("../../../../../src/app/success/success.component.ts");
+var not_found_component_1 = __webpack_require__("../../../../../src/app/not-found/not-found.component.ts");
 var appRouter = [
     { path: '', component: home_component_component_1.HomeComponentComponent },
     { path: 'sell', component: sell_component_1.SellComponent },
@@ -317,17 +546,29 @@ var appRouter = [
     { path: 'book-list', component: book_component_1.BookComponent },
     { path: 'book-list/:id', component: book_detail_component_1.BookDetailComponent },
     { path: 'house-list', component: house_component_component_1.HouseComponentComponent },
-    { path: 'house-list/:id', component: house_detail_component_1.HouseDetailComponent, children: [
+    {
+        path: 'house-list/:id', component: house_detail_component_1.HouseDetailComponent, children: [
             { path: ':id/desc', component: house_desc_component_1.HouseDescComponent },
             { path: ':id/contact', component: house_contact_component_1.HouseContactComponent }
-        ] },
+        ]
+    },
     { path: 'product-list', component: product_component_1.ProductComponent },
-    { path: 'product-list/:id', component: product_detail_component_1.ProductDetailComponent, children: [
+    {
+        path: 'product-list/:id', component: product_detail_component_1.ProductDetailComponent, children: [
             { path: ':id/desc', component: product_desc_component_1.ProductDescComponent },
             { path: ':id/contact', component: product_contact_component_1.ProductContactComponent }
-        ] },
+        ]
+    },
     { path: 'test', component: test_component_1.TestComponent },
-    { path: 'survival-guide', component: new_students_component_1.NewStudentsComponent }
+    { path: 'survival-guide', component: new_students_component_1.NewStudentsComponent },
+    { path: 'callback', component: callback_component_1.CallbackComponent },
+    {
+        path: 'profile',
+        component: profile_component_1.ProfileComponent,
+        canActivate: [auth_guard_service_1.AuthGuardService]
+    },
+    { path: 'success', component: success_component_1.SuccessComponent },
+    { path: '**', component: not_found_component_1.NotFoundComponent }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -387,10 +628,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var ng2_page_scroll_1 = __webpack_require__("../../../../ng2-page-scroll/ng2-page-scroll.js");
+var auth_service_1 = __webpack_require__("../../../../../src/app/Service/auth.service.ts");
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(auth) {
+        this.auth = auth;
         this.title = 'app';
         ng2_page_scroll_1.PageScrollConfig.defaultDuration = 500;
+        auth.handleAuthentication();
     }
     AppComponent = __decorate([
         core_1.Component({
@@ -398,7 +642,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/app.component.html"),
             styles: [__webpack_require__("../../../../../src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [auth_service_1.AuthService])
     ], AppComponent);
     return AppComponent;
 }());
@@ -459,6 +703,13 @@ var sell_component_1 = __webpack_require__("../../../../../src/app/sell/sell.com
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
 var footer_component_1 = __webpack_require__("../../../../../src/app/footer/footer.component.ts");
 var coding_component_1 = __webpack_require__("../../../../../src/app/coding/coding.component.ts");
+var profile_component_1 = __webpack_require__("../../../../../src/app/profile/profile.component.ts");
+var auth_service_1 = __webpack_require__("../../../../../src/app/Service/auth.service.ts");
+var callback_component_1 = __webpack_require__("../../../../../src/app/callback/callback.component.ts");
+var auth_guard_service_1 = __webpack_require__("../../../../../src/app/Service/auth.guard.service.ts");
+var error_component_1 = __webpack_require__("../../../../../src/app/error/error.component.ts");
+var success_component_1 = __webpack_require__("../../../../../src/app/success/success.component.ts");
+var not_found_component_1 = __webpack_require__("../../../../../src/app/not-found/not-found.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -483,7 +734,12 @@ var AppModule = /** @class */ (function () {
                 new_students_component_1.NewStudentsComponent,
                 sell_component_1.SellComponent,
                 footer_component_1.FooterComponent,
-                coding_component_1.CodingComponent
+                coding_component_1.CodingComponent,
+                profile_component_1.ProfileComponent,
+                callback_component_1.CallbackComponent,
+                error_component_1.ErrorComponent,
+                success_component_1.SuccessComponent,
+                not_found_component_1.NotFoundComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -510,7 +766,9 @@ var AppModule = /** @class */ (function () {
                 product_service_1.ProductService,
                 house_service_1.HouseService,
                 book_service_1.BookService,
-                collaboration_service_1.CollaborationService
+                collaboration_service_1.CollaborationService,
+                auth_service_1.AuthService,
+                auth_guard_service_1.AuthGuardService
             ],
             bootstrap: [app_component_1.AppComponent]
         })
@@ -525,7 +783,7 @@ exports.AppModule = AppModule;
 /***/ "../../../../../src/app/book/book-detail/book-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<body>\n  <div class=\"fh5co-loader\"></div>\n  <div id=\"page\">\n    <nav class=\"fh5co-nav\" role=\"navigation\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-3 col-xs-2\">\n            <div id=\"fh5co-logo\">\n              <a routerLink=\"\">WPI.</a>\n            </div>\n          </div>\n          <div class=\"col-md-6 col-xs-6 text-center menu-1\">\n            <ul>\n              <li class=\"has-dropdown active\">\n                <a routerLink=\"/product-list\">Shop</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"single.html\">Single Shop</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"about.html\">About</a>\n              </li>\n              <li class=\"has-dropdown\">\n                <a href=\"services.html\">Services</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"#\">Web Design</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">eCommerce</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">Branding</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">API</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"contact.html\">Contact</a>\n              </li>\n            </ul>\n          </div>\n          <div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n            <ul>\n              <li class=\"search\">\n                <div class=\"input-group\">\n                  <input type=\"text\" placeholder=\"Search..\">\n                  <span class=\"input-group-btn\">\n                    <button class=\"btn btn-primary\" type=\"button\">\n                      <i class=\"icon-search\"></i>\n                    </button>\n                  </span>\n                </div>\n              </li>\n              <li class=\"shopping-cart\">\n                <a href=\"#\" class=\"cart\">\n                  <span>\n                    <small>0</small>\n                    <i class=\"icon-shopping-cart\"></i>\n                  </span>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </nav>\n\n    <header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../../assets/img_bg_2.jpg);\">\n      <div class=\"overlay\"></div>\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-8 col-md-offset-2 text-center\">\n            <div class=\"display-t\">\n              <div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n                <h1>Book Details</h1>\n                <h2>Free html5 templates Made</h2>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </header>\n\n    <div id=\"fh5co-product\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-10 col-md-offset-1\">\n          \n            <div>\n              <ngx-carousel [inputs]=\"Config\">\n                <ngx-item *ngFor=\"let bookImg of bookModel.imgUrl\" class=\"bannerStyle \" NgxCarouselItem>\n                  <img [src]=\"bookImg\" alt=\"house\" width=\"100%\" #test2 id=\"img1\">\n                </ngx-item>\n                <i NgxCarouselPrev class=\"leftRs fa fa-arrow-left fa-3x\" aria-hidden=\"true\"></i>\n                <i NgxCarouselNext class=\"rightRs fa fa-arrow-right fa-3x\" aria-hidden=\"true\"></i>\n              </ngx-carousel>\n            </div>\n          \n\n\n            <div class=\"row animate-box\">\n              <div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n                <h2>{{bookModel.department}}</h2>\n                <p>\n                  <a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Post your Product to Sell</a>\n                  <a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Compare</a>\n                </p>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"col-md-10 col-md-offset-1\">\n            <ul class=\"nav nav-tabs\">\n              <mat-tab-group>\n\n                <mat-tab label=\"Book detail\">\n                  <div class=\"col-md-8 \">\n                      <h4>Book Detail</h4>\n                      <ul>\n                          <li>{{bookModel.name}}\n                          </li>\n                          <li>{{bookModel.price}}</li>\n                          <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                          <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis officiis est.</li>\n                        </ul>\n                  </div>\n                </mat-tab>\n\n                <mat-tab label=\"Contact Info\">\n\n\n                  <div class=\"col-md-8\">\n                    <h4>Book Owner contact info</h4>\n                    <ul>\n                      <li>{{bookModel.contactInfo}}\n                      </li>\n                      <li>{{bookModel.owwnerID}}</li>\n                      <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                      <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis officiis est.</li>\n                    </ul>\n                    <ul>\n                      <li>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci eius\n                      </li>\n                      <li>adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi</li>\n                      <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                      <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur officiis\n                        est.</li>\n                    </ul>\n                  </div>\n\n\n                </mat-tab>\n              </mat-tab-group>\n\n            </ul>\n          </div>\n        </div>\n        <!-- Tabs -->\n        <router-outlet></router-outlet>\n        <div class=\"col-md-10 col-md-offset-1\">\n          <h3>Happy Buyers</h3>\n          <div class=\"feed\">\n            <div>\n              <blockquote>\n                <p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni\n                  quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n                  officiis est.\n                </p>\n              </blockquote>\n              <h3>&mdash; Louie Knight</h3>\n              <span class=\"rate\">\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n              </span>\n            </div>\n            <div>\n              <blockquote>\n                <p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni\n                  quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n                  officiis est.\n                </p>\n              </blockquote>\n              <h3>&mdash; Joefrey Gwapo</h3>\n              <span class=\"rate\">\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n              </span>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div id=\"fh5co-started\">\n    <div class=\"container\">\n      <div class=\"row animate-box\">\n        <!-- UY BEGIN -->\n        <div id=\"uyan_frame\"></div>\n        <script type=\"text/javascript\" src=\"http://v2.uyan.cc/code/uyan.js?uid=2158295\"></script>\n        <!-- UY END -->\n      </div>\n    </div>\n  </div>\n\n  <footer id=\"fh5co-footer\" role=\"contentinfo\">\n    <div class=\"container\">\n      <div class=\"row row-pb-md\">\n        <div class=\"col-md-4 fh5co-widget\">\n          <h3>Shop.</h3>\n          <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto\n            culpa amet.\n          </p>\n        </div>\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">About</a>\n            </li>\n            <li>\n              <a href=\"#\">Help</a>\n            </li>\n            <li>\n              <a href=\"#\">Contact</a>\n            </li>\n            <li>\n              <a href=\"#\">Terms</a>\n            </li>\n            <li>\n              <a href=\"#\">Meetups</a>\n            </li>\n          </ul>\n        </div>\n\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">Shop</a>\n            </li>\n            <li>\n              <a href=\"#\">Privacy</a>\n            </li>\n            <li>\n              <a href=\"#\">Testimonials</a>\n            </li>\n            <li>\n              <a href=\"#\">Handbook</a>\n            </li>\n            <li>\n              <a href=\"#\">Held Desk</a>\n            </li>\n          </ul>\n        </div>\n\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">Find Designers</a>\n            </li>\n            <li>\n              <a href=\"#\">Find Developers</a>\n            </li>\n            <li>\n              <a href=\"#\">Teams</a>\n            </li>\n            <li>\n              <a href=\"#\">Advertise</a>\n            </li>\n            <li>\n              <a href=\"#\">API</a>\n            </li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"row copyright\">\n        <div class=\"col-md-12 text-center\">\n          <p>\n            <small class=\"block\">Copyright &copy; 2017.Company name All rights reserved.\n              <a target=\"_blank\" href=\"http://guantaow.taobao.com/\">厚朴网络淘宝店</a>\n              <a target=\"_blank\" href=\"http://www.moobnn.com\">网页模板</a>\n            </small>\n          </p>\n          <p>\n            <ul class=\"fh5co-social-icons\">\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-twitter\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-facebook\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-linkedin\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-dribbble\"></i>\n                </a>\n              </li>\n            </ul>\n        </div>\n      </div>\n\n    </div>\n  </footer>\n  <div class=\"gototop js-top\">\n    <a href=\"#\" class=\"js-gotop\">\n      <i class=\"icon-arrow-up\"></i>\n    </a>\n  </div>\n</body>"
+module.exports = "<body>\n  <div class=\"fh5co-loader\"></div>\n  <div id=\"page\">\n    <nav class=\"fh5co-nav\" role=\"navigation\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-3 col-xs-2\">\n            <div id=\"fh5co-logo\">\n              <a routerLink=\"\">WPI.</a>\n            </div>\n          </div>\n          <div class=\"col-md-6 col-xs-6 text-center menu-1\">\n            <ul>\n              <li class=\"has-dropdown active\">\n                <a routerLink=\"/product-list\">Shop</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"single.html\">Single Shop</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"about.html\">About</a>\n              </li>\n              <li class=\"has-dropdown\">\n                <a href=\"services.html\">Services</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"#\">Web Design</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">eCommerce</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">Branding</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">API</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"contact.html\">Contact</a>\n              </li>\n            </ul>\n          </div>\n          <div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n            <ul>\n              <li class=\"search\">\n                <div class=\"input-group\">\n                  <input type=\"text\" placeholder=\"Search..\">\n                  <span class=\"input-group-btn\">\n                    <button class=\"btn btn-primary\" type=\"button\">\n                      <i class=\"icon-search\"></i>\n                    </button>\n                  </span>\n                </div>\n              </li>\n              <li class=\"shopping-cart\">\n                <a href=\"#\" class=\"cart\">\n                  <span>\n                    <small>0</small>\n                    <i class=\"icon-shopping-cart\"></i>\n                  </span>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </nav>\n\n    <header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../../assets/img_bg_2.jpg);\">\n      <div class=\"overlay\"></div>\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-8 col-md-offset-2 text-center\">\n            <div class=\"display-t\">\n              <div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n                <h1>Book Details</h1>\n                <h2>Free html5 templates Made</h2>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </header>\n\n    <div id=\"fh5co-product\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-10 col-md-offset-1\">\n          \n            <div>\n              <ngx-carousel [inputs]=\"Config\">\n                <ngx-item *ngFor=\"let bookImg of bookModel.imgUrl\" class=\"bannerStyle \" NgxCarouselItem>\n                  <img [src]=\"bookImg\" alt=\"house\" width=\"100%\" #test2 id=\"img1\">\n                </ngx-item>\n                <i NgxCarouselPrev class=\"leftRs fa fa-arrow-left fa-3x\" aria-hidden=\"true\"></i>\n                <i NgxCarouselNext class=\"rightRs fa fa-arrow-right fa-3x\" aria-hidden=\"true\"></i>\n              </ngx-carousel>\n            </div>\n          \n\n\n            <div class=\"row animate-box\">\n              <div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n                <h2>{{bookModel.department}}</h2>\n                <p>\n                  <a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Post your Product to Sell</a>\n                  <a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Compare</a>\n                </p>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"col-md-10 col-md-offset-1\">\n            <ul class=\"nav nav-tabs\">\n              <mat-tab-group>\n\n                <mat-tab label=\"Book detail\">\n                  <div class=\"col-md-8 \">\n                      <h4>Book Detail</h4>\n                      <ul>\n                          <li>{{bookModel.name}}\n                          </li>\n                          <li>{{bookModel.price}}</li>\n                          <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                          <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis officiis est.</li>\n                        </ul>\n                  </div>\n                </mat-tab>\n\n                <mat-tab label=\"Contact Info\">\n\n\n                  <div class=\"col-md-8\">\n                    <h4>Book Owner contact info</h4>\n                    <ul>\n                      <li>{{bookModel.contactInfo}}\n                      </li>\n                      <li>{{bookModel.ownerID}}</li>\n                      <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                      <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis officiis est.</li>\n                    </ul>\n                    <ul>\n                      <li>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci eius\n                      </li>\n                      <li>adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi</li>\n                      <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                      <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur officiis\n                        est.</li>\n                    </ul>\n                  </div>\n\n\n                </mat-tab>\n              </mat-tab-group>\n\n            </ul>\n          </div>\n        </div>\n        <!-- Tabs -->\n        <router-outlet></router-outlet>\n        <div class=\"col-md-10 col-md-offset-1\">\n          <h3>Happy Buyers</h3>\n          <div class=\"feed\">\n            <div>\n              <blockquote>\n                <p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni\n                  quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n                  officiis est.\n                </p>\n              </blockquote>\n              <h3>&mdash; Louie Knight</h3>\n              <span class=\"rate\">\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n              </span>\n            </div>\n            <div>\n              <blockquote>\n                <p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni\n                  quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n                  officiis est.\n                </p>\n              </blockquote>\n              <h3>&mdash; Joefrey Gwapo</h3>\n              <span class=\"rate\">\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n              </span>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div id=\"fh5co-started\">\n    <div class=\"container\">\n      <div class=\"row animate-box\">\n        <!-- UY BEGIN -->\n        <div id=\"uyan_frame\"></div>\n        <script type=\"text/javascript\" src=\"http://v2.uyan.cc/code/uyan.js?uid=2158295\"></script>\n        <!-- UY END -->\n      </div>\n    </div>\n  </div>\n\n  <footer id=\"fh5co-footer\" role=\"contentinfo\">\n    <div class=\"container\">\n      <div class=\"row row-pb-md\">\n        <div class=\"col-md-4 fh5co-widget\">\n          <h3>Shop.</h3>\n          <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto\n            culpa amet.\n          </p>\n        </div>\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">About</a>\n            </li>\n            <li>\n              <a href=\"#\">Help</a>\n            </li>\n            <li>\n              <a href=\"#\">Contact</a>\n            </li>\n            <li>\n              <a href=\"#\">Terms</a>\n            </li>\n            <li>\n              <a href=\"#\">Meetups</a>\n            </li>\n          </ul>\n        </div>\n\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">Shop</a>\n            </li>\n            <li>\n              <a href=\"#\">Privacy</a>\n            </li>\n            <li>\n              <a href=\"#\">Testimonials</a>\n            </li>\n            <li>\n              <a href=\"#\">Handbook</a>\n            </li>\n            <li>\n              <a href=\"#\">Held Desk</a>\n            </li>\n          </ul>\n        </div>\n\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">Find Designers</a>\n            </li>\n            <li>\n              <a href=\"#\">Find Developers</a>\n            </li>\n            <li>\n              <a href=\"#\">Teams</a>\n            </li>\n            <li>\n              <a href=\"#\">Advertise</a>\n            </li>\n            <li>\n              <a href=\"#\">API</a>\n            </li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"row copyright\">\n        <div class=\"col-md-12 text-center\">\n          <p>\n            <small class=\"block\">Copyright &copy; 2017.Company name All rights reserved.\n              <a target=\"_blank\" href=\"http://guantaow.taobao.com/\">厚朴网络淘宝店</a>\n              <a target=\"_blank\" href=\"http://www.moobnn.com\">网页模板</a>\n            </small>\n          </p>\n          <p>\n            <ul class=\"fh5co-social-icons\">\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-twitter\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-facebook\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-linkedin\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-dribbble\"></i>\n                </a>\n              </li>\n            </ul>\n        </div>\n      </div>\n\n    </div>\n  </footer>\n  <div class=\"gototop js-top\">\n    <a href=\"#\" class=\"js-gotop\">\n      <i class=\"icon-arrow-up\"></i>\n    </a>\n  </div>\n</body>"
 
 /***/ }),
 
@@ -602,13 +860,15 @@ exports.BookDetailComponent = BookDetailComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var BookModel = /** @class */ (function () {
-    function BookModel(name, department, owwnerID, price, contactInfo, img) {
+    function BookModel(name, price, ownerID, desc, contactInfo, img, department, type) {
         this.name = name;
         this.department = department;
-        this.owwnerID = owwnerID;
+        this.ownerID = ownerID;
         this.price = price;
         this.contactInfo = contactInfo;
+        this.description = desc;
         this.imgUrl = img;
+        this.type = type;
     }
     return BookModel;
 }());
@@ -694,6 +954,67 @@ var BookComponent = /** @class */ (function () {
     return BookComponent;
 }());
 exports.BookComponent = BookComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/callback/callback.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".loading {\r\n    position: absolute;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    height: 100vh;\r\n    width: 100vw;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    background-color: #fff;\r\n  }", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/callback/callback.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"loading\">\n  <img src=\"assets/loading.svg\" alt=\"loading\">\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/callback/callback.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var CallbackComponent = /** @class */ (function () {
+    function CallbackComponent() {
+    }
+    CallbackComponent.prototype.ngOnInit = function () {
+    };
+    CallbackComponent = __decorate([
+        core_1.Component({
+            selector: 'app-callback',
+            template: __webpack_require__("../../../../../src/app/callback/callback.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/callback/callback.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], CallbackComponent);
+    return CallbackComponent;
+}());
+exports.CallbackComponent = CallbackComponent;
 
 
 /***/ }),
@@ -794,6 +1115,67 @@ var CodingComponent = /** @class */ (function () {
     return CodingComponent;
 }());
 exports.CodingComponent = CodingComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/error/error.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/error/error.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h1>\n  <li>Opps...</li>\n  There must be something wrong with the server, please contact: hbchenjh@gmail.com! Thank you very much!\n</h1>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/error/error.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var ErrorComponent = /** @class */ (function () {
+    function ErrorComponent() {
+    }
+    ErrorComponent.prototype.ngOnInit = function () {
+    };
+    ErrorComponent = __decorate([
+        core_1.Component({
+            selector: 'app-error',
+            template: __webpack_require__("../../../../../src/app/error/error.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/error/error.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ErrorComponent);
+    return ErrorComponent;
+}());
+exports.ErrorComponent = ErrorComponent;
 
 
 /***/ }),
@@ -943,7 +1325,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/home-page/home-component.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!DOCTYPE html>\n<html lang=\"en\">\n\n<body>\n  <!-- Navigation\n    ==========================================-->\n  <app-nav></app-nav>\n\n  <!-- Header -->\n\n  <app-header></app-header>\n  <!-- Services Section -->\n  <div id=\"services-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>Shopping\n          <strong>Section</strong>\n        </h2>\n        <hr>\n        <div class=\"clearfix\"></div>\n        <p>There you can find almost whatever you want.</p>\n      </div>\n      <div class=\"space\"></div>\n      <div class=\"row\">\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"['house-list']\" class=\"fa fa-home\"></i>\n          <h4>\n            <strong>House/Apartment Rent</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>\n        </div>\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"'book-list'\" class=\"fa fa-book\"></i>\n          <h4>\n            <strong>Book</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque.</p>\n        </div>\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"'product-list'\" class=\"fa fa-bed\"></i>\n          <h4>\n            <strong>Others</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>\n        </div>\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"'sell'\" class=\"fa fa-money\"></i>\n          <h4>\n            <strong>Sell your Product</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque.</p>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- Portfolio Section -->\n  <div id=\"works-section\">\n    <div class=\"container\">\n      <!-- Container -->\n      <div class=\"section-title text-center center\">\n        <h2>Recent\n          <strong>Product</strong>\n        </h2>\n        <hr>\n        <div class=\"clearfix\"></div>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div class=\"categories\">   \n          <mat-tab-group>   \n              <mat-tab label=\"House\">\n                  <div class=\"col-sm-6 col-md-3 col-lg-3 web\" *ngFor=\"let house of showHouses;let i of index\">\n                      <div class=\"portfolio-item\" >\n                        <div class=\"hover-bg\">\n                          <a [routerLink]=\"['book-list', house.id]\" >\n                            <div class=\"hover-text\">\n                              <h4>{{house.Address}}</h4>\n                              <small>{{house.price}}</small>\n                              <div class=\"clearfix\"></div>\n                              <i class=\"fa fa-plus\"></i>\n                            </div>\n                            <img [src]=\"house.imgUrl[0]\" class=\"img-responsive\" alt=\"Project Title\"> </a>\n                        </div>\n                      </div>\n                    </div>\n              </mat-tab>\n            <mat-tab label=\"Book\">\n                <div class=\"col-sm-6 col-md-3 col-lg-3 web\" *ngFor=\"let book of showBooks;let i of index\">\n                    <div class=\"portfolio-item\" >\n                      <div class=\"hover-bg\">\n                        <a [routerLink]=\"['book-list', book.id]\" >\n                          <div class=\"hover-text\">\n                            <h4>{{book.name}}</h4>\n                            <small>{{book.department}}</small>\n                            <div class=\"clearfix\"></div>\n                            <i class=\"fa fa-plus\"></i>\n                          </div>\n                          <img [src]=\"book.imgUrl[0]\" class=\"img-responsive\" alt=\"Project Title\"> </a>\n                      </div>\n                    </div>\n                  </div>\n            </mat-tab>\n            <mat-tab label=\"Others\">\n                <div class=\"col-sm-6 col-md-3 col-lg-3 web\" *ngFor=\"let product of showProducts;let i of index\">\n                    <div class=\"portfolio-item\" >\n                      <div class=\"hover-bg\">\n                        <a [routerLink]=\"['product-list', product.id]\">\n                          <div class=\"hover-text\">\n                            <h4>{{product.name}}</h4>\n                            <small>{{product.price}}</small>\n                            <div class=\"clearfix\"></div>\n                            <i class=\"fa fa-plus\"></i>\n                          </div>\n                          <img [src]=\"product.imgUrl[0]\" class=\"img-responsive\" alt=\"Project Title\">  </a>\n                      </div>\n                    </div>\n                  </div>  \n            </mat-tab>\n          </mat-tab-group>\n\n        <div class=\"clearfix\"></div>\n      </div>\n\n    </div>\n  </div>\n  <!-- About Section -->\n  <div id=\"about-section\">\n    <div class=\"container\">\n      <div class=\"section-title text-center center\">\n        <h2>\n          <strong>New</strong> Students</h2>\n        <hr>\n        <div class=\"clearfix\"></div>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-md-6\">\n          <img src=\"../../assets/about.png\" class=\"img-responsive\"> </div>\n        <div class=\"col-md-6\">\n          <div class=\"about-text\" [routerLink]=\"['survival-guide']\">\n            <i class=\"fa fa-users\"></i>\n            <h4>Survival Guide</h4>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh\n              ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis\n              bibendum.</p>\n            <i class=\"fa fa-puzzle-piece\"></i>\n            <h4>Airport pickup</h4>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh\n              ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis\n              bibendum.</p>\n            <i class=\"fa fa-check-square-o\"></i>\n            <h4>Temporary Residence</h4>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh\n              ante facilisis bibendum dolor feugiat at.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Team Section -->\n  <div id=\"team-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>Meet the\n          <strong>team</strong>\n        </h2>\n        <hr>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div id=\"row\">\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t01.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Jessica Wally</h3>\n              <p>Founder</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t02.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Mike Sloan</h3>\n              <p>Web Designer</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t03.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Michele Doe</h3>\n              <p>Web Designer</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t04.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Larry Evans</h3>\n              <p>Project Manager</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Testimonials Section -->\n  <div id=\"testimonials-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>What\n          <strong>clients</strong> say</h2>\n        <hr>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-md-8 col-md-offset-2\">\n          <div id=\"testimonial\" class=\"owl-carousel owl-theme\">\n            <div class=\"item\">\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo\n                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>\n              <p>\n                <strong>John DOE</strong>, CEO, Company.</p>\n            </div>\n            <div class=\"item\">\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo\n                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>\n              <p>\n                <strong>Jenny DOE</strong>, CEO, Company.</p>\n            </div>\n            <div class=\"item\">\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo\n                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>\n              <p>\n                <strong>John DOEn</strong>, CEO, Company.</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Contact Section -->\n  <div id=\"contact-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>\n          <strong>Contact</strong> us</h2>\n        <hr>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div class=\"col-md-8 col-md-offset-2\">\n        <div class=\"col-md-4\">\n          <i class=\"fa fa-map-marker fa-2x\"></i>\n          <p>100 Insitute Road\n            <br> Worcester, MA 01609</p>\n        </div>\n        <div class=\"col-md-4\">\n          <i class=\"fa fa-envelope-o fa-2x\"></i>\n          <p>hbchenjh@gmail.com</p>\n        </div>\n        <div class=\"col-md-4\">\n          <i class=\"fa fa-phone fa-2x\"></i>\n          <p> +1 800 123 1234</p>\n        </div>\n        <hr>\n        <div class=\"clearfix\"></div>\n      </div>\n      <div class=\"col-md-8 col-md-offset-2\">\n        <hr>\n        <h3>Leave us a message</h3>\n        <form>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <input type=\"email\" class=\"form-control\" placeholder=\"Name\">\n              </div>\n            </div>\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <input type=\"email\" class=\"form-control\" placeholder=\"Email\">\n              </div>\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <textarea class=\"form-control\" rows=\"4\" placeholder=\"Message\"></textarea>\n          </div>\n          <button type=\"submit\" class=\"btn btn-default\">Send Message</button>\n        </form>\n      </div>\n    </div>\n  </div>\n  <nav id=\"footer\">\n    <div class=\"container\">\n      <div class=\"pull-left fnav\">\n        <p>Copyright &copy; 2018 \n          <a href=\"http://wpilife.org/\" target=\"_blank\" title=\"模板在线\">WPILife Team </a>\n        </p>\n      </div>\n      <div class=\"pull-right fnav\">\n        <ul class=\"footer-social\">\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-facebook\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-twitter\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-dribbble\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-linkedin\"></i>\n            </a>\n          </li>\n        </ul>\n      </div>\n    </div>\n  </nav>\n</body>\n\n</html>"
+module.exports = "<!DOCTYPE html>\n<html lang=\"en\">\n\n<body>\n  <!-- Navigation\n    ==========================================-->\n  <app-nav></app-nav>\n\n  <!-- Header -->\n\n  <app-header></app-header>\n  <!-- Services Section -->\n  <div id=\"services-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>Shopping\n          <strong>Section</strong>\n        </h2>\n        <hr>\n        <div class=\"clearfix\"></div>\n        <p>There you can find almost whatever you want.</p>\n      </div>\n      <div class=\"space\"></div>\n      <div class=\"row\">\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"['house-list']\" class=\"fa fa-home\"></i>\n          <h4>\n            <strong>House/Apartment Rent</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>\n        </div>\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"'book-list'\" class=\"fa fa-book\"></i>\n          <h4>\n            <strong>Book</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque.</p>\n        </div>\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"'product-list'\" class=\"fa fa-bed\"></i>\n          <h4>\n            <strong>Others</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>\n        </div>\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"'sell'\" class=\"fa fa-money\"></i>\n          <h4>\n            <strong>Sell your Product</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque.</p>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- Portfolio Section -->\n  <div id=\"works-section\">\n    <div class=\"container\">\n      <!-- Container -->\n      <div class=\"section-title text-center center\">\n        <h2>Recent\n          <strong>Product</strong>\n        </h2>\n        <hr>\n        <div class=\"clearfix\"></div>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div class=\"categories\">   \n          <mat-tab-group>   \n              <mat-tab label=\"House\">\n                  <div class=\"col-sm-6 col-md-3 col-lg-3 web\" *ngFor=\"let house of showHouses;let i of index\">\n                      <div class=\"portfolio-item\" >\n                        <div class=\"hover-bg\">\n                          <a [routerLink]=\"['house-list', house.id]\" >\n                            <div class=\"hover-text\">\n                              <h4>{{house.Address}}</h4>\n                              <small>{{house.price}}</small>\n                              <div class=\"clearfix\"></div>\n                              <i class=\"fa fa-plus\"></i>\n                            </div>\n                            <img [src]=\"house.imgUrl[0]\" class=\"img-responsive\" alt=\"Project Title\"> </a>\n                        </div>\n                      </div>\n                    </div>\n              </mat-tab>\n            <mat-tab label=\"Book\">\n                <div class=\"col-sm-6 col-md-3 col-lg-3 web\" *ngFor=\"let book of showBooks;let i of index\">\n                    <div class=\"portfolio-item\" >\n                      <div class=\"hover-bg\">\n                        <a [routerLink]=\"['book-list', book.id]\" >\n                          <div class=\"hover-text\">\n                            <h4>{{book.name}}</h4>\n                            <small>{{book.department}}</small>\n                            <div class=\"clearfix\"></div>\n                            <i class=\"fa fa-plus\"></i>\n                          </div>\n                          <img [src]=\"book.imgUrl[0]\" class=\"img-responsive\" alt=\"Project Title\"> </a>\n                      </div>\n                    </div>\n                  </div>\n            </mat-tab>\n            <mat-tab label=\"Others\">\n                <div class=\"col-sm-6 col-md-3 col-lg-3 web\" *ngFor=\"let product of showProducts;let i of index\">\n                    <div class=\"portfolio-item\" >\n                      <div class=\"hover-bg\">\n                        <a [routerLink]=\"['product-list', product.id]\">\n                          <div class=\"hover-text\">\n                            <h4>{{product.name}}</h4>\n                            <small>{{product.price}}</small>\n                            <div class=\"clearfix\"></div>\n                            <i class=\"fa fa-plus\"></i>\n                          </div>\n                          <img [src]=\"product.imgUrl[0]\" class=\"img-responsive\" alt=\"Project Title\">  </a>\n                      </div>\n                    </div>\n                  </div>  \n            </mat-tab>\n          </mat-tab-group>\n\n        <div class=\"clearfix\"></div>\n      </div>\n\n    </div>\n  </div>\n  <!-- About Section -->\n  <div id=\"about-section\">\n    <div class=\"container\">\n      <div class=\"section-title text-center center\">\n        <h2>\n          <strong>New</strong> Students</h2>\n        <hr>\n        <div class=\"clearfix\"></div>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-md-6\">\n          <img src=\"../../assets/about.png\" class=\"img-responsive\"> </div>\n        <div class=\"col-md-6\">\n          <div class=\"about-text\" [routerLink]=\"['survival-guide']\">\n            <i class=\"fa fa-users\"></i>\n            <h4>Survival Guide</h4>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh\n              ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis\n              bibendum.</p>\n            <i class=\"fa fa-puzzle-piece\"></i>\n            <h4>Airport pickup</h4>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh\n              ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis\n              bibendum.</p>\n            <i class=\"fa fa-check-square-o\"></i>\n            <h4>Temporary Residence</h4>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh\n              ante facilisis bibendum dolor feugiat at.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Team Section -->\n  <div id=\"team-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>Meet the\n          <strong>team</strong>\n        </h2>\n        <hr>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div id=\"row\">\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t01.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Jessica Wally</h3>\n              <p>Founder</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t02.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Mike Sloan</h3>\n              <p>Web Designer</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t03.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Michele Doe</h3>\n              <p>Web Designer</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t04.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Larry Evans</h3>\n              <p>Project Manager</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Testimonials Section -->\n  <div id=\"testimonials-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>What\n          <strong>clients</strong> say</h2>\n        <hr>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-md-8 col-md-offset-2\">\n          <div id=\"testimonial\" class=\"owl-carousel owl-theme\">\n            <div class=\"item\">\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo\n                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>\n              <p>\n                <strong>John DOE</strong>, CEO, Company.</p>\n            </div>\n            <div class=\"item\">\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo\n                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>\n              <p>\n                <strong>Jenny DOE</strong>, CEO, Company.</p>\n            </div>\n            <div class=\"item\">\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo\n                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>\n              <p>\n                <strong>John DOEn</strong>, CEO, Company.</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Contact Section -->\n  <div id=\"contact-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>\n          <strong>Contact</strong> us</h2>\n        <hr>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div class=\"col-md-8 col-md-offset-2\">\n        <div class=\"col-md-4\">\n          <i class=\"fa fa-map-marker fa-2x\"></i>\n          <p>100 Insitute Road\n            <br> Worcester, MA 01609</p>\n        </div>\n        <div class=\"col-md-4\">\n          <i class=\"fa fa-envelope-o fa-2x\"></i>\n          <p>hbchenjh@gmail.com</p>\n        </div>\n        <div class=\"col-md-4\">\n          <i class=\"fa fa-phone fa-2x\"></i>\n          <p> +1 800 123 1234</p>\n        </div>\n        <hr>\n        <div class=\"clearfix\"></div>\n      </div>\n      <div class=\"col-md-8 col-md-offset-2\">\n        <hr>\n        <h3>Leave us a message</h3>\n        <form>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <input type=\"email\" class=\"form-control\" placeholder=\"Name\">\n              </div>\n            </div>\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <input type=\"email\" class=\"form-control\" placeholder=\"Email\">\n              </div>\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <textarea class=\"form-control\" rows=\"4\" placeholder=\"Message\"></textarea>\n          </div>\n          <button type=\"submit\" class=\"btn btn-default\">Send Message</button>\n        </form>\n      </div>\n    </div>\n  </div>\n  <nav id=\"footer\">\n    <div class=\"container\">\n      <div class=\"pull-left fnav\">\n        <p>Copyright &copy; 2018 \n          <a href=\"http://wpilife.org/\" target=\"_blank\" title=\"模板在线\">WPILife Team </a>\n        </p>\n      </div>\n      <div class=\"pull-right fnav\">\n        <ul class=\"footer-social\">\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-facebook\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-twitter\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-dribbble\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-linkedin\"></i>\n            </a>\n          </li>\n        </ul>\n      </div>\n    </div>\n  </nav>\n</body>\n\n</html>"
 
 /***/ }),
 
@@ -1110,7 +1492,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/house/house-detail/house-contact/house-contact.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-10 col-md-offset-1\">\n      <h3>Product Owner contact info</h3>\n      <ul>\n        <li>{{house.contactInfo}}</li>\n        <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n        <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n          officiis est.</li>\n      </ul>\n      <ul>\n        <li>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas\n          eius</li>\n        <li>adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi</li>\n        <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n        <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n          officiis est.</li>\n      </ul>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-10 col-md-offset-1\">\n      <h3>Product Owner contact info</h3>\n      <ul>\n        <li>{{house.contactInfo}}</li>\n        <li>{{house.ownerID}}</li>\n        <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n          officiis est.</li>\n      </ul>\n      <ul>\n        <li>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas\n          eius</li>\n        <li>adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi</li>\n        <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n        <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n          officiis est.</li>\n      </ul>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1146,7 +1528,7 @@ var HouseContactComponent = /** @class */ (function () {
         });
         this.houseService.gethouse(this.id)
             .then(function (house) { return _this.house = house; });
-        console.log(this.house.ownerinfo);
+        console.log(this.house.ownerID);
     };
     HouseContactComponent = __decorate([
         core_1.Component({
@@ -1314,13 +1696,14 @@ exports.HouseDetailComponent = HouseDetailComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var HouseModel = /** @class */ (function () {
-    function HouseModel(Address, desc, price, ownerinfo, contactInfo, img) {
+    function HouseModel(Address, price, ownerID, desc, contactInfo, img, type) {
         this.Address = Address;
-        this.description = desc;
         this.price = price;
-        this.ownerinfo = ownerinfo;
+        this.description = desc;
+        this.ownerID = ownerID;
         this.contactInfo = contactInfo;
         this.imgUrl = img;
+        this.type = type;
     }
     return HouseModel;
 }());
@@ -1337,7 +1720,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body, html {\r\n\tfont-family: 'Lato', sans-serif;\r\n\ttext-rendering: optimizeLegibility !important;\r\n\t-webkit-font-smoothing: antialiased !important;\r\n\tcolor: #5a5a5a;\r\n}\r\nh1 {\r\n}\r\nh1 strong {\r\n\tfont-weight: 900;\r\n}\r\nh2 {\r\n\ttext-transform: uppercase;\r\n\tline-height: 20px;\r\n\tmargin: 0;\r\n}\r\nh3 {\r\n\tfont-size: 16px;\r\n\tfont-weight: 700;\r\n}\r\nh4 {\r\n\ttext-transform: capitalize;\r\n}\r\nh5 {\r\n\ttext-transform: uppercase;\r\n\tfont-weight: 700;\r\n\tline-height: 20px;\r\n}\r\np {\r\n\tfont-family: 'Open Sans', sans-serif;\r\n}\r\np.intro {\r\n\tfont-size: 16px;\r\n\tmargin: 12px 0 0;\r\n\tline-height: 24px;\r\n\tfont-family: 'Open Sans', sans-serif;\r\n}\r\na {\r\n\tcolor: #D2527F\r\n}\r\na:hover, a:focus {\r\n\ttext-decoration: none;\r\n\tcolor: #9D3D5F;\r\n}\r\n.clearfix:after {\r\n\tvisibility: hidden;\r\n\tdisplay: block;\r\n\tfont-size: 0;\r\n\tcontent: \" \";\r\n\tclear: both;\r\n\theight: 0;\r\n}\r\n.clearfix {\r\n\tdisplay: inline-block;\r\n}\r\n* html .clearfix {\r\n\theight: 1%;\r\n}\r\n.clearfix {\r\n\tdisplay: block;\r\n}\r\nul, ol {\r\n\tpadding: 0;\r\n\twebkit-padding: 0;\r\n\tmoz-padding: 0;\r\n}\r\n#menu {\r\n\tpadding: 20px;\r\n\t-webkit-transition: all 0.8s;\r\n\ttransition: all 0.8s;\r\n}\r\n#menu.navbar-default {\r\n\tbackground-color: rgba(248, 248, 248, 0);\r\n\tborder-color: rgba(231, 231, 231, 0);\r\n}\r\n#menu a.navbar-brand {\r\n\ttext-transform: uppercase;\r\n\tfont-size: 22px;\r\n\tcolor: #fff;\r\n\tfont-weight: 900;\r\n}\r\n#menu.navbar-default .navbar-nav > li > a {\r\n\ttext-transform: uppercase;\r\n\tcolor: #FFF;\r\n\tfont-size: 12px;\r\n\tletter-spacing: 1px;\r\n}\r\n#menu.navbar-default .navbar-nav > li > a:hover {\r\n\tcolor: #D2527F;\r\n}\r\n.on {\r\n\tbackground-color: #222222 !important;\r\n\tpadding: 0 !important;\r\n}\r\n.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {\r\n\tcolor: #D2527F !important;\r\n\tbackground-color: transparent;\r\n\tfont-weight: 700;\r\n}\r\n.navbar-toggle {\r\n\tborder-radius: 0;\r\n}\r\n.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {\r\n\tbackground-color: #D2527F;\r\n\tborder-color: #D2527F;\r\n}\r\n.navbar-default .navbar-toggle:hover>.icon-bar {\r\n\tbackground-color: #FFF;\r\n}", ""]);
+exports.push([module.i, "body, html {\r\n\tfont-family: 'Lato', sans-serif;\r\n\ttext-rendering: optimizeLegibility !important;\r\n\t-webkit-font-smoothing: antialiased !important;\r\n\tcolor: #5a5a5a;\r\n}\r\nh1 {\r\n}\r\nh1 strong {\r\n\tfont-weight: 900;\r\n}\r\nh2 {\r\n\ttext-transform: uppercase;\r\n\tline-height: 20px;\r\n\tmargin: 0;\r\n}\r\nh3 {\r\n\tfont-size: 16px;\r\n\tfont-weight: 700;\r\n}\r\nh4 {\r\n\ttext-transform: capitalize;\r\n}\r\nh5 {\r\n\ttext-transform: uppercase;\r\n\tfont-weight: 700;\r\n\tline-height: 20px;\r\n}\r\np {\r\n\tfont-family: 'Open Sans', sans-serif;\r\n}\r\np.intro {\r\n\tfont-size: 16px;\r\n\tmargin: 12px 0 0;\r\n\tline-height: 24px;\r\n\tfont-family: 'Open Sans', sans-serif;\r\n}\r\na {\r\n\tcolor: #D2527F\r\n}\r\na:hover, a:focus {\r\n\ttext-decoration: none;\r\n\tcolor: #9D3D5F;\r\n}\r\n.clearfix:after {\r\n\tvisibility: hidden;\r\n\tdisplay: block;\r\n\tfont-size: 0;\r\n\tcontent: \" \";\r\n\tclear: both;\r\n\theight: 0;\r\n}\r\n.clearfix {\r\n\tdisplay: inline-block;\r\n}\r\n* html .clearfix {\r\n\theight: 1%;\r\n}\r\n.clearfix {\r\n\tdisplay: block;\r\n}\r\nul, ol {\r\n\tpadding: 0;\r\n\twebkit-padding: 0;\r\n\tmoz-padding: 0;\r\n}\r\n#menu {\r\n\tpadding: 20px;\r\n\t-webkit-transition: all 0.8s;\r\n\ttransition: all 0.8s;\r\n}\r\n#menu.navbar-default {\r\n\tbackground-color: rgba(248, 248, 248, 0);\r\n\tborder-color: rgba(231, 231, 231, 0);\r\n}\r\n#menu a.navbar-brand {\r\n\ttext-transform: uppercase;\r\n\tfont-size: 22px;\r\n\tcolor: #fff;\r\n\tfont-weight: 900;\r\n}\r\n#menu.navbar-default .navbar-nav > li > a {\r\n\ttext-transform: uppercase;\r\n\tcolor: #FFF;\r\n\tfont-size: 12px;\r\n\tletter-spacing: 1px;\r\n}\r\n#menu.navbar-default .navbar-nav > li > a:hover {\r\n\tcolor: #D2527F;\r\n}\r\n.on {\r\n\tbackground-color: #222222 !important;\r\n\tpadding: 0 !important;\r\n}\r\n.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {\r\n\tcolor: #D2527F !important;\r\n\tbackground-color: transparent;\r\n\tfont-weight: 700;\r\n}\r\n.navbar-toggle {\r\n\tborder-radius: 0;\r\n}\r\n.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {\r\n\tbackground-color: #D2527F;\r\n\tborder-color: #D2527F;\r\n}\r\n.navbar-default .navbar-toggle:hover>.icon-bar {\r\n\tbackground-color: #FFF;\r\n}\r\n#login {\r\n\tcursor: pointer;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1350,7 +1733,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/nav/nav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav id=\"menu\" class=\"navbar navbar-default navbar-fixed-top\">\n  <div class=\"container\"> \n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\"> <span class=\"sr-only\">Toggle navigation</span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> </button>\n      <a class=\"navbar-brand\" href=\"index.html\">WPI<strong><span class=\"color\">.</span></strong></a> \n      <p class = \"navbar-text\">Make your life eaiser in WPI</p>\n     </div>\n    \n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li><a pageScroll href=\"#home\">Home</a></li>\n        <li><a pageScroll href=\"#services-section\" >Shop</a></li>\n        <li><a pageScroll href=\"#works-section\" >Carpooling</a></li>\n        <li><a pageScroll href=\"#about-section\" >New Students</a></li>\n        <li><a pageScroll href=\"#team-section\" >Event</a></li>\n        <li><a pageScroll href=\"#testimonials-section\">Testimonials</a></li>\n        <li><a pageScroll href=\"#contact-section\" >Contact</a></li>\n      </ul>\n    </div>\n    <!-- /.navbar-collapse --> \n  </div>\n  <!-- /.container-fluid --> \n</nav>"
+module.exports = "<nav id=\"menu\" class=\"navbar navbar-default navbar-fixed-top\">\n  <div class=\"container\"> \n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\"> <span class=\"sr-only\">Toggle navigation</span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> </button>\n      <a class=\"navbar-brand\" href=\"index.html\">WPI<strong><span class=\"color\">.</span></strong></a> \n      <p class = \"navbar-text\">Make your life eaiser in WPI</p>\n     </div>\n    \n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li><a pageScroll href=\"#home\">Home</a></li>\n        <li><a pageScroll href=\"#services-section\" >Shop</a></li>\n        <li><a pageScroll href=\"#works-section\" >Carpooling</a></li>\n        <li><a pageScroll href=\"#about-section\" >New Students</a></li>\n        <li><a pageScroll href=\"#team-section\" >Event</a></li>\n        <li *ngIf=\"auth.isAuthenticated()\"><a id=\"login\" [routerLink]=\"['profile']\" >Profile</a></li>\n        <li  *ngIf=\"!auth.isAuthenticated()\"><a id=\"login\" (click)=\"auth.login()\" >Login/SignUp</a></li>\n        <li  *ngIf=\"auth.isAuthenticated()\"><a id=\"login\" (click)=\"auth.logout()\" >Log Out</a></li>\n      </ul>\n    </div>\n    <!-- /.navbar-collapse --> \n  </div>\n  <!-- /.container-fluid --> \n</nav>"
 
 /***/ }),
 
@@ -1370,8 +1753,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var auth_service_1 = __webpack_require__("../../../../../src/app/Service/auth.service.ts");
 var NavComponent = /** @class */ (function () {
-    function NavComponent() {
+    function NavComponent(auth) {
+        this.auth = auth;
+        auth.handleAuthentication();
     }
     NavComponent.prototype.ngOnInit = function () {
     };
@@ -1381,7 +1767,7 @@ var NavComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/nav/nav.component.html"),
             styles: [__webpack_require__("../../../../../src/app/nav/nav.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [auth_service_1.AuthService])
     ], NavComponent);
     return NavComponent;
 }());
@@ -1462,6 +1848,67 @@ var NewStudentsComponent = /** @class */ (function () {
     return NewStudentsComponent;
 }());
 exports.NewStudentsComponent = NewStudentsComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/not-found/not-found.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "h1 {\r\n    text-align: center;\r\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/not-found/not-found.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<body>\n\t<div id=\"page\">\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"search\">\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\">\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\n\t\t\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"shopping-cart\">\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"cart\">\n\t\t\t\t\t\t\t\t\t<span>\n\t\t\t\t\t\t\t\t\t\t<small>0</small>\n\t\t\t\t\t\t\t\t\t\t<i class=\"icon-shopping-cart\"></i>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t</nav>\n\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\n\t\t\t<div class=\"overlay\"></div>\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\n\t\t\t\t\t\t<div class=\"display-t\">\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n\t\t\t\t\t\t\t\t<h1>Others</h1>\n\t\t\t\t\t\t\t\t<h2>Free html5 templates Made</h2>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</header>\n\n\t\t<div id=\"fh5co-product\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row animate-box\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n\t\t\t\t\t\t<span>Cool Stuff</span>\n\t\t\t\t\t\t<h2>Others.</h2>\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\n\t\t\t\t\t\t\teius.\n\t\t\t\t\t\t</p>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t  <h1>\n        Page not found!\n      </h1>\n\t\t\t</div>\n\t\t</div>\n\t\t<app-footer></app-footer>\n\t</div>\n</body>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/not-found/not-found.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var NotFoundComponent = /** @class */ (function () {
+    function NotFoundComponent() {
+    }
+    NotFoundComponent.prototype.ngOnInit = function () {
+    };
+    NotFoundComponent = __decorate([
+        core_1.Component({
+            selector: 'app-not-found',
+            template: __webpack_require__("../../../../../src/app/not-found/not-found.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/product/product.component.css"), __webpack_require__("../../../../../src/app/not-found/not-found.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], NotFoundComponent);
+    return NotFoundComponent;
+}());
+exports.NotFoundComponent = NotFoundComponent;
 
 
 /***/ }),
@@ -1698,7 +2145,7 @@ var ProductDetailComponent = /** @class */ (function () {
         this.productService.getProduct((this.id))
             .then(function (product) {
             _this.ProductDetail = product;
-            console.log('2222' + _this.ProductDetail);
+            //  console.log('2222' + this.ProductDetail);
         })
             .catch(function (e) {
             console.log(e);
@@ -1726,13 +2173,14 @@ exports.ProductDetailComponent = ProductDetailComponent;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var ProductModel = /** @class */ (function () {
-    function ProductModel(name, price, ownerID, desc, contactInfo, img) {
+    function ProductModel(name, price, ownerID, desc, contactInfo, img, type) {
         this.name = name;
         this.price = price;
         this.ownerID = ownerID;
         this.description = desc;
         this.imgUrl = img;
         this.contactInfo = contactInfo;
+        this.type = type;
     }
     return ProductModel;
 }());
@@ -1762,7 +2210,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/product/product.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<body>\r\n\t<div id=\"page\">\r\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\r\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\r\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"search\">\r\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\">\r\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\r\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\r\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\r\n\t\t\t\t\t\t\t\t\t\t</button>\r\n\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"shopping-cart\">\r\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"cart\">\r\n\t\t\t\t\t\t\t\t\t<span>\r\n\t\t\t\t\t\t\t\t\t\t<small>0</small>\r\n\t\t\t\t\t\t\t\t\t\t<i class=\"icon-shopping-cart\"></i>\r\n\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t</div>\r\n\t\t</nav>\r\n\r\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\r\n\t\t\t<div class=\"overlay\"></div>\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\r\n\t\t\t\t\t\t<div class=\"display-t\">\r\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\r\n\t\t\t\t\t\t\t\t<h1>Household Item</h1>\r\n\t\t\t\t\t\t\t\t<h2>Free html5 templates Made</h2>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</header>\r\n\r\n\t\t<div id=\"fh5co-product\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row animate-box\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\r\n\t\t\t\t\t\t<span>Cool Stuff</span>\r\n\t\t\t\t\t\t<h2>Products.</h2>\r\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\r\n\t\t\t\t\t\t\teius.\r\n\t\t\t\t\t\t</p>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-4 text-center\" *ngFor=\"let product of allProducts | paginate: { id:'product', itemsPerPage: 6, currentPage: p }\">\r\n\t\t\t\t\t\t<div class=\"product\" (click)=\"ToProductDetail(product.id)\">\r\n\t\t\t\t\t\t\t<div class=\"product-grid\" [style.background-image]=\"'url('+product.imgUrl[0]+')'\">\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div class=\"desc\">\r\n\t\t\t\t\t\t\t\t<h3>\r\n\t\t\t\t\t\t\t\t\t<i>{{product.name}}</i>\r\n\t\t\t\t\t\t\t\t</h3>\r\n\t\t\t\t\t\t\t\t<span class=\"price\">{{product.price}}</span>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<pagination-controls class=\"pageButton\" id=\"product\" (pageChange)=\"p = $event\" maxSize=\"9\" directionLinks=\"true\" autoHide=\"true\"\r\n\t\t\t\t screenReaderPaginationLabel=\"Pagination\" screenReaderPageLabel=\"page\" screenReaderCurrentLabel=\"You're on page\">\r\n\t\t\t\t</pagination-controls>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<app-footer></app-footer>\r\n\t</div>\r\n</body>"
+module.exports = "<body>\r\n\t<div id=\"page\">\r\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\r\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\r\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"search\">\r\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\">\r\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\r\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\r\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\r\n\t\t\t\t\t\t\t\t\t\t</button>\r\n\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"shopping-cart\">\r\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"cart\">\r\n\t\t\t\t\t\t\t\t\t<span>\r\n\t\t\t\t\t\t\t\t\t\t<small>0</small>\r\n\t\t\t\t\t\t\t\t\t\t<i class=\"icon-shopping-cart\"></i>\r\n\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t</div>\r\n\t\t</nav>\r\n\r\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\r\n\t\t\t<div class=\"overlay\"></div>\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\r\n\t\t\t\t\t\t<div class=\"display-t\">\r\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\r\n\t\t\t\t\t\t\t\t<h1>Others</h1>\r\n\t\t\t\t\t\t\t\t<h2>Free html5 templates Made</h2>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</header>\r\n\r\n\t\t<div id=\"fh5co-product\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row animate-box\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\r\n\t\t\t\t\t\t<span>Cool Stuff</span>\r\n\t\t\t\t\t\t<h2>Others.</h2>\r\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\r\n\t\t\t\t\t\t\teius.\r\n\t\t\t\t\t\t</p>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-4 text-center\" *ngFor=\"let product of allProducts | paginate: { id:'product', itemsPerPage: 6, currentPage: p }\">\r\n\t\t\t\t\t\t<div class=\"product\" (click)=\"ToProductDetail(product.id)\">\r\n\t\t\t\t\t\t\t<div class=\"product-grid\" [style.background-image]=\"'url('+product.imgUrl[0]+')'\">\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div class=\"desc\">\r\n\t\t\t\t\t\t\t\t<h3>\r\n\t\t\t\t\t\t\t\t\t<i>{{product.name}}</i>\r\n\t\t\t\t\t\t\t\t</h3>\r\n\t\t\t\t\t\t\t\t<span class=\"price\">{{product.price}}</span>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<pagination-controls class=\"pageButton\" id=\"product\" (pageChange)=\"p = $event\" maxSize=\"9\" directionLinks=\"true\" autoHide=\"true\"\r\n\t\t\t\t screenReaderPaginationLabel=\"Pagination\" screenReaderPageLabel=\"page\" screenReaderCurrentLabel=\"You're on page\">\r\n\t\t\t\t</pagination-controls>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<app-footer></app-footer>\r\n\t</div>\r\n</body>"
 
 /***/ }),
 
@@ -1828,6 +2276,131 @@ exports.ProductComponent = ProductComponent;
 
 /***/ }),
 
+/***/ "../../../../../src/app/profile/profile.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".mat-tab {\r\n    padding: 0px;\r\n    margin: 0px;\r\n    overflow: hidden;\r\n}\r\na {\r\n    cursor: pointer;\r\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/profile/profile.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<body>\r\n    <div id=\"page\">\r\n        <nav class=\"fh5co-nav\" role=\"navigation\">\r\n            <div class=\"container\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-3 col-xs-2\">\r\n                        <div id=\"fh5co-logo\">\r\n                            <a [routerLink]=\"['']\">WPI.</a>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-6 col-xs-6 text-center menu-1\">\r\n                        <ul>\r\n                            <li class=\"has-dropdown\">\r\n                                <a href=\"product.html\">Shop</a>\r\n                                <ul class=\"dropdown\">\r\n                                    <li>\r\n                                        <a href=\"single.html\">Single Shop</a>\r\n                                    </li>\r\n                                </ul>\r\n                            </li>\r\n                            <li>\r\n                                <a href=\"about.html\">About</a>\r\n                            </li>\r\n                            <li class=\"has-dropdown\">\r\n                                <a href=\"services.html\">Services</a>\r\n                                <ul class=\"dropdown\">\r\n                                    <li>\r\n                                        <a href=\"#\">Web Design</a>\r\n                                    </li>\r\n                                    <li>\r\n                                        <a href=\"#\">eCommerce</a>\r\n                                    </li>\r\n                                    <li>\r\n                                        <a href=\"#\">Branding</a>\r\n                                    </li>\r\n                                    <li>\r\n                                        <a href=\"#\">API</a>\r\n                                    </li>\r\n                                </ul>\r\n                            </li>\r\n                            <li>\r\n                                <a href=\"contact.html\">Contact</a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\r\n                        <ul>\r\n                            <li class=\"search\">\r\n                                <div class=\"input-group\">\r\n                                    <input type=\"text\" placeholder=\"Search..\">\r\n                                    <span class=\"input-group-btn\">\r\n                                        <button class=\"btn btn-primary\" type=\"button\">\r\n                                            <i class=\"icon-search\"></i>\r\n                                        </button>\r\n                                    </span>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"shopping-cart\">\r\n                                <a href=\"#\" class=\"cart\">\r\n                                    <span>\r\n                                        <small>0</small>\r\n                                        <i class=\"icon-shopping-cart\"></i>\r\n                                    </span>\r\n                                </a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n        </nav>\r\n\r\n        <header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\r\n            <div class=\"overlay\"></div>\r\n            <div class=\"container\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-8 col-md-offset-2 text-center\">\r\n                        <div class=\"display-t\">\r\n                            <div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\r\n                                <h1>Household Item</h1>\r\n                                <h2>Free html5 templates Made</h2>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </header>\r\n\r\n        <div id=\"fh5co-product\">\r\n            <div class=\"container\">\r\n                <div class=\"row animate-box\">\r\n                    <div class=\"col-md-10 col-md-offset-2 text-center fh5co-heading\">\r\n                        <span>Cool Stuff</span>\r\n                        <h2>Products.</h2>\r\n                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit\r\n                            ab aliquam dolor eius.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-4 text-center\" *ngFor=\"let product of productModel\">\r\n                        <div class=\"product\">\r\n                            <div class=\"product-grid\" [style.background-image]=\"'url('+product.imgUrl[0]+')'\">\r\n                            </div>\r\n                            <div class=\"desc\">\r\n                                <h3>\r\n                                    <i>{{product.name}}</i>\r\n                                </h3>\r\n                                <span class=\"price\">{{product.price}}</span>\r\n                                <br>\r\n                                <i><a  (click)=\"onDeleteProduct(product)\">Delete this ITEM</a></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-4 text-center\" *ngFor=\"let book of bookModel\">\r\n                        <div class=\"product\">\r\n                            <div class=\"product-grid\" [style.background-image]=\"'url('+book.imgUrl[0]+')'\">\r\n                            </div>\r\n                            <div class=\"desc\">\r\n                                <h3>\r\n                                    <i>{{book.name}}</i>\r\n                                </h3>\r\n                                <span class=\"price\">{{book.price}}</span>\r\n                                <br>\r\n                                <i><a  (click)=\"onDeleteBook(book)\">Delete this ITEM</a></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-4 text-center\" *ngFor=\"let house of houseModel\">\r\n                        <div class=\"product\">\r\n                            <div class=\"product-grid\" [style.background-image]=\"'url('+house.imgUrl[0]+')'\">\r\n                            </div>\r\n                            <div class=\"desc\">\r\n                                <h3>\r\n                                    <i>{{house.Address}}</i>\r\n                                </h3>\r\n                                <span class=\"price\">{{house.price}}</span>\r\n                                <br>\r\n                                <i><a  (click)=\"onDeleteHouse(house)\">Delete this ITEM</a></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <app-footer></app-footer>\r\n    </div>\r\n</body>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/profile/profile.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var auth_service_1 = __webpack_require__("../../../../../src/app/Service/auth.service.ts");
+var book_service_1 = __webpack_require__("../../../../../src/app/Service/book-service.ts");
+var product_service_1 = __webpack_require__("../../../../../src/app/Service/product-service.ts");
+var house_service_1 = __webpack_require__("../../../../../src/app/Service/house-service.ts");
+var ProfileComponent = /** @class */ (function () {
+    function ProfileComponent(authService, bookService, productService, houseService) {
+        this.authService = authService;
+        this.bookService = bookService;
+        this.productService = productService;
+        this.houseService = houseService;
+        this.bookModel = [];
+        this.productModel = [];
+        this.houseModel = [];
+        // this.profile = JSON.parse(localStorage.getItem('profile'));
+    }
+    ProfileComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        if (this.authService.userProfile) {
+            this.profile = this.authService.userProfile;
+            this.getProducts(this.profile.name);
+            this.getBooks(this.profile.name);
+            this.getHouses(this.profile.name);
+        }
+        else {
+            this.authService.getProfile(function (err, profile) {
+                _this.profile = profile;
+                _this.getProducts(_this.profile.name);
+                _this.getBooks(_this.profile.name);
+                _this.getHouses(_this.profile.name);
+            });
+        }
+    };
+    ProfileComponent.prototype.getProducts = function (name) {
+        var _this = this;
+        this.productService.getUserProduct(name)
+            .then(function (products) {
+            _this.productModel = products;
+            console.log(_this.productModel);
+        })
+            .catch(function (e) { return console.log(e); });
+    };
+    ProfileComponent.prototype.getBooks = function (name) {
+        var _this = this;
+        this.bookService.getUserBooks(name)
+            .then(function (books) {
+            _this.bookModel = books;
+            // console.log(this.productModel);
+        })
+            .catch(function (e) { return console.log(e); });
+    };
+    ProfileComponent.prototype.getHouses = function (name) {
+        var _this = this;
+        this.houseService.getUserhouse(name)
+            .then(function (houses) {
+            _this.houseModel = houses;
+            console.log(_this.productModel);
+        })
+            .catch(function (e) { return console.log(e); });
+    };
+    ProfileComponent.prototype.onDeleteHouse = function (item) {
+        this.houseService.deleteHouse(item.id);
+    };
+    ProfileComponent.prototype.onDeleteBook = function (item) {
+        this.bookService.deleteBook(item.id);
+    };
+    ProfileComponent.prototype.onDeleteProduct = function (item) {
+        this.productService.deleteProduct(+item.id);
+    };
+    ProfileComponent = __decorate([
+        core_1.Component({
+            selector: 'app-profile',
+            template: __webpack_require__("../../../../../src/app/profile/profile.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/product/product.component.css"), __webpack_require__("../../../../../src/app/profile/profile.component.css")]
+        }),
+        __metadata("design:paramtypes", [auth_service_1.AuthService, book_service_1.BookService, product_service_1.ProductService,
+            house_service_1.HouseService])
+    ], ProfileComponent);
+    return ProfileComponent;
+}());
+exports.ProfileComponent = ProfileComponent;
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/sell/sell.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1836,7 +2409,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".form-group{\r\n    width: 100%;\r\n  }\r\n  .plus {\r\n    height: 25px;\r\n    width: 40px;\r\n  }", ""]);
+exports.push([module.i, ".form-group{\r\n    width: 100%;\r\n  }\r\n  .plus {\r\n    height: 25px;\r\n    width: 40px;\r\n  }\r\n  h4 a {\r\n    cursor: pointer;\r\n  }\r\n  ng-template{\r\n    margin: 0 auto;\r\n  }", ""]);
 
 // exports
 
@@ -1849,7 +2422,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/sell/sell.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<body>\n  <div id=\"page\">\n    <nav class=\"fh5co-nav\" role=\"navigation\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-3 col-xs-2\">\n            <div id=\"fh5co-logo\">\n              <a [routerLink]=\"['']\">WPI.</a>\n            </div>\n          </div>\n          <div class=\"col-md-6 col-xs-6 text-center menu-1\">\n            <ul>\n              <li class=\"has-dropdown\">\n                <a href=\"product.html\">Shop</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"single.html\">Single Shop</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"about.html\">About</a>\n              </li>\n              <li class=\"has-dropdown\">\n                <a href=\"services.html\">Services</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"#\">Web Design</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">eCommerce</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">Branding</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">API</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"contact.html\">Contact</a>\n              </li>\n            </ul>\n          </div>\n          <div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n            <ul>\n              <li class=\"search\">\n                <div class=\"input-group\">\n                  <input type=\"text\" placeholder=\"Search..\">\n                  <span class=\"input-group-btn\">\n                    <button class=\"btn btn-primary\" type=\"button\">\n                      <i class=\"icon-search\"></i>\n                    </button>\n                  </span>\n                </div>\n              </li>\n              <li class=\"shopping-cart\">\n                <a href=\"#\" class=\"cart\">\n                  <span>\n                    <small>0</small>\n                    <i class=\"icon-shopping-cart\"></i>\n                  </span>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n      </div>\n    </nav>\n\n    <header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\n      <div class=\"overlay\"></div>\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-8 col-md-offset-2 text-center\">\n            <div class=\"display-t\">\n              <div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n                <h1>Sell Section</h1>\n                <h2>Your can Post your Product to Sell at Here</h2>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </header>\n\n    <div id=\"fh5co-product\">\n      <div class=\"container\">\n        <div class=\"row animate-box\">\n          <div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n            <span>Cool Stuff</span>\n            <h2>House.</h2>\n            <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam\n              dolor eius.\n            </p>\n          </div>\n        </div>\n        <div class=\"row\">\n          <div class=\"container\">\n            <div class=\"row\">\n              <div class=\"col-lg-12 \">\n                <mat-form-field class=\"form-group\">\n                  <mat-select placeholder=\"Product Type\" [formControl]=\"selected\" [errorStateMatcher]=\"matcher\" [(ngModel)]=\"type\" [(value)]=\"type\"\n                    required>\n                    <mat-option *ngFor=\"let option of options\" [value]=\"option\">\n                      {{option}}\n                    </mat-option>\n                  </mat-select>\n                  <mat-error *ngIf=\"selected.hasError('required')\">You must make a selection</mat-error>\n                  <mat-hint *ngIf=\"!selected.touched\">Please select your product type</mat-hint>\n                </mat-form-field>\n                <div *ngIf=\"isOthers(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Product Name</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"name\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Product Price</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> A Good Description make your product easy to sell</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    <div *ngFor=\"let time of times\">\n                      <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    </div>\n                    <div class=\"plus\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\" (click)=\"onSecondSelect()\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                  </form>\n                </div>\n\n                <div *ngIf=\"isHouse(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your House Address</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"address\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Rent fee (per Month)</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> You can provide other information which you think is necessary at here</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    <div *ngFor=\"let time of times\">\n                      <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    </div>\n                    <div class=\"plus\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\" (click)=\"onSecondSelect()\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                  </form>\n                </div>\n\n                <div *ngIf=\"isBook(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\">\n                      <mat-select placeholder=\"Book Major\" [formControl]=\"selectedBook\" [errorStateMatcher]=\"matcher\" [(ngModel)]=\"department\"\n                        [(value)]=\"department\" required>\n                        <mat-option *ngFor=\"let department of Departments\" [value]=\"department\">\n                          {{department}}\n                        </mat-option>\n                      </mat-select>\n                      <mat-error *ngIf=\"selectedBook.hasError('required')\">You must make a selection</mat-error>\n                      <mat-hint *ngIf=\"!selectedBook.touched\">Please select your product type</mat-hint>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Book Name</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"name\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Book Price</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> You can provide other information which you think is necessary at here</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">                   \n                     <div *ngFor=\"let time of times\">\n                      <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\" >\n                    </div>\n                    <div class=\"plus\" (click)=\"onSecondSelect(i)\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                  </form>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <footer id=\"fh5co-footer\" role=\"contentinfo\">\n      <div class=\"container\">\n        <div class=\"row row-pb-md\">\n          <div class=\"col-md-4 fh5co-widget\">\n            <h3>Shop.</h3>\n            <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto\n              culpa amet.\n            </p>\n          </div>\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">About</a>\n              </li>\n              <li>\n                <a href=\"#\">Help</a>\n              </li>\n              <li>\n                <a href=\"#\">Contact</a>\n              </li>\n              <li>\n                <a href=\"#\">Terms</a>\n              </li>\n              <li>\n                <a href=\"#\">Meetups</a>\n              </li>\n            </ul>\n          </div>\n\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">Shop</a>\n              </li>\n              <li>\n                <a href=\"#\">Privacy</a>\n              </li>\n              <li>\n                <a href=\"#\">Testimonials</a>\n              </li>\n              <li>\n                <a href=\"#\">Handbook</a>\n              </li>\n              <li>\n                <a href=\"#\">Held Desk</a>\n              </li>\n            </ul>\n          </div>\n\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">Find Designers</a>\n              </li>\n              <li>\n                <a href=\"#\">Find Developers</a>\n              </li>\n              <li>\n                <a href=\"#\">Teams</a>\n              </li>\n              <li>\n                <a href=\"#\">Advertise</a>\n              </li>\n              <li>\n                <a href=\"#\">API</a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n        <div class=\"row copyright\">\n          <div class=\"col-md-12 text-center\">\n            <p>\n              <small class=\"block\">Copyright &copy; 2017.Company name All rights reserved.\n                <a target=\"_blank\" href=\"http://guantaow.taobao.com/\">厚朴网络淘宝店</a>\n                <a target=\"_blank\" href=\"http://www.moobnn.com\">网页模板</a>\n              </small>\n            </p>\n            <ul class=\"fh5co-social-icons\">\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-twitter\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-facebook\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-linkedin\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-dribbble\"></i>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n      </div>\n    </footer>\n  </div>\n\n  <div class=\"gototop js-top\">\n    <a href=\"#\" class=\"js-gotop\">\n      <i class=\"icon-arrow-up\"></i>\n    </a>\n  </div>\n</body>"
+module.exports = "<body>\n  <div id=\"page\">\n    <nav class=\"fh5co-nav\" role=\"navigation\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-3 col-xs-2\">\n            <div id=\"fh5co-logo\">\n              <a [routerLink]=\"['']\">WPI.</a>\n            </div>\n          </div>\n          <div class=\"col-md-6 col-xs-6 text-center menu-1\">\n            <ul>\n              <li class=\"has-dropdown\">\n                <a href=\"product.html\">Shop</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"single.html\">Single Shop</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"about.html\">About</a>\n              </li>\n              <li class=\"has-dropdown\">\n                <a href=\"services.html\">Services</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"#\">Web Design</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">eCommerce</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">Branding</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">API</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"contact.html\">Contact</a>\n              </li>\n            </ul>\n          </div>\n          <div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n            <ul>\n              <li class=\"search\">\n                <div class=\"input-group\">\n                  <input type=\"text\" placeholder=\"Search..\">\n                  <span class=\"input-group-btn\">\n                    <button class=\"btn btn-primary\" type=\"button\">\n                      <i class=\"icon-search\"></i>\n                    </button>\n                  </span>\n                </div>\n              </li>\n              <li class=\"shopping-cart\">\n                <a href=\"#\" class=\"cart\">\n                  <span>\n                    <small>0</small>\n                    <i class=\"icon-shopping-cart\"></i>\n                  </span>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n      </div>\n    </nav>\n\n    <header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\n      <div class=\"overlay\"></div>\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-8 col-md-offset-2 text-center\">\n            <div class=\"display-t\">\n              <div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n                <h1>Sell Section</h1>\n                <h2>Your can Post your Product to Sell at Here</h2>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </header>\n\n    <div id=\"fh5co-product\">\n      <div class=\"container\">\n        <div class=\"row animate-box\">\n          <div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n            <span>Cool Stuff</span>\n            <h2>Sell.</h2>\n            <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam\n              dolor eius.\n            </p>\n          </div>\n        </div>\n        <div *ngIf=\"authService.isAuthenticated() else login\" class=\"row\">\n          <div class=\"container\">\n            <div class=\"row\">\n              <div class=\"col-lg-12 \">\n                <mat-form-field class=\"form-group\">\n                  <mat-select placeholder=\"Product Type\" [formControl]=\"selected\" [errorStateMatcher]=\"matcher\" [(ngModel)]=\"type\" [(value)]=\"type\"\n                    required>\n                    <mat-option *ngFor=\"let option of options\" [value]=\"option\">\n                      {{option}}\n                    </mat-option>\n                  </mat-select>\n                  <mat-error *ngIf=\"selected.hasError('required')\">You must make a selection</mat-error>\n                  <mat-hint *ngIf=\"!selected.touched\">Please select your product type</mat-hint>\n                </mat-form-field>\n                <div *ngIf=\"isOthers(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Product Name</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"name\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Product Price</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> A Good Description make your product easy to sell</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    <div *ngFor=\"let time of times\">\n                      <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    </div>\n                    <div class=\"plus\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\" (click)=\"onSecondSelect()\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                  </form>\n                </div>\n\n                <div *ngIf=\"isHouse(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your House Address</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"address\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Rent fee (per Month)</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> You can provide other information which you think is necessary at here</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    <div *ngFor=\"let time of times\">\n                      <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    </div>\n                    <div class=\"plus\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\" (click)=\"onSecondSelect()\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                  </form>\n                </div>\n\n                <div *ngIf=\"isBook(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\">\n                      <mat-select placeholder=\"Book Major\" [formControl]=\"selectedBook\" [errorStateMatcher]=\"matcher\" [(ngModel)]=\"department\"\n                        [(value)]=\"department\" required>\n                        <mat-option *ngFor=\"let department of Departments\" [value]=\"department\">\n                          {{department}}\n                        </mat-option>\n                      </mat-select>\n                      <mat-error *ngIf=\"selectedBook.hasError('required')\">You must make a selection</mat-error>\n                      <mat-hint *ngIf=\"!selectedBook.touched\">Please select your product type</mat-hint>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Book Name</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"name\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Book Price</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> You can provide other information which you think is necessary at here</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">                   \n                     <div *ngFor=\"let time of times\">\n                      <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\" >\n                    </div>\n                    <div class=\"plus\" (click)=\"onSecondSelect(i)\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                    <h3>\n                      {{ownerID}}\n                    </h3>\n                  </form>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n        <ng-template #login>\n          <h4>\n            Please <a id=\"login\" (click)=\"authService.login()\">Login</a> First to post your stuff to sell\n          </h4>\n        </ng-template>\n      </div>\n    </div>\n\n    <footer id=\"fh5co-footer\" role=\"contentinfo\">\n      <div class=\"container\">\n        <div class=\"row row-pb-md\">\n          <div class=\"col-md-4 fh5co-widget\">\n            <h3>Shop.</h3>\n            <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto\n              culpa amet.\n            </p>\n          </div>\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">About</a>\n              </li>\n              <li>\n                <a href=\"#\">Help</a>\n              </li>\n              <li>\n                <a href=\"#\">Contact</a>\n              </li>\n              <li>\n                <a href=\"#\">Terms</a>\n              </li>\n              <li>\n                <a href=\"#\">Meetups</a>\n              </li>\n            </ul>\n          </div>\n\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">Shop</a>\n              </li>\n              <li>\n                <a href=\"#\">Privacy</a>\n              </li>\n              <li>\n                <a href=\"#\">Testimonials</a>\n              </li>\n              <li>\n                <a href=\"#\">Handbook</a>\n              </li>\n              <li>\n                <a href=\"#\">Held Desk</a>\n              </li>\n            </ul>\n          </div>\n\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">Find Designers</a>\n              </li>\n              <li>\n                <a href=\"#\">Find Developers</a>\n              </li>\n              <li>\n                <a href=\"#\">Teams</a>\n              </li>\n              <li>\n                <a href=\"#\">Advertise</a>\n              </li>\n              <li>\n                <a href=\"#\">API</a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n        <div class=\"row copyright\">\n          <div class=\"col-md-12 text-center\">\n            <p>\n              <small class=\"block\">Copyright &copy; 2017.Company name All rights reserved.\n                <a target=\"_blank\" href=\"http://guantaow.taobao.com/\">厚朴网络淘宝店</a>\n                <a target=\"_blank\" href=\"http://www.moobnn.com\">网页模板</a>\n              </small>\n            </p>\n            <ul class=\"fh5co-social-icons\">\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-twitter\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-facebook\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-linkedin\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-dribbble\"></i>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n      </div>\n    </footer>\n  </div>\n\n  <div class=\"gototop js-top\">\n    <a href=\"#\" class=\"js-gotop\">\n      <i class=\"icon-arrow-up\"></i>\n    </a>\n  </div>\n</body>"
 
 /***/ }),
 
@@ -1874,6 +2447,7 @@ var house_service_1 = __webpack_require__("../../../../../src/app/Service/house-
 var book_service_1 = __webpack_require__("../../../../../src/app/Service/book-service.ts");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
+var auth_service_1 = __webpack_require__("../../../../../src/app/Service/auth.service.ts");
 /** Error when invalid control is dirty, touched, or submitted. */
 var MyErrorStateMatcher = /** @class */ (function () {
     function MyErrorStateMatcher() {
@@ -1886,13 +2460,13 @@ var MyErrorStateMatcher = /** @class */ (function () {
 }());
 exports.MyErrorStateMatcher = MyErrorStateMatcher;
 var SellComponent = /** @class */ (function () {
-    function SellComponent(productService, houseService, bookService, httpClient) {
+    function SellComponent(productService, houseService, bookService, httpClient, authService) {
         this.productService = productService;
         this.houseService = houseService;
         this.bookService = bookService;
         this.httpClient = httpClient;
+        this.authService = authService;
         this.Departments = ['Computer Science', 'Electrical Engineering', 'ESL', 'Data Science', 'MSIT', 'Marketing', 'Others'];
-        this.ownerID = 0; // TODO: AUTH
         this.imgUrl = [];
         this.times = [];
         this.selectedFile = null;
@@ -1916,25 +2490,43 @@ var SellComponent = /** @class */ (function () {
         this.options = ['Book', 'House', 'Others'];
         this.matcher = new MyErrorStateMatcher();
     }
+    SellComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        if (this.authService.userProfile && this.authService.isAuthenticated()) {
+            this.profile = this.authService.userProfile;
+            this.ownerID = this.profile.name;
+            console.log(this.profile);
+        }
+        else if (this.authService.isAuthenticated()) {
+            this.authService.getProfile(function (err, profile) {
+                _this.profile = profile;
+                _this.ownerID = _this.profile.name;
+            });
+        }
+        console.log(this.ownerID);
+    };
     SellComponent.prototype.upload = function () {
         var _this = this;
         this.httpClient.post('api/v1/image', this.fd)
             .subscribe(function (res) {
+            //   console.log(res);
             for (var i = 0; i < res.length; i++) {
-                _this.imgUrl[i] = "http://localhost:3000/api/v1/images/" + res[i].filename;
+                console.log(res);
+                _this.imgUrl[i] = window.location.origin + "/api/v1/images/" + res[i];
+                console.log(_this.imgUrl[i]);
             }
             _this.addProduct(_this.type);
         });
     };
     SellComponent.prototype.addProduct = function (type) {
         if (type === 'Others') {
-            this.productService.setProduct(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl);
+            this.productService.setProduct(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, true);
         }
         if (type === 'House') {
-            this.houseService.setNewllHouse(this.address, this.desc, this.price, 'ownerOne', this.contactInfo, this.imgUrl);
+            this.houseService.setNewllHouse(this.address, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl);
         }
         if (type === 'Book') {
-            this.bookService.setBook(this.name, this.department, 0, this.price, this.contactInfo, this.imgUrl);
+            this.bookService.setBook(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, this.department);
         }
     };
     SellComponent.prototype.isOthers = function (option) {
@@ -1988,8 +2580,6 @@ var SellComponent = /** @class */ (function () {
             }
         }
     };
-    SellComponent.prototype.ngOnInit = function () {
-    };
     SellComponent = __decorate([
         core_1.Component({
             selector: 'app-sell',
@@ -1997,11 +2587,74 @@ var SellComponent = /** @class */ (function () {
             styles: [__webpack_require__("../../../../../src/app/product/product.component.css"), __webpack_require__("../../../../../src/app/sell/sell.component.css")]
         }),
         __metadata("design:paramtypes", [product_service_1.ProductService, house_service_1.HouseService,
-            book_service_1.BookService, http_1.HttpClient])
+            book_service_1.BookService, http_1.HttpClient, auth_service_1.AuthService])
     ], SellComponent);
     return SellComponent;
 }());
 exports.SellComponent = SellComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/success/success.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "h1{\r\n    text-align: center;\r\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/success/success.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<body>\n\t<div id=\"page\">\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"search\">\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\">\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\n\t\t\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"shopping-cart\">\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"cart\">\n\t\t\t\t\t\t\t\t\t<span>\n\t\t\t\t\t\t\t\t\t\t<small>0</small>\n\t\t\t\t\t\t\t\t\t\t<i class=\"icon-shopping-cart\"></i>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t</nav>\n\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\n\t\t\t<div class=\"overlay\"></div>\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\n\t\t\t\t\t\t<div class=\"display-t\">\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n\t\t\t\t\t\t\t\t<h1>Others</h1>\n\t\t\t\t\t\t\t\t<h2>Free html5 templates Made</h2>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</header>\n\n\t\t<div id=\"fh5co-product\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row animate-box\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n\t\t\t\t\t\t<span>Cool Stuff</span>\n\t\t\t\t\t\t<h2>Others.</h2>\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\n\t\t\t\t\t\t\teius.\n\t\t\t\t\t\t</p>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t  <h1>\n        Your product has been uploaded successfully!\n      </h1>\n\t\t\t</div>\n\t\t</div>\n\t\t<app-footer></app-footer>\n\t</div>\n</body>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/success/success.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var SuccessComponent = /** @class */ (function () {
+    function SuccessComponent(router) {
+        this.router = router;
+    }
+    SuccessComponent.prototype.ngOnInit = function () {
+    };
+    SuccessComponent = __decorate([
+        core_1.Component({
+            selector: 'app-success',
+            template: __webpack_require__("../../../../../src/app/success/success.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/product/product.component.css"), __webpack_require__("../../../../../src/app/success/success.component.css")]
+        }),
+        __metadata("design:paramtypes", [router_1.Router])
+    ], SuccessComponent);
+    return SuccessComponent;
+}());
+exports.SuccessComponent = SuccessComponent;
 
 
 /***/ }),
@@ -2027,7 +2680,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/test/test.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <h2>单图上传</h2>\r\n      <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\r\n \r\n      <button (click)=\"upload()\">Submit</button>\r\n      <img src=\"http://localhost:3000/api/v1/images\" alt=\"\">\r\n      <div class=\"container\">\r\n          <h2>Modal Example</h2>\r\n          <!-- Trigger the modal with a button -->\r\n          <button type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" data-target=\"#myModal\">Open Modal</button>\r\n        \r\n          <!-- Modal -->\r\n          <div class=\"modal fade\" id=\"myModal\" role=\"dialog\">\r\n            <div class=\"modal-dialog\">\r\n            \r\n              <!-- Modal content-->\r\n              <div class=\"modal-content\">\r\n                <div class=\"modal-header\">\r\n                  <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\r\n                  <h4 class=\"modal-title\">Modal Header</h4>\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                  <p>Some text in the modal.</p>\r\n                </div>\r\n                <div class=\"modal-footer\">\r\n                  <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\r\n                </div>\r\n              </div>\r\n              \r\n            </div>\r\n          </div>\r\n          \r\n        </div>"
+module.exports = "<nav class=\"navbar navbar-default\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"navbar-header\">\r\n      <a class=\"navbar-brand\" href=\"#\">Auth0 - Angular</a>\r\n\r\n      <button\r\n        class=\"btn btn-primary btn-margin\"\r\n        routerLink=\"/\">\r\n          Home\r\n      </button>\r\n\r\n      <button\r\n        id=\"qsLoginBtn\"\r\n        class=\"btn btn-primary btn-margin\"\r\n        *ngIf=\"!auth.isAuthenticated()\"\r\n        (click)=\"auth.login()\">\r\n          Log In\r\n      </button>\r\n\r\n      <button\r\n        id=\"qsLogoutBtn\"\r\n        class=\"btn btn-primary btn-margin\"\r\n        *ngIf=\"auth.isAuthenticated()\"\r\n        (click)=\"auth.logout()\">\r\n          Log Out\r\n      </button>\r\n\r\n    </div>\r\n  </div>\r\n</nav>\r\n<button (click)=\"show()\">123</button>\r\n<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -2047,40 +2700,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var http_1 = __webpack_require__("../../../common/esm5/http.js");
-var product_model_1 = __webpack_require__("../../../../../src/app/product/product-model.ts");
+var auth_service_1 = __webpack_require__("../../../../../src/app/Service/auth.service.ts");
 /** Error when invalid control is dirty, touched, or submitted. */
-var MyErrorStateMatcher = /** @class */ (function () {
-    function MyErrorStateMatcher() {
-    }
-    MyErrorStateMatcher.prototype.isErrorState = function (control, form) {
-        var isSubmitted = form && form.submitted;
-        return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-    };
-    return MyErrorStateMatcher;
-}());
-exports.MyErrorStateMatcher = MyErrorStateMatcher;
 var TestComponent = /** @class */ (function () {
-    function TestComponent(httpClient) {
-        this.httpClient = httpClient;
-        this.imgSrc = '../../../../WPI-Server/upload/1.png';
-        this.product = new product_model_1.ProductModel('test', 100, 1, 'good', '123456', []);
-        this.selectedFile = null;
+    function TestComponent(auth) {
+        this.auth = auth;
+        this.x = 1;
+        //  auth.handleAuthentication();
     }
-    TestComponent.prototype.onFileSelect = function (event) {
-        this.selectedFile = event.target.files;
-        console.log(event);
-    };
     TestComponent.prototype.ngOnInit = function () {
         // this.httpClient.get('api/v1/images')
         // .subscribe();
     };
-    TestComponent.prototype.upload = function () {
-        var fd = new FormData();
-        fd.append('logo', this.selectedFile[0], this.selectedFile.name);
-        fd.append('logo', this.selectedFile[1], this.selectedFile.name);
-        this.httpClient.post('api/v1/image', fd)
-            .subscribe(function (res) { return console.log(res); });
+    TestComponent.prototype.show = function () {
+        // let x = 2;
+        // let y = 2;
+        // (function () {
+        // let x = 3;
+        // console.log(this.x);
+        //  }());
+        this.show2();
+    };
+    TestComponent.prototype.show2 = function () {
+        console.log(this.x);
     };
     TestComponent = __decorate([
         core_1.Component({
@@ -2088,7 +2730,7 @@ var TestComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/test/test.component.html"),
             styles: [__webpack_require__("../../../../../src/app/test/test.component.css")]
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [auth_service_1.AuthService])
     ], TestComponent);
     return TestComponent;
 }());
