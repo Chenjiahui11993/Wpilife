@@ -3,48 +3,51 @@ import { NgModule } from '@angular/core';
 import { Ng2PageScrollModule} from 'ng2-page-scroll';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppComponent } from './app.component';
-import { HouseComponentComponent } from './house/house-component.component';
-import { HomeComponentComponent } from './home-page/home-component.component';
+import { HouseComponentComponent } from './component/house/house-component.component';
+import { HomeComponentComponent } from './component/home-page/home-component.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ProductComponent } from './product/product.component';
-import { ProductDetailComponent } from './product/product-detail/product-detail.component';
-import { HeaderComponent } from './header/header.component';
-import { NavComponent } from './nav/nav.component';
+import { ProductComponent } from './component/product/product.component';
+import { ProductDetailComponent } from './component/product/product-detail/product-detail.component';
+import { HeaderComponent } from './component/header/header.component';
+import { NavComponent } from './component/nav/nav.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCarouselModule } from 'ngx-carousel';
 import {NgxPaginationModule} from 'ngx-pagination';
 import 'hammerjs';
 import { TestComponent } from './test/test.component';
-import { ProductDescComponent } from './product/product-detail/product-desc/product-desc.component';
-import { ProductContactComponent } from './product/product-detail/product-contact/product-contact.component';
+import { ProductDescComponent } from './component/product/product-detail/product-desc/product-desc.component';
+import { ProductContactComponent } from './component/product/product-detail/product-contact/product-contact.component';
 import { ProductService } from '../app/Service/product-service';
 import { CollaborationService } from '../app/Service/collaboration.service';
 import { HouseService } from './Service/house-service';
-import { HouseDetailComponent } from './house/house-detail/house-detail.component';
-import { HouseDescComponent } from './house/house-detail/house-desc/house-desc.component';
-import { HouseContactComponent } from './house/house-detail/house-contact/house-contact.component';
-import { BookComponent } from './book/book.component';
+import { HouseDetailComponent } from './component/house/house-detail/house-detail.component';
+import { HouseDescComponent } from './component/house/house-detail/house-desc/house-desc.component';
+import { HouseContactComponent } from './component/house/house-detail/house-contact/house-contact.component';
+import { BookComponent } from './component/book/book.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule,  MatIconModule, MatInputModule} from '@angular/material';
 import { MatListModule} from '@angular/material/list';
 import { BookService } from './Service/book-service';
-import { BookDetailComponent } from './book/book-detail/book-detail.component';
+import { BookDetailComponent } from './component/book/book-detail/book-detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { NewStudentsComponent } from './new-students/new-students.component';
+import { NewStudentsComponent } from './component/new-students/new-students.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { SellComponent } from './sell/sell.component';
+import { SellComponent } from './component/sell/sell.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from './component/footer/footer.component';
 import { CodingComponent } from './coding/coding.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './component/profile/profile.component';
 import { AuthService } from './Service/auth.service';
-import { CallbackComponent } from './callback/callback.component';
+import { CallbackComponent } from './component/callback/callback.component';
 import { AuthGuardService } from './Service/auth.guard.service';
-import { ErrorComponent } from './error/error.component';
-import { SuccessComponent } from './success/success.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { ErrorComponent } from './component/error/error.component';
+import { SuccessComponent } from './component/success/success.component';
+import { NotFoundComponent } from './component/not-found/not-found.component';
+import { SearchPipe } from './Pipe/search.pipe';
+import { HouseSearchPipe } from './Pipe/house-search.pipe';
+import { ProductSearchPipe } from './Pipe/product-search.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +73,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CallbackComponent,
     ErrorComponent,
     SuccessComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SearchPipe,
+    HouseSearchPipe,
+    ProductSearchPipe,
   ],
   imports: [
     BrowserModule,

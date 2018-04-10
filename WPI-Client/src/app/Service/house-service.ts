@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/toPromise';
-import { HouseModel } from '../house/house.model';
+import { HouseModel } from '../component/house/house.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 @Injectable()

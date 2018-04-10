@@ -1,0 +1,135 @@
+body, html {
+	font-family: 'Lato', sans-serif;
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
+	color: #5a5a5a;
+}
+h1 {
+}
+h1 strong {
+	font-weight: 900;
+}
+h2 {
+	text-transform: uppercase;
+	line-height: 20px;
+	margin: 0;
+}
+h3 {
+	font-size: 16px;
+	font-weight: 700;
+}
+h4 {
+	text-transform: capitalize;
+}
+h5 {
+	text-transform: uppercase;
+	font-weight: 700;
+	line-height: 20px;
+}
+p {
+	font-family: 'Open Sans', sans-serif;
+}
+p.intro {
+	font-size: 16px;
+	margin: 12px 0 0;
+	line-height: 24px;
+	font-family: 'Open Sans', sans-serif;
+}
+a {
+	color: #D2527F
+}
+a:hover, a:focus {
+	text-decoration: none;
+	color: #9D3D5F;
+}
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+.clearfix {
+	display: inline-block;
+}
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+ul, ol {
+	padding: 0;
+	webkit-padding: 0;
+	moz-padding: 0;
+}
+/* Navigation */
+
+/* Home Style */
+header {
+	background: url(../../../assets/wpi-main.jpg) no-repeat bottom center fixed;
+	background-size: cover;
+	color: #cfcfcf;
+	position: relative;
+	height: 100%;
+}
+header p {
+	color: #ffffff;
+	font-size: 22px;
+}
+.intro-text {
+	position: relative;
+	padding-top: 250px;
+	padding-right: 0;
+	padding-left: 0;
+	padding-bottom: 200px;
+}
+.intro-text H1 {
+	font-size: 40px;
+	text-transform: uppercase;
+	color: #fff;
+}
+.color {
+	color: #D2527F;
+}
+a.fa.fa-angle-down {
+	padding: 10px 15px;
+	color: #fff;
+	font-size: 24px;
+	margin-top: 100px;
+	border: 0px solid #E74C3C;
+	transition: all 0.5s;
+	border-radius: 50%;
+	background-color: #D2527F;
+}
+a.fa.fa-angle-down:hover {
+	background: #9D3D5F;
+}
+@media (max-width: 768px) {
+	.content {
+		padding: 40% 0 0;
+	}
+	}
+	
+	@media (max-width: 603px) {
+	#menu.navbar-default {
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+	label {
+		float: none !important
+	}
+	.pull-left.fnav, .pull-right.fnav {
+		float: none !important;
+		text-align: center;
+	}
+	.hover-bg .hover-text {
+		padding: 12% 10%;
+	}
+	}
+	
+	@media (max-width: 360px) {
+	.hover-bg .hover-text {
+		padding: 22% 10%;
+	}
+	}

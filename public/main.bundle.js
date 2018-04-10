@@ -17,6 +17,102 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 
 /***/ }),
 
+/***/ "../../../../../src/app/Pipe/house-search.pipe.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var HouseSearchPipe = /** @class */ (function () {
+    function HouseSearchPipe() {
+    }
+    HouseSearchPipe.prototype.transform = function (houses, term) {
+        return houses.filter(function (house) { return house.Address.trim().toLowerCase().includes(term); });
+    };
+    HouseSearchPipe = __decorate([
+        core_1.Pipe({
+            name: 'houseSearch'
+        })
+    ], HouseSearchPipe);
+    return HouseSearchPipe;
+}());
+exports.HouseSearchPipe = HouseSearchPipe;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/Pipe/product-search.pipe.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var ProductSearchPipe = /** @class */ (function () {
+    function ProductSearchPipe() {
+    }
+    ProductSearchPipe.prototype.transform = function (products, term) {
+        return products.filter(function (product) { return product.name.trim().toLowerCase().includes(term); });
+    };
+    ProductSearchPipe = __decorate([
+        core_1.Pipe({
+            name: 'productSearch'
+        })
+    ], ProductSearchPipe);
+    return ProductSearchPipe;
+}());
+exports.ProductSearchPipe = ProductSearchPipe;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/Pipe/search.pipe.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var SearchPipe = /** @class */ (function () {
+    function SearchPipe() {
+    }
+    SearchPipe.prototype.transform = function (books, term) {
+        console.log(term);
+        console.log(books);
+        return books.filter(function (book) { return book.name.trim().toLowerCase().includes(term); });
+        // console.log(book.name);
+    };
+    SearchPipe = __decorate([
+        core_1.Pipe({
+            name: 'search'
+        })
+    ], SearchPipe);
+    return SearchPipe;
+}());
+exports.SearchPipe = SearchPipe;
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/Service/auth.guard.service.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -188,7 +284,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
 var BehaviorSubject_1 = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubject.js");
 __webpack_require__("../../../../rxjs/_esm5/add/operator/toPromise.js");
-var book_model_1 = __webpack_require__("../../../../../src/app/book/book-model.ts");
+var book_model_1 = __webpack_require__("../../../../../src/app/component/book/book-model.ts");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var BookService = /** @class */ (function () {
@@ -329,7 +425,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
 var BehaviorSubject_1 = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubject.js");
 __webpack_require__("../../../../rxjs/_esm5/add/operator/toPromise.js");
-var house_model_1 = __webpack_require__("../../../../../src/app/house/house.model.ts");
+var house_model_1 = __webpack_require__("../../../../../src/app/component/house/house.model.ts");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var HouseService = /** @class */ (function () {
@@ -421,7 +517,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
 var BehaviorSubject_1 = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubject.js");
 __webpack_require__("../../../../rxjs/_esm5/add/operator/toPromise.js");
-var product_model_1 = __webpack_require__("../../../../../src/app/product/product-model.ts");
+var product_model_1 = __webpack_require__("../../../../../src/app/component/product/product-model.ts");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var ProductService = /** @class */ (function () {
@@ -519,26 +615,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
-var home_component_component_1 = __webpack_require__("../../../../../src/app/home-page/home-component.component.ts");
-var house_component_component_1 = __webpack_require__("../../../../../src/app/house/house-component.component.ts");
-var product_component_1 = __webpack_require__("../../../../../src/app/product/product.component.ts");
-var product_detail_component_1 = __webpack_require__("../../../../../src/app/product/product-detail/product-detail.component.ts");
+var home_component_component_1 = __webpack_require__("../../../../../src/app/component/home-page/home-component.component.ts");
+var house_component_component_1 = __webpack_require__("../../../../../src/app/component/house/house-component.component.ts");
+var product_component_1 = __webpack_require__("../../../../../src/app/component/product/product.component.ts");
+var product_detail_component_1 = __webpack_require__("../../../../../src/app/component/product/product-detail/product-detail.component.ts");
 var test_component_1 = __webpack_require__("../../../../../src/app/test/test.component.ts");
-var product_desc_component_1 = __webpack_require__("../../../../../src/app/product/product-detail/product-desc/product-desc.component.ts");
-var product_contact_component_1 = __webpack_require__("../../../../../src/app/product/product-detail/product-contact/product-contact.component.ts");
-var house_detail_component_1 = __webpack_require__("../../../../../src/app/house/house-detail/house-detail.component.ts");
-var house_desc_component_1 = __webpack_require__("../../../../../src/app/house/house-detail/house-desc/house-desc.component.ts");
-var house_contact_component_1 = __webpack_require__("../../../../../src/app/house/house-detail/house-contact/house-contact.component.ts");
-var book_component_1 = __webpack_require__("../../../../../src/app/book/book.component.ts");
-var book_detail_component_1 = __webpack_require__("../../../../../src/app/book/book-detail/book-detail.component.ts");
-var new_students_component_1 = __webpack_require__("../../../../../src/app/new-students/new-students.component.ts");
-var sell_component_1 = __webpack_require__("../../../../../src/app/sell/sell.component.ts");
+var product_desc_component_1 = __webpack_require__("../../../../../src/app/component/product/product-detail/product-desc/product-desc.component.ts");
+var product_contact_component_1 = __webpack_require__("../../../../../src/app/component/product/product-detail/product-contact/product-contact.component.ts");
+var house_detail_component_1 = __webpack_require__("../../../../../src/app/component/house/house-detail/house-detail.component.ts");
+var house_desc_component_1 = __webpack_require__("../../../../../src/app/component/house/house-detail/house-desc/house-desc.component.ts");
+var house_contact_component_1 = __webpack_require__("../../../../../src/app/component/house/house-detail/house-contact/house-contact.component.ts");
+var book_component_1 = __webpack_require__("../../../../../src/app/component/book/book.component.ts");
+var book_detail_component_1 = __webpack_require__("../../../../../src/app/component/book/book-detail/book-detail.component.ts");
+var new_students_component_1 = __webpack_require__("../../../../../src/app/component/new-students/new-students.component.ts");
+var sell_component_1 = __webpack_require__("../../../../../src/app/component/sell/sell.component.ts");
 var coding_component_1 = __webpack_require__("../../../../../src/app/coding/coding.component.ts");
-var callback_component_1 = __webpack_require__("../../../../../src/app/callback/callback.component.ts");
-var profile_component_1 = __webpack_require__("../../../../../src/app/profile/profile.component.ts");
+var callback_component_1 = __webpack_require__("../../../../../src/app/component/callback/callback.component.ts");
+var profile_component_1 = __webpack_require__("../../../../../src/app/component/profile/profile.component.ts");
 var auth_guard_service_1 = __webpack_require__("../../../../../src/app/Service/auth.guard.service.ts");
-var success_component_1 = __webpack_require__("../../../../../src/app/success/success.component.ts");
-var not_found_component_1 = __webpack_require__("../../../../../src/app/not-found/not-found.component.ts");
+var success_component_1 = __webpack_require__("../../../../../src/app/component/success/success.component.ts");
+var not_found_component_1 = __webpack_require__("../../../../../src/app/component/not-found/not-found.component.ts");
 var appRouter = [
     { path: '', component: home_component_component_1.HomeComponentComponent },
     { path: 'sell', component: sell_component_1.SellComponent },
@@ -668,48 +764,51 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var ng2_page_scroll_1 = __webpack_require__("../../../../ng2-page-scroll/ng2-page-scroll.js");
 var angular_font_awesome_1 = __webpack_require__("../../../../angular-font-awesome/dist/angular-font-awesome.es5.js");
 var app_component_1 = __webpack_require__("../../../../../src/app/app.component.ts");
-var house_component_component_1 = __webpack_require__("../../../../../src/app/house/house-component.component.ts");
-var home_component_component_1 = __webpack_require__("../../../../../src/app/home-page/home-component.component.ts");
+var house_component_component_1 = __webpack_require__("../../../../../src/app/component/house/house-component.component.ts");
+var home_component_component_1 = __webpack_require__("../../../../../src/app/component/home-page/home-component.component.ts");
 var app_routing_module_1 = __webpack_require__("../../../../../src/app/app-routing.module.ts");
-var product_component_1 = __webpack_require__("../../../../../src/app/product/product.component.ts");
-var product_detail_component_1 = __webpack_require__("../../../../../src/app/product/product-detail/product-detail.component.ts");
-var header_component_1 = __webpack_require__("../../../../../src/app/header/header.component.ts");
-var nav_component_1 = __webpack_require__("../../../../../src/app/nav/nav.component.ts");
+var product_component_1 = __webpack_require__("../../../../../src/app/component/product/product.component.ts");
+var product_detail_component_1 = __webpack_require__("../../../../../src/app/component/product/product-detail/product-detail.component.ts");
+var header_component_1 = __webpack_require__("../../../../../src/app/component/header/header.component.ts");
+var nav_component_1 = __webpack_require__("../../../../../src/app/component/nav/nav.component.ts");
 var ng_bootstrap_1 = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var ngx_carousel_1 = __webpack_require__("../../../../ngx-carousel/index.js");
 var ngx_pagination_1 = __webpack_require__("../../../../ngx-pagination/dist/ngx-pagination.js");
 __webpack_require__("../../../../hammerjs/hammer.js");
 var test_component_1 = __webpack_require__("../../../../../src/app/test/test.component.ts");
-var product_desc_component_1 = __webpack_require__("../../../../../src/app/product/product-detail/product-desc/product-desc.component.ts");
-var product_contact_component_1 = __webpack_require__("../../../../../src/app/product/product-detail/product-contact/product-contact.component.ts");
+var product_desc_component_1 = __webpack_require__("../../../../../src/app/component/product/product-detail/product-desc/product-desc.component.ts");
+var product_contact_component_1 = __webpack_require__("../../../../../src/app/component/product/product-detail/product-contact/product-contact.component.ts");
 var product_service_1 = __webpack_require__("../../../../../src/app/Service/product-service.ts");
 var collaboration_service_1 = __webpack_require__("../../../../../src/app/Service/collaboration.service.ts");
 var house_service_1 = __webpack_require__("../../../../../src/app/Service/house-service.ts");
-var house_detail_component_1 = __webpack_require__("../../../../../src/app/house/house-detail/house-detail.component.ts");
-var house_desc_component_1 = __webpack_require__("../../../../../src/app/house/house-detail/house-desc/house-desc.component.ts");
-var house_contact_component_1 = __webpack_require__("../../../../../src/app/house/house-detail/house-contact/house-contact.component.ts");
-var book_component_1 = __webpack_require__("../../../../../src/app/book/book.component.ts");
+var house_detail_component_1 = __webpack_require__("../../../../../src/app/component/house/house-detail/house-detail.component.ts");
+var house_desc_component_1 = __webpack_require__("../../../../../src/app/component/house/house-detail/house-desc/house-desc.component.ts");
+var house_contact_component_1 = __webpack_require__("../../../../../src/app/component/house/house-detail/house-contact/house-contact.component.ts");
+var book_component_1 = __webpack_require__("../../../../../src/app/component/book/book.component.ts");
 var animations_1 = __webpack_require__("../../../platform-browser/esm5/animations.js");
 var material_1 = __webpack_require__("../../../material/esm5/material.es5.js");
 var list_1 = __webpack_require__("../../../material/esm5/list.es5.js");
 var book_service_1 = __webpack_require__("../../../../../src/app/Service/book-service.ts");
-var book_detail_component_1 = __webpack_require__("../../../../../src/app/book/book-detail/book-detail.component.ts");
+var book_detail_component_1 = __webpack_require__("../../../../../src/app/component/book/book-detail/book-detail.component.ts");
 var tabs_1 = __webpack_require__("../../../material/esm5/tabs.es5.js");
-var new_students_component_1 = __webpack_require__("../../../../../src/app/new-students/new-students.component.ts");
+var new_students_component_1 = __webpack_require__("../../../../../src/app/component/new-students/new-students.component.ts");
 var radio_1 = __webpack_require__("../../../material/esm5/radio.es5.js");
 var select_1 = __webpack_require__("../../../material/esm5/select.es5.js");
-var sell_component_1 = __webpack_require__("../../../../../src/app/sell/sell.component.ts");
+var sell_component_1 = __webpack_require__("../../../../../src/app/component/sell/sell.component.ts");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
-var footer_component_1 = __webpack_require__("../../../../../src/app/footer/footer.component.ts");
+var footer_component_1 = __webpack_require__("../../../../../src/app/component/footer/footer.component.ts");
 var coding_component_1 = __webpack_require__("../../../../../src/app/coding/coding.component.ts");
-var profile_component_1 = __webpack_require__("../../../../../src/app/profile/profile.component.ts");
+var profile_component_1 = __webpack_require__("../../../../../src/app/component/profile/profile.component.ts");
 var auth_service_1 = __webpack_require__("../../../../../src/app/Service/auth.service.ts");
-var callback_component_1 = __webpack_require__("../../../../../src/app/callback/callback.component.ts");
+var callback_component_1 = __webpack_require__("../../../../../src/app/component/callback/callback.component.ts");
 var auth_guard_service_1 = __webpack_require__("../../../../../src/app/Service/auth.guard.service.ts");
-var error_component_1 = __webpack_require__("../../../../../src/app/error/error.component.ts");
-var success_component_1 = __webpack_require__("../../../../../src/app/success/success.component.ts");
-var not_found_component_1 = __webpack_require__("../../../../../src/app/not-found/not-found.component.ts");
+var error_component_1 = __webpack_require__("../../../../../src/app/component/error/error.component.ts");
+var success_component_1 = __webpack_require__("../../../../../src/app/component/success/success.component.ts");
+var not_found_component_1 = __webpack_require__("../../../../../src/app/component/not-found/not-found.component.ts");
+var search_pipe_1 = __webpack_require__("../../../../../src/app/Pipe/search.pipe.ts");
+var house_search_pipe_1 = __webpack_require__("../../../../../src/app/Pipe/house-search.pipe.ts");
+var product_search_pipe_1 = __webpack_require__("../../../../../src/app/Pipe/product-search.pipe.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -739,7 +838,10 @@ var AppModule = /** @class */ (function () {
                 callback_component_1.CallbackComponent,
                 error_component_1.ErrorComponent,
                 success_component_1.SuccessComponent,
-                not_found_component_1.NotFoundComponent
+                not_found_component_1.NotFoundComponent,
+                search_pipe_1.SearchPipe,
+                house_search_pipe_1.HouseSearchPipe,
+                product_search_pipe_1.ProductSearchPipe,
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -776,245 +878,6 @@ var AppModule = /** @class */ (function () {
     return AppModule;
 }());
 exports.AppModule = AppModule;
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/book/book-detail/book-detail.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<body>\n  <div class=\"fh5co-loader\"></div>\n  <div id=\"page\">\n    <nav class=\"fh5co-nav\" role=\"navigation\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-3 col-xs-2\">\n            <div id=\"fh5co-logo\">\n              <a routerLink=\"\">WPI.</a>\n            </div>\n          </div>\n          <div class=\"col-md-6 col-xs-6 text-center menu-1\">\n            <ul>\n              <li class=\"has-dropdown active\">\n                <a routerLink=\"/product-list\">Shop</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"single.html\">Single Shop</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"about.html\">About</a>\n              </li>\n              <li class=\"has-dropdown\">\n                <a href=\"services.html\">Services</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"#\">Web Design</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">eCommerce</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">Branding</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">API</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"contact.html\">Contact</a>\n              </li>\n            </ul>\n          </div>\n          <div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n            <ul>\n              <li class=\"search\">\n                <div class=\"input-group\">\n                  <input type=\"text\" placeholder=\"Search..\">\n                  <span class=\"input-group-btn\">\n                    <button class=\"btn btn-primary\" type=\"button\">\n                      <i class=\"icon-search\"></i>\n                    </button>\n                  </span>\n                </div>\n              </li>\n              <li class=\"shopping-cart\">\n                <a href=\"#\" class=\"cart\">\n                  <span>\n                    <small>0</small>\n                    <i class=\"icon-shopping-cart\"></i>\n                  </span>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </nav>\n\n    <header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../../assets/img_bg_2.jpg);\">\n      <div class=\"overlay\"></div>\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-8 col-md-offset-2 text-center\">\n            <div class=\"display-t\">\n              <div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n                <h1>Book Details</h1>\n                <h2>Free html5 templates Made</h2>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </header>\n\n    <div id=\"fh5co-product\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-10 col-md-offset-1\">\n          \n            <div>\n              <ngx-carousel [inputs]=\"Config\">\n                <ngx-item *ngFor=\"let bookImg of bookModel.imgUrl\" class=\"bannerStyle \" NgxCarouselItem>\n                  <img [src]=\"bookImg\" alt=\"house\" width=\"100%\" #test2 id=\"img1\">\n                </ngx-item>\n                <i NgxCarouselPrev class=\"leftRs fa fa-arrow-left fa-3x\" aria-hidden=\"true\"></i>\n                <i NgxCarouselNext class=\"rightRs fa fa-arrow-right fa-3x\" aria-hidden=\"true\"></i>\n              </ngx-carousel>\n            </div>\n          \n\n\n            <div class=\"row animate-box\">\n              <div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n                <h2>{{bookModel.department}}</h2>\n                <p>\n                  <a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Post your Product to Sell</a>\n                  <a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Compare</a>\n                </p>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"col-md-10 col-md-offset-1\">\n            <ul class=\"nav nav-tabs\">\n              <mat-tab-group>\n\n                <mat-tab label=\"Book detail\">\n                  <div class=\"col-md-8 \">\n                      <h4>Book Detail</h4>\n                      <ul>\n                          <li>{{bookModel.name}}\n                          </li>\n                          <li>{{bookModel.price}}</li>\n                          <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                          <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis officiis est.</li>\n                        </ul>\n                  </div>\n                </mat-tab>\n\n                <mat-tab label=\"Contact Info\">\n\n\n                  <div class=\"col-md-8\">\n                    <h4>Book Owner contact info</h4>\n                    <ul>\n                      <li>{{bookModel.contactInfo}}\n                      </li>\n                      <li>{{bookModel.ownerID}}</li>\n                      <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                      <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis officiis est.</li>\n                    </ul>\n                    <ul>\n                      <li>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci eius\n                      </li>\n                      <li>adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi</li>\n                      <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                      <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur officiis\n                        est.</li>\n                    </ul>\n                  </div>\n\n\n                </mat-tab>\n              </mat-tab-group>\n\n            </ul>\n          </div>\n        </div>\n        <!-- Tabs -->\n        <router-outlet></router-outlet>\n        <div class=\"col-md-10 col-md-offset-1\">\n          <h3>Happy Buyers</h3>\n          <div class=\"feed\">\n            <div>\n              <blockquote>\n                <p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni\n                  quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n                  officiis est.\n                </p>\n              </blockquote>\n              <h3>&mdash; Louie Knight</h3>\n              <span class=\"rate\">\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n              </span>\n            </div>\n            <div>\n              <blockquote>\n                <p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni\n                  quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n                  officiis est.\n                </p>\n              </blockquote>\n              <h3>&mdash; Joefrey Gwapo</h3>\n              <span class=\"rate\">\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n              </span>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div id=\"fh5co-started\">\n    <div class=\"container\">\n      <div class=\"row animate-box\">\n        <!-- UY BEGIN -->\n        <div id=\"uyan_frame\"></div>\n        <script type=\"text/javascript\" src=\"http://v2.uyan.cc/code/uyan.js?uid=2158295\"></script>\n        <!-- UY END -->\n      </div>\n    </div>\n  </div>\n\n  <footer id=\"fh5co-footer\" role=\"contentinfo\">\n    <div class=\"container\">\n      <div class=\"row row-pb-md\">\n        <div class=\"col-md-4 fh5co-widget\">\n          <h3>Shop.</h3>\n          <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto\n            culpa amet.\n          </p>\n        </div>\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">About</a>\n            </li>\n            <li>\n              <a href=\"#\">Help</a>\n            </li>\n            <li>\n              <a href=\"#\">Contact</a>\n            </li>\n            <li>\n              <a href=\"#\">Terms</a>\n            </li>\n            <li>\n              <a href=\"#\">Meetups</a>\n            </li>\n          </ul>\n        </div>\n\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">Shop</a>\n            </li>\n            <li>\n              <a href=\"#\">Privacy</a>\n            </li>\n            <li>\n              <a href=\"#\">Testimonials</a>\n            </li>\n            <li>\n              <a href=\"#\">Handbook</a>\n            </li>\n            <li>\n              <a href=\"#\">Held Desk</a>\n            </li>\n          </ul>\n        </div>\n\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">Find Designers</a>\n            </li>\n            <li>\n              <a href=\"#\">Find Developers</a>\n            </li>\n            <li>\n              <a href=\"#\">Teams</a>\n            </li>\n            <li>\n              <a href=\"#\">Advertise</a>\n            </li>\n            <li>\n              <a href=\"#\">API</a>\n            </li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"row copyright\">\n        <div class=\"col-md-12 text-center\">\n          <p>\n            <small class=\"block\">Copyright &copy; 2017.Company name All rights reserved.\n              <a target=\"_blank\" href=\"http://guantaow.taobao.com/\">厚朴网络淘宝店</a>\n              <a target=\"_blank\" href=\"http://www.moobnn.com\">网页模板</a>\n            </small>\n          </p>\n          <p>\n            <ul class=\"fh5co-social-icons\">\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-twitter\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-facebook\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-linkedin\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-dribbble\"></i>\n                </a>\n              </li>\n            </ul>\n        </div>\n      </div>\n\n    </div>\n  </footer>\n  <div class=\"gototop js-top\">\n    <a href=\"#\" class=\"js-gotop\">\n      <i class=\"icon-arrow-up\"></i>\n    </a>\n  </div>\n</body>"
-
-/***/ }),
-
-/***/ "../../../../../src/app/book/book-detail/book-detail.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var book_service_1 = __webpack_require__("../../../../../src/app/Service/book-service.ts");
-var router_1 = __webpack_require__("../../../router/esm5/router.js");
-var BookDetailComponent = /** @class */ (function () {
-    function BookDetailComponent(bookService, activatedRoute) {
-        this.bookService = bookService;
-        this.activatedRoute = activatedRoute;
-        this.Config = {
-            grid: { xs: 1, sm: 1, md: 1, lg: 1, all: 0 },
-            slide: 1,
-            speed: 400,
-            point: {
-                visible: true
-            },
-            loop: true,
-            touch: false
-        };
-    }
-    BookDetailComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.activatedRoute.params
-            .subscribe(function (params) {
-            _this.id = +params['id'];
-        });
-        this.bookService.getBook(this.id)
-            .then(function (book) {
-            _this.bookModel = book;
-            console.log(_this.bookModel);
-            return _this.bookModel;
-        })
-            .catch(function (e) {
-            console.log(e);
-        });
-        // console.log(this.bookModel);
-        console.log(typeof this.id);
-    };
-    BookDetailComponent = __decorate([
-        core_1.Component({
-            selector: 'app-book-detail',
-            template: __webpack_require__("../../../../../src/app/book/book-detail/book-detail.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product.component.css"), __webpack_require__("../../../../../src/app/product/product-detail/product-detail.component.css")]
-        }),
-        __metadata("design:paramtypes", [book_service_1.BookService, router_1.ActivatedRoute])
-    ], BookDetailComponent);
-    return BookDetailComponent;
-}());
-exports.BookDetailComponent = BookDetailComponent;
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/book/book-model.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var BookModel = /** @class */ (function () {
-    function BookModel(name, price, ownerID, desc, contactInfo, img, department, type) {
-        this.name = name;
-        this.department = department;
-        this.ownerID = ownerID;
-        this.price = price;
-        this.contactInfo = contactInfo;
-        this.description = desc;
-        this.imgUrl = img;
-        this.type = type;
-    }
-    return BookModel;
-}());
-exports.BookModel = BookModel;
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/book/book.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<body>\r\n\t<div id=\"page\">\r\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\r\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\r\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"search\">\r\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\">\r\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\r\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\r\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\r\n\t\t\t\t\t\t\t\t\t\t</button>\r\n\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"shopping-cart\">\r\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"cart\">\r\n\t\t\t\t\t\t\t\t\t<span>\r\n\t\t\t\t\t\t\t\t\t\t<small>0</small>\r\n\t\t\t\t\t\t\t\t\t\t<i class=\"icon-shopping-cart\"></i>\r\n\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t</div>\r\n\t\t</nav>\r\n\r\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\r\n\t\t\t<div class=\"overlay\"></div>\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\r\n\t\t\t\t\t\t<div class=\"display-t\">\r\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\r\n\t\t\t\t\t\t\t\t<h1>Book store</h1>\r\n\t\t\t\t\t\t\t\t<h2>Find your most helpful text book with the best price!</h2>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</header>\r\n\r\n\t\t<div id=\"fh5co-product\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row animate-box\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\r\n\t\t\t\t\t\t<span>Cool Stuff</span>\r\n\t\t\t\t\t\t<h2>Products.</h2>\r\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\r\n\t\t\t\t\t\t\teius.\r\n\t\t\t\t\t\t</p>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-3 choice\">\r\n\t\t\t\t\t\t<div class=\"product\">\r\n\t\t\t\t\t\t\t<h3>\r\n\t\t\t\t\t\t\t\t<i>Please select department:</i>\r\n\t\t\t\t\t\t\t</h3>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\tselected:{{selectedDept}}\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<mat-selection-list #Dept [(ngModel)]=\"selectedDept\" (selectionChange)=\"onChange()\">\r\n\t\t\t\t\t\t\t<mat-list-option *ngFor=\"let Department of Departments\" [value]=\"Department\">\r\n\t\t\t\t\t\t\t\t{{Department}}\r\n\t\t\t\t\t\t\t</mat-list-option>\r\n\t\t\t\t\t\t</mat-selection-list>\r\n\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t<div class=\"col-md-3 text-center\" *ngFor=\"let Book of AllBooks | paginate: {id:'Book',\r\n\t\t\t\t\t\t                                                                        itemsPerPage: 6, \r\n\t\t\t                                                                                    currentPage: p }\">\r\n\t\t\t\t\t\t<div class=\"product\" (click)=\"ToBookDetail(Book.id)\">\r\n\r\n\t\t\t\t\t\t\t<div class=\"product-grid\" [style.background-image]=\"'url('+Book.imgUrl[0]+')'\">\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div class=\"desc\">\r\n\t\t\t\t\t\t\t\t<h3>\r\n\t\t\t\t\t\t\t\t\t<i>{{Book.name}}</i>\r\n\t\t\t\t\t\t\t\t</h3>\r\n\t\t\t\t\t\t\t\t<span class=\"price\">{{Book.department}}</span>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<pagination-controls class=\"pageButton\" id=\"Book\" (pageChange)=\"p = $event\" maxSize=\"9\" directionLinks=\"true\" autoHide=\"true\"\r\n\t\t\t\t screenReaderPaginationLabel=\"Pagination\" screenReaderPageLabel=\"page\" screenReaderCurrentLabel=\"You're on page\">\r\n\t\t\t\t</pagination-controls>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<app-footer></app-footer>\r\n\t</div>\r\n</body>"
-
-/***/ }),
-
-/***/ "../../../../../src/app/book/book.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var book_service_1 = __webpack_require__("../../../../../src/app/Service/book-service.ts");
-var router_1 = __webpack_require__("../../../router/esm5/router.js");
-var BookComponent = /** @class */ (function () {
-    function BookComponent(bookService, router, activateRouter) {
-        this.bookService = bookService;
-        this.router = router;
-        this.activateRouter = activateRouter;
-        this.selectedDept = ['cs'];
-        this.Departments = ['Computer Science', 'Electrical Engineering', 'ESL', 'Data Science', 'MSIT', 'Marketing', 'Others'];
-        this.AllBooks = [];
-        this.books = [];
-        this.selectedBook = [];
-    }
-    BookComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.subscriptionBooks = this.bookService.getALLBooks()
-            .subscribe(function (allBooks) {
-            _this.AllBooks = allBooks;
-            _this.books = allBooks;
-        });
-        console.log(this.AllBooks);
-    };
-    BookComponent.prototype.ngOnDestroy = function () {
-        this.subscriptionBooks.unsubscribe();
-    };
-    BookComponent.prototype.ToBookDetail = function (id) {
-        this.router.navigate(['/book-list', id]);
-    };
-    BookComponent.prototype.onChange = function (value) {
-        var _this = this;
-        this.selectedBook = [];
-        this.AllBooks = this.books;
-        this.AllBooks.forEach(function (book) {
-            if (_this.selectedDept.includes(book.department)) {
-                _this.selectedBook.push(book);
-            }
-        });
-        if (this.selectedBook.length === 0) {
-            return 0;
-        }
-        this.AllBooks = this.selectedBook;
-        console.log(this.AllBooks);
-    };
-    BookComponent = __decorate([
-        core_1.Component({
-            selector: 'app-book',
-            template: __webpack_require__("../../../../../src/app/book/book.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product.component.css")]
-        }),
-        __metadata("design:paramtypes", [book_service_1.BookService, router_1.Router, router_1.ActivatedRoute])
-    ], BookComponent);
-    return BookComponent;
-}());
-exports.BookComponent = BookComponent;
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/callback/callback.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".loading {\r\n    position: absolute;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    height: 100vh;\r\n    width: 100vw;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    background-color: #fff;\r\n  }", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/callback/callback.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"loading\">\n  <img src=\"assets/loading.svg\" alt=\"loading\">\n</div>"
-
-/***/ }),
-
-/***/ "../../../../../src/app/callback/callback.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var CallbackComponent = /** @class */ (function () {
-    function CallbackComponent() {
-    }
-    CallbackComponent.prototype.ngOnInit = function () {
-    };
-    CallbackComponent = __decorate([
-        core_1.Component({
-            selector: 'app-callback',
-            template: __webpack_require__("../../../../../src/app/callback/callback.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/callback/callback.component.css")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], CallbackComponent);
-    return CallbackComponent;
-}());
-exports.CallbackComponent = CallbackComponent;
 
 
 /***/ }),
@@ -1108,7 +971,7 @@ var CodingComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-coding',
             template: __webpack_require__("../../../../../src/app/coding/coding.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/coding/coding.component.css"), __webpack_require__("../../../../../src/app/product/product.component.css")]
+            styles: [__webpack_require__("../../../../../src/app/coding/coding.component.css"), __webpack_require__("../../../../../src/app/component/product/product.component.css")]
         }),
         __metadata("design:paramtypes", [collaboration_service_1.CollaborationService, router_1.ActivatedRoute])
     ], CodingComponent);
@@ -1119,7 +982,257 @@ exports.CodingComponent = CodingComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/error/error.component.css":
+/***/ "../../../../../src/app/component/book/book-detail/book-detail.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<body>\n  <div class=\"fh5co-loader\"></div>\n  <div id=\"page\">\n    <nav class=\"fh5co-nav\" role=\"navigation\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-3 col-xs-2\">\n            <div id=\"fh5co-logo\">\n              <a routerLink=\"\">WPI.</a>\n            </div>\n          </div>\n          <div class=\"col-md-6 col-xs-6 text-center menu-1\">\n            <ul>\n              <li class=\"has-dropdown active\">\n                <a routerLink=\"/product-list\">Shop</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"single.html\">Single Shop</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"about.html\">About</a>\n              </li>\n              <li class=\"has-dropdown\">\n                <a href=\"services.html\">Services</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"#\">Web Design</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">eCommerce</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">Branding</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">API</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"contact.html\">Contact</a>\n              </li>\n            </ul>\n          </div>\n          <div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n            <ul>\n              <li class=\"search\">\n                <div class=\"input-group\">\n                  <input type=\"text\" placeholder=\"Search..\">\n                  <span class=\"input-group-btn\">\n                    <button class=\"btn btn-primary\" type=\"button\">\n                      <i class=\"icon-search\"></i>\n                    </button>\n                  </span>\n                </div>\n              </li>\n              <li class=\"shopping-cart\">\n                <a href=\"#\" class=\"cart\">\n                  <span>\n                    <small>0</small>\n                    <i class=\"icon-shopping-cart\"></i>\n                  </span>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </nav>\n\n    <header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../../assets/img_bg_2.jpg);\">\n      <div class=\"overlay\"></div>\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-8 col-md-offset-2 text-center\">\n            <div class=\"display-t\">\n              <div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n                <h1>Book Details</h1>\n                <h2>Free html5 templates Made</h2>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </header>\n\n    <div id=\"fh5co-product\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-10 col-md-offset-1\">\n          \n            <div>\n              <ngx-carousel [inputs]=\"Config\">\n                <ngx-item *ngFor=\"let bookImg of bookModel.imgUrl\" class=\"bannerStyle \" NgxCarouselItem>\n                  <img [src]=\"bookImg\" alt=\"house\" width=\"100%\" #test2 id=\"img1\">\n                </ngx-item>\n                <i NgxCarouselPrev class=\"leftRs fa fa-arrow-left fa-3x\" aria-hidden=\"true\"></i>\n                <i NgxCarouselNext class=\"rightRs fa fa-arrow-right fa-3x\" aria-hidden=\"true\"></i>\n              </ngx-carousel>\n            </div>\n          \n\n\n            <div class=\"row animate-box\">\n              <div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n                <h2>{{bookModel.department}}</h2>\n                <p>\n                  <a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Post your Product to Sell</a>\n                  <a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Compare</a>\n                </p>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"col-md-10 col-md-offset-1\">\n            <ul class=\"nav nav-tabs\">\n              <mat-tab-group>\n\n                <mat-tab label=\"Book detail\">\n                  <div class=\"col-md-8 \">\n                      <h4>Book Detail</h4>\n                      <ul>\n                          <li>{{bookModel.name}}\n                          </li>\n                          <li>{{bookModel.price}}</li>\n                          <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                          <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis officiis est.</li>\n                        </ul>\n                  </div>\n                </mat-tab>\n\n                <mat-tab label=\"Contact Info\">\n\n\n                  <div class=\"col-md-8\">\n                    <h4>Book Owner contact info</h4>\n                    <ul>\n                      <li>{{bookModel.contactInfo}}\n                      </li>\n                      <li>{{bookModel.ownerID}}</li>\n                      <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                      <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis officiis est.</li>\n                    </ul>\n                    <ul>\n                      <li>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci eius\n                      </li>\n                      <li>adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi</li>\n                      <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n                      <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur officiis\n                        est.</li>\n                    </ul>\n                  </div>\n\n\n                </mat-tab>\n              </mat-tab-group>\n\n            </ul>\n          </div>\n        </div>\n        <!-- Tabs -->\n        <router-outlet></router-outlet>\n        <div class=\"col-md-10 col-md-offset-1\">\n          <h3>Happy Buyers</h3>\n          <div class=\"feed\">\n            <div>\n              <blockquote>\n                <p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni\n                  quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n                  officiis est.\n                </p>\n              </blockquote>\n              <h3>&mdash; Louie Knight</h3>\n              <span class=\"rate\">\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n              </span>\n            </div>\n            <div>\n              <blockquote>\n                <p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni\n                  quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n                  officiis est.\n                </p>\n              </blockquote>\n              <h3>&mdash; Joefrey Gwapo</h3>\n              <span class=\"rate\">\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n                <i class=\"icon-star2\"></i>\n              </span>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div id=\"fh5co-started\">\n    <div class=\"container\">\n      <div class=\"row animate-box\">\n        <!-- UY BEGIN -->\n        <div id=\"uyan_frame\"></div>\n        <script type=\"text/javascript\" src=\"http://v2.uyan.cc/code/uyan.js?uid=2158295\"></script>\n        <!-- UY END -->\n      </div>\n    </div>\n  </div>\n\n  <footer id=\"fh5co-footer\" role=\"contentinfo\">\n    <div class=\"container\">\n      <div class=\"row row-pb-md\">\n        <div class=\"col-md-4 fh5co-widget\">\n          <h3>Shop.</h3>\n          <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto\n            culpa amet.\n          </p>\n        </div>\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">About</a>\n            </li>\n            <li>\n              <a href=\"#\">Help</a>\n            </li>\n            <li>\n              <a href=\"#\">Contact</a>\n            </li>\n            <li>\n              <a href=\"#\">Terms</a>\n            </li>\n            <li>\n              <a href=\"#\">Meetups</a>\n            </li>\n          </ul>\n        </div>\n\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">Shop</a>\n            </li>\n            <li>\n              <a href=\"#\">Privacy</a>\n            </li>\n            <li>\n              <a href=\"#\">Testimonials</a>\n            </li>\n            <li>\n              <a href=\"#\">Handbook</a>\n            </li>\n            <li>\n              <a href=\"#\">Held Desk</a>\n            </li>\n          </ul>\n        </div>\n\n        <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n          <ul class=\"fh5co-footer-links\">\n            <li>\n              <a href=\"#\">Find Designers</a>\n            </li>\n            <li>\n              <a href=\"#\">Find Developers</a>\n            </li>\n            <li>\n              <a href=\"#\">Teams</a>\n            </li>\n            <li>\n              <a href=\"#\">Advertise</a>\n            </li>\n            <li>\n              <a href=\"#\">API</a>\n            </li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"row copyright\">\n        <div class=\"col-md-12 text-center\">\n          <p>\n            <small class=\"block\">Copyright &copy; 2017.Company name All rights reserved.\n              <a target=\"_blank\" href=\"http://guantaow.taobao.com/\">厚朴网络淘宝店</a>\n              <a target=\"_blank\" href=\"http://www.moobnn.com\">网页模板</a>\n            </small>\n          </p>\n          <p>\n            <ul class=\"fh5co-social-icons\">\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-twitter\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-facebook\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-linkedin\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-dribbble\"></i>\n                </a>\n              </li>\n            </ul>\n        </div>\n      </div>\n\n    </div>\n  </footer>\n  <div class=\"gototop js-top\">\n    <a href=\"#\" class=\"js-gotop\">\n      <i class=\"icon-arrow-up\"></i>\n    </a>\n  </div>\n</body>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/component/book/book-detail/book-detail.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var book_service_1 = __webpack_require__("../../../../../src/app/Service/book-service.ts");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var BookDetailComponent = /** @class */ (function () {
+    function BookDetailComponent(bookService, activatedRoute) {
+        this.bookService = bookService;
+        this.activatedRoute = activatedRoute;
+        this.Config = {
+            grid: { xs: 1, sm: 1, md: 1, lg: 1, all: 0 },
+            slide: 1,
+            speed: 400,
+            point: {
+                visible: true
+            },
+            loop: true,
+            touch: false
+        };
+    }
+    BookDetailComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params
+            .subscribe(function (params) {
+            _this.id = +params['id'];
+        });
+        this.bookService.getBook(this.id)
+            .then(function (book) {
+            _this.bookModel = book;
+            console.log(_this.bookModel);
+            return _this.bookModel;
+        })
+            .catch(function (e) {
+            console.log(e);
+        });
+        // console.log(this.bookModel);
+        console.log(typeof this.id);
+    };
+    BookDetailComponent = __decorate([
+        core_1.Component({
+            selector: 'app-book-detail',
+            template: __webpack_require__("../../../../../src/app/component/book/book-detail/book-detail.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product.component.css"), __webpack_require__("../../../../../src/app/component/product/product-detail/product-detail.component.css")]
+        }),
+        __metadata("design:paramtypes", [book_service_1.BookService, router_1.ActivatedRoute])
+    ], BookDetailComponent);
+    return BookDetailComponent;
+}());
+exports.BookDetailComponent = BookDetailComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/component/book/book-model.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var BookModel = /** @class */ (function () {
+    function BookModel(name, price, ownerID, desc, contactInfo, img, department, type) {
+        this.name = name;
+        this.department = department;
+        this.ownerID = ownerID;
+        this.price = price;
+        this.contactInfo = contactInfo;
+        this.description = desc;
+        this.imgUrl = img;
+        this.type = type;
+    }
+    return BookModel;
+}());
+exports.BookModel = BookModel;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/component/book/book.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<body>\r\n\t<div id=\"page\">\r\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\r\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\r\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"search\">\r\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search...\" [formControl]=\"searchBox\">\r\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\r\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\r\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\r\n\t\t\t\t\t\t\t\t\t\t</button>\r\n\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t</div>\r\n\t\t</nav>\r\n\r\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\r\n\t\t\t<div class=\"overlay\"></div>\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\r\n\t\t\t\t\t\t<div class=\"display-t\">\r\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\r\n\t\t\t\t\t\t\t\t<h1>Book store</h1>\r\n\t\t\t\t\t\t\t\t<h2>Find your most helpful text book with the best price!</h2>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</header>\r\n\r\n\t\t<div id=\"fh5co-product\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row animate-box\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\r\n\t\t\t\t\t\t<span>Cool Stuff</span>\r\n\t\t\t\t\t\t<h2>Products.</h2>\r\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\r\n\t\t\t\t\t\t\teius.\r\n\t\t\t\t\t\t</p>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-3 choice\">\r\n\t\t\t\t\t\t<div class=\"product\">\r\n\t\t\t\t\t\t\t<h3>\r\n\t\t\t\t\t\t\t\t<i>Please select department:</i>\r\n\t\t\t\t\t\t\t</h3>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\tselected:{{selectedDept}}\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<mat-selection-list #Dept [(ngModel)]=\"selectedDept\" (selectionChange)=\"onChange()\">\r\n\t\t\t\t\t\t\t<mat-list-option *ngFor=\"let Department of Departments\" [value]=\"Department\">\r\n\t\t\t\t\t\t\t\t{{Department}}\r\n\t\t\t\t\t\t\t</mat-list-option>\r\n\t\t\t\t\t\t</mat-selection-list>\r\n\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t<div class=\"col-md-3 text-center\" *ngFor=\"let Book of AllBooks| search: searchValue | paginate: {id:'Book',\r\n\t\t\t\t\t\t                                                                        itemsPerPage: 6, \r\n\t\t\t                                                                                    currentPage: p }\">\r\n\t\t\t\t\t\t<div class=\"product\" (click)=\"ToBookDetail(Book.id)\">\r\n\r\n\t\t\t\t\t\t\t<div class=\"product-grid\" [style.background-image]=\"'url('+Book.imgUrl[0]+')'\">\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div class=\"desc\">\r\n\t\t\t\t\t\t\t\t<h3>\r\n\t\t\t\t\t\t\t\t\t<i>{{Book.name}}</i>\r\n\t\t\t\t\t\t\t\t</h3>\r\n\t\t\t\t\t\t\t\t<span class=\"price\">{{Book.department}}</span>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<pagination-controls class=\"pageButton\" id=\"Book\" (pageChange)=\"p = $event\" maxSize=\"9\" directionLinks=\"true\" autoHide=\"true\"\r\n\t\t\t\t screenReaderPaginationLabel=\"Pagination\" screenReaderPageLabel=\"page\" screenReaderCurrentLabel=\"You're on page\">\r\n\t\t\t\t</pagination-controls>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<app-footer></app-footer>\r\n\t</div>\r\n</body>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/component/book/book.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var book_service_1 = __webpack_require__("../../../../../src/app/Service/book-service.ts");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/debounceTime.js");
+// import { SearchBoxService } from '../Service/search-box.service';
+var BookComponent = /** @class */ (function () {
+    function BookComponent(bookService, router, activateRouter) {
+        this.bookService = bookService;
+        this.router = router;
+        this.activateRouter = activateRouter;
+        this.searchBox = new forms_1.FormControl();
+        this.searchValue = '';
+        this.selectedDept = ['cs'];
+        this.Departments = ['Computer Science', 'Electrical Engineering', 'ESL', 'Data Science', 'MSIT', 'Marketing', 'Others'];
+        this.AllBooks = [];
+        this.books = [];
+        this.selectedBook = [];
+    }
+    BookComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscriptionBooks = this.bookService.getALLBooks()
+            .subscribe(function (allBooks) {
+            _this.AllBooks = allBooks;
+            _this.books = allBooks;
+        });
+        this.subscriptionInput = this.searchBox
+            .valueChanges
+            .debounceTime(200)
+            .subscribe(function (term) {
+            _this.searchValue = term;
+        });
+    };
+    BookComponent.prototype.ngOnDestroy = function () {
+        this.subscriptionBooks.unsubscribe();
+    };
+    BookComponent.prototype.ToBookDetail = function (id) {
+        this.router.navigate(['/book-list', id]);
+    };
+    BookComponent.prototype.onChange = function (value) {
+        var _this = this;
+        this.selectedBook = [];
+        this.AllBooks = this.books;
+        this.AllBooks.forEach(function (book) {
+            if (_this.selectedDept.includes(book.department)) {
+                _this.selectedBook.push(book);
+            }
+        });
+        if (this.selectedBook.length === 0) {
+            return 0;
+        }
+        this.AllBooks = this.selectedBook;
+        console.log(this.AllBooks);
+    };
+    BookComponent = __decorate([
+        core_1.Component({
+            selector: 'app-book',
+            template: __webpack_require__("../../../../../src/app/component/book/book.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product.component.css")]
+        }),
+        __metadata("design:paramtypes", [book_service_1.BookService, router_1.Router,
+            router_1.ActivatedRoute])
+    ], BookComponent);
+    return BookComponent;
+}());
+exports.BookComponent = BookComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/component/callback/callback.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".loading {\r\n    position: absolute;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    height: 100vh;\r\n    width: 100vw;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    background-color: #fff;\r\n  }", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/component/callback/callback.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"loading\">\n  <img src=\"assets/loading.svg\" alt=\"loading\">\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/component/callback/callback.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var CallbackComponent = /** @class */ (function () {
+    function CallbackComponent() {
+    }
+    CallbackComponent.prototype.ngOnInit = function () {
+    };
+    CallbackComponent = __decorate([
+        core_1.Component({
+            selector: 'app-callback',
+            template: __webpack_require__("../../../../../src/app/component/callback/callback.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/callback/callback.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], CallbackComponent);
+    return CallbackComponent;
+}());
+exports.CallbackComponent = CallbackComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/component/error/error.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1137,14 +1250,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/error/error.component.html":
+/***/ "../../../../../src/app/component/error/error.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<h1>\n  <li>Opps...</li>\n  There must be something wrong with the server, please contact: hbchenjh@gmail.com! Thank you very much!\n</h1>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/error/error.component.ts":
+/***/ "../../../../../src/app/component/error/error.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1168,8 +1281,8 @@ var ErrorComponent = /** @class */ (function () {
     ErrorComponent = __decorate([
         core_1.Component({
             selector: 'app-error',
-            template: __webpack_require__("../../../../../src/app/error/error.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/error/error.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/error/error.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/error/error.component.css")]
         }),
         __metadata("design:paramtypes", [])
     ], ErrorComponent);
@@ -1180,7 +1293,7 @@ exports.ErrorComponent = ErrorComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/footer/footer.component.css":
+/***/ "../../../../../src/app/component/footer/footer.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1198,14 +1311,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/footer/footer.component.html":
+/***/ "../../../../../src/app/component/footer/footer.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<footer id=\"fh5co-footer\" role=\"contentinfo\">\n  <div class=\"container\">\n    <div class=\"row row-pb-md\">\n      <div class=\"col-md-4 fh5co-widget\">\n        <h3>Shop.</h3>\n        <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto\n          culpa amet.\n        </p>\n      </div>\n      <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n        <ul class=\"fh5co-footer-links\">\n          <li>\n            <a href=\"#\">About</a>\n          </li>\n          <li>\n            <a href=\"#\">Help</a>\n          </li>\n          <li>\n            <a href=\"#\">Contact</a>\n          </li>\n          <li>\n            <a href=\"#\">Terms</a>\n          </li>\n          <li>\n            <a href=\"#\">Meetups</a>\n          </li>\n        </ul>\n      </div>\n\n      <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n        <ul class=\"fh5co-footer-links\">\n          <li>\n            <a href=\"#\">Shop</a>\n          </li>\n          <li>\n            <a href=\"#\">Privacy</a>\n          </li>\n          <li>\n            <a href=\"#\">Testimonials</a>\n          </li>\n          <li>\n            <a href=\"#\">Handbook</a>\n          </li>\n          <li>\n            <a href=\"#\">Held Desk</a>\n          </li>\n        </ul>\n      </div>\n\n      <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n        <ul class=\"fh5co-footer-links\">\n          <li>\n            <a href=\"#\">Find Designers</a>\n          </li>\n          <li>\n            <a href=\"#\">Find Developers</a>\n          </li>\n          <li>\n            <a href=\"#\">Teams</a>\n          </li>\n          <li>\n            <a href=\"#\">Advertise</a>\n          </li>\n          <li>\n            <a href=\"#\">API</a>\n          </li>\n        </ul>\n      </div>\n    </div>\n\n    <div class=\"row copyright\">\n      <div class=\"col-md-12 text-center\">\n        <p>\n          <small class=\"block\">Copyright &copy; 2017.Company name All rights reserved.   \n          </small>\n        </p>\n        <ul class=\"fh5co-social-icons\">\n          <li>\n            <a href=\"#\">\n              <i class=\"icon-twitter\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"icon-facebook\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"icon-linkedin\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"icon-dribbble\"></i>\n            </a>\n          </li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</footer>\n<div class=\"gototop js-top\">\n  <a href=\"#\" class=\"js-gotop\">\n    <i class=\"icon-arrow-up\"></i>\n  </a>\n</div>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/footer/footer.component.ts":
+/***/ "../../../../../src/app/component/footer/footer.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1229,8 +1342,8 @@ var FooterComponent = /** @class */ (function () {
     FooterComponent = __decorate([
         core_1.Component({
             selector: 'app-footer',
-            template: __webpack_require__("../../../../../src/app/footer/footer.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/footer/footer.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/footer/footer.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/footer/footer.component.css")]
         }),
         __metadata("design:paramtypes", [])
     ], FooterComponent);
@@ -1241,7 +1354,7 @@ exports.FooterComponent = FooterComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/header/header.component.css":
+/***/ "../../../../../src/app/component/header/header.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 var escape = __webpack_require__("../../../../css-loader/lib/url/escape.js");
@@ -1260,14 +1373,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/header/header.component.html":
+/***/ "../../../../../src/app/component/header/header.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<header class=\"text-center\" name=\"home\">\n  <div class=\"intro-text\">\n    <h1>Welcome to <strong><span class=\"color\">WPILIFE2.0</span></strong></h1>\n    <p>We are dedicated to <strong>make our</strong> & <strong>life</strong> in WPI much eaiser.</p>\n    <a href=\"#services-section\" class=\"fa fa-angle-down page-scroll\"> </a> </div>\n</header>\n "
 
 /***/ }),
 
-/***/ "../../../../../src/app/header/header.component.ts":
+/***/ "../../../../../src/app/component/header/header.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1291,8 +1404,8 @@ var HeaderComponent = /** @class */ (function () {
     HeaderComponent = __decorate([
         core_1.Component({
             selector: 'app-header',
-            template: __webpack_require__("../../../../../src/app/header/header.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/header/header.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/header/header.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/header/header.component.css")]
         }),
         __metadata("design:paramtypes", [])
     ], HeaderComponent);
@@ -1303,7 +1416,7 @@ exports.HeaderComponent = HeaderComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/home-page/home-component.component.css":
+/***/ "../../../../../src/app/component/home-page/home-component.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 var escape = __webpack_require__("../../../../css-loader/lib/url/escape.js");
@@ -1322,14 +1435,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/home-page/home-component.component.html":
+/***/ "../../../../../src/app/component/home-page/home-component.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<!DOCTYPE html>\n<html lang=\"en\">\n\n<body>\n  <!-- Navigation\n    ==========================================-->\n  <app-nav></app-nav>\n\n  <!-- Header -->\n\n  <app-header></app-header>\n  <!-- Services Section -->\n  <div id=\"services-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>Shopping\n          <strong>Section</strong>\n        </h2>\n        <hr>\n        <div class=\"clearfix\"></div>\n        <p>There you can find almost whatever you want.</p>\n      </div>\n      <div class=\"space\"></div>\n      <div class=\"row\">\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"['house-list']\" class=\"fa fa-home\"></i>\n          <h4>\n            <strong>House/Apartment Rent</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>\n        </div>\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"'book-list'\" class=\"fa fa-book\"></i>\n          <h4>\n            <strong>Book</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque.</p>\n        </div>\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"'product-list'\" class=\"fa fa-bed\"></i>\n          <h4>\n            <strong>Others</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>\n        </div>\n        <div class=\"col-md-3 col-sm-6 service\">\n          <i [routerLink]=\"'sell'\" class=\"fa fa-money\"></i>\n          <h4>\n            <strong>Sell your Product</strong>\n          </h4>\n          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque.</p>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- Portfolio Section -->\n  <div id=\"works-section\">\n    <div class=\"container\">\n      <!-- Container -->\n      <div class=\"section-title text-center center\">\n        <h2>Recent\n          <strong>Product</strong>\n        </h2>\n        <hr>\n        <div class=\"clearfix\"></div>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div class=\"categories\">   \n          <mat-tab-group>   \n              <mat-tab label=\"House\">\n                  <div class=\"col-sm-6 col-md-3 col-lg-3 web\" *ngFor=\"let house of showHouses;let i of index\">\n                      <div class=\"portfolio-item\" >\n                        <div class=\"hover-bg\">\n                          <a [routerLink]=\"['house-list', house.id]\" >\n                            <div class=\"hover-text\">\n                              <h4>{{house.Address}}</h4>\n                              <small>{{house.price}}</small>\n                              <div class=\"clearfix\"></div>\n                              <i class=\"fa fa-plus\"></i>\n                            </div>\n                            <img [src]=\"house.imgUrl[0]\" class=\"img-responsive\" alt=\"Project Title\"> </a>\n                        </div>\n                      </div>\n                    </div>\n              </mat-tab>\n            <mat-tab label=\"Book\">\n                <div class=\"col-sm-6 col-md-3 col-lg-3 web\" *ngFor=\"let book of showBooks;let i of index\">\n                    <div class=\"portfolio-item\" >\n                      <div class=\"hover-bg\">\n                        <a [routerLink]=\"['book-list', book.id]\" >\n                          <div class=\"hover-text\">\n                            <h4>{{book.name}}</h4>\n                            <small>{{book.department}}</small>\n                            <div class=\"clearfix\"></div>\n                            <i class=\"fa fa-plus\"></i>\n                          </div>\n                          <img [src]=\"book.imgUrl[0]\" class=\"img-responsive\" alt=\"Project Title\"> </a>\n                      </div>\n                    </div>\n                  </div>\n            </mat-tab>\n            <mat-tab label=\"Others\">\n                <div class=\"col-sm-6 col-md-3 col-lg-3 web\" *ngFor=\"let product of showProducts;let i of index\">\n                    <div class=\"portfolio-item\" >\n                      <div class=\"hover-bg\">\n                        <a [routerLink]=\"['product-list', product.id]\">\n                          <div class=\"hover-text\">\n                            <h4>{{product.name}}</h4>\n                            <small>{{product.price}}</small>\n                            <div class=\"clearfix\"></div>\n                            <i class=\"fa fa-plus\"></i>\n                          </div>\n                          <img [src]=\"product.imgUrl[0]\" class=\"img-responsive\" alt=\"Project Title\">  </a>\n                      </div>\n                    </div>\n                  </div>  \n            </mat-tab>\n          </mat-tab-group>\n\n        <div class=\"clearfix\"></div>\n      </div>\n\n    </div>\n  </div>\n  <!-- About Section -->\n  <div id=\"about-section\">\n    <div class=\"container\">\n      <div class=\"section-title text-center center\">\n        <h2>\n          <strong>New</strong> Students</h2>\n        <hr>\n        <div class=\"clearfix\"></div>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-md-6\">\n          <img src=\"../../assets/about.png\" class=\"img-responsive\"> </div>\n        <div class=\"col-md-6\">\n          <div class=\"about-text\" [routerLink]=\"['survival-guide']\">\n            <i class=\"fa fa-users\"></i>\n            <h4>Survival Guide</h4>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh\n              ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis\n              bibendum.</p>\n            <i class=\"fa fa-puzzle-piece\"></i>\n            <h4>Airport pickup</h4>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh\n              ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis\n              bibendum.</p>\n            <i class=\"fa fa-check-square-o\"></i>\n            <h4>Temporary Residence</h4>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh\n              ante facilisis bibendum dolor feugiat at.</p>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Team Section -->\n  <div id=\"team-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>Meet the\n          <strong>team</strong>\n        </h2>\n        <hr>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div id=\"row\">\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t01.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Jessica Wally</h3>\n              <p>Founder</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t02.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Mike Sloan</h3>\n              <p>Web Designer</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t03.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Michele Doe</h3>\n              <p>Web Designer</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"col-md-3 col-sm-6 team\">\n          <div class=\"thumbnail\">\n            <img src=\"../../assets/t04.jpg\" alt=\"...\" class=\"img-circle team-img\">\n            <div class=\"caption\">\n              <h3>Larry Evans</h3>\n              <p>Project Manager</p>\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Testimonials Section -->\n  <div id=\"testimonials-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>What\n          <strong>clients</strong> say</h2>\n        <hr>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-md-8 col-md-offset-2\">\n          <div id=\"testimonial\" class=\"owl-carousel owl-theme\">\n            <div class=\"item\">\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo\n                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>\n              <p>\n                <strong>John DOE</strong>, CEO, Company.</p>\n            </div>\n            <div class=\"item\">\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo\n                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>\n              <p>\n                <strong>Jenny DOE</strong>, CEO, Company.</p>\n            </div>\n            <div class=\"item\">\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo\n                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>\n              <p>\n                <strong>John DOEn</strong>, CEO, Company.</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Contact Section -->\n  <div id=\"contact-section\" class=\"text-center\">\n    <div class=\"container\">\n      <div class=\"section-title center\">\n        <h2>\n          <strong>Contact</strong> us</h2>\n        <hr>\n        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>\n      </div>\n      <div class=\"col-md-8 col-md-offset-2\">\n        <div class=\"col-md-4\">\n          <i class=\"fa fa-map-marker fa-2x\"></i>\n          <p>100 Insitute Road\n            <br> Worcester, MA 01609</p>\n        </div>\n        <div class=\"col-md-4\">\n          <i class=\"fa fa-envelope-o fa-2x\"></i>\n          <p>hbchenjh@gmail.com</p>\n        </div>\n        <div class=\"col-md-4\">\n          <i class=\"fa fa-phone fa-2x\"></i>\n          <p> +1 800 123 1234</p>\n        </div>\n        <hr>\n        <div class=\"clearfix\"></div>\n      </div>\n      <div class=\"col-md-8 col-md-offset-2\">\n        <hr>\n        <h3>Leave us a message</h3>\n        <form>\n          <div class=\"row\">\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <input type=\"email\" class=\"form-control\" placeholder=\"Name\">\n              </div>\n            </div>\n            <div class=\"col-md-6\">\n              <div class=\"form-group\">\n                <input type=\"email\" class=\"form-control\" placeholder=\"Email\">\n              </div>\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <textarea class=\"form-control\" rows=\"4\" placeholder=\"Message\"></textarea>\n          </div>\n          <button type=\"submit\" class=\"btn btn-default\">Send Message</button>\n        </form>\n      </div>\n    </div>\n  </div>\n  <nav id=\"footer\">\n    <div class=\"container\">\n      <div class=\"pull-left fnav\">\n        <p>Copyright &copy; 2018 \n          <a href=\"http://wpilife.org/\" target=\"_blank\" title=\"模板在线\">WPILife Team </a>\n        </p>\n      </div>\n      <div class=\"pull-right fnav\">\n        <ul class=\"footer-social\">\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-facebook\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-twitter\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-dribbble\"></i>\n            </a>\n          </li>\n          <li>\n            <a href=\"#\">\n              <i class=\"fa fa-linkedin\"></i>\n            </a>\n          </li>\n        </ul>\n      </div>\n    </div>\n  </nav>\n</body>\n\n</html>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/home-page/home-component.component.ts":
+/***/ "../../../../../src/app/component/home-page/home-component.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1390,8 +1503,8 @@ var HomeComponentComponent = /** @class */ (function () {
     HomeComponentComponent = __decorate([
         core_1.Component({
             selector: 'app-home-component',
-            template: __webpack_require__("../../../../../src/app/home-page/home-component.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/home-page/home-component.component.css")],
+            template: __webpack_require__("../../../../../src/app/component/home-page/home-component.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/home-page/home-component.component.css")],
             encapsulation: core_2.ViewEncapsulation.None
         }),
         __metadata("design:paramtypes", [house_service_1.HouseService, book_service_1.BookService, product_service_1.ProductService])
@@ -1403,14 +1516,14 @@ exports.HomeComponentComponent = HomeComponentComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/house/house-component.component.html":
+/***/ "../../../../../src/app/component/house/house-component.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<body>\n\t<div id=\"page\">\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"search\">\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\">\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\n\t\t\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"shopping-cart\">\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"cart\">\n\t\t\t\t\t\t\t\t\t<span>\n\t\t\t\t\t\t\t\t\t\t<small>0</small>\n\t\t\t\t\t\t\t\t\t\t<i class=\"icon-shopping-cart\"></i>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t</nav>\n\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\n\t\t\t<div class=\"overlay\"></div>\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\n\t\t\t\t\t\t<div class=\"display-t\">\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n\t\t\t\t\t\t\t\t<h1>House Section</h1>\n\t\t\t\t\t\t\t\t<h2>Find your new life in America</h2>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</header>\n\n\t\t<div id=\"fh5co-product\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row animate-box\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n\t\t\t\t\t\t<span>Cool Stuff</span>\n\t\t\t\t\t\t<h2>House.</h2>\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\n\t\t\t\t\t\t\teius.</p>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\t\t\n\t\t\t\t<div class=\"row\">\t\t\t\t\t\t\n\t\t\t\t\t<div class=\"col-md-4 text-center\" *ngFor=\"let house of houses | paginate: { id:'house',\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   itemsPerPage: 6, \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   currentPage: hp }\">\n\t\t\t\t\t\t<div class=\"product\" (click)=\"toHouseDetail(house.id)\" >\n\t\t\t\t\t\t\t<div class=\"product-grid\" [style.background-image]=\"'url('+house.imgUrl[0]+')'\">\n\t\t\t\t\t\t\t</div> \n\t\t\t\t\t\t\t<div class=\"desc\">\n\t\t\t\t\t\t\t\t<h3>\n\t\t\t\t\t\t\t\t\t<i>{{house.Address}}</i>\n\t\t\t\t\t\t\t\t</h3>\n\t\t\t\t\t\t\t\t<span class=\"price\">{{house.price}}</span>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\t\n\t\t\t\t\t</div>\n\t\t\t\t\t<pagination-controls class=\"pageButton\" id=\"house\" (pageChange)=\"hp = $event\" maxSize=\"9\" directionLinks=\"true\" autoHide=\"true\"\n\t\t\t\t\tscreenReaderPaginationLabel=\"Pagination\" screenReaderPageLabel=\"page\" screenReaderCurrentLabel=\"You're on page\">\n\t\t\t\t   </pagination-controls>\t\t\t\t\t\t\n\t\t\t</div>\n\t\t</div>\t\t\n\t<app-footer></app-footer>\n\t</div>\n</body>"
+module.exports = "<body>\n\t<div id=\"page\">\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"search\">\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\"[formControl]=\"searchBox\">\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</nav>\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\n\t\t\t<div class=\"overlay\"></div>\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\n\t\t\t\t\t\t<div class=\"display-t\">\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n\t\t\t\t\t\t\t\t<h1>House Section</h1>\n\t\t\t\t\t\t\t\t<h2>Find your new life in America</h2>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</header>\n\n\t\t<div id=\"fh5co-product\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row animate-box\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n\t\t\t\t\t\t<span>Cool Stuff</span>\n\t\t\t\t\t\t<h2>House.</h2>\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\n\t\t\t\t\t\t\teius.</p>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\t\t\n\t\t\t\t<div class=\"row\">\t\t\t\t\t\t\n\t\t\t\t\t<div class=\"col-md-4 text-center\" *ngFor=\"let house of houses | houseSearch: searchValue | paginate: { id:'house',\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   itemsPerPage: 6, \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   currentPage: hp }\">\n\t\t\t\t\t\t<div class=\"product\" (click)=\"toHouseDetail(house.id)\" >\n\t\t\t\t\t\t\t<div class=\"product-grid\" [style.background-image]=\"'url('+house.imgUrl[0]+')'\">\n\t\t\t\t\t\t\t</div> \n\t\t\t\t\t\t\t<div class=\"desc\">\n\t\t\t\t\t\t\t\t<h3>\n\t\t\t\t\t\t\t\t\t<i>{{house.Address}}</i>\n\t\t\t\t\t\t\t\t</h3>\n\t\t\t\t\t\t\t\t<span class=\"price\">{{house.price}}</span>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\t\n\t\t\t\t\t</div>\n\t\t\t\t\t<pagination-controls class=\"pageButton\" id=\"house\" (pageChange)=\"hp = $event\" maxSize=\"9\" directionLinks=\"true\" autoHide=\"true\"\n\t\t\t\t\tscreenReaderPaginationLabel=\"Pagination\" screenReaderPageLabel=\"page\" screenReaderCurrentLabel=\"You're on page\">\n\t\t\t\t   </pagination-controls>\t\t\t\t\t\t\n\t\t\t</div>\n\t\t</div>\t\t\n\t<app-footer></app-footer>\n\t</div>\n</body>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/house/house-component.component.ts":
+/***/ "../../../../../src/app/component/house/house-component.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1426,14 +1539,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var house_service_1 = __webpack_require__("../../../../../src/app/Service/house-service.ts");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/debounceTime.js");
 var HouseComponentComponent = /** @class */ (function () {
     function HouseComponentComponent(houseService, router, activateRouter) {
         this.houseService = houseService;
         this.router = router;
         this.activateRouter = activateRouter;
         this.houses = [];
+        this.searchBox = new forms_1.FormControl();
+        this.searchValue = '';
         this.hp = houseService.getCurrentPage();
     }
     HouseComponentComponent.prototype.ngOnInit = function () {
@@ -1444,6 +1561,12 @@ var HouseComponentComponent = /** @class */ (function () {
         });
         this.houseSubscription = this.houseService.getAllHouses()
             .subscribe(function (allHouse) { return _this.houses = allHouse; });
+        this.subscriptionInput = this.searchBox
+            .valueChanges
+            .debounceTime(200)
+            .subscribe(function (term) {
+            _this.searchValue = term;
+        });
     };
     HouseComponentComponent.prototype.ngOnDestroy = function () {
         this.houseSubscription.unsubscribe();
@@ -1459,8 +1582,8 @@ var HouseComponentComponent = /** @class */ (function () {
     HouseComponentComponent = __decorate([
         core_1.Component({
             selector: 'app-house-component',
-            template: __webpack_require__("../../../../../src/app/house/house-component.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/house/house-component.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product.component.css")]
         }),
         __metadata("design:paramtypes", [house_service_1.HouseService, router_1.Router, router_1.ActivatedRoute])
     ], HouseComponentComponent);
@@ -1471,7 +1594,7 @@ exports.HouseComponentComponent = HouseComponentComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/house/house-detail/house-contact/house-contact.component.css":
+/***/ "../../../../../src/app/component/house/house-detail/house-contact/house-contact.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1489,14 +1612,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/house/house-detail/house-contact/house-contact.component.html":
+/***/ "../../../../../src/app/component/house/house-detail/house-contact/house-contact.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-10 col-md-offset-1\">\n      <h3>Product Owner contact info</h3>\n      <ul>\n        <li>{{house.contactInfo}}</li>\n        <li>{{house.ownerID}}</li>\n        <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n          officiis est.</li>\n      </ul>\n      <ul>\n        <li>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas\n          eius</li>\n        <li>adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi</li>\n        <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n        <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n          officiis est.</li>\n      </ul>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/house/house-detail/house-contact/house-contact.component.ts":
+/***/ "../../../../../src/app/component/house/house-detail/house-contact/house-contact.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1533,8 +1656,8 @@ var HouseContactComponent = /** @class */ (function () {
     HouseContactComponent = __decorate([
         core_1.Component({
             selector: 'app-house-contact',
-            template: __webpack_require__("../../../../../src/app/house/house-detail/house-contact/house-contact.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/house/house-detail/house-contact/house-contact.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/house/house-detail/house-contact/house-contact.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/house/house-detail/house-contact/house-contact.component.css")]
         }),
         __metadata("design:paramtypes", [house_service_1.HouseService, router_1.Router, router_1.ActivatedRoute])
     ], HouseContactComponent);
@@ -1545,7 +1668,7 @@ exports.HouseContactComponent = HouseContactComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/house/house-detail/house-desc/house-desc.component.css":
+/***/ "../../../../../src/app/component/house/house-detail/house-desc/house-desc.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1563,14 +1686,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/house/house-detail/house-desc/house-desc.component.html":
+/***/ "../../../../../src/app/component/house/house-detail/house-desc/house-desc.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-10 col-md-offset-1\">\n      <span class=\"price\"> ${{house.price}}</span>\n      <h2>Product detail</h2>\n      <p>{{house.description}}\n      </p>\n      <div class=\"row\">\n        <div class=\"col-md-6\">\n          <h2 class=\"uppercase\">Keep it simple</h2>\n          <p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>\n        </div>\n        <div class=\"col-md-6\">\n          <h2 class=\"uppercase\">Less is more</h2>\n          <p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/house/house-detail/house-desc/house-desc.component.ts":
+/***/ "../../../../../src/app/component/house/house-detail/house-desc/house-desc.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1606,8 +1729,8 @@ var HouseDescComponent = /** @class */ (function () {
     HouseDescComponent = __decorate([
         core_1.Component({
             selector: 'app-house-desc',
-            template: __webpack_require__("../../../../../src/app/house/house-detail/house-desc/house-desc.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/house/house-detail/house-desc/house-desc.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/house/house-detail/house-desc/house-desc.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/house/house-detail/house-desc/house-desc.component.css")]
         }),
         __metadata("design:paramtypes", [house_service_1.HouseService, router_1.Router, router_1.ActivatedRoute])
     ], HouseDescComponent);
@@ -1618,14 +1741,14 @@ exports.HouseDescComponent = HouseDescComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/house/house-detail/house-detail.component.html":
+/***/ "../../../../../src/app/component/house/house-detail/house-detail.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<body>\n\t<div class=\"fh5co-loader\"></div>\n\t<div id=\"page\">\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\n\t\t\t\t\t\t\t<a routerLink=\"\">WPI.</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"has-dropdown active\">\n\t\t\t\t\t\t\t\t<a routerLink=\"/product-list\">Shop</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"search\">\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\">\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\n\t\t\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"shopping-cart\">\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"cart\">\n\t\t\t\t\t\t\t\t\t<span>\n\t\t\t\t\t\t\t\t\t\t<small>0</small>\n\t\t\t\t\t\t\t\t\t\t<i class=\"icon-shopping-cart\"></i>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</nav>\n\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../../assets/img_bg_2.jpg);\">\n\t\t\t<div class=\"overlay\"></div>\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\n\t\t\t\t\t\t<div class=\"display-t\">\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n\t\t\t\t\t\t\t\t<h1>House Details</h1>\n\t\t\t\t\t\t\t\t<h2>Free html5 templates Made</h2>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</header>\n\n\t\t<div id=\"fh5co-product\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-10 col-md-offset-1\">\n                      \n\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t<ngx-carousel [inputs]=\"Config\">\n\t\t\t\t\t\t\t\t<ngx-item *ngFor=\"let houseImg of houseDetail.imgUrl\" class=\"bannerStyle \" NgxCarouselItem>\n\t\t\t\t\t\t\t\t\t<img [src]=\"houseImg\" alt=\"house\" width=\"100%\" #test2 id=\"img1\">\n\t\t\t\t\t\t\t\t</ngx-item>\n\t\t\t\t\t\t\t\t<i NgxCarouselPrev class=\"leftRs fa fa-arrow-left fa-3x\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t\t\t<i NgxCarouselNext class=\"rightRs fa fa-arrow-right fa-3x\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t\t</ngx-carousel>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\n\n\n\t\t\t\t\t\t<div class=\"row animate-box\">\n\t\t\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n\t\t\t\t\t\t\t\t<h2>{{houseDetail.Address}}</h2>\n\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t<a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Post your Product to Sell</a>\n\t\t\t\t\t\t\t\t\t<a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Compare</a>\n\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-10 col-md-offset-1\">\n\t\t\t\t\t\t<ul class=\"nav nav-tabs\">\n\t\t\t\t\t\t\t<li class=\"list-group-item-heading\" role=\"presentation\" routerLinkActive=\"active\"  [routerLinkActiveOptions]=\"{exact: true}\">\n\t\t\t\t\t\t\t\t<a [routerLink]=\"[id, 'desc']\" >House detail</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"list-group-item-heading\"  role=\"presentation\" routerLinkActive=\"active\"  >\n\t\t\t\t\t\t\t\t<a [routerLink]=\"[id, 'contact']\">Contact info</a>\n\t\t\t\t\t\t\t</li>\t\t\t\t\t\t\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<!-- Tabs -->\n\t\t\t\t<router-outlet></router-outlet>\n\t\t\t\t<div class=\"col-md-10 col-md-offset-1\">\n\t\t\t\t\t<h3>Happy Buyers</h3>\n\t\t\t\t\t<div class=\"feed\">\n\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t<blockquote>\n\t\t\t\t\t\t\t\t<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas\n\t\t\t\t\t\t\t\t\teius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis\n\t\t\t\t\t\t\t\t\test.\n\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t</blockquote>\n\t\t\t\t\t\t\t<h3>&mdash; Louie Knight</h3>\n\t\t\t\t\t\t\t<span class=\"rate\">\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t<blockquote>\n\t\t\t\t\t\t\t\t<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas\n\t\t\t\t\t\t\t\t\teius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis\n\t\t\t\t\t\t\t\t\test.\n\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t</blockquote>\n\t\t\t\t\t\t\t<h3>&mdash; Joefrey Gwapo</h3>\n\t\t\t\t\t\t\t<span class=\"rate\">\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<div id=\"fh5co-started\">\n\t\t<div class=\"container\">\n\t\t\t<div class=\"row animate-box\">\n\t\t\t\t<!-- UY BEGIN -->\n              <div id=\"uyan_frame\"></div>\n              <script type=\"text/javascript\" src=\"http://v2.uyan.cc/code/uyan.js?uid=2158295\"></script>\n               <!-- UY END -->\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<footer id=\"fh5co-footer\" role=\"contentinfo\">\n\t\t<div class=\"container\">\n\t\t\t<div class=\"row row-pb-md\">\n\t\t\t\t<div class=\"col-md-4 fh5co-widget\">\n\t\t\t\t\t<h3>Shop.</h3>\n\t\t\t\t\t<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa\n\t\t\t\t\t\tamet.\n\t\t\t\t\t</p>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n\t\t\t\t\t<ul class=\"fh5co-footer-links\">\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">About</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Help</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Contact</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Terms</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Meetups</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n\t\t\t\t\t<ul class=\"fh5co-footer-links\">\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Shop</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Privacy</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Testimonials</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Handbook</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Held Desk</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n\t\t\t\t\t<ul class=\"fh5co-footer-links\">\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Find Designers</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Find Developers</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Teams</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Advertise</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">API</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div class=\"row copyright\">\n\t\t\t\t<div class=\"col-md-12 text-center\">\n\t\t\t\t\t<p>\n\t\t\t\t\t\t<small class=\"block\">Copyright &copy; 2017.Company name All rights reserved.\n\t\t\t\t\t\t\t<a target=\"_blank\" href=\"http://guantaow.taobao.com/\">厚朴网络淘宝店</a>\n\t\t\t\t\t\t\t<a target=\"_blank\" href=\"http://www.moobnn.com\">网页模板</a>\n\t\t\t\t\t\t</small>\n\t\t\t\t\t</p>\n\t\t\t\t\t<p>\n\t\t\t\t\t\t<ul class=\"fh5co-social-icons\">\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"#\">\n\t\t\t\t\t\t\t\t\t<i class=\"icon-twitter\"></i>\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"#\">\n\t\t\t\t\t\t\t\t\t<i class=\"icon-facebook\"></i>\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"#\">\n\t\t\t\t\t\t\t\t\t<i class=\"icon-linkedin\"></i>\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"#\">\n\t\t\t\t\t\t\t\t\t<i class=\"icon-dribbble\"></i>\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</div>\n\t</footer>\n\t<div class=\"gototop js-top\">\n\t\t<a href=\"#\" class=\"js-gotop\">\n\t\t\t<i class=\"icon-arrow-up\"></i>\n\t\t</a>\n\t</div>\n</body>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/house/house-detail/house-detail.component.ts":
+/***/ "../../../../../src/app/component/house/house-detail/house-detail.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1677,8 +1800,8 @@ var HouseDetailComponent = /** @class */ (function () {
     HouseDetailComponent = __decorate([
         core_1.Component({
             selector: 'app-house-detail',
-            template: __webpack_require__("../../../../../src/app/house/house-detail/house-detail.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product.component.css"), __webpack_require__("../../../../../src/app/product/product-detail/product-detail.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/house/house-detail/house-detail.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product.component.css"), __webpack_require__("../../../../../src/app/component/product/product-detail/product-detail.component.css")]
         }),
         __metadata("design:paramtypes", [house_service_1.HouseService, router_1.Router, router_1.ActivatedRoute])
     ], HouseDetailComponent);
@@ -1689,7 +1812,7 @@ exports.HouseDetailComponent = HouseDetailComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/house/house.model.ts":
+/***/ "../../../../../src/app/component/house/house.model.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1712,7 +1835,7 @@ exports.HouseModel = HouseModel;
 
 /***/ }),
 
-/***/ "../../../../../src/app/nav/nav.component.css":
+/***/ "../../../../../src/app/component/nav/nav.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1730,14 +1853,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/nav/nav.component.html":
+/***/ "../../../../../src/app/component/nav/nav.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<nav id=\"menu\" class=\"navbar navbar-default navbar-fixed-top\">\n  <div class=\"container\"> \n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\"> <span class=\"sr-only\">Toggle navigation</span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> </button>\n      <a class=\"navbar-brand\" href=\"index.html\">WPI<strong><span class=\"color\">.</span></strong></a> \n      <p class = \"navbar-text\">Make your life eaiser in WPI</p>\n     </div>\n    \n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li><a pageScroll href=\"#home\">Home</a></li>\n        <li><a pageScroll href=\"#services-section\" >Shop</a></li>\n        <li><a pageScroll href=\"#works-section\" >Carpooling</a></li>\n        <li><a pageScroll href=\"#about-section\" >New Students</a></li>\n        <li><a pageScroll href=\"#team-section\" >Event</a></li>\n        <li *ngIf=\"auth.isAuthenticated()\"><a id=\"login\" [routerLink]=\"['profile']\" >Profile</a></li>\n        <li  *ngIf=\"!auth.isAuthenticated()\"><a id=\"login\" (click)=\"auth.login()\" >Login/SignUp</a></li>\n        <li  *ngIf=\"auth.isAuthenticated()\"><a id=\"login\" (click)=\"auth.logout()\" >Log Out</a></li>\n      </ul>\n    </div>\n    <!-- /.navbar-collapse --> \n  </div>\n  <!-- /.container-fluid --> \n</nav>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/nav/nav.component.ts":
+/***/ "../../../../../src/app/component/nav/nav.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1764,8 +1887,8 @@ var NavComponent = /** @class */ (function () {
     NavComponent = __decorate([
         core_1.Component({
             selector: 'app-nav',
-            template: __webpack_require__("../../../../../src/app/nav/nav.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/nav/nav.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/nav/nav.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/nav/nav.component.css")]
         }),
         __metadata("design:paramtypes", [auth_service_1.AuthService])
     ], NavComponent);
@@ -1776,7 +1899,7 @@ exports.NavComponent = NavComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/new-students/new-students.component.css":
+/***/ "../../../../../src/app/component/new-students/new-students.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1794,14 +1917,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/new-students/new-students.component.html":
+/***/ "../../../../../src/app/component/new-students/new-students.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<body>\n  <div id=\"page\">\n    <nav class=\"fh5co-nav\" role=\"navigation\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-3 col-xs-2\">\n            <div id=\"fh5co-logo\">\n              <a [routerLink]=\"['']\">WPI.</a>\n            </div>\n          </div>\n          <div class=\"col-md-6 col-xs-6 text-center menu-1\">\n            <ul>\n              <li class=\"has-dropdown\">\n                <a href=\"product.html\">Shop</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"single.html\">Single Shop</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"about.html\">About</a>\n              </li>\n              <li class=\"has-dropdown\">\n                <a href=\"services.html\">Services</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"#\">Web Design</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">eCommerce</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">Branding</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">API</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"contact.html\">Contact</a>\n              </li>\n            </ul>\n          </div>\n          <div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n            <ul>\n              <li class=\"search\">\n                <div class=\"input-group\">\n                  <input type=\"text\" placeholder=\"Search..\">\n                  <span class=\"input-group-btn\">\n                    <button class=\"btn btn-primary\" type=\"button\">\n                      <i class=\"icon-search\"></i>\n                    </button>\n                  </span>\n                </div>\n              </li>\n              <li class=\"shopping-cart\">\n                <a href=\"#\" class=\"cart\">\n                  <span>\n                    <small>0</small>\n                    <i class=\"icon-shopping-cart\"></i>\n                  </span>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n      </div>\n    </nav>\n\n    <header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\n      <div class=\"overlay\"></div>\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-8 col-md-offset-2 text-center\">\n            <div class=\"display-t\">\n              <div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n                <h1>New Students Survival Guide</h1>\n                <h2>Prepare your life in WPI</h2>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </header>\n\n    <div id=\"fh5co-product\">\n      <div class=\"container\">\n        <div class=\"row animate-box\">\n          <div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n            <span>Made by WPI CSSA</span>\n            <h2>WPI CSSA OFFICAL GUIDE</h2>\n            <p>If there are something unclear to you, please let us know.\n            </p>\n          </div>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"col-md-3 choice\">\n            <div class=\"product\">\n              <h3>\n                <i>Catalog:</i>\n              </h3>\n            </div>\n            <mat-radio-group class=\"example-radio-group\" id =\"example-radio-group\" [(ngModel)]=\"selected\">\n              <mat-radio-button class=\"example-radio-button\" *ngFor=\"let index of Indexs\" [value]=\"index\">\n                {{index}}\n              </mat-radio-button>\n            </mat-radio-group>\n            <div class=\"example-selected-value\">Your favorite season is: {{selected}}</div>\n          </div>\n\n          <div class=\"col-md-9 text-center\">\n            <article [ngSwitch]=\"selected\">\n              <div *ngSwitchCase=\"'Prelude'\">\n                <h2 align=\"right\">{{selected}}</h2>\n                <hr style=\"height:1px;border:none;border-top:1px solid #555555;\" />\n                <p align=\"left\">亲爱的同学:</p>\n                <p align=\"left\">你好!</p>\n                <p align=\"justify\">\n                  首先我们代表WPI中国学生学者联谊会Chinese Students & Scholars Association(CSSA)欢迎您来WPI学习深造! WPI地处美国历史最悠久的马萨诸塞州,不仅人文气息浓厚,而且高科技产业由于众多大学的支撑而非常发达。对于WPI的同学来说,无论理工文商,这里都是学习和工作的理想地点。\n                </p>\n                <p align=\"justify\">\n                  WPI CSSA主要是由来自中国的学生和学者组成的志愿性组织。目前我们已有超过300名成员,其中包括学生、教授、访问学者及家属等。CSSA的主要任务是为中国学生学者提供一些生活和学习上的帮助,包括接新生、帮助新生安顿和适应这里的生活、举办中秋晚会、春节晚会等具有中国特色的活动等等。\n                \n                  这本新生手册主要是为了帮助刚来到美国,来到Worcester的新同学、朋友们尽快地适应这里的生活、学习和工作。本手册经过WPI中国学生学者联谊会成员们的共同努力制作而成。这里, 我们向所有参与编写和校正的同学们表示深深的感谢!\n                \n                \n                  本手册中不足之处恳请大家及时指正,我们会不断地更新和完善。本手册中出现的一些网上购物地点或者订机票代理等的电话,完全是同学们平时积累的经验所得,不存在任何商业广告行为。\n                \n             \n                  我们也真诚地希望能有更多热心的同学、朋友们加入WPI中国学生学者联谊会,互相帮助,共同努力, 更好地为这里的中国学生学者们服务!\n            \n               \n                  最后, 祝大家在WPI过得愉快、充实!\n                </p>\n                <p align=\"right\">\n                  CSSA 敬上 2017年夏\n                </p>\n              </div>\n              <div *ngSwitchCase=\"'Introduction'\">\n                <h2 align=\"right\">{{selected}}</h2>\n                <hr style=\"height:1px;border:none;border-top:1px solid #555555;\" />\n                <p align=\"left\">\n                  (1) CSSA 2017 FALL QQ 群:107266431\n                </p>\n                <p align=\"left\">\n                  此群为\n                  <span style=\"background-color:#FFE500;\">实名制</span>\n                </p>\n              </div>\n              <div *ngSwitchCase=\"'Before come to America'\">\n                <h2 align=\"right\">{{selected}}</h2>\n                <hr style=\"height:1px;border:none;border-top:1px solid #555555;\" />\n              </div>\n              <div *ngSwitchCase=\"'Flight'\">\n                <h2 align=\"right\">{{selected}}</h2>\n                <hr style=\"height:1px;border:none;border-top:1px solid #555555;\" />\n              </div>\n              <div *ngSwitchCase=\"'After Arrival'\">\n                <h2 align=\"right\">{{selected}}</h2>\n                <hr style=\"height:1px;border:none;border-top:1px solid #555555;\" />\n              </div>\n              <div *ngSwitchCase=\"'Life in WPI'\">\n                <h2 align=\"right\">{{selected}}</h2>\n                <hr style=\"height:1px;border:none;border-top:1px solid #555555;\" />\n              </div>\n              <div *ngSwitchCase=\"'Come back to China'\">\n                <h2 align=\"right\">{{selected}}</h2>\n                <hr style=\"height:1px;border:none;border-top:1px solid #555555;\" />\n              </div>\n              <div *ngSwitchCase=\"'Postscript'\">\n                <h2 align=\"right\">{{selected}}</h2>\n                <hr style=\"height:1px;border:none;border-top:1px solid #555555;\" />\n              </div>\n              <div *ngSwitchCase=\"'Appendix'\">\n                <h2 align=\"right\">{{selected}}</h2>\n                <hr style=\"height:1px;border:none;border-top:1px solid #555555;\" />\n              </div>\n              <div *ngSwitchCase=\"'Acknowledgments'\">\n                <h2 align=\"right\">{{selected}}</h2>\n                <hr style=\"height:1px;border:none;border-top:1px solid #555555;\" />\n              </div>\n            </article>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <footer id=\"fh5co-footer\" role=\"contentinfo\">\n      <div class=\"container\">\n        <div class=\"row row-pb-md\">\n          <div class=\"col-md-4 fh5co-widget\">\n            <h3>Shop.</h3>\n            <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto\n              culpa amet.\n            </p>\n          </div>\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">About</a>\n              </li>\n              <li>\n                <a href=\"#\">Help</a>\n              </li>\n              <li>\n                <a href=\"#\">Contact</a>\n              </li>\n              <li>\n                <a href=\"#\">Terms</a>\n              </li>\n              <li>\n                <a href=\"#\">Meetups</a>\n              </li>\n            </ul>\n          </div>\n\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">Shop</a>\n              </li>\n              <li>\n                <a href=\"#\">Privacy</a>\n              </li>\n              <li>\n                <a href=\"#\">Testimonials</a>\n              </li>\n              <li>\n                <a href=\"#\">Handbook</a>\n              </li>\n              <li>\n                <a href=\"#\">Held Desk</a>\n              </li>\n            </ul>\n          </div>\n\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">Find Designers</a>\n              </li>\n              <li>\n                <a href=\"#\">Find Developers</a>\n              </li>\n              <li>\n                <a href=\"#\">Teams</a>\n              </li>\n              <li>\n                <a href=\"#\">Advertise</a>\n              </li>\n              <li>\n                <a href=\"#\">API</a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n        <div class=\"row copyright\">\n          <div class=\"col-md-12 text-center\">\n            <p>\n              <small class=\"block\">Copyright &copy; 2017.Company name All rights reserved.\n                <a target=\"_blank\" href=\"http://guantaow.taobao.com/\">厚朴网络淘宝店</a>\n                <a target=\"_blank\" href=\"http://www.moobnn.com\">网页模板</a>\n              </small>\n            </p>\n            <ul class=\"fh5co-social-icons\">\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-twitter\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-facebook\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-linkedin\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-dribbble\"></i>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n      </div>\n    </footer>\n  </div>\n\n  <div class=\"gototop js-top\">\n    <a href=\"#\" class=\"js-gotop\">\n      <i class=\"icon-arrow-up\"></i>\n    </a>\n  </div>\n</body>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/new-students/new-students.component.ts":
+/***/ "../../../../../src/app/component/new-students/new-students.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1839,8 +1962,8 @@ var NewStudentsComponent = /** @class */ (function () {
     NewStudentsComponent = __decorate([
         core_1.Component({
             selector: 'app-new-students',
-            template: __webpack_require__("../../../../../src/app/new-students/new-students.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/new-students/new-students.component.css")],
+            template: __webpack_require__("../../../../../src/app/component/new-students/new-students.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/new-students/new-students.component.css")],
             encapsulation: core_2.ViewEncapsulation.None
         }),
         __metadata("design:paramtypes", [])
@@ -1852,7 +1975,7 @@ exports.NewStudentsComponent = NewStudentsComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/not-found/not-found.component.css":
+/***/ "../../../../../src/app/component/not-found/not-found.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1870,14 +1993,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/not-found/not-found.component.html":
+/***/ "../../../../../src/app/component/not-found/not-found.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<body>\n\t<div id=\"page\">\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"search\">\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\">\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\n\t\t\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"shopping-cart\">\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"cart\">\n\t\t\t\t\t\t\t\t\t<span>\n\t\t\t\t\t\t\t\t\t\t<small>0</small>\n\t\t\t\t\t\t\t\t\t\t<i class=\"icon-shopping-cart\"></i>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t</nav>\n\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\n\t\t\t<div class=\"overlay\"></div>\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\n\t\t\t\t\t\t<div class=\"display-t\">\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n\t\t\t\t\t\t\t\t<h1>Others</h1>\n\t\t\t\t\t\t\t\t<h2>Free html5 templates Made</h2>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</header>\n\n\t\t<div id=\"fh5co-product\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row animate-box\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n\t\t\t\t\t\t<span>Cool Stuff</span>\n\t\t\t\t\t\t<h2>Others.</h2>\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\n\t\t\t\t\t\t\teius.\n\t\t\t\t\t\t</p>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t  <h1>\n        Page not found!\n      </h1>\n\t\t\t</div>\n\t\t</div>\n\t\t<app-footer></app-footer>\n\t</div>\n</body>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/not-found/not-found.component.ts":
+/***/ "../../../../../src/app/component/not-found/not-found.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1901,8 +2024,8 @@ var NotFoundComponent = /** @class */ (function () {
     NotFoundComponent = __decorate([
         core_1.Component({
             selector: 'app-not-found',
-            template: __webpack_require__("../../../../../src/app/not-found/not-found.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product.component.css"), __webpack_require__("../../../../../src/app/not-found/not-found.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/not-found/not-found.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product.component.css"), __webpack_require__("../../../../../src/app/component/not-found/not-found.component.css")]
         }),
         __metadata("design:paramtypes", [])
     ], NotFoundComponent);
@@ -1913,7 +2036,7 @@ exports.NotFoundComponent = NotFoundComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product-detail/product-contact/product-contact.component.css":
+/***/ "../../../../../src/app/component/product/product-detail/product-contact/product-contact.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1931,14 +2054,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product-detail/product-contact/product-contact.component.html":
+/***/ "../../../../../src/app/component/product/product-detail/product-contact/product-contact.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-10 col-md-offset-1\">\n      <h3>Product Owner contact info</h3>\n      <ul>\n        <li>{{owner}}\n         </li>\n        <li>{{contact}}</li>\n        <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n        <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n          officiis est.</li>\n      </ul>\n      <ul>\n        <li>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas\n          eius</li>\n        <li>adipisci dignissimos consectetur magni quas eius nobis reprehenderit soluta eligendi</li>\n        <li>Veritatis tenetur odio delectus quibusdam officiis est.</li>\n        <li>Magni quas eius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam\n          officiis est.</li>\n      </ul>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product-detail/product-contact/product-contact.component.ts":
+/***/ "../../../../../src/app/component/product/product-detail/product-contact/product-contact.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1981,8 +2104,8 @@ var ProductContactComponent = /** @class */ (function () {
     ProductContactComponent = __decorate([
         core_1.Component({
             selector: 'app-product-contact',
-            template: __webpack_require__("../../../../../src/app/product/product-detail/product-contact/product-contact.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product-detail/product-contact/product-contact.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/product/product-detail/product-contact/product-contact.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product-detail/product-contact/product-contact.component.css")]
         }),
         __metadata("design:paramtypes", [product_service_1.ProductService, router_1.ActivatedRoute, router_1.Router])
     ], ProductContactComponent);
@@ -1993,7 +2116,7 @@ exports.ProductContactComponent = ProductContactComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product-detail/product-desc/product-desc.component.css":
+/***/ "../../../../../src/app/component/product/product-detail/product-desc/product-desc.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -2011,14 +2134,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product-detail/product-desc/product-desc.component.html":
+/***/ "../../../../../src/app/component/product/product-detail/product-desc/product-desc.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"container\">\n  <div class=\"row\">\n\n    <div class=\"col-md-10 col-md-offset-1\">\n      <span class=\"price\"> ${{price}}</span>\n      <h2>Product detail</h2>\n      <p>{{desc}}\n      </p>\n      <div class=\"row\">\n        <div class=\"col-md-6\">\n          <h2 class=\"uppercase\">Keep it simple</h2>\n          <p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>\n        </div>\n        <div class=\"col-md-6\">\n          <h2 class=\"uppercase\">Less is more</h2>\n          <p>Ullam dolorum iure dolore dicta fuga ipsa velit veritatis</p>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product-detail/product-desc/product-desc.component.ts":
+/***/ "../../../../../src/app/component/product/product-detail/product-desc/product-desc.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2064,8 +2187,8 @@ var ProductDescComponent = /** @class */ (function () {
     ProductDescComponent = __decorate([
         core_1.Component({
             selector: 'app-product-desc',
-            template: __webpack_require__("../../../../../src/app/product/product-detail/product-desc/product-desc.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product-detail/product-desc/product-desc.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/product/product-detail/product-desc/product-desc.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product-detail/product-desc/product-desc.component.css")]
         }),
         __metadata("design:paramtypes", [product_service_1.ProductService, router_1.ActivatedRoute, router_1.Router])
     ], ProductDescComponent);
@@ -2076,7 +2199,7 @@ exports.ProductDescComponent = ProductDescComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product-detail/product-detail.component.css":
+/***/ "../../../../../src/app/component/product/product-detail/product-detail.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -2094,14 +2217,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product-detail/product-detail.component.html":
+/***/ "../../../../../src/app/component/product/product-detail/product-detail.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<body>\r\n\t<div class=\"fh5co-loader\"></div>\r\n\t<div id=\"page\">\r\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\r\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\r\n\t\t\t\t\t\t\t<a routerLink=\"\">WPI.</a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown active\">\r\n\t\t\t\t\t\t\t\t<a routerLink=\"/product-list\">Shop</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"search\">\r\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\">\r\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\r\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\r\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\r\n\t\t\t\t\t\t\t\t\t\t</button>\r\n\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"shopping-cart\">\r\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"cart\">\r\n\t\t\t\t\t\t\t\t\t<span>\r\n\t\t\t\t\t\t\t\t\t\t<small>0</small>\r\n\t\t\t\t\t\t\t\t\t\t<i class=\"icon-shopping-cart\"></i>\r\n\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t</div>\r\n\t\t</nav>\r\n\r\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../../assets/img_bg_2.jpg);\">\r\n\t\t\t<div class=\"overlay\"></div>\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\r\n\t\t\t\t\t\t<div class=\"display-t\">\r\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\r\n\t\t\t\t\t\t\t\t<h1>Product Details</h1>\r\n\t\t\t\t\t\t\t\t<h2>Free html5 templates Made</h2>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</header>\r\n\r\n\t\t<div id=\"fh5co-product\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-10 col-md-offset-1\">\r\n\r\n\t\t\t\t\t\t<div class=\"carouselBox\">\r\n\t\t\t\t\t\t\t<div #test2 id=\"img1\">\r\n\t\t\t\t\t\t\t<ngx-carousel [inputs]=\"Config\">\r\n\t\t\t\t\t\t\t\t<ngx-item *ngFor=\"let img of ProductDetail.imgUrl\" class=\"bannerStyle \" NgxCarouselItem>\t\t\r\n\t\t\t\t\t\t\t\t\t<img [src]=\"img\" alt=\"user\" width=\"100%\" >\t\r\n\t\t\t\t\t\t\t\t</ngx-item>\r\n\t\t\t\t\t\t\t\t<i NgxCarouselPrev class=\"leftRs fa fa-arrow-left fa-3x\" aria-hidden=\"true\"></i>\r\n\t\t\t\t\t\t\t\t<i NgxCarouselNext class=\"rightRs fa fa-arrow-right fa-3x\" aria-hidden=\"true\"></i>\r\n\t\t\t\t\t\t\t</ngx-carousel>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div class=\"clx\"></div>\r\n\t\t\t\t\t\t</div>\r\n\r\n\r\n\r\n\t\t\t\t\t\t<div class=\"row animate-box\">\r\n\t\t\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\r\n\t\t\t\t\t\t\t\t<h2>{{ProductDetail.name}}</h2>\r\n\t\t\t\t\t\t\t\t<p>\r\n\t\t\t\t\t\t\t\t\t<a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Post your Product to Sell</a>\r\n\t\t\t\t\t\t\t\t\t<a href=\"#\" class=\"btn btn-primary btn-outline btn-lg\">Compare</a>\r\n\t\t\t\t\t\t\t\t</p>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-10 col-md-offset-1\">\r\n\t\t\t\t\t\t<ul class=\"nav nav-tabs\">\r\n\t\t\t\t\t\t\t<li class=\"list-group-item-heading\" role=\"presentation\" routerLinkActive=\"active\"  [routerLinkActiveOptions]=\"{exact: true}\">\r\n\t\t\t\t\t\t\t\t<a [routerLink]=\"[id, 'desc']\" >Product detail</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"list-group-item-heading\"  role=\"presentation\" routerLinkActive=\"active\"  >\r\n\t\t\t\t\t\t\t\t<a [routerLink]=\"[id, 'contact']\">Contact info</a>\r\n\t\t\t\t\t\t\t</li>\t\r\n\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<!-- Tabs -->\r\n\t\t\t\t<router-outlet></router-outlet>\r\n\t\t\t\t<div class=\"col-md-10 col-md-offset-1\">\r\n\t\t\t\t\t<h3>Happy Buyers</h3>\r\n\t\t\t\t\t<div class=\"feed\">\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t<blockquote>\r\n\t\t\t\t\t\t\t\t<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas\r\n\t\t\t\t\t\t\t\t\teius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis\r\n\t\t\t\t\t\t\t\t\test.\r\n\t\t\t\t\t\t\t\t</p>\r\n\t\t\t\t\t\t\t</blockquote>\r\n\t\t\t\t\t\t\t<h3>&mdash; Louie Knight</h3>\r\n\t\t\t\t\t\t\t<span class=\"rate\">\r\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\r\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\r\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\r\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\r\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\r\n\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div>\r\n\t\t\t\t\t\t\t<blockquote>\r\n\t\t\t\t\t\t\t\t<p>Paragraph placeat quis fugiat provident veritatis quia iure a debitis adipisci dignissimos consectetur magni quas\r\n\t\t\t\t\t\t\t\t\teius nobis reprehenderit soluta eligendi quo reiciendis fugit? Veritatis tenetur odio delectus quibusdam officiis\r\n\t\t\t\t\t\t\t\t\test.\r\n\t\t\t\t\t\t\t\t</p>\r\n\t\t\t\t\t\t\t</blockquote>\r\n\t\t\t\t\t\t\t<h3>&mdash; Joefrey Gwapo</h3>\r\n\t\t\t\t\t\t\t<span class=\"rate\">\r\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\r\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\r\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\r\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\r\n\t\t\t\t\t\t\t\t<i class=\"icon-star2\"></i>\r\n\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n\r\n\t<div id=\"fh5co-started\">\r\n\t\t<div class=\"container\">\r\n\t\t\t<div class=\"row animate-box\">\r\n\t\t\t\t<!-- UY BEGIN -->\r\n              <div id=\"uyan_frame\"></div>\r\n              <script type=\"text/javascript\" src=\"http://v2.uyan.cc/code/uyan.js?uid=2158295\"></script>\r\n               <!-- UY END -->\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n\r\n\t<app-footer></app-footer>\r\n\t\r\n</body>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product-detail/product-detail.component.ts":
+/***/ "../../../../../src/app/component/product/product-detail/product-detail.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2154,8 +2277,8 @@ var ProductDetailComponent = /** @class */ (function () {
     ProductDetailComponent = __decorate([
         core_1.Component({
             selector: 'app-product-detail',
-            template: __webpack_require__("../../../../../src/app/product/product-detail/product-detail.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product.component.css"), __webpack_require__("../../../../../src/app/product/product-detail/product-detail.component.css")],
+            template: __webpack_require__("../../../../../src/app/component/product/product-detail/product-detail.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product.component.css"), __webpack_require__("../../../../../src/app/component/product/product-detail/product-detail.component.css")],
         }),
         __metadata("design:paramtypes", [product_service_1.ProductService, router_1.ActivatedRoute, router_1.Router])
     ], ProductDetailComponent);
@@ -2166,7 +2289,7 @@ exports.ProductDetailComponent = ProductDetailComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product-model.ts":
+/***/ "../../../../../src/app/component/product/product-model.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2189,7 +2312,7 @@ exports.ProductModel = ProductModel;
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product.component.css":
+/***/ "../../../../../src/app/component/product/product.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -2207,14 +2330,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product.component.html":
+/***/ "../../../../../src/app/component/product/product.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<body>\r\n\t<div id=\"page\">\r\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\r\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\r\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"search\">\r\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\">\r\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\r\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\r\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\r\n\t\t\t\t\t\t\t\t\t\t</button>\r\n\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"shopping-cart\">\r\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"cart\">\r\n\t\t\t\t\t\t\t\t\t<span>\r\n\t\t\t\t\t\t\t\t\t\t<small>0</small>\r\n\t\t\t\t\t\t\t\t\t\t<i class=\"icon-shopping-cart\"></i>\r\n\t\t\t\t\t\t\t\t\t</span>\r\n\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t</div>\r\n\t\t</nav>\r\n\r\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\r\n\t\t\t<div class=\"overlay\"></div>\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\r\n\t\t\t\t\t\t<div class=\"display-t\">\r\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\r\n\t\t\t\t\t\t\t\t<h1>Others</h1>\r\n\t\t\t\t\t\t\t\t<h2>Free html5 templates Made</h2>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</header>\r\n\r\n\t\t<div id=\"fh5co-product\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row animate-box\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\r\n\t\t\t\t\t\t<span>Cool Stuff</span>\r\n\t\t\t\t\t\t<h2>Others.</h2>\r\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\r\n\t\t\t\t\t\t\teius.\r\n\t\t\t\t\t\t</p>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-4 text-center\" *ngFor=\"let product of allProducts | paginate: { id:'product', itemsPerPage: 6, currentPage: p }\">\r\n\t\t\t\t\t\t<div class=\"product\" (click)=\"ToProductDetail(product.id)\">\r\n\t\t\t\t\t\t\t<div class=\"product-grid\" [style.background-image]=\"'url('+product.imgUrl[0]+')'\">\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div class=\"desc\">\r\n\t\t\t\t\t\t\t\t<h3>\r\n\t\t\t\t\t\t\t\t\t<i>{{product.name}}</i>\r\n\t\t\t\t\t\t\t\t</h3>\r\n\t\t\t\t\t\t\t\t<span class=\"price\">{{product.price}}</span>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<pagination-controls class=\"pageButton\" id=\"product\" (pageChange)=\"p = $event\" maxSize=\"9\" directionLinks=\"true\" autoHide=\"true\"\r\n\t\t\t\t screenReaderPaginationLabel=\"Pagination\" screenReaderPageLabel=\"page\" screenReaderCurrentLabel=\"You're on page\">\r\n\t\t\t\t</pagination-controls>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<app-footer></app-footer>\r\n\t</div>\r\n</body>"
+module.exports = "<body>\r\n\t<div id=\"page\">\r\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\r\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\r\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\r\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\r\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\r\n\t\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t<li class=\"search\">\r\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\"[formControl]=\"searchBox\">\r\n\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t</div>\r\n\t\t</nav>\r\n\r\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\r\n\t\t\t<div class=\"overlay\"></div>\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\r\n\t\t\t\t\t\t<div class=\"display-t\">\r\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\r\n\t\t\t\t\t\t\t\t<h1>Others</h1>\r\n\t\t\t\t\t\t\t\t<h2>Free html5 templates Made</h2>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</header>\r\n\r\n\t\t<div id=\"fh5co-product\">\r\n\t\t\t<div class=\"container\">\r\n\t\t\t\t<div class=\"row animate-box\">\r\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\r\n\t\t\t\t\t\t<span>Cool Stuff</span>\r\n\t\t\t\t\t\t<h2>Others.</h2>\r\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\r\n\t\t\t\t\t\t\teius.\r\n\t\t\t\t\t\t</p>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t<div class=\"col-md-4 text-center\" *ngFor=\"let product of allProducts | productSearch: searchValue | paginate: { id:'product', itemsPerPage: 6, currentPage: p }\">\r\n\t\t\t\t\t\t<div class=\"product\" (click)=\"ToProductDetail(product.id)\">\r\n\t\t\t\t\t\t\t<div class=\"product-grid\" [style.background-image]=\"'url('+product.imgUrl[0]+')'\">\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div class=\"desc\">\r\n\t\t\t\t\t\t\t\t<h3>\r\n\t\t\t\t\t\t\t\t\t<i>{{product.name}}</i>\r\n\t\t\t\t\t\t\t\t</h3>\r\n\t\t\t\t\t\t\t\t<span class=\"price\">{{product.price}}</span>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<pagination-controls class=\"pageButton\" id=\"product\" (pageChange)=\"p = $event\" maxSize=\"9\" directionLinks=\"true\" autoHide=\"true\"\r\n\t\t\t\t screenReaderPaginationLabel=\"Pagination\" screenReaderPageLabel=\"page\" screenReaderCurrentLabel=\"You're on page\">\r\n\t\t\t\t</pagination-controls>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<app-footer></app-footer>\r\n\t</div>\r\n</body>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/product/product.component.ts":
+/***/ "../../../../../src/app/component/product/product.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2231,7 +2354,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var product_service_1 = __webpack_require__("../../../../../src/app/Service/product-service.ts");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/debounceTime.js");
 var platform_browser_1 = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
 var ProductComponent = /** @class */ (function () {
     function ProductComponent(productService, router, activatedRouter, sanitization) {
@@ -2239,7 +2364,8 @@ var ProductComponent = /** @class */ (function () {
         this.router = router;
         this.activatedRouter = activatedRouter;
         this.sanitization = sanitization;
-        this.path = '../../assets/product-1.jpg';
+        this.searchBox = new forms_1.FormControl();
+        this.searchValue = '';
         this.allProducts = [];
         this.p = this.productService.getCurrentPage();
         console.log(this.p);
@@ -2248,6 +2374,12 @@ var ProductComponent = /** @class */ (function () {
         var _this = this;
         this.subscriptionProducts = this.productService.getAllProduct()
             .subscribe(function (allProducts) { return _this.allProducts = allProducts; });
+        this.subscriptionInput = this.searchBox
+            .valueChanges
+            .debounceTime(200)
+            .subscribe(function (term) {
+            _this.searchValue = term;
+        });
     };
     ProductComponent.prototype.ngOnDestroy = function () {
         this.subscriptionProducts.unsubscribe();
@@ -2262,8 +2394,8 @@ var ProductComponent = /** @class */ (function () {
     ProductComponent = __decorate([
         core_1.Component({
             selector: 'app-product',
-            template: __webpack_require__("../../../../../src/app/product/product.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product.component.css")],
+            template: __webpack_require__("../../../../../src/app/component/product/product.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product.component.css")],
             providers: []
         }),
         __metadata("design:paramtypes", [product_service_1.ProductService, router_1.Router,
@@ -2276,7 +2408,7 @@ exports.ProductComponent = ProductComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/profile/profile.component.css":
+/***/ "../../../../../src/app/component/profile/profile.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -2294,14 +2426,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/profile/profile.component.html":
+/***/ "../../../../../src/app/component/profile/profile.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<body>\r\n    <div id=\"page\">\r\n        <nav class=\"fh5co-nav\" role=\"navigation\">\r\n            <div class=\"container\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-3 col-xs-2\">\r\n                        <div id=\"fh5co-logo\">\r\n                            <a [routerLink]=\"['']\">WPI.</a>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-6 col-xs-6 text-center menu-1\">\r\n                        <ul>\r\n                            <li class=\"has-dropdown\">\r\n                                <a href=\"product.html\">Shop</a>\r\n                                <ul class=\"dropdown\">\r\n                                    <li>\r\n                                        <a href=\"single.html\">Single Shop</a>\r\n                                    </li>\r\n                                </ul>\r\n                            </li>\r\n                            <li>\r\n                                <a href=\"about.html\">About</a>\r\n                            </li>\r\n                            <li class=\"has-dropdown\">\r\n                                <a href=\"services.html\">Services</a>\r\n                                <ul class=\"dropdown\">\r\n                                    <li>\r\n                                        <a href=\"#\">Web Design</a>\r\n                                    </li>\r\n                                    <li>\r\n                                        <a href=\"#\">eCommerce</a>\r\n                                    </li>\r\n                                    <li>\r\n                                        <a href=\"#\">Branding</a>\r\n                                    </li>\r\n                                    <li>\r\n                                        <a href=\"#\">API</a>\r\n                                    </li>\r\n                                </ul>\r\n                            </li>\r\n                            <li>\r\n                                <a href=\"contact.html\">Contact</a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\r\n                        <ul>\r\n                            <li class=\"search\">\r\n                                <div class=\"input-group\">\r\n                                    <input type=\"text\" placeholder=\"Search..\">\r\n                                    <span class=\"input-group-btn\">\r\n                                        <button class=\"btn btn-primary\" type=\"button\">\r\n                                            <i class=\"icon-search\"></i>\r\n                                        </button>\r\n                                    </span>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"shopping-cart\">\r\n                                <a href=\"#\" class=\"cart\">\r\n                                    <span>\r\n                                        <small>0</small>\r\n                                        <i class=\"icon-shopping-cart\"></i>\r\n                                    </span>\r\n                                </a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n        </nav>\r\n\r\n        <header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\r\n            <div class=\"overlay\"></div>\r\n            <div class=\"container\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-8 col-md-offset-2 text-center\">\r\n                        <div class=\"display-t\">\r\n                            <div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\r\n                                <h1>Household Item</h1>\r\n                                <h2>Free html5 templates Made</h2>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </header>\r\n\r\n        <div id=\"fh5co-product\">\r\n            <div class=\"container\">\r\n                <div class=\"row animate-box\">\r\n                    <div class=\"col-md-10 col-md-offset-2 text-center fh5co-heading\">\r\n                        <span>Cool Stuff</span>\r\n                        <h2>Products.</h2>\r\n                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit\r\n                            ab aliquam dolor eius.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-4 text-center\" *ngFor=\"let product of productModel\">\r\n                        <div class=\"product\">\r\n                            <div class=\"product-grid\" [style.background-image]=\"'url('+product.imgUrl[0]+')'\">\r\n                            </div>\r\n                            <div class=\"desc\">\r\n                                <h3>\r\n                                    <i>{{product.name}}</i>\r\n                                </h3>\r\n                                <span class=\"price\">{{product.price}}</span>\r\n                                <br>\r\n                                <i><a  (click)=\"onDeleteProduct(product)\">Delete this ITEM</a></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-4 text-center\" *ngFor=\"let book of bookModel\">\r\n                        <div class=\"product\">\r\n                            <div class=\"product-grid\" [style.background-image]=\"'url('+book.imgUrl[0]+')'\">\r\n                            </div>\r\n                            <div class=\"desc\">\r\n                                <h3>\r\n                                    <i>{{book.name}}</i>\r\n                                </h3>\r\n                                <span class=\"price\">{{book.price}}</span>\r\n                                <br>\r\n                                <i><a  (click)=\"onDeleteBook(book)\">Delete this ITEM</a></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-4 text-center\" *ngFor=\"let house of houseModel\">\r\n                        <div class=\"product\">\r\n                            <div class=\"product-grid\" [style.background-image]=\"'url('+house.imgUrl[0]+')'\">\r\n                            </div>\r\n                            <div class=\"desc\">\r\n                                <h3>\r\n                                    <i>{{house.Address}}</i>\r\n                                </h3>\r\n                                <span class=\"price\">{{house.price}}</span>\r\n                                <br>\r\n                                <i><a  (click)=\"onDeleteHouse(house)\">Delete this ITEM</a></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <app-footer></app-footer>\r\n    </div>\r\n</body>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/profile/profile.component.ts":
+/***/ "../../../../../src/app/component/profile/profile.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2388,8 +2520,8 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent = __decorate([
         core_1.Component({
             selector: 'app-profile',
-            template: __webpack_require__("../../../../../src/app/profile/profile.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product.component.css"), __webpack_require__("../../../../../src/app/profile/profile.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/profile/profile.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product.component.css"), __webpack_require__("../../../../../src/app/component/profile/profile.component.css")]
         }),
         __metadata("design:paramtypes", [auth_service_1.AuthService, book_service_1.BookService, product_service_1.ProductService,
             house_service_1.HouseService])
@@ -2401,7 +2533,7 @@ exports.ProfileComponent = ProfileComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/sell/sell.component.css":
+/***/ "../../../../../src/app/component/sell/sell.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -2419,14 +2551,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/sell/sell.component.html":
+/***/ "../../../../../src/app/component/sell/sell.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<body>\n  <div id=\"page\">\n    <nav class=\"fh5co-nav\" role=\"navigation\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-3 col-xs-2\">\n            <div id=\"fh5co-logo\">\n              <a [routerLink]=\"['']\">WPI.</a>\n            </div>\n          </div>\n          <div class=\"col-md-6 col-xs-6 text-center menu-1\">\n            <ul>\n              <li class=\"has-dropdown\">\n                <a href=\"product.html\">Shop</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"single.html\">Single Shop</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"about.html\">About</a>\n              </li>\n              <li class=\"has-dropdown\">\n                <a href=\"services.html\">Services</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"#\">Web Design</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">eCommerce</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">Branding</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">API</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"contact.html\">Contact</a>\n              </li>\n            </ul>\n          </div>\n          <div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n            <ul>\n              <li class=\"search\">\n                <div class=\"input-group\">\n                  <input type=\"text\" placeholder=\"Search..\">\n                  <span class=\"input-group-btn\">\n                    <button class=\"btn btn-primary\" type=\"button\">\n                      <i class=\"icon-search\"></i>\n                    </button>\n                  </span>\n                </div>\n              </li>\n              <li class=\"shopping-cart\">\n                <a href=\"#\" class=\"cart\">\n                  <span>\n                    <small>0</small>\n                    <i class=\"icon-shopping-cart\"></i>\n                  </span>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n      </div>\n    </nav>\n\n    <header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\n      <div class=\"overlay\"></div>\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-8 col-md-offset-2 text-center\">\n            <div class=\"display-t\">\n              <div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n                <h1>Sell Section</h1>\n                <h2>Your can Post your Product to Sell at Here</h2>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </header>\n\n    <div id=\"fh5co-product\">\n      <div class=\"container\">\n        <div class=\"row animate-box\">\n          <div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n            <span>Cool Stuff</span>\n            <h2>Sell.</h2>\n            <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam\n              dolor eius.\n            </p>\n          </div>\n        </div>\n        <div *ngIf=\"authService.isAuthenticated() else login\" class=\"row\">\n          <div class=\"container\">\n            <div class=\"row\">\n              <div class=\"col-lg-12 \">\n                <mat-form-field class=\"form-group\">\n                  <mat-select placeholder=\"Product Type\" [formControl]=\"selected\" [errorStateMatcher]=\"matcher\" [(ngModel)]=\"type\" [(value)]=\"type\"\n                    required>\n                    <mat-option *ngFor=\"let option of options\" [value]=\"option\">\n                      {{option}}\n                    </mat-option>\n                  </mat-select>\n                  <mat-error *ngIf=\"selected.hasError('required')\">You must make a selection</mat-error>\n                  <mat-hint *ngIf=\"!selected.touched\">Please select your product type</mat-hint>\n                </mat-form-field>\n                <div *ngIf=\"isOthers(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Product Name</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"name\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Product Price</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> A Good Description make your product easy to sell</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    <div *ngFor=\"let time of times\">\n                      <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    </div>\n                    <div class=\"plus\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\" (click)=\"onSecondSelect()\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                  </form>\n                </div>\n\n                <div *ngIf=\"isHouse(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your House Address</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"address\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Rent fee (per Month)</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> You can provide other information which you think is necessary at here</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    <div *ngFor=\"let time of times\">\n                      <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    </div>\n                    <div class=\"plus\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\" (click)=\"onSecondSelect()\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                  </form>\n                </div>\n\n                <div *ngIf=\"isBook(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\">\n                      <mat-select placeholder=\"Book Major\" [formControl]=\"selectedBook\" [errorStateMatcher]=\"matcher\" [(ngModel)]=\"department\"\n                        [(value)]=\"department\" required>\n                        <mat-option *ngFor=\"let department of Departments\" [value]=\"department\">\n                          {{department}}\n                        </mat-option>\n                      </mat-select>\n                      <mat-error *ngIf=\"selectedBook.hasError('required')\">You must make a selection</mat-error>\n                      <mat-hint *ngIf=\"!selectedBook.touched\">Please select your product type</mat-hint>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Book Name</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"name\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Book Price</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> You can provide other information which you think is necessary at here</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">                   \n                     <div *ngFor=\"let time of times\">\n                      <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\" >\n                    </div>\n                    <div class=\"plus\" (click)=\"onSecondSelect(i)\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                    <h3>\n                      {{ownerID}}\n                    </h3>\n                  </form>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n        <ng-template #login>\n          <h4>\n            Please <a id=\"login\" (click)=\"authService.login()\">Login</a> First to post your stuff to sell\n          </h4>\n        </ng-template>\n      </div>\n    </div>\n\n    <footer id=\"fh5co-footer\" role=\"contentinfo\">\n      <div class=\"container\">\n        <div class=\"row row-pb-md\">\n          <div class=\"col-md-4 fh5co-widget\">\n            <h3>Shop.</h3>\n            <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto\n              culpa amet.\n            </p>\n          </div>\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">About</a>\n              </li>\n              <li>\n                <a href=\"#\">Help</a>\n              </li>\n              <li>\n                <a href=\"#\">Contact</a>\n              </li>\n              <li>\n                <a href=\"#\">Terms</a>\n              </li>\n              <li>\n                <a href=\"#\">Meetups</a>\n              </li>\n            </ul>\n          </div>\n\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">Shop</a>\n              </li>\n              <li>\n                <a href=\"#\">Privacy</a>\n              </li>\n              <li>\n                <a href=\"#\">Testimonials</a>\n              </li>\n              <li>\n                <a href=\"#\">Handbook</a>\n              </li>\n              <li>\n                <a href=\"#\">Held Desk</a>\n              </li>\n            </ul>\n          </div>\n\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">Find Designers</a>\n              </li>\n              <li>\n                <a href=\"#\">Find Developers</a>\n              </li>\n              <li>\n                <a href=\"#\">Teams</a>\n              </li>\n              <li>\n                <a href=\"#\">Advertise</a>\n              </li>\n              <li>\n                <a href=\"#\">API</a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n        <div class=\"row copyright\">\n          <div class=\"col-md-12 text-center\">\n            <p>\n              <small class=\"block\">Copyright &copy; 2017.Company name All rights reserved.\n                <a target=\"_blank\" href=\"http://guantaow.taobao.com/\">厚朴网络淘宝店</a>\n                <a target=\"_blank\" href=\"http://www.moobnn.com\">网页模板</a>\n              </small>\n            </p>\n            <ul class=\"fh5co-social-icons\">\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-twitter\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-facebook\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-linkedin\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-dribbble\"></i>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n      </div>\n    </footer>\n  </div>\n\n  <div class=\"gototop js-top\">\n    <a href=\"#\" class=\"js-gotop\">\n      <i class=\"icon-arrow-up\"></i>\n    </a>\n  </div>\n</body>"
+module.exports = "<body>\n  <div id=\"page\">\n    <nav class=\"fh5co-nav\" role=\"navigation\">\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-3 col-xs-2\">\n            <div id=\"fh5co-logo\">\n              <a [routerLink]=\"['']\">WPI.</a>\n            </div>\n          </div>\n          <div class=\"col-md-6 col-xs-6 text-center menu-1\">\n            <ul>\n              <li class=\"has-dropdown\">\n                <a href=\"product.html\">Shop</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"single.html\">Single Shop</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"about.html\">About</a>\n              </li>\n              <li class=\"has-dropdown\">\n                <a href=\"services.html\">Services</a>\n                <ul class=\"dropdown\">\n                  <li>\n                    <a href=\"#\">Web Design</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">eCommerce</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">Branding</a>\n                  </li>\n                  <li>\n                    <a href=\"#\">API</a>\n                  </li>\n                </ul>\n              </li>\n              <li>\n                <a href=\"contact.html\">Contact</a>\n              </li>\n            </ul>\n          </div>\n          <div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n            <ul>\n              <li class=\"search\">\n                <div class=\"input-group\">\n                  <input type=\"text\" placeholder=\"Search..\">\n                  <span class=\"input-group-btn\">\n                    <button class=\"btn btn-primary\" type=\"button\">\n                      <i class=\"icon-search\"></i>\n                    </button>\n                  </span>\n                </div>\n              </li>\n              <li class=\"shopping-cart\">\n                <a href=\"#\" class=\"cart\">\n                  <span>\n                    <small>0</small>\n                    <i class=\"icon-shopping-cart\"></i>\n                  </span>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n      </div>\n    </nav>\n\n    <header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\n      <div class=\"overlay\"></div>\n      <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-md-8 col-md-offset-2 text-center\">\n            <div class=\"display-t\">\n              <div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n                <h1>Sell Section</h1>\n                <h2>Your can Post your Product to Sell at Here</h2>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </header>\n\n    <div id=\"fh5co-product\">\n      <div class=\"container\">\n        <div class=\"row animate-box\">\n          <div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n            <span>Cool Stuff</span>\n            <h2>Sell.</h2>\n            <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam\n              dolor eius.\n            </p>\n          </div>\n        </div>\n        <div *ngIf=\"authService.isAuthenticated() else login\" class=\"row\">\n          <div class=\"container\">\n            <div class=\"row\">\n              <div class=\"col-lg-12 \">\n                <mat-form-field class=\"form-group\">\n                  <mat-select placeholder=\"Product Type\" [formControl]=\"selected\" [errorStateMatcher]=\"matcher\" [(ngModel)]=\"type\" [(value)]=\"type\"\n                    required>\n                    <mat-option *ngFor=\"let option of options\" [value]=\"option\">\n                      {{option}}\n                    </mat-option>\n                  </mat-select>\n                  <mat-error *ngIf=\"selected.hasError('required')\">You must make a selection</mat-error>\n                  <mat-hint *ngIf=\"!selected.touched\">Please select your product type</mat-hint>\n                </mat-form-field>\n                <div *ngIf=\"isOthers(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Product Name</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"name\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Product Price</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> A Good Description make your product easy to sell</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    <div *ngFor=\"let time of names\">\n                      <input type=\"file\" multiple [name]=\"time\" [id]= \"time\" (change)=\"onFileSelect($event)\">\n                    </div>\n                    <div class=\"plus\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\" (click)=\"onSecondSelect()\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                  </form>\n                </div>\n\n                <div *ngIf=\"isHouse(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your House Address</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"address\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Rent fee (per Month)</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> You can provide other information which you think is necessary at here</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">\n                    <div *ngFor=\"let time of names\">\n                      <input type=\"file\" multiple [name]=\"time\" (change)=\"onFileSelect($event)\">\n                    </div>\n                    <div class=\"plus\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\" (click)=\"onSecondSelect()\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                  </form>\n                </div>\n\n                <div *ngIf=\"isBook(type)\">\n                  <form action=\"submit\">\n                    <mat-form-field class=\"form-group\">\n                      <mat-select placeholder=\"Book Major\" [formControl]=\"selectedBook\" [errorStateMatcher]=\"matcher\" [(ngModel)]=\"department\"\n                        [(value)]=\"department\" required>\n                        <mat-option *ngFor=\"let department of Departments\" [value]=\"department\">\n                          {{department}}\n                        </mat-option>\n                      </mat-select>\n                      <mat-error *ngIf=\"selectedBook.hasError('required')\">You must make a selection</mat-error>\n                      <mat-hint *ngIf=\"!selectedBook.touched\">Please select your product type</mat-hint>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Book Name</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"name\" [formControl]=\"productNameError\" [errorStateMatcher]=\"matcher\" name=\"productName\" required>\n                      <mat-error *ngIf=\"productNameError.hasError('required')\">Product Name are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Book Price</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"price\" [formControl]=\"productPriceError\" [errorStateMatcher]=\"matcher\" name=\"productPrice\" required>\n                      <mat-error *ngIf=\"productPriceError.hasError('required')\">Product Price are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>\n                          create\n                        </mat-icon>\n                        <i>Please Input your Contact Information</i>\n                      </mat-placeholder>\n                      <input matInput [(ngModel)]=\"contactInfo\" [formControl]=\"productContactError\" [errorStateMatcher]=\"matcher\" name=\"productContact\"\n                        required>\n                      <mat-error *ngIf=\"productContactError.hasError('required')\">Contact Information are Required</mat-error>\n                    </mat-form-field>\n                    <mat-form-field class=\"form-group\" [floatLabel]=\"'always'\">\n                      <mat-placeholder>\n                        <mat-icon>create</mat-icon>\n                        <i> You can provide other information which you think is necessary at here</i>\n                      </mat-placeholder>\n                      <textarea [(ngModel)]=\"desc\" matInput matTextareaAutosize matAutosizeMinRows=\"2\" matAutosizeMaxRows=\"5\" name=\"productDescp\">\n                             </textarea>\n                    </mat-form-field>\n                    <input type=\"file\" multiple name=\"logo\" (change)=\"onFileSelect($event)\">                   \n                     <div *ngFor=\"let time of names\">\n                      <input type=\"file\" multiple [name]=\"time\" (change)=\"onFileSelect($event)\" >\n                    </div>\n                    <div class=\"plus\" (click)=\"onSecondSelect(i)\">\n                      <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n                    </div>\n                    <button class=\"btn btn-primary\" (click)=\"upload()\" [disabled]=\"isBookDisable()\">Submit</button>\n                    <h3>\n                      {{ownerID}}\n                    </h3>\n                  </form>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n        <ng-template #login>\n          <h4>\n            Please <a id=\"login\" (click)=\"authService.login()\">Login</a> First to post your stuff to sell\n          </h4>\n        </ng-template>\n      </div>\n    </div>\n\n    <footer id=\"fh5co-footer\" role=\"contentinfo\">\n      <div class=\"container\">\n        <div class=\"row row-pb-md\">\n          <div class=\"col-md-4 fh5co-widget\">\n            <h3>Shop.</h3>\n            <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto\n              culpa amet.\n            </p>\n          </div>\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">About</a>\n              </li>\n              <li>\n                <a href=\"#\">Help</a>\n              </li>\n              <li>\n                <a href=\"#\">Contact</a>\n              </li>\n              <li>\n                <a href=\"#\">Terms</a>\n              </li>\n              <li>\n                <a href=\"#\">Meetups</a>\n              </li>\n            </ul>\n          </div>\n\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">Shop</a>\n              </li>\n              <li>\n                <a href=\"#\">Privacy</a>\n              </li>\n              <li>\n                <a href=\"#\">Testimonials</a>\n              </li>\n              <li>\n                <a href=\"#\">Handbook</a>\n              </li>\n              <li>\n                <a href=\"#\">Held Desk</a>\n              </li>\n            </ul>\n          </div>\n\n          <div class=\"col-md-2 col-sm-4 col-xs-6 col-md-push-1\">\n            <ul class=\"fh5co-footer-links\">\n              <li>\n                <a href=\"#\">Find Designers</a>\n              </li>\n              <li>\n                <a href=\"#\">Find Developers</a>\n              </li>\n              <li>\n                <a href=\"#\">Teams</a>\n              </li>\n              <li>\n                <a href=\"#\">Advertise</a>\n              </li>\n              <li>\n                <a href=\"#\">API</a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n        <div class=\"row copyright\">\n          <div class=\"col-md-12 text-center\">\n            <p>\n              <small class=\"block\">Copyright &copy; 2017.Company name All rights reserved.\n                <a target=\"_blank\" href=\"http://guantaow.taobao.com/\">厚朴网络淘宝店</a>\n                <a target=\"_blank\" href=\"http://www.moobnn.com\">网页模板</a>\n              </small>\n            </p>\n            <ul class=\"fh5co-social-icons\">\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-twitter\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-facebook\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-linkedin\"></i>\n                </a>\n              </li>\n              <li>\n                <a href=\"#\">\n                  <i class=\"icon-dribbble\"></i>\n                </a>\n              </li>\n            </ul>\n          </div>\n        </div>\n\n      </div>\n    </footer>\n  </div>\n\n  <div class=\"gototop js-top\">\n    <a href=\"#\" class=\"js-gotop\">\n      <i class=\"icon-arrow-up\"></i>\n    </a>\n  </div>\n</body>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/sell/sell.component.ts":
+/***/ "../../../../../src/app/component/sell/sell.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2468,10 +2600,11 @@ var SellComponent = /** @class */ (function () {
         this.authService = authService;
         this.Departments = ['Computer Science', 'Electrical Engineering', 'ESL', 'Data Science', 'MSIT', 'Marketing', 'Others'];
         this.imgUrl = [];
-        this.times = [];
+        this.names = [];
         this.selectedFile = null;
         this.i = 0;
         this.fd = new FormData();
+        this.size = 0;
         this.selected = new forms_1.FormControl('valid', [
             forms_1.Validators.required
         ]);
@@ -2564,27 +2697,34 @@ var SellComponent = /** @class */ (function () {
     };
     SellComponent.prototype.onSecondSelect = function (k) {
         this.i = this.i + 1;
-        this.times.push(1);
-        console.log(this.times);
+        this.names.push(this.i);
+        console.log(this.names);
     };
     SellComponent.prototype.onFileSelect = function (event) {
-        if (event.target.files.length === 0 && this.times.length === 0) {
+        console.log(event);
+        // this.size = this.selectedFile[0].size / 1024;
+        if (event.target.files.length === 0 && this.names.length === 0) {
             this.fd.delete('logo');
             return 0;
         }
-        else if (event.target.files.length !== 0) {
+        else if (event.target.files.length !== 0 && this.size < 1024) {
             this.selectedFile = event.target.files;
+            console.log(this.selectedFile);
+            console.log(this.selectedFile[0].size / 1024);
             for (var _i = 0, _a = this.selectedFile; _i < _a.length; _i++) {
                 var file = _a[_i];
                 this.fd.append('logo', file, file.name);
             }
         }
+        else {
+            return 0;
+        }
     };
     SellComponent = __decorate([
         core_1.Component({
             selector: 'app-sell',
-            template: __webpack_require__("../../../../../src/app/sell/sell.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product.component.css"), __webpack_require__("../../../../../src/app/sell/sell.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/sell/sell.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product.component.css"), __webpack_require__("../../../../../src/app/component/sell/sell.component.css")]
         }),
         __metadata("design:paramtypes", [product_service_1.ProductService, house_service_1.HouseService,
             book_service_1.BookService, http_1.HttpClient, auth_service_1.AuthService])
@@ -2596,7 +2736,7 @@ exports.SellComponent = SellComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/app/success/success.component.css":
+/***/ "../../../../../src/app/component/success/success.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -2614,14 +2754,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/success/success.component.html":
+/***/ "../../../../../src/app/component/success/success.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<body>\n\t<div id=\"page\">\n\t\t<nav class=\"fh5co-nav\" role=\"navigation\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-3 col-xs-2\">\n\t\t\t\t\t\t<div id=\"fh5co-logo\">\n\t\t\t\t\t\t\t<a [routerLink]=\"['']\">WPI.</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-6 col-xs-6 text-center menu-1\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"product.html\">Shop</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"single.html\">Single Shop</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"about.html\">About</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"has-dropdown\">\n\t\t\t\t\t\t\t\t<a href=\"services.html\">Services</a>\n\t\t\t\t\t\t\t\t<ul class=\"dropdown\">\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Web Design</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">eCommerce</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">Branding</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t\t\t<a href=\"#\">API</a>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t\t<a href=\"contact.html\">Contact</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-3 col-xs-4 text-right hidden-xs menu-2\">\n\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t<li class=\"search\">\n\t\t\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t\t\t<input type=\"text\" placeholder=\"Search..\">\n\t\t\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\">\n\t\t\t\t\t\t\t\t\t\t\t<i class=\"icon-search\"></i>\n\t\t\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t<li class=\"shopping-cart\">\n\t\t\t\t\t\t\t\t<a href=\"#\" class=\"cart\">\n\t\t\t\t\t\t\t\t\t<span>\n\t\t\t\t\t\t\t\t\t\t<small>0</small>\n\t\t\t\t\t\t\t\t\t\t<i class=\"icon-shopping-cart\"></i>\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t</nav>\n\n\t\t<header id=\"fh5co-header\" class=\"fh5co-cover fh5co-cover-sm\" role=\"banner\" style=\"background-image:url(../../assets/img_bg_2.jpg);\">\n\t\t\t<div class=\"overlay\"></div>\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center\">\n\t\t\t\t\t\t<div class=\"display-t\">\n\t\t\t\t\t\t\t<div class=\"display-tc animate-box\" data-animate-effect=\"fadeIn\">\n\t\t\t\t\t\t\t\t<h1>Others</h1>\n\t\t\t\t\t\t\t\t<h2>Free html5 templates Made</h2>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</header>\n\n\t\t<div id=\"fh5co-product\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"row animate-box\">\n\t\t\t\t\t<div class=\"col-md-8 col-md-offset-2 text-center fh5co-heading\">\n\t\t\t\t\t\t<span>Cool Stuff</span>\n\t\t\t\t\t\t<h2>Others.</h2>\n\t\t\t\t\t\t<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor\n\t\t\t\t\t\t\teius.\n\t\t\t\t\t\t</p>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t  <h1>\n        Your product has been uploaded successfully!\n      </h1>\n\t\t\t</div>\n\t\t</div>\n\t\t<app-footer></app-footer>\n\t</div>\n</body>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/success/success.component.ts":
+/***/ "../../../../../src/app/component/success/success.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2647,8 +2787,8 @@ var SuccessComponent = /** @class */ (function () {
     SuccessComponent = __decorate([
         core_1.Component({
             selector: 'app-success',
-            template: __webpack_require__("../../../../../src/app/success/success.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/product/product.component.css"), __webpack_require__("../../../../../src/app/success/success.component.css")]
+            template: __webpack_require__("../../../../../src/app/component/success/success.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/component/product/product.component.css"), __webpack_require__("../../../../../src/app/component/success/success.component.css")]
         }),
         __metadata("design:paramtypes", [router_1.Router])
     ], SuccessComponent);

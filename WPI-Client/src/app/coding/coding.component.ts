@@ -6,7 +6,7 @@ declare const ace: any;
   selector: 'app-coding',
   templateUrl: './coding.component.html',
   styleUrls: ['./coding.component.css',
-    '../product/product.component.css']
+    '../component/product/product.component.css']
 })
 export class CodingComponent implements OnInit {
   editor: any;

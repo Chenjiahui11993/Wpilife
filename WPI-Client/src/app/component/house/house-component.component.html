@@ -1,0 +1,107 @@
+<body>
+	<div id="page">
+		<nav class="fh5co-nav" role="navigation">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-xs-2">
+						<div id="fh5co-logo">
+							<a [routerLink]="['']">WPI.</a>
+						</div>
+					</div>
+					<div class="col-md-6 col-xs-6 text-center menu-1">
+						<ul>
+							<li class="has-dropdown">
+								<a href="product.html">Shop</a>
+								<ul class="dropdown">
+									<li>
+										<a href="single.html">Single Shop</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="about.html">About</a>
+							</li>
+							<li class="has-dropdown">
+								<a href="services.html">Services</a>
+								<ul class="dropdown">
+									<li>
+										<a href="#">Web Design</a>
+									</li>
+									<li>
+										<a href="#">eCommerce</a>
+									</li>
+									<li>
+										<a href="#">Branding</a>
+									</li>
+									<li>
+										<a href="#">API</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="contact.html">Contact</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
+						<ul>
+							<li class="search">
+								<div class="input-group">
+									<input type="text" placeholder="Search.."[formControl]="searchBox">							
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(../../assets/img_bg_2.jpg);">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center">
+						<div class="display-t">
+							<div class="display-tc animate-box" data-animate-effect="fadeIn">
+								<h1>House Section</h1>
+								<h2>Find your new life in America</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div id="fh5co-product">
+			<div class="container">
+				<div class="row animate-box">
+					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+						<span>Cool Stuff</span>
+						<h2>House.</h2>
+						<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor
+							eius.</p>
+					</div>
+				</div>		
+				<div class="row">						
+					<div class="col-md-4 text-center" *ngFor="let house of houses | houseSearch: searchValue | paginate: { id:'house',
+																							   itemsPerPage: 6, 
+																							   currentPage: hp }">
+						<div class="product" (click)="toHouseDetail(house.id)" >
+							<div class="product-grid" [style.background-image]="'url('+house.imgUrl[0]+')'">
+							</div> 
+							<div class="desc">
+								<h3>
+									<i>{{house.Address}}</i>
+								</h3>
+								<span class="price">{{house.price}}</span>
+							</div>
+						</div>
+					</div>	
+					</div>
+					<pagination-controls class="pageButton" id="house" (pageChange)="hp = $event" maxSize="9" directionLinks="true" autoHide="true"
+					screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+				   </pagination-controls>						
+			</div>
+		</div>		
+	<app-footer></app-footer>
+	</div>
+</body>

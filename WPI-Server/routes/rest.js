@@ -24,7 +24,7 @@ var jwtCheck = jwt({
     issuer: "https://wpilife.auth0.com/",
     algorithms: ['RS256']
 });
-const checkScopes = jwtAuthz([ 'postBooks' ]);
+// const checkScopes = jwtAuthz([ 'postBooks' ]);
 // deal with household item
 router.get('/products', (req, res) => {
     problemService.getProducts()
@@ -125,7 +125,7 @@ router.post('/houses', jwtCheck, jsonParser, (req, res) => {
             console.log(e);
         });
 });
-router.post('/image', upload.array('logo', 2), function(req, res, next){
+router.post('/image', upload.array('logo', 5), function(req, res, next){
     var files = req.files;
     var resFiles = [];
     files.forEach((file, index) => {

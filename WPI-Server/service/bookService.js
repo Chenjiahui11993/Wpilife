@@ -1,7 +1,7 @@
 const bookModel = require('../modules/bookModels');
 const getAllBooks = () => {
     return new Promise((resolve, reject) => {
-        bookModel.find({type: true}, (err, books) => {
+        bookModel.find({}, (err, books) => {
             if (err) {
                 reject(err);
             } else {

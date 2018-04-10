@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ChildrenOutletContexts } from '@angular/router';
-import { HomeComponentComponent } from './home-page/home-component.component';
-import { HouseComponentComponent } from './house/house-component.component';
-import { ProductComponent } from './product/product.component';
-import { ProductDetailComponent } from './product/product-detail/product-detail.component';
+import { HomeComponentComponent } from './component/home-page/home-component.component';
+import { HouseComponentComponent } from './component/house/house-component.component';
+import { ProductComponent } from './component/product/product.component';
+import { ProductDetailComponent } from './component/product/product-detail/product-detail.component';
 import { TestComponent } from './test/test.component';
-import { ProductDescComponent } from './product/product-detail/product-desc/product-desc.component';
-import { ProductContactComponent } from './product/product-detail/product-contact/product-contact.component';
-import { HouseDetailComponent } from './house/house-detail/house-detail.component';
-import { HouseDescComponent } from './house/house-detail/house-desc/house-desc.component';
-import { HouseContactComponent } from './house/house-detail/house-contact/house-contact.component';
-import { BookComponent } from './book/book.component';
-import { BookDetailComponent } from './book/book-detail/book-detail.component';
-import { NewStudentsComponent } from './new-students/new-students.component';
-import { SellComponent } from './sell/sell.component';
+import { ProductDescComponent } from './component/product/product-detail/product-desc/product-desc.component';
+import { ProductContactComponent } from './component/product/product-detail/product-contact/product-contact.component';
+import { HouseDetailComponent } from './component/house/house-detail/house-detail.component';
+import { HouseDescComponent } from './component/house/house-detail/house-desc/house-desc.component';
+import { HouseContactComponent } from './component/house/house-detail/house-contact/house-contact.component';
+import { BookComponent } from './component/book/book.component';
+import { BookDetailComponent } from './component/book/book-detail/book-detail.component';
+import { NewStudentsComponent } from './component/new-students/new-students.component';
+import { SellComponent } from './component/sell/sell.component';
 import { CodingComponent } from './coding/coding.component';
-import { CallbackComponent } from './callback/callback.component';
-import { ProfileComponent } from './profile/profile.component';
+import { CallbackComponent } from './component/callback/callback.component';
+import { ProfileComponent } from './component/profile/profile.component';
 import { AuthGuardService } from './Service/auth.guard.service';
-import { SuccessComponent } from './success/success.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { SuccessComponent } from './component/success/success.component';
+import { NotFoundComponent } from './component/not-found/not-found.component';
 
 
 const appRouter: Routes = [

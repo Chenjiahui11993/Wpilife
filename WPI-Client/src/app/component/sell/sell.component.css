@@ -1,0 +1,13 @@
+.form-group{
+    width: 100%;
+  }
+  .plus {
+    height: 25px;
+    width: 40px;
+  }
+  h4 a {
+    cursor: pointer;
+  }
+  ng-template{
+    margin: 0 auto;
+  }
