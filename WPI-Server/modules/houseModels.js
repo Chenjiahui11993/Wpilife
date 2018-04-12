@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const houseSchema = mongoose.Schema({
     id: Number,
     type: Boolean,
-    price: Number,
+    price: String,
     ownerID: String,
     description: String,
     Address: String,

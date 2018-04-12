@@ -6,13 +6,12 @@
       <a class="navbar-brand" href="index.html">WPI<strong><span class="color">.</span></strong></a> 
       <p class = "navbar-text">Make your life eaiser in WPI</p>
      </div>
-    
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li><a pageScroll href="#home">Home</a></li>
         <li><a pageScroll href="#services-section" >Shop</a></li>
-        <li><a pageScroll href="#works-section" >Carpooling</a></li>
+        <li><a pageScroll href="#works-section" >Recent Product</a></li>
         <li><a pageScroll href="#about-section" >New Students</a></li>
         <li><a pageScroll href="#team-section" >Event</a></li>
         <li *ngIf="auth.isAuthenticated()"><a id="login" [routerLink]="['profile']" >Profile</a></li>

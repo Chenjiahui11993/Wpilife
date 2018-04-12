@@ -1,13 +1,13 @@
 export class ProductModel {
     id: string;
     name: string;
-    price: number;
+    price: string;
     ownerID: string;
     description: string;
     imgUrl: string[];
     type: Boolean;
     contactInfo: string;
- constructor( name: string, price: number, ownerID: string, desc: string, contactInfo: string, img: string[], type: Boolean) {
+ constructor( name: string, price: string, ownerID: string, desc: string, contactInfo: string, img: string[], type: Boolean) {
     this.name = name;
     this.price = price;
     this.ownerID = ownerID;

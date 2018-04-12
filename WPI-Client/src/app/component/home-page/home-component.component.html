@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <body>
   <!-- Navigation
     ==========================================-->
   <app-nav></app-nav>
-
   <!-- Header -->
-
   <app-header></app-header>
   <!-- Services Section -->
   <div id="services-section" class="text-center">
@@ -22,33 +19,40 @@
       </div>
       <div class="space"></div>
       <div class="row">
-        <div class="col-md-3 col-sm-6 service">
+        <div class="col-md-2 col-md-offset-1 col-sm-6 service">
           <i [routerLink]="['house-list']" class="fa fa-home"></i>
           <h4>
             <strong>House/Apartment Rent</strong>
           </h4>
-          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>
+          <p>Please make sure house condition when sign a lease </p>
         </div>
-        <div class="col-md-3 col-sm-6 service">
+        <div class="col-md-2 col-sm-6 service">
           <i [routerLink]="'book-list'" class="fa fa-book"></i>
           <h4>
             <strong>Book</strong>
           </h4>
-          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque.</p>
+          <p>ECE, CS, MSIT, Marketing....All here.</p>
         </div>
-        <div class="col-md-3 col-sm-6 service">
+        <div class="col-md-2 col-sm-6 service">
           <i [routerLink]="'product-list'" class="fa fa-bed"></i>
           <h4>
             <strong>Others</strong>
           </h4>
-          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.</p>
+          <p>Cars, Bed.....</p>
         </div>
-        <div class="col-md-3 col-sm-6 service">
+        <div class="col-md-2 col-sm-6 service">
           <i [routerLink]="'sell'" class="fa fa-money"></i>
           <h4>
             <strong>Sell your Product</strong>
           </h4>
-          <p>Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque.</p>
+          <p>We are glad to help you save money.</p>
+        </div>
+        <div class="col-md-2 col-sm-6 service">
+          <i [routerLink]="'sell'" class="fa fa-tag"></i>
+          <h4>
+            <strong>Demand list</strong>
+          </h4>
+          <p>If you need something not exist on our website, you can post your request here.</p>
         </div>
       </div>
     </div>
@@ -63,7 +67,6 @@
         </h2>
         <hr>
         <div class="clearfix"></div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
       </div>
       <div class="categories">   
           <mat-tab-group>   
@@ -119,7 +122,6 @@
 
         <div class="clearfix"></div>
       </div>
-
     </div>
   </div>
   <!-- About Section -->
@@ -156,8 +158,41 @@
       </div>
     </div>
   </div>
-
   <!-- Team Section -->
+  <!-- Testimonials Section -->
+  <div id="testimonials-section" class="text-center">
+    <div class="container">
+      <div class="section-title center">
+        <h2>Up 
+          <strong>Coming</strong> Events</h2>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div id="testimonial" class="owl-carousel owl-theme">
+            <div class="item">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
+                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
+              <p>
+                <strong>John DOE</strong>, CEO, Company.</p>
+            </div>
+            <div class="item">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
+                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
+              <p>
+                <strong>Jenny DOE</strong>, CEO, Company.</p>
+            </div>
+            <div class="item">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
+                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
+              <p>
+                <strong>John DOEn</strong>, CEO, Company.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="team-section" class="text-center">
     <div class="container">
       <div class="section-title center">
@@ -211,42 +246,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Testimonials Section -->
-  <div id="testimonials-section" class="text-center">
-    <div class="container">
-      <div class="section-title center">
-        <h2>What
-          <strong>clients</strong> say</h2>
-        <hr>
-      </div>
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <div id="testimonial" class="owl-carousel owl-theme">
-            <div class="item">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
-                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
-              <p>
-                <strong>John DOE</strong>, CEO, Company.</p>
-            </div>
-            <div class="item">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
-                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
-              <p>
-                <strong>Jenny DOE</strong>, CEO, Company.</p>
-            </div>
-            <div class="item">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
-                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
-              <p>
-                <strong>John DOEn</strong>, CEO, Company.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Contact Section -->
   <div id="contact-section" class="text-center">
     <div class="container">

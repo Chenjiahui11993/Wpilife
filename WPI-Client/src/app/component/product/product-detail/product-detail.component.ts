@@ -14,6 +14,12 @@ export class ProductDetailComponent implements OnInit {
   public Config: NgxCarousel;
   ProductDetail: ProductModel;
   id: number;
+  price: string;
+  name: string;
+  desc: string;
+  ownerID: string;
+  contactInfo: string;
+  imgUrl = [];
   constructor(private productService: ProductService, private activateRouter: ActivatedRoute, private router: Router ) {
     this.Config = {
       grid: {xs: 1, sm: 1, md: 1, lg: 1, all: 0},
@@ -31,16 +37,19 @@ export class ProductDetailComponent implements OnInit {
   .subscribe(
     (params: Params) => {
     this.id = params['id'];
+    this.productService.getProduct((this.id))
+    .then(product => {
+      this.ProductDetail = product;
+      this.name = this.ProductDetail.name;
+      this.price =  this.ProductDetail.price;
+      this.desc = this.ProductDetail.description;
+      this.contactInfo = this.ProductDetail.contactInfo;
+      this.imgUrl = this.ProductDetail.imgUrl;
+    })
+    .catch((e) => {
+      this.router.navigate(['/Not-found']);
+    });
     }
   );
-  this.productService.getProduct((this.id))
-  .then((product) => {
-    this.ProductDetail = product;
-   //  console.log('2222' + this.ProductDetail);
-  })
-  .catch((e) => {
-    console.log(e);
-  });
-
   }
 }

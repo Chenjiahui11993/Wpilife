@@ -32,7 +32,7 @@ export class HouseService {
             .toPromise()
             .then((res: any) => res);
     }
-    setNewllHouse(address: string, price: number, ownerinfo: string, desc: string
+    setNewllHouse(address: string, price: string, ownerinfo: string, desc: string
         , contactInfo: string, img: string[]) {
         const options = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })

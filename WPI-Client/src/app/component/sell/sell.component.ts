@@ -4,7 +4,7 @@ import { HouseService } from '../../Service/house-service';
 import { BookService } from '../../Service/book-service';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEventType, HttpResponse } from '@angular/common/http';
 import { AuthService } from '../../Service/auth.service';
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -23,7 +23,7 @@ export class SellComponent implements OnInit {
   Departments = ['Computer Science', 'Electrical Engineering', 'ESL', 'Data Science', 'MSIT', 'Marketing', 'Others'];
   name: string;
   address: string;
-  price: number;
+  price: string;
   ownerID: string; // TODO: AUTH
   desc: string;
   type: string;
@@ -31,11 +31,15 @@ export class SellComponent implements OnInit {
   contactInfo: string;
   imgUrl = [];
   names = [];
-  selectedFile = null;
+  selectedFile = [];
   i = 0;
   profile: any;
   fd = new FormData();
   size = 0;
+  userImagesNames: number;
+  fileSizeError = [];
+  fileTypeError = [];
+  uploadProcess = false;
   selected = new FormControl('valid', [
     Validators.required
   ]);
@@ -51,7 +55,7 @@ export class SellComponent implements OnInit {
   productContactError = new FormControl('', [
     Validators.required
   ]);
-  options = ['Book', 'House', 'Others'];
+  options = ['Book', 'House', 'Others', 'Demand'];
   matcher = new MyErrorStateMatcher();
   constructor(private productService: ProductService, private houseService: HouseService,
     private bookService: BookService, private httpClient: HttpClient, public authService: AuthService) { }
@@ -66,18 +70,34 @@ export class SellComponent implements OnInit {
         this.ownerID = this.profile.name;
       });
     }
-    console.log(this.ownerID);
+    console.log(this.ownerID + 'zheshi owner ID');
   }
   upload() {
-    this.httpClient.post('api/v1/image', this.fd)
+    console.log(this.selectedFile + 'shang chuan wenjian');
+    for (const file of this.selectedFile) {
+      if (file !== null) {
+        this.fd.append('logo', file[0], file.name);
+      }
+    }
+    this.httpClient.post('api/v1/image', this.fd,
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+        observe: 'events', reportProgress: true
+      })
       .subscribe((res: any) => {
-        //   console.log(res);
-        for (let i = 0; i < res.length; i++) {
+        if (res.type === HttpEventType.UploadProgress) {
+          this.uploadProcess = true;
+          console.log('uploading');
           console.log(res);
-          this.imgUrl[i] = `${window.location.origin}/api/v1/images/${res[i]}`;
-          console.log(this.imgUrl[i]);
+        } else if (res instanceof HttpResponse) {
+          console.log('upload successful');
+          console.log(res);
+          for (let i = 0; i < res.body.length; i++) {
+            this.imgUrl[i] = `${window.location.origin}/api/v1/images/${res.body[i]}`;
+            console.log(this.imgUrl[i]);
+          }
+          this.addProduct(this.type);
         }
-        this.addProduct(this.type);
       });
   }
   addProduct(type) {
@@ -88,6 +108,9 @@ export class SellComponent implements OnInit {
       this.houseService.setNewllHouse(this.address, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl);
     }
     if (type === 'Book') {
+      this.bookService.setBook(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, this.department);
+    }
+    if (type === 'Demand') {
       this.bookService.setBook(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, this.department);
     }
   }
@@ -103,6 +126,11 @@ export class SellComponent implements OnInit {
   }
   isBook(option) {
     if (option === 'Book') {
+      return true;
+    }
+  }
+  isDemand(option) {
+    if (option === 'Demand') {
       return true;
     }
   }
@@ -125,24 +153,45 @@ export class SellComponent implements OnInit {
   onSecondSelect(k) { // add plus signal
     this.i = this.i + 1;
     this.names.push(this.i);
+    this.selectedFile[this.i] = null;
     console.log(this.names);
   }
   onFileSelect(event) {
     console.log(event);
-    if (event.target.files.length === 0 && this.names.length === 0) { // when use click cancel when upload file
-      this.fd.delete('logo');
+    // this.size = event.target.files[0].size / 1024;
+    this.userImagesNames = event.target.name;
+    // console.log(this.size);
+    if (event.target.files.length === 0) { // when use click cancel when upload file
+      this.selectedFile[this.userImagesNames] = null;
+      console.log('wen jian qu xiao');
       return 0;
-    } else if (event.target.files.length !== 0 && this.size < 1024) {
-      this.selectedFile = <File>event.target.files;
-      console.log(this.selectedFile);
-      console.log(this.selectedFile[0].size / 1024);
-      for (const file of this.selectedFile) {
-        this.fd.append('logo', file, file.name);
+    } else if (event.target.files.length !== 0 && (event.target.files[0].size / 1024) < 1024) {
+      this.fileTypeError[this.userImagesNames] = this.checkTypeError(event.target.files[0].name);
+      this.fileSizeError[event.target.name] = false;
+      // this.userImagesNames = event.target.name;
+      if (!this.fileTypeError[this.userImagesNames]) {
+        this.selectedFile[this.userImagesNames] = event.target.files;
+        console.log(this.selectedFile[this.userImagesNames][0]);
+        console.log(this.selectedFile);
       }
-    } else {
+      //  console.log(this.selectedFile);
+    } else if ((event.target.files[0].size / 1024) > 1024) {
+      this.fileSizeError[this.userImagesNames] = true;
+      console.log(+this.userImagesNames);
       console.log('image are to large !');
       return 0;
     }
   }
-
+  checkFileError(i) {
+    return this.fileSizeError[i];
+  }
+  checkTypeError(filename: string) {
+    let fileType = filename.toLocaleLowerCase().split('.');
+    if (fileType[1].includes('jpg') || fileType[1].includes('png') || fileType[1].includes('bmp') || fileType[1].includes('jpeg')) {
+      console.log(fileType[1]);
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

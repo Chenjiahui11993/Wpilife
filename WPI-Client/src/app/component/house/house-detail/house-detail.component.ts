@@ -13,6 +13,12 @@ export class HouseDetailComponent implements OnInit {
   Config: NgxCarousel;
   houseDetail: HouseModel;
   id: number;
+  address: string;
+  price: string;
+  contact: string;
+  desc: string;
+  ownerID: string;
+  imgUrl = [];
   constructor( private houseService: HouseService, private router: Router, private activateRouter: ActivatedRoute) {
     this.Config = {
       grid: {xs: 1, sm: 1, md: 1, lg: 1, all: 0},
@@ -36,10 +42,15 @@ export class HouseDetailComponent implements OnInit {
    this.houseService.gethouse((this.id))
    .then(house =>  {
      this.houseDetail = house;
-     console.log(this.houseDetail);
+     this.address = this.houseDetail.Address;
+     this.desc = this.houseDetail.description;
+     this.contact = this.houseDetail.contactInfo;
+     this.price = this.houseDetail.price;
+     this.ownerID = this.houseDetail.ownerID;
+     this.imgUrl = this.houseDetail.imgUrl;
     })
    .catch((e) => {
-     console.log(e);
+    this.router.navigate(['/Not-found']);
    });
   }
 

@@ -45,7 +45,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.temp = id / 6;
     this.p = Math.ceil(this.temp);
     // console.log(this.p);
-    this.router.navigate(['/product-list', id, id, 'desc']);
+    this.router.navigate(['/product-list', id]);
     this.productService.setCurrentPage(this.p);
   }
 }

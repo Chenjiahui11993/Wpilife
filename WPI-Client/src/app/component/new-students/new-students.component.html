@@ -10,66 +10,27 @@
           </div>
           <div class="col-md-6 col-xs-6 text-center menu-1">
             <ul>
-              <li class="has-dropdown">
-                <a href="product.html">Shop</a>
-                <ul class="dropdown">
-                  <li>
-                    <a href="single.html">Single Shop</a>
-                  </li>
-                </ul>
+              <li>
+                <a [routerLink]="''">Home</a>
               </li>
               <li>
-                <a href="about.html">About</a>
+                <a [routerLink]="'/house-list'">House</a>
               </li>
-              <li class="has-dropdown">
-                <a href="services.html">Services</a>
-                <ul class="dropdown">
-                  <li>
-                    <a href="#">Web Design</a>
-                  </li>
-                  <li>
-                    <a href="#">eCommerce</a>
-                  </li>
-                  <li>
-                    <a href="#">Branding</a>
-                  </li>
-                  <li>
-                    <a href="#">API</a>
-                  </li>
-                </ul>
+              <li>
+                <a [routerLink]="'/survival-guide'">New Students</a>
+              </li>
+              <li>
+                <a [routerLink]="'/sell'">Sell Your Product</a>
               </li>
               <li>
                 <a href="contact.html">Contact</a>
               </li>
             </ul>
           </div>
-          <div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
-            <ul>
-              <li class="search">
-                <div class="input-group">
-                  <input type="text" placeholder="Search..">
-                  <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button">
-                      <i class="icon-search"></i>
-                    </button>
-                  </span>
-                </div>
-              </li>
-              <li class="shopping-cart">
-                <a href="#" class="cart">
-                  <span>
-                    <small>0</small>
-                    <i class="icon-shopping-cart"></i>
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
-
       </div>
     </nav>
-
+    
     <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(../../assets/img_bg_2.jpg);">
       <div class="overlay"></div>
       <div class="container">
@@ -85,7 +46,6 @@
         </div>
       </div>
     </header>
-
     <div id="fh5co-product">
       <div class="container">
         <div class="row animate-box">
@@ -104,7 +64,7 @@
                 <i>Catalog:</i>
               </h3>
             </div>
-            <mat-radio-group class="example-radio-group" id ="example-radio-group" [(ngModel)]="selected">
+            <mat-radio-group class="example-radio-group" id="example-radio-group" [(ngModel)]="selected">
               <mat-radio-button class="example-radio-button" *ngFor="let index of Indexs" [value]="index">
                 {{index}}
               </mat-radio-button>
@@ -124,17 +84,9 @@
                 </p>
                 <p align="justify">
                   WPI CSSA主要是由来自中国的学生和学者组成的志愿性组织。目前我们已有超过300名成员,其中包括学生、教授、访问学者及家属等。CSSA的主要任务是为中国学生学者提供一些生活和学习上的帮助,包括接新生、帮助新生安顿和适应这里的生活、举办中秋晚会、春节晚会等具有中国特色的活动等等。
-                
                   这本新生手册主要是为了帮助刚来到美国,来到Worcester的新同学、朋友们尽快地适应这里的生活、学习和工作。本手册经过WPI中国学生学者联谊会成员们的共同努力制作而成。这里, 我们向所有参与编写和校正的同学们表示深深的感谢!
-                
-                
-                  本手册中不足之处恳请大家及时指正,我们会不断地更新和完善。本手册中出现的一些网上购物地点或者订机票代理等的电话,完全是同学们平时积累的经验所得,不存在任何商业广告行为。
-                
-             
-                  我们也真诚地希望能有更多热心的同学、朋友们加入WPI中国学生学者联谊会,互相帮助,共同努力, 更好地为这里的中国学生学者们服务!
-            
-               
-                  最后, 祝大家在WPI过得愉快、充实!
+                  本手册中不足之处恳请大家及时指正,我们会不断地更新和完善。本手册中出现的一些网上购物地点或者订机票代理等的电话,完全是同学们平时积累的经验所得,不存在任何商业广告行为。 我们也真诚地希望能有更多热心的同学、朋友们加入WPI中国学生学者联谊会,互相帮助,共同努力,
+                  更好地为这里的中国学生学者们服务! 最后, 祝大家在WPI过得愉快、充实!
                 </p>
                 <p align="right">
                   CSSA 敬上 2017年夏
@@ -188,117 +140,6 @@
         </div>
       </div>
     </div>
-
-    <footer id="fh5co-footer" role="contentinfo">
-      <div class="container">
-        <div class="row row-pb-md">
-          <div class="col-md-4 fh5co-widget">
-            <h3>Shop.</h3>
-            <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto
-              culpa amet.
-            </p>
-          </div>
-          <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
-            <ul class="fh5co-footer-links">
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">Help</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
-              <li>
-                <a href="#">Terms</a>
-              </li>
-              <li>
-                <a href="#">Meetups</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
-            <ul class="fh5co-footer-links">
-              <li>
-                <a href="#">Shop</a>
-              </li>
-              <li>
-                <a href="#">Privacy</a>
-              </li>
-              <li>
-                <a href="#">Testimonials</a>
-              </li>
-              <li>
-                <a href="#">Handbook</a>
-              </li>
-              <li>
-                <a href="#">Held Desk</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
-            <ul class="fh5co-footer-links">
-              <li>
-                <a href="#">Find Designers</a>
-              </li>
-              <li>
-                <a href="#">Find Developers</a>
-              </li>
-              <li>
-                <a href="#">Teams</a>
-              </li>
-              <li>
-                <a href="#">Advertise</a>
-              </li>
-              <li>
-                <a href="#">API</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row copyright">
-          <div class="col-md-12 text-center">
-            <p>
-              <small class="block">Copyright &copy; 2017.Company name All rights reserved.
-                <a target="_blank" href="http://guantaow.taobao.com/">厚朴网络淘宝店</a>
-                <a target="_blank" href="http://www.moobnn.com">网页模板</a>
-              </small>
-            </p>
-            <ul class="fh5co-social-icons">
-              <li>
-                <a href="#">
-                  <i class="icon-twitter"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon-facebook"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon-linkedin"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon-dribbble"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    </footer>
-  </div>
-
-  <div class="gototop js-top">
-    <a href="#" class="js-gotop">
-      <i class="icon-arrow-up"></i>
-    </a>
+    <app-footer></app-footer>
   </div>
 </body>

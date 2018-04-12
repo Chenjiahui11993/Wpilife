@@ -10,20 +10,16 @@ import { ProductComponent } from './component/product/product.component';
 import { ProductDetailComponent } from './component/product/product-detail/product-detail.component';
 import { HeaderComponent } from './component/header/header.component';
 import { NavComponent } from './component/nav/nav.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCarouselModule } from 'ngx-carousel';
 import {NgxPaginationModule} from 'ngx-pagination';
 import 'hammerjs';
 import { TestComponent } from './test/test.component';
-import { ProductDescComponent } from './component/product/product-detail/product-desc/product-desc.component';
-import { ProductContactComponent } from './component/product/product-detail/product-contact/product-contact.component';
 import { ProductService } from '../app/Service/product-service';
 import { CollaborationService } from '../app/Service/collaboration.service';
 import { HouseService } from './Service/house-service';
 import { HouseDetailComponent } from './component/house/house-detail/house-detail.component';
-import { HouseDescComponent } from './component/house/house-detail/house-desc/house-desc.component';
-import { HouseContactComponent } from './component/house/house-detail/house-contact/house-contact.component';
 import { BookComponent } from './component/book/book.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule,  MatIconModule, MatInputModule} from '@angular/material';
@@ -48,6 +44,9 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
 import { SearchPipe } from './Pipe/search.pipe';
 import { HouseSearchPipe } from './Pipe/house-search.pipe';
 import { ProductSearchPipe } from './Pipe/product-search.pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
+import { DemandComponent } from './component/demand/demand.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,11 +57,7 @@ import { ProductSearchPipe } from './Pipe/product-search.pipe';
     HeaderComponent,
     NavComponent,
     TestComponent,
-    ProductDescComponent,
-    ProductContactComponent,
     HouseDetailComponent,
-    HouseDescComponent,
-    HouseContactComponent,
     BookComponent,
     BookDetailComponent,
     NewStudentsComponent,
@@ -77,6 +72,7 @@ import { ProductSearchPipe } from './Pipe/product-search.pipe';
     SearchPipe,
     HouseSearchPipe,
     ProductSearchPipe,
+    DemandComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,7 +93,9 @@ import { ProductSearchPipe } from './Pipe/product-search.pipe';
     ReactiveFormsModule,
     MatIconModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    MatDividerModule
   ],
   providers: [
               ProductService,

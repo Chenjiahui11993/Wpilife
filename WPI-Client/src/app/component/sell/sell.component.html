@@ -10,66 +10,26 @@
           </div>
           <div class="col-md-6 col-xs-6 text-center menu-1">
             <ul>
-              <li class="has-dropdown">
-                <a href="product.html">Shop</a>
-                <ul class="dropdown">
-                  <li>
-                    <a href="single.html">Single Shop</a>
-                  </li>
-                </ul>
+              <li>
+                <a [routerLink]="''">Home</a>
               </li>
               <li>
-                <a href="about.html">About</a>
+                <a [routerLink]="'/house-list'">House</a>
               </li>
-              <li class="has-dropdown">
-                <a href="services.html">Services</a>
-                <ul class="dropdown">
-                  <li>
-                    <a href="#">Web Design</a>
-                  </li>
-                  <li>
-                    <a href="#">eCommerce</a>
-                  </li>
-                  <li>
-                    <a href="#">Branding</a>
-                  </li>
-                  <li>
-                    <a href="#">API</a>
-                  </li>
-                </ul>
+              <li>
+                <a [routerLink]="'/survival-guide'">New Students</a>
+              </li>
+              <li>
+                <a [routerLink]="'/sell'">Sell Your Product</a>
               </li>
               <li>
                 <a href="contact.html">Contact</a>
               </li>
             </ul>
           </div>
-          <div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
-            <ul>
-              <li class="search">
-                <div class="input-group">
-                  <input type="text" placeholder="Search..">
-                  <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button">
-                      <i class="icon-search"></i>
-                    </button>
-                  </span>
-                </div>
-              </li>
-              <li class="shopping-cart">
-                <a href="#" class="cart">
-                  <span>
-                    <small>0</small>
-                    <i class="icon-shopping-cart"></i>
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
-
       </div>
     </nav>
-
     <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(../../assets/img_bg_2.jpg);">
       <div class="overlay"></div>
       <div class="container">
@@ -85,15 +45,14 @@
         </div>
       </div>
     </header>
-
     <div id="fh5co-product">
       <div class="container">
         <div class="row animate-box">
           <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
             <span>Cool Stuff</span>
             <h2>Sell.</h2>
-            <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam
-              dolor eius.
+            <p>If you find some bug or have some suggestions, please contack us at: hbchenjh@gmail.com. We are hearing all the
+              time. your feedback makes our website better!
             </p>
           </div>
         </div>
@@ -152,18 +111,23 @@
                       <textarea [(ngModel)]="desc" matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" name="productDescp">
                              </textarea>
                     </mat-form-field>
-
-                    <input type="file" multiple name="logo" (change)="onFileSelect($event)">
+                    <input type="file" name="0" (change)="onFileSelect($event)">
+                    <p *ngIf="fileSizeError[0]">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
+                    <p *ngIf="fileTypeError[0]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
                     <div *ngFor="let time of names">
-                      <input type="file" multiple [name]="time" [id]= "time" (change)="onFileSelect($event)">
+                      <input type="file" [name]="time" (change)="onFileSelect($event)">
+                      <p *ngIf="checkFileError(time)">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
+                      <p *ngIf="fileTypeError[time]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
                     </div>
                     <div class="plus">
                       <i class="fa fa-plus" aria-hidden="true" (click)="onSecondSelect()"></i>
                     </div>
-                    <button class="btn btn-primary" (click)="upload()" [disabled]="isBookDisable()">Submit</button>
+                    <button *ngIf="!uploadProcess" class="btn btn-primary" (click)="upload()" [disabled]="isBookDisable()">Submit</button>
+                    <h3>
+                      {{ownerID}}
+                    </h3>
                   </form>
                 </div>
-
                 <div *ngIf="isHouse(type)">
                   <form action="submit">
                     <mat-form-field class="form-group" [floatLabel]="'always'">
@@ -205,17 +169,62 @@
                       <textarea [(ngModel)]="desc" matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" name="productDescp">
                              </textarea>
                     </mat-form-field>
-                    <input type="file" multiple name="logo" (change)="onFileSelect($event)">
+                    <input type="file" name="0" (change)="onFileSelect($event)">
+                    <p *ngIf="fileSizeError[0]">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
+                    <p *ngIf="fileTypeError[0]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
                     <div *ngFor="let time of names">
-                      <input type="file" multiple [name]="time" (change)="onFileSelect($event)">
+                      <input type="file" [name]="time" (change)="onFileSelect($event)">
+                      <p *ngIf="checkFileError(time)">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
+                      <p *ngIf="fileTypeError[time]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
                     </div>
                     <div class="plus">
                       <i class="fa fa-plus" aria-hidden="true" (click)="onSecondSelect()"></i>
                     </div>
-                    <button class="btn btn-primary" (click)="upload()" [disabled]="isBookDisable()">Submit</button>
+                    <button *ngIf="!uploadProcess" class="btn btn-primary" (click)="upload()" [disabled]="isBookDisable()">Submit</button>
+                    <h3>
+                      {{ownerID}}
+                    </h3>
                   </form>
                 </div>
-
+                <!--demand list-->
+                <div *ngIf="isDemand(type)">
+                  <form action="submit">
+                    <mat-form-field class="form-group" [floatLabel]="'always'">
+                      <mat-placeholder>
+                        <mat-icon>
+                          create
+                        </mat-icon>
+                        <i>Please tell us what you want</i>
+                      </mat-placeholder>
+                      <input matInput [(ngModel)]="name" [formControl]="productNameError" [errorStateMatcher]="matcher" name="productName" required>
+                      <mat-error *ngIf="productNameError.hasError('required')">Product Name are Required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="form-group" [floatLabel]="'always'">
+                      <mat-placeholder>
+                        <mat-icon>
+                          create
+                        </mat-icon>
+                        <i>Please Input your Contact Information</i>
+                      </mat-placeholder>
+                      <input matInput [(ngModel)]="contactInfo" [formControl]="productContactError" [errorStateMatcher]="matcher" name="productContact"
+                        required>
+                      <mat-error *ngIf="productContactError.hasError('required')">Contact Information are Required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="form-group" [floatLabel]="'always'">
+                      <mat-placeholder>
+                        <mat-icon>create</mat-icon>
+                        <i> You can provide other information which you think is necessary at here</i>
+                      </mat-placeholder>
+                      <textarea [(ngModel)]="desc" matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" name="productDescp">
+                             </textarea>
+                    </mat-form-field>
+                    <button *ngIf="!uploadProcess" class="btn btn-primary" (click)="addProduct(type)" [disabled]="isBookDisable()">Submit</button>
+                    <h3>
+                      {{ownerID}}
+                    </h3>
+                  </form>
+                </div>
+                <!--book section-->
                 <div *ngIf="isBook(type)">
                   <form action="submit">
                     <mat-form-field class="form-group">
@@ -267,141 +276,37 @@
                       <textarea [(ngModel)]="desc" matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" name="productDescp">
                              </textarea>
                     </mat-form-field>
-                    <input type="file" multiple name="logo" (change)="onFileSelect($event)">                   
-                     <div *ngFor="let time of names">
-                      <input type="file" multiple [name]="time" (change)="onFileSelect($event)" >
+                    <input type="file" name="0" (change)="onFileSelect($event)">
+                    <p *ngIf="fileSizeError[0]">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
+                    <p *ngIf="fileTypeError[0]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
+                    <div *ngFor="let time of names">
+                      <input type="file" [name]="time" (change)="onFileSelect($event)">
+                      <p *ngIf="checkFileError(time)">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
+                      <p *ngIf="fileTypeError[time]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
                     </div>
                     <div class="plus" (click)="onSecondSelect(i)">
                       <i class="fa fa-plus" aria-hidden="true"></i>
                     </div>
-                    <button class="btn btn-primary" (click)="upload()" [disabled]="isBookDisable()">Submit</button>
+                    <button *ngIf="!uploadProcess" class="btn btn-primary" (click)="upload()" [disabled]="isBookDisable()">Submit</button>
                     <h3>
                       {{ownerID}}
                     </h3>
                   </form>
                 </div>
+                <mat-progress-spinner *ngIf="uploadProcess" class="example-margin" color="primary" mode="indeterminate" value="50">
+                </mat-progress-spinner>
               </div>
             </div>
           </div>
         </div>
         <ng-template #login>
           <h4>
-            Please <a id="login" (click)="authService.login()">Login</a> First to post your stuff to sell
+            Please
+            <a id="login" (click)="authService.login()">Login</a> First to post your stuff to sell
           </h4>
         </ng-template>
       </div>
     </div>
-
-    <footer id="fh5co-footer" role="contentinfo">
-      <div class="container">
-        <div class="row row-pb-md">
-          <div class="col-md-4 fh5co-widget">
-            <h3>Shop.</h3>
-            <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto
-              culpa amet.
-            </p>
-          </div>
-          <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
-            <ul class="fh5co-footer-links">
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">Help</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
-              <li>
-                <a href="#">Terms</a>
-              </li>
-              <li>
-                <a href="#">Meetups</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
-            <ul class="fh5co-footer-links">
-              <li>
-                <a href="#">Shop</a>
-              </li>
-              <li>
-                <a href="#">Privacy</a>
-              </li>
-              <li>
-                <a href="#">Testimonials</a>
-              </li>
-              <li>
-                <a href="#">Handbook</a>
-              </li>
-              <li>
-                <a href="#">Held Desk</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
-            <ul class="fh5co-footer-links">
-              <li>
-                <a href="#">Find Designers</a>
-              </li>
-              <li>
-                <a href="#">Find Developers</a>
-              </li>
-              <li>
-                <a href="#">Teams</a>
-              </li>
-              <li>
-                <a href="#">Advertise</a>
-              </li>
-              <li>
-                <a href="#">API</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row copyright">
-          <div class="col-md-12 text-center">
-            <p>
-              <small class="block">Copyright &copy; 2017.Company name All rights reserved.
-                <a target="_blank" href="http://guantaow.taobao.com/">厚朴网络淘宝店</a>
-                <a target="_blank" href="http://www.moobnn.com">网页模板</a>
-              </small>
-            </p>
-            <ul class="fh5co-social-icons">
-              <li>
-                <a href="#">
-                  <i class="icon-twitter"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon-facebook"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon-linkedin"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon-dribbble"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    </footer>
-  </div>
-
-  <div class="gototop js-top">
-    <a href="#" class="js-gotop">
-      <i class="icon-arrow-up"></i>
-    </a>
+    <app-footer></app-footer>
   </div>
 </body>

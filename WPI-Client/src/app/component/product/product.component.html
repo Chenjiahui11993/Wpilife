@@ -10,33 +10,17 @@
 					</div>
 					<div class="col-md-6 col-xs-6 text-center menu-1">
 						<ul>
-							<li class="has-dropdown">
-								<a href="product.html">Shop</a>
-								<ul class="dropdown">
-									<li>
-										<a href="single.html">Single Shop</a>
-									</li>
-								</ul>
+							<li>
+								<a [routerLink]="''">Home</a>								
 							</li>
 							<li>
-								<a href="about.html">About</a>
+									<a [routerLink]="'/house-list'">House</a>
+								</li>
+							<li>
+								<a [routerLink]="'/survival-guide'">New Students</a>
 							</li>
-							<li class="has-dropdown">
-								<a href="services.html">Services</a>
-								<ul class="dropdown">
-									<li>
-										<a href="#">Web Design</a>
-									</li>
-									<li>
-										<a href="#">eCommerce</a>
-									</li>
-									<li>
-										<a href="#">Branding</a>
-									</li>
-									<li>
-										<a href="#">API</a>
-									</li>
-								</ul>
+							<li>
+								<a [routerLink]="'/sell'">Sell Your Product</a>
 							</li>
 							<li>
 								<a href="contact.html">Contact</a>
@@ -54,10 +38,8 @@
 						</ul>
 					</div>
 				</div>
-
 			</div>
 		</nav>
-
 		<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(../../assets/img_bg_2.jpg);">
 			<div class="overlay"></div>
 			<div class="container">
@@ -66,26 +48,23 @@
 						<div class="display-t">
 							<div class="display-tc animate-box" data-animate-effect="fadeIn">
 								<h1>Others</h1>
-								<h2>Free html5 templates Made</h2>
+								<h2>You can find Cars, bookshelf and almost everything here</h2>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</header>
-
 		<div id="fh5co-product">
 			<div class="container">
 				<div class="row animate-box">
 					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 						<span>Cool Stuff</span>
 						<h2>Others.</h2>
-						<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor
-							eius.
+						<p>If you find some bug or have some suggestions, please contack us at: hbchenjh@gmail.com. We are hearing all the time. your feedback makes our website better!
 						</p>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="col-md-4 text-center" *ngFor="let product of allProducts | productSearch: searchValue | paginate: { id:'product', itemsPerPage: 6, currentPage: p }">
 						<div class="product" (click)="ToProductDetail(product.id)">
@@ -95,7 +74,7 @@
 								<h3>
 									<i>{{product.name}}</i>
 								</h3>
-								<span class="price">{{product.price}}</span>
+								<span class="price">{{product.price}}$</span>
 							</div>
 						</div>
 					</div>

@@ -46,7 +46,7 @@ export class BookService {
                 console.log(res);
             });
     }
-    setBook(name: string, price: number, ownerID: string, desc: string,
+    setBook(name: string, price: string, ownerID: string, desc: string,
         contactInfo: string, img: string[], department: string) {
         const options = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })

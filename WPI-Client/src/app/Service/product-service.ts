@@ -48,7 +48,7 @@ export class ProductService {
             });
         return this._productSource.asObservable();
     }
-    setProduct(name: string, price: number, ownerID: string,
+    setProduct(name: string, price: string, ownerID: string,
         desc: string, contactInfo: string, img: string[], type: Boolean): Promise<ProductModel> { // TODO AUTH
         const options = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })

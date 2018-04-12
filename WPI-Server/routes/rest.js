@@ -125,8 +125,9 @@ router.post('/houses', jwtCheck, jsonParser, (req, res) => {
             console.log(e);
         });
 });
-router.post('/image', upload.array('logo', 5), function(req, res, next){
+router.post('/image', jwtCheck, upload.array('logo', 5), function(req, res, next){
     var files = req.files;
+    console.log(files);
     var resFiles = [];
     files.forEach((file, index) => {
      name = file.originalname;

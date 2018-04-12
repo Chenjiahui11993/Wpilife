@@ -49,7 +49,7 @@ export class HouseComponentComponent implements OnInit, OnDestroy {
     this.temp = id / 6;
     this.hp = Math.ceil(this.temp);
     this.houseService.setCurrentPage(this.hp);
-    this.router.navigate(['/house-list', id, id, 'desc']);
+    this.router.navigate(['/house-list', id]);
     // this.house = this.houseService.gethouse((id - 1));
     console.log('这是第' + id + '个房子');
   }
