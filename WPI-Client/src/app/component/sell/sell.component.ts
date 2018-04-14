@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../Service/product-service';
 import { HouseService } from '../../Service/house-service';
 import { BookService } from '../../Service/book-service';
+import { DemandService } from '../../Service/demand.service';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { HttpClient, HttpHeaders, HttpEventType, HttpResponse } from '@angular/common/http';
 import { AuthService } from '../../Service/auth.service';
+import { Router } from '@angular/router';
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -40,6 +42,7 @@ export class SellComponent implements OnInit {
   fileSizeError = [];
   fileTypeError = [];
   uploadProcess = false;
+  plusSignal = true;
   selected = new FormControl('valid', [
     Validators.required
   ]);
@@ -57,8 +60,8 @@ export class SellComponent implements OnInit {
   ]);
   options = ['Book', 'House', 'Others', 'Demand'];
   matcher = new MyErrorStateMatcher();
-  constructor(private productService: ProductService, private houseService: HouseService,
-    private bookService: BookService, private httpClient: HttpClient, public authService: AuthService) { }
+  constructor(private productService: ProductService, private houseService: HouseService, private demandService: DemandService,
+    private bookService: BookService, private httpClient: HttpClient, public authService: AuthService, private router: Router) { }
   ngOnInit() {
     if (this.authService.userProfile && this.authService.isAuthenticated()) {
       this.profile = this.authService.userProfile;
@@ -102,16 +105,28 @@ export class SellComponent implements OnInit {
   }
   addProduct(type) {
     if (type === 'Others') {
-      this.productService.setProduct(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, true);
+      this.productService.setProduct(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, true)
+      .catch(e => {
+        this.router.navigate(['/error']);
+      });
     }
     if (type === 'House') {
-      this.houseService.setNewllHouse(this.address, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl);
+      this.houseService.setNewllHouse(this.address, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl)
+      .catch(e => {
+        this.router.navigate(['/error']);
+      });
     }
     if (type === 'Book') {
-      this.bookService.setBook(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, this.department);
+      this.bookService.setBook(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, this.department)
+      .catch(e => {
+        this.router.navigate(['/error']);
+      });
     }
     if (type === 'Demand') {
-      this.bookService.setBook(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, this.department);
+      this.demandService.setDemandList(this.name, this.contactInfo, this.desc, this.ownerID)
+      .catch(e => {
+        this.router.navigate(['/error']);
+      });
     }
   }
   isOthers(option) {
@@ -150,11 +165,23 @@ export class SellComponent implements OnInit {
       return false;
     }
   }
+  isDemandDisable() {
+    if (this.productNameError.hasError('required') || this.productContactError.hasError('required') ||
+       this.selected.hasError('require')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   onSecondSelect(k) { // add plus signal
     this.i = this.i + 1;
-    this.names.push(this.i);
-    this.selectedFile[this.i] = null;
-    console.log(this.names);
+    if (this.i <= 4) {
+      this.names.push(this.i);
+      this.selectedFile[this.i] = null;
+      console.log(this.names);
+    } else {
+      this.plusSignal = false;
+    }
   }
   onFileSelect(event) {
     console.log(event);

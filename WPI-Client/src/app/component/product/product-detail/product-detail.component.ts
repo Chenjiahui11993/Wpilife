@@ -45,6 +45,7 @@ export class ProductDetailComponent implements OnInit {
       this.desc = this.ProductDetail.description;
       this.contactInfo = this.ProductDetail.contactInfo;
       this.imgUrl = this.ProductDetail.imgUrl;
+      this.ownerID = this.ProductDetail.ownerID;
     })
     .catch((e) => {
       this.router.navigate(['/Not-found']);

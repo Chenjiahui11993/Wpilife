@@ -1,6 +1,4 @@
-#img1 { 
-    float: left;
-}
+
 .clx {
     clear: both;
 }
@@ -25,4 +23,7 @@
         right: 0;
         z-index: 1;
         display: none;
+    }
+    .mat-tab-label{
+        margin: 0 30px;
     }

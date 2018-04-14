@@ -47,6 +47,8 @@ import { ProductSearchPipe } from './Pipe/product-search.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
 import { DemandComponent } from './component/demand/demand.component';
+import { DemandService } from './Service/demand.service';
+import { PickUpComponent } from './component/pick-up/pick-up.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,6 +75,7 @@ import { DemandComponent } from './component/demand/demand.component';
     HouseSearchPipe,
     ProductSearchPipe,
     DemandComponent,
+    PickUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,7 +106,8 @@ import { DemandComponent } from './component/demand/demand.component';
               BookService,
               CollaborationService,
               AuthService,
-              AuthGuardService
+              AuthGuardService,
+              DemandService
   ],
   bootstrap: [AppComponent]
 })

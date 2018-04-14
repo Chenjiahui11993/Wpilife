@@ -67,9 +67,9 @@
 				</div>		
 				<div class="row">						
 					<div class="col-md-4 text-center" *ngFor="let house of houses | houseSearch: searchValue | paginate: { id:'house',
-																							   itemsPerPage: 6, 
-																							   currentPage: hp }">
-						<div class="product" (click)="toHouseDetail(house.id)" >
+																							     itemsPerPage: 6, 
+																							     currentPage: hp };let i = index">
+						<div class="product" (click)="toHouseDetail(house.id,i)" >
 							<div class="product-grid" [style.background-image]="'url('+house.imgUrl[0]+')'">
 							</div> 
 							<div class="desc">
@@ -81,7 +81,7 @@
 						</div>
 					</div>	
 					</div>
-					<pagination-controls class="pageButton" id="house" (pageChange)="hp = $event" maxSize="9" directionLinks="true" autoHide="true"
+					<pagination-controls class="pageButton" id="house" (pageChange)="getPageNumber($event)" maxSize="9" directionLinks="true" autoHide="true"
 					screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
 				   </pagination-controls>						
 			</div>

@@ -51,7 +51,23 @@
             <h2>Items in Demand.</h2>
           </div>
         </div>
-
+        <div class="row">
+          <div class="col-md-6 text-center" *ngFor="let demand of demandList | paginate: { id:'demands',
+						                                                                             itemsPerPage: 4, 
+                                                                                         currentPage: dp }">
+            <mat-list>
+              <mat-list-item>demand name: {{demand.name}}</mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item>demand Description:: {{demand.description}}</mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item>Contact Information: {{demand.contactInfo}}</mat-list-item>
+              <mat-divider></mat-divider>
+            </mat-list>
+          </div>
+        </div>
+        <pagination-controls class="pageButton" id="demands" (pageChange)="dp = $event" maxSize="20" directionLinks="true" autoHide="true"
+          screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
       </div>
     </div>
     <app-footer></app-footer>

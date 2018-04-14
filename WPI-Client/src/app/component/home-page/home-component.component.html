@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+
 <html lang="en">
-<body>
+  <body> 
   <!-- Navigation
     ==========================================-->
   <app-nav></app-nav>
@@ -41,19 +41,19 @@
           <p>Cars, Bed.....</p>
         </div>
         <div class="col-md-2 col-sm-6 service">
+          <i [routerLink]="'demand-list'" class="fa fa-tag"></i>
+          <h4>
+            <strong>Demand list</strong>
+          </h4>
+          <p>Someone needs those things.</p>
+        </div>
+        <div class="col-md-2 col-sm-6 service">
           <i [routerLink]="'sell'" class="fa fa-money"></i>
           <h4>
             <strong>Sell your Product</strong>
           </h4>
           <p>We are glad to help you save money.</p>
-        </div>
-        <div class="col-md-2 col-sm-6 service">
-          <i [routerLink]="'sell'" class="fa fa-tag"></i>
-          <h4>
-            <strong>Demand list</strong>
-          </h4>
-          <p>If you need something not exist on our website, you can post your request here.</p>
-        </div>
+        </div>  
       </div>
     </div>
   </div>
@@ -132,27 +132,22 @@
           <strong>New</strong> Students</h2>
         <hr>
         <div class="clearfix"></div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
+        <p>Welcome to WPI, we are waiting for you!</p>
       </div>
       <div class="row">
         <div class="col-md-6">
-          <img src="../../assets/about.png" class="img-responsive"> </div>
+          <img src="../../assets/11.jpg" class="img-responsive"> </div>
         <div class="col-md-6">
-          <div class="about-text" [routerLink]="['survival-guide']">
+          <div class="about-text" >
             <i class="fa fa-users"></i>
-            <h4>Survival Guide</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh
-              ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis
-              bibendum.</p>
+            <h4 [routerLink]= "['survival-guide']"><a id="survival-guide">Survival Guide</a></h4>
+            <p>New Students? Look Here, we have prepare everything for you.</p>
             <i class="fa fa-puzzle-piece"></i>
-            <h4>Airport pickup</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh
-              ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis
-              bibendum.</p>
+            <h4 [routerLink]= "['pickup']">Airport pickup</h4>
+            <p>For more information, please click it.</p>
             <i class="fa fa-check-square-o"></i>
             <h4>Temporary Residence</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh
-              ante facilisis bibendum dolor feugiat at.</p>
+            <p>For more information, please click it.</p>
           </div>
         </div>
       </div>
@@ -169,24 +164,12 @@
       </div>
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <div id="testimonial" class="owl-carousel owl-theme">
+          <div id="testimonial">
             <div class="item">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
                 nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
               <p>
                 <strong>John DOE</strong>, CEO, Company.</p>
-            </div>
-            <div class="item">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
-                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
-              <p>
-                <strong>Jenny DOE</strong>, CEO, Company.</p>
-            </div>
-            <div class="item">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo
-                nibh ante facilisis bibendum dolor feugiat at duis sed dapibus leo nec ornare diam.</p>
-              <p>
-                <strong>John DOEn</strong>, CEO, Company.</p>
             </div>
           </div>
         </div>
@@ -200,36 +183,36 @@
           <strong>team</strong>
         </h2>
         <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
+        <p>Our team is a multi-Culture team. We are here to make our life much eaiser in WPI</p>
       </div>
       <div id="row">
         <div class="col-md-3 col-sm-6 team">
           <div class="thumbnail">
-            <img src="../../assets/t01.jpg" alt="..." class="img-circle team-img">
+            <img src="../../assets/Jiahui5.jpg" alt="..." class="img-circle team-img">
             <div class="caption">
-              <h3>Jessica Wally</h3>
-              <p>Founder</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3>Jiahui Chen</h3>
+              <p>Founder WPIlife 2.0</p>
+              <p>Front and Back End design. proficiency in Angular 2+ CSS3 HTML5 JAVA Node</p>
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6 team">
           <div class="thumbnail">
-            <img src="../../assets/t02.jpg" alt="..." class="img-circle team-img">
+            <img src="../../assets/muzammil pic2.jpg" alt="..." class="img-circle team-img">
             <div class="caption">
-              <h3>Mike Sloan</h3>
-              <p>Web Designer</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3>Muzammil</h3>
+              <p>Database Designer/marketing manager</p>
+              <p>Database Designer Good at Mysql, Python, Java.</p>
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6 team">
           <div class="thumbnail">
-            <img src="../../assets/t03.jpg" alt="..." class="img-circle team-img">
+            <img src="../../assets/bao.jpg" alt="..." class="img-circle team-img">
             <div class="caption">
-              <h3>Michele Doe</h3>
-              <p>Web Designer</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3>YuXiang Bao</h3>
+              <p>Web Designer/CSSA Contacts</p>
+              <p>Good at HTML5 CSS3 Jquery.</p>
             </div>
           </div>
         </div>
@@ -237,8 +220,8 @@
           <div class="thumbnail">
             <img src="../../assets/t04.jpg" alt="..." class="img-circle team-img">
             <div class="caption">
-              <h3>Larry Evans</h3>
-              <p>Project Manager</p>
+              <h3>Mo Cheng</h3>
+              <p>Data Manager</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
           </div>
@@ -253,7 +236,7 @@
         <h2>
           <strong>Contact</strong> us</h2>
         <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
+        <p>If you have any suggestion or want to join our R & D team team, please contact us:</p>
       </div>
       <div class="col-md-8 col-md-offset-2">
         <div class="col-md-4">
@@ -271,28 +254,6 @@
         </div>
         <hr>
         <div class="clearfix"></div>
-      </div>
-      <div class="col-md-8 col-md-offset-2">
-        <hr>
-        <h3>Leave us a message</h3>
-        <form>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <input type="email" class="form-control" placeholder="Name">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email">
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <textarea class="form-control" rows="4" placeholder="Message"></textarea>
-          </div>
-          <button type="submit" class="btn btn-default">Send Message</button>
-        </form>
       </div>
     </div>
   </div>
@@ -330,5 +291,4 @@
     </div>
   </nav>
 </body>
-
 </html>

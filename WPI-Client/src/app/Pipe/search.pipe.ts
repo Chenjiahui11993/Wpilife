@@ -8,7 +8,7 @@ export class SearchPipe implements PipeTransform {
   transform(books: BookModel[], term: string): BookModel[] {
     console.log(term);
     console.log(books);
-    return books.filter(book => book.name.trim().toLowerCase().includes(term));
+    return books.filter(book => book.name.trim().toLocaleLowerCase().includes(term.toLocaleLowerCase()));
     // console.log(book.name);
   }
 }

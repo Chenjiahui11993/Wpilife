@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class BookService {
     newBook: BookModel;
+    currentPage: number;
     private _bookSource = new BehaviorSubject<BookModel[]>([]);
     constructor(private httpClient: HttpClient, private router: Router) { }
     currentPageNumber: number;
@@ -61,9 +62,13 @@ export class BookService {
                 this.router.navigate(['/success']);
             })
             .catch((e) => {
-                this.router.navigate(['/error']);
                 return Promise.reject(e.body || e);
             });
-
+    }
+    getCurrentPage() {
+        return this.currentPage;
+    }
+    setCurrentPage(page: number) {
+        this.currentPage = page;
     }
 }

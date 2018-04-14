@@ -22,9 +22,10 @@ export class BookComponent implements OnInit, OnDestroy {
   selectedBook: BookModel[] = [];
   subscriptionBooks: Subscription;
   subscriptionInput: Subscription;
+  bp: number;
   constructor(private bookService: BookService, private router: Router,
     private activateRouter: ActivatedRoute) {
-
+    this.bp = this.bookService.getCurrentPage();
   }
 
   ngOnInit() {
@@ -46,6 +47,7 @@ export class BookComponent implements OnInit, OnDestroy {
     this.subscriptionBooks.unsubscribe();
   }
   ToBookDetail(id: number) {
+    this.bookService.setCurrentPage(this.bp);
     this.router.navigate(['/book-list', id]);
   }
   onChange(value: any) {
@@ -61,6 +63,9 @@ export class BookComponent implements OnInit, OnDestroy {
     }
     this.AllBooks = this.selectedBook;
     console.log(this.AllBooks);
+  }
+  getPageNumber(event) {
+    this.bp = event;
   }
 
 }

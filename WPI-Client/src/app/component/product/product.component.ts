@@ -15,7 +15,7 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeStyle } from '@angular/plat
 export class ProductComponent implements OnInit, OnDestroy {
   searchBox: FormControl = new FormControl();
   searchValue = '';
-  public p: number;
+   p: number;
   temp: number;
   user_photo: SafeUrl;
   subscriptionProducts: Subscription;
@@ -42,10 +42,12 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.subscriptionProducts.unsubscribe();
   }
   ToProductDetail(id: number) {
-    this.temp = id / 6;
-    this.p = Math.ceil(this.temp);
-    // console.log(this.p);
+    this.productService.setCurrentPage(this.p);
     this.router.navigate(['/product-list', id]);
     this.productService.setCurrentPage(this.p);
+  }
+  getPageNumber(event) {
+    this.p = event;
+  //  console.log(event);
   }
 }

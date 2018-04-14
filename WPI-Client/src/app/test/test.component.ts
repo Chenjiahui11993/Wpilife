@@ -13,6 +13,7 @@ export class TestComponent implements OnInit {
   constructor(public auth: AuthService) {
     //  auth.handleAuthentication();
   }
+  output: string;
    x = 1;
   ngOnInit() {
     // this.httpClient.get('api/v1/images')

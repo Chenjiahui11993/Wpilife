@@ -16,6 +16,9 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { AuthGuardService } from './Service/auth.guard.service';
 import { SuccessComponent } from './component/success/success.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
+import { ErrorComponent } from './component/error/error.component';
+import { DemandComponent } from './component/demand/demand.component';
+import { PickUpComponent } from './component/pick-up/pick-up.component';
 
 
 const appRouter: Routes = [
@@ -34,6 +37,8 @@ const appRouter: Routes = [
     },
     { path: 'test', component: TestComponent },
     { path: 'survival-guide', component: NewStudentsComponent },
+    { path: 'pickup', component: PickUpComponent },
+    { path: 'demand-list', component: DemandComponent },
     { path: 'callback', component: CallbackComponent },
     {
         path: 'profile',
@@ -42,6 +47,7 @@ const appRouter: Routes = [
     },
     { path: 'success', component: SuccessComponent },
     { path: 'Not-found', component: NotFoundComponent },
+    { path: 'error', component: ErrorComponent },
     { path: '**', component: NotFoundComponent }
 ];
 @NgModule({

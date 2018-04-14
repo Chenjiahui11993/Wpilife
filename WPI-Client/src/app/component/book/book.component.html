@@ -92,7 +92,7 @@
 
 					<div class="col-md-3 text-center" *ngFor="let Book of AllBooks| search: searchValue | paginate: {id:'Book',
 						                                                                        itemsPerPage: 6, 
-			                                                                                    currentPage: p }">
+			                                                                                    currentPage: bp }">
 						<div class="product" (click)="ToBookDetail(Book.id)">
 
 							<div class="product-grid" [style.background-image]="'url('+Book.imgUrl[0]+')'">
@@ -106,7 +106,7 @@
 						</div>
 					</div>
 				</div>
-				<pagination-controls class="pageButton" id="Book" (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true"
+				<pagination-controls class="pageButton" id="Book" (pageChange)="getPageNumber($event)" maxSize="9" directionLinks="true" autoHide="true"
 				 screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
 				</pagination-controls>
 			</div>

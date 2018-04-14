@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/toPromise';
@@ -39,7 +39,7 @@ export class HouseService {
                 .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
         };
         this.newHouse = new HouseModel(address, price, ownerinfo, desc, contactInfo, img, true);
-        this.httpClient.post('api/v1/houses', this.newHouse, options)
+        return this.httpClient.post('api/v1/houses', this.newHouse, options)
             .toPromise()
             .then((newHouses) => {
                 this.getAllHouses();

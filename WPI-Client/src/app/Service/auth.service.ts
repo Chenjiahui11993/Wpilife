@@ -50,7 +50,6 @@ export class AuthService {
     // Go back to the home route
     this.router.navigate(['/']);
   }
-
   public isAuthenticated(): boolean {
     // Check whether the current time is past the
     // access token's expiry time

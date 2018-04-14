@@ -9,6 +9,7 @@ var jwks = require('jwks-rsa');
 const problemService = require('../service/productService');
 const bookService = require('../service/bookService');
 const houseService = require('../service/houseService');
+const demandService = require('../service/demandService');
 var multer  = require('multer');
 const path = require('path');
 var upload = multer({ dest: 'upload/' });
@@ -149,5 +150,19 @@ router.get('/images/:id', (req, res) => {
     res.writeHead(200, {'Content-Type': 'image/png' });
     res.end(img, 'binary')
     //res.sendFile('index.html', {root: path.join(__dirname, '../../public/')})
+});
+router.get('/demands', (req, res) => {
+    demandService.getAllDemands()
+        .then((demands) => res.json(demands))
+        .catch((e) => {
+            console.log(e);
+        });
+});
+router.post('/demands', jwtCheck, jsonParser, (req, res) => {
+    demandService.addDemands(req.body)
+        .then((newDemand) => res.json(newDemand))
+        .catch((e) => {
+            console.log(e);
+        });
 });
 module.exports = router;

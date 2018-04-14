@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Location, PopStateEvent } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { HouseService } from '../../Service/house-service';
 import { ProductService } from '../../Service/product-service';
@@ -14,6 +16,8 @@ import { HouseModel } from '../house/house.model';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponentComponent implements OnInit, OnDestroy {
+  private lastPoppedUrl: string;
+  private yScrollStack: number[] = [];
   bookModel: BookModel[] = [];
   productModel: ProductModel[] = [];
   houseModel: HouseModel[] = [];
@@ -26,9 +30,40 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
   showBooks: BookModel[] = [];
   showProducts: ProductModel[] = [];
   showHouses: HouseModel[] = [];
-  constructor(private houserService: HouseService, private bookService: BookService, private productService: ProductService) { }
-
+  constructor(private houserService: HouseService, private bookService: BookService,
+    private productService: ProductService, private location: Location, private router: Router) {
+    this.houserService.setCurrentPage(0);
+    this.bookService.setCurrentPage(0);
+    this.productService.setCurrentPage(0);
+  }
   ngOnInit() {
+    this.lastPoppedUrl = '/';
+    this.location.subscribe((ev: PopStateEvent) => {
+      console.log(ev.url + 'zhi xing le');
+      if (ev.url === '') {
+        console.log('kongde');
+        this.lastPoppedUrl = '/';
+      } else {
+        this.lastPoppedUrl = ev.url;
+      }
+    });
+    this.router.events.subscribe((ev: any) => {
+      if (ev instanceof NavigationStart) {
+        if (ev.url !== this.lastPoppedUrl ) {
+          console.log('show ye bao cun' + this.lastPoppedUrl);
+          console.log('show ye bao cun 2' + ev.url);
+          this.yScrollStack.push(window.scrollY);
+        }
+      } else if (ev instanceof NavigationEnd) {
+        if (ev.url === this.lastPoppedUrl) {
+          console.log('pi pei le ');
+          this.lastPoppedUrl = undefined;
+          window.scrollTo(0, this.yScrollStack.pop());
+        } else {
+          window.scrollTo(0, 0);
+        }
+      }
+    });
     this.subscriptionHouse = this.houserService.getAllHouses()
       .subscribe(allhouse => {
         this.houseModel = allhouse;

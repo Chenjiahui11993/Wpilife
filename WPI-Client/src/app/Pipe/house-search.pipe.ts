@@ -6,7 +6,7 @@ import { HouseModel } from '../component/house/house.model';
 export class HouseSearchPipe implements PipeTransform {
 
   transform(houses: HouseModel[], term: string): HouseModel[] {
-    return houses.filter(house => house.Address.trim().toLowerCase().includes(term));
+    return houses.filter(house => house.Address.trim().toLocaleLowerCase().includes(term.toLocaleLowerCase()));
   }
 
 }

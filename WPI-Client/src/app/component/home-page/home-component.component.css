@@ -450,3 +450,6 @@ nav#footer p {
 		padding: 22% 10%;
 	}
 	}
+	#survival-guide{
+		cursor: pointer;
+	}

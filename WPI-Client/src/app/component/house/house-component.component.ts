@@ -45,13 +45,15 @@ export class HouseComponentComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.houseSubscription.unsubscribe();
   }
-  toHouseDetail(id: number) {
-    this.temp = id / 6;
-    this.hp = Math.ceil(this.temp);
+  toHouseDetail(id: number, page: number) {
+    console.log(page + '这是显示得第几个');
     this.houseService.setCurrentPage(this.hp);
     this.router.navigate(['/house-list', id]);
     // this.house = this.houseService.gethouse((id - 1));
     console.log('这是第' + id + '个房子');
   }
-
+  getPageNumber(event) {
+    this.hp = event;
+  //  console.log(event);
+  }
 }
