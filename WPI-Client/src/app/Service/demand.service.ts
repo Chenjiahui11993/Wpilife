@@ -18,8 +18,8 @@ export class DemandService {
       });
     return this.demandLists.asObservable();
   }
-  setDemandList(name: string, contactInfo: string, desc: string, ownerID: string) {
-    const demandItem = new DemandModel(name, contactInfo, desc, ownerID, true);
+  setDemandList(name: string, contactInfo: string, desc: string, ownerID: string, today: string) {
+    const demandItem = new DemandModel(name, contactInfo, desc, ownerID, true, today);
     const options = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))

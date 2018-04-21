@@ -32,7 +32,10 @@ export class HouseComponentComponent implements OnInit, OnDestroy {
         }
       );
     this.houseSubscription = this.houseService.getAllHouses()
-      .subscribe(allHouse => this.houses = allHouse);
+      .subscribe(allHouse => {
+        this.houses = allHouse;
+        this.houses = this.houses.reverse();
+      });
     this.subscriptionInput = this.searchBox
       .valueChanges
       .debounceTime(200)
@@ -46,11 +49,11 @@ export class HouseComponentComponent implements OnInit, OnDestroy {
     this.houseSubscription.unsubscribe();
   }
   toHouseDetail(id: number, page: number) {
-    console.log(page + '这是显示得第几个');
+  //  console.log(page + '这是显示得第几个');
     this.houseService.setCurrentPage(this.hp);
     this.router.navigate(['/house-list', id]);
     // this.house = this.houseService.gethouse((id - 1));
-    console.log('这是第' + id + '个房子');
+  //  console.log('这是第' + id + '个房子');
   }
   getPageNumber(event) {
     this.hp = event;

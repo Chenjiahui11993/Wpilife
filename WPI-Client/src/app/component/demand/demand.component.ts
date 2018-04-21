@@ -4,21 +4,23 @@ import { DemandService } from '../../Service/demand.service';
 @Component({
   selector: 'app-demand',
   templateUrl: './demand.component.html',
-  styleUrls: ['../product/product.component.css']
+  styleUrls: ['../product/product.component.css',
+    './demand.component.css']
 })
 export class DemandComponent implements OnInit {
   demandList = [];
   dp: number;
+  date: string;
   constructor(private demandService: DemandService) { }
   ngOnInit() {
     this.demandService.getDemandList()
-    .subscribe((demandList) => {
-    this.demandList = demandList;
-    });
+      .subscribe((demandList) => {
+        this.demandList = demandList;
+      });
   }
   getPageNumber(event) {
     this.dp = event;
-  //  console.log(event);
+    //  console.log(event);
   }
 
 }

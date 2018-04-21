@@ -21,6 +21,7 @@ export class BookDetailComponent implements OnInit {
   contactInfo: string;
   ownerID: string;
   desc: string;
+  date: string;
   constructor(private bookService: BookService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.Config = {
       grid: { xs: 1, sm: 1, md: 1, lg: 1, all: 0 },
@@ -48,7 +49,8 @@ export class BookDetailComponent implements OnInit {
               this.price = this.bookModel.price;
               this.ownerID = this.bookModel.ownerID;
               this.desc = this.bookModel.description;
-              console.log(this.bookModel);
+              this.date = this.bookModel.today;
+            //  console.log(this.bookModel);
               // return this.bookModel;
             })
             .catch((e) => {
@@ -57,6 +59,6 @@ export class BookDetailComponent implements OnInit {
         }
       );
     // console.log(this.bookModel);
-    console.log(typeof this.id);
+  //  console.log(typeof this.id);
   }
 }

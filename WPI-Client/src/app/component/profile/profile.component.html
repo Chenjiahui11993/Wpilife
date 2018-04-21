@@ -10,23 +10,23 @@
                     </div>
                     <div class="col-md-6 col-xs-6 text-center menu-1">
                         <ul>
-							<li>
-								<a [routerLink]="''">Home</a>								
-							</li>
-							<li>
-									<a [routerLink]="'/house-list'">House</a>
-								</li>
-							<li>
-								<a [routerLink]="'/survival-guide'">New Students</a>
-							</li>
-							<li>
-								<a [routerLink]="'/sell'">Sell Your Product</a>
-							</li>
-							<li>
-								<a href="contact.html">Contact</a>
-							</li>
-						</ul>
-                    </div>      
+                            <li>
+                                <a [routerLink]="''">Home</a>
+                            </li>
+                            <li>
+                                <a [routerLink]="'/house-list'">House</a>
+                            </li>
+                            <li>
+                                <a [routerLink]="'/survival-guide'">New Students</a>
+                            </li>
+                            <li>
+                                <a [routerLink]="'/sell'">Sell Your Product</a>
+                            </li>
+                            <li>
+                                <a [routerLink]="'/test'">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>
@@ -67,7 +67,9 @@
                                 </h3>
                                 <span class="price">{{product.price}}</span>
                                 <br>
-                                <i><a  (click)="onDeleteProduct(product)">Delete this ITEM</a></i>
+                                <i>
+                                    <a (click)="onDeleteProduct(product)">Delete this ITEM</a>
+                                </i>
                             </div>
                         </div>
                     </div>
@@ -81,7 +83,9 @@
                                 </h3>
                                 <span class="price">{{book.price}}</span>
                                 <br>
-                                <i><a  (click)="onDeleteBook(book)">Delete this ITEM</a></i>
+                                <i>
+                                    <a (click)="onDeleteBook(book)">Delete this ITEM</a>
+                                </i>
                             </div>
                         </div>
                     </div>
@@ -95,7 +99,9 @@
                                 </h3>
                                 <span class="price">{{house.price}}</span>
                                 <br>
-                                <i><a  (click)="onDeleteHouse(house)">Delete this ITEM</a></i>
+                                <i>
+                                    <a (click)="onDeleteHouse(house)">Delete this ITEM</a>
+                                </i>
                             </div>
                         </div>
                     </div>

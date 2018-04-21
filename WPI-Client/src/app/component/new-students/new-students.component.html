@@ -23,7 +23,7 @@
                 <a [routerLink]="'/sell'">Sell Your Product</a>
               </li>
               <li>
-                <a href="contact.html">Contact</a>
+                <a [routerLink]="'/test'">Contact</a>
               </li>
             </ul>
           </div>
@@ -31,7 +31,7 @@
       </div>
     </nav>
 
-    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(../../assets/img_bg_2.jpg);">
+    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(../../../assets/img_bg_2.jpg);">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
@@ -51,7 +51,7 @@
         <div class="row animate-box">
           <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
             <span>Made by WPI CSSA</span>
-            <h2>WPI CSSA OFFICAL GUIDE</h2>
+            <h2>WPI CSSA OFFICAL GUIDE(content is not finish)</h2>
             <h3>If there are something unclear to you, please let us know.
             </h3>
           </div>
@@ -69,7 +69,6 @@
                 {{index}}
               </mat-radio-button>
             </mat-radio-group>
-            <div class="example-selected-value">Your favorite season is: {{selected}}</div>
           </div>
 
           <div class="col-md-9 text-center newstudent">
@@ -395,7 +394,7 @@
               <div *ngSwitchCase="'Flight'">
                 <h2 align="right">{{selected}}</h2>
                 <hr style="height:1px;border:none;border-top:1px solid #555555;" />
-                
+
               </div>
               <div *ngSwitchCase="'After Arrival'">
                 <h2 align="right">{{selected}}</h2>

@@ -23,12 +23,15 @@ export class ProductComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService, private router: Router,
     private activatedRouter: ActivatedRoute, private sanitization: DomSanitizer) {
     this.p = this.productService.getCurrentPage();
-    console.log(this.p);
+   // console.log(this.p);
   }
   allProducts: ProductModel[] = [];
   ngOnInit() {
     this.subscriptionProducts = this.productService.getAllProduct()
-      .subscribe(allProducts => this.allProducts = allProducts);
+      .subscribe(allProducts => {
+        this.allProducts = allProducts;
+        this.allProducts = this.allProducts.reverse();
+      });
       this.subscriptionInput = this.searchBox
       .valueChanges
       .debounceTime(200)

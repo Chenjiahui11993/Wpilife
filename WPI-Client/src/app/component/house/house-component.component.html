@@ -11,11 +11,11 @@
 					<div class="col-md-6 col-xs-6 text-center menu-1">
 						<ul>
 							<li>
-								<a [routerLink]="''">Home</a>								
+								<a [routerLink]="''">Home</a>
 							</li>
 							<li>
-									<a [routerLink]="'/house-list'">House</a>
-								</li>
+								<a [routerLink]="'/house-list'">House</a>
+							</li>
 							<li>
 								<a [routerLink]="'/survival-guide'">New Students</a>
 							</li>
@@ -23,7 +23,7 @@
 								<a [routerLink]="'/sell'">Sell Your Product</a>
 							</li>
 							<li>
-								<a href="contact.html">Contact</a>
+								<a [routerLink]="'/test'">Contact</a>
 							</li>
 						</ul>
 					</div>
@@ -31,7 +31,7 @@
 						<ul>
 							<li class="search">
 								<div class="input-group">
-									<input type="text" placeholder="Search.."[formControl]="searchBox">							
+									<input type="text" placeholder="Search.." [formControl]="searchBox">
 								</div>
 							</li>
 						</ul>
@@ -61,17 +61,18 @@
 					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 						<span>Cool Stuff</span>
 						<h2>House.</h2>
-						<p>If you find some bug or have some suggestions, please contack us at: hbchenjh@gmail.com. We are hearing all the time. your feedback makes our website better!
+						<p>If you find some bugs or have some suggestions, please contack us at: hbchenjh@gmail.com. We are hearing all the time.
+							your feedback makes our website better!
 						</p>
 					</div>
-				</div>		
-				<div class="row">						
+				</div>
+				<div class="row">
 					<div class="col-md-4 text-center" *ngFor="let house of houses | houseSearch: searchValue | paginate: { id:'house',
 																							     itemsPerPage: 6, 
 																							     currentPage: hp };let i = index">
-						<div class="product" (click)="toHouseDetail(house.id,i)" >
+						<div class="product" (click)="toHouseDetail(house.id,i)">
 							<div class="product-grid" [style.background-image]="'url('+house.imgUrl[0]+')'">
-							</div> 
+							</div>
 							<div class="desc">
 								<h3>
 									<i>{{house.Address}}</i>
@@ -79,13 +80,13 @@
 								<span class="price">{{house.price}}</span>
 							</div>
 						</div>
-					</div>	
 					</div>
-					<pagination-controls class="pageButton" id="house" (pageChange)="getPageNumber($event)" maxSize="9" directionLinks="true" autoHide="true"
-					screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
-				   </pagination-controls>						
+				</div>
+				<pagination-controls class="pageButton" id="house" (pageChange)="getPageNumber($event)" maxSize="9" directionLinks="true"
+				 autoHide="true" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+				</pagination-controls>
 			</div>
-		</div>		
-	<app-footer></app-footer>
+		</div>
+		<app-footer></app-footer>
 	</div>
 </body>

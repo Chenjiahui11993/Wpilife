@@ -39,9 +39,9 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.lastPoppedUrl = '/';
     this.location.subscribe((ev: PopStateEvent) => {
-      console.log(ev.url + 'zhi xing le');
+    //  console.log(ev.url + 'zhi xing le');
       if (ev.url === '') {
-        console.log('kongde');
+      //  console.log('kongde');
         this.lastPoppedUrl = '/';
       } else {
         this.lastPoppedUrl = ev.url;
@@ -50,13 +50,13 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
     this.router.events.subscribe((ev: any) => {
       if (ev instanceof NavigationStart) {
         if (ev.url !== this.lastPoppedUrl ) {
-          console.log('show ye bao cun' + this.lastPoppedUrl);
-          console.log('show ye bao cun 2' + ev.url);
+      //    console.log('show ye bao cun' + this.lastPoppedUrl);
+      //    console.log('show ye bao cun 2' + ev.url);
           this.yScrollStack.push(window.scrollY);
         }
       } else if (ev instanceof NavigationEnd) {
         if (ev.url === this.lastPoppedUrl) {
-          console.log('pi pei le ');
+       //   console.log('pi pei le ');
           this.lastPoppedUrl = undefined;
           window.scrollTo(0, this.yScrollStack.pop());
         } else {

@@ -4,7 +4,7 @@ import { HomeComponentComponent } from './component/home-page/home-component.com
 import { HouseComponentComponent } from './component/house/house-component.component';
 import { ProductComponent } from './component/product/product.component';
 import { ProductDetailComponent } from './component/product/product-detail/product-detail.component';
-import { TestComponent } from './test/test.component';
+import { TestComponent } from './component/test/test.component';
 import { HouseDetailComponent } from './component/house/house-detail/house-detail.component';
 import { BookComponent } from './component/book/book.component';
 import { BookDetailComponent } from './component/book/book-detail/book-detail.component';

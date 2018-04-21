@@ -12,11 +12,11 @@
 					<div class="col-md-6 col-xs-6 text-center menu-1">
 						<ul>
 							<li>
-								<a [routerLink]="''">Home</a>								
+								<a [routerLink]="''">Home</a>
 							</li>
 							<li>
-									<a [routerLink]="'/house-list'">House</a>
-								</li>
+								<a [routerLink]="'/house-list'">House</a>
+							</li>
 							<li>
 								<a [routerLink]="'/survival-guide'">New Students</a>
 							</li>
@@ -24,7 +24,7 @@
 								<a [routerLink]="'/sell'">Sell Your Product</a>
 							</li>
 							<li>
-								<a href="contact.html">Contact</a>
+								<a [routerLink]="'/test'">Contact</a>
 							</li>
 						</ul>
 					</div>
@@ -52,7 +52,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-                      
+
 						<div>
 							<ngx-carousel [inputs]="Config">
 								<ngx-item *ngFor="let houseImg of imgUrl" class="bannerStyle " NgxCarouselItem>
@@ -61,12 +61,12 @@
 								<i NgxCarouselPrev class="leftRs fa fa-arrow-left fa-3x" aria-hidden="true"></i>
 								<i NgxCarouselNext class="rightRs fa fa-arrow-right fa-3x" aria-hidden="true"></i>
 							</ngx-carousel>
-						</div>					
+						</div>
 						<div class="row animate-box">
 							<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 								<h2>{{address}}</h2>
 								<p>
-								<a [routerLink]="'/sell'" class="btn btn-primary btn-outline btn-lg">Post your Product to Sell</a>
+									<a [routerLink]="'/sell'" class="btn btn-primary btn-outline btn-lg">Post your Product to Sell</a>
 								</p>
 							</div>
 						</div>
@@ -75,37 +75,36 @@
 
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<ul class="nav nav-tabs">
-							<mat-tab-group>
-							  <mat-tab label="Book detail">
-								<div class="col-md-8 ">
-									<mat-list>
-									  <mat-list-item>House Address: {{address}}</mat-list-item>
-									  <mat-divider></mat-divider>
-									  <mat-list-item>Rent fee(per month) : {{price}}$</mat-list-item>
-									  <mat-divider></mat-divider>
-									  <mat-list-item>House Description: {{desc}}</mat-list-item>
-									</mat-list>   
+						<mat-tab-group>
+							<mat-tab label="House detail">
+								<div class="col-md-12 ">
+									<div class="col-md-12">
+										<div class="col-md-12 ">
+											<p>House Address: {{address}}</p>
+											<hr style="height:1px;border:none;border-top:1px solid #555555;">
+											<p>Rent fee(per month) : {{price}}$</p>
+											<hr style="height:1px;border:none;border-top:1px solid #555555;">
+											<p>House available date: {{availableDate}}</p>
+											<hr style="height:1px;border:none;border-top:1px solid #555555;">
+											<p>House contract end date: {{endDay}}</p>
+										</div>
+									</div>
 								</div>
-							  </mat-tab>
-							  <mat-tab label="Contact Info">
-								<div class="col-md-8">
-								  <mat-list>
-									<mat-list-item>Contact information: {{contact}}</mat-list-item>
-									<mat-divider></mat-divider>
-									<mat-list-item>Owner information: {{ownerID}}</mat-list-item>
-									<mat-divider></mat-divider>
-									<mat-list-item>House Description: {{desc}}</mat-list-item>
-									<mat-divider></mat-divider>
-								  </mat-list>                    
+							</mat-tab>
+							<mat-tab label="Contact Info">
+								<div class="col-md-12">
+									<div class="col-md-12 ">
+										<p>Contact information: {{contact}}</p>
+										<hr style="height:1px;border:none;border-top:1px solid #555555;">
+										<p>House Description: {{desc}}</p>
+									</div>
 								</div>
-							  </mat-tab>
-							</mat-tab-group>
-						  </ul>
+							</mat-tab>
+						</mat-tab-group>
 					</div>
-				</div>		
+				</div>
 			</div>
 		</div>
 	</div>
-<app-footer></app-footer>
+	<app-footer></app-footer>
 </body>

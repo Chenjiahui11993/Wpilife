@@ -8,7 +8,8 @@ const bookSchema = mongoose.Schema({
     description: String,
     department: String,
     contactInfo: String,
-    imgUrl: []
+    imgUrl: [],
+    today: String
 });
 const bookModel = mongoose.model('bookmodels', bookSchema);
 module.exports = bookModel;

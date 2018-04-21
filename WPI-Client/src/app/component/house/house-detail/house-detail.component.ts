@@ -19,6 +19,8 @@ export class HouseDetailComponent implements OnInit {
   desc: string;
   ownerID: string;
   imgUrl = [];
+  availableDate: string;
+  endDay: string;
   constructor( private houseService: HouseService, private router: Router, private activateRouter: ActivatedRoute) {
     this.Config = {
       grid: {xs: 1, sm: 1, md: 1, lg: 1, all: 0},
@@ -48,6 +50,8 @@ export class HouseDetailComponent implements OnInit {
      this.price = this.houseDetail.price;
      this.ownerID = this.houseDetail.ownerID;
      this.imgUrl = this.houseDetail.imgUrl;
+     this.availableDate = this.houseDetail.fromDate;
+     this.endDay = this.houseDetail.toDate;
     })
    .catch((e) => {
     this.router.navigate(['/Not-found']);

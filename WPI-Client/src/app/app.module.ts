@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCarouselModule } from 'ngx-carousel';
 import {NgxPaginationModule} from 'ngx-pagination';
 import 'hammerjs';
-import { TestComponent } from './test/test.component';
+import { TestComponent } from './component/test/test.component';
 import { ProductService } from '../app/Service/product-service';
 import { CollaborationService } from '../app/Service/collaboration.service';
 import { HouseService } from './Service/house-service';
@@ -49,6 +49,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { DemandComponent } from './component/demand/demand.component';
 import { DemandService } from './Service/demand.service';
 import { PickUpComponent } from './component/pick-up/pick-up.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +77,7 @@ import { PickUpComponent } from './component/pick-up/pick-up.component';
     HouseSearchPipe,
     ProductSearchPipe,
     DemandComponent,
-    PickUpComponent,
+    PickUpComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +100,9 @@ import { PickUpComponent } from './component/pick-up/pick-up.component';
     MatInputModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
               ProductService,

@@ -23,7 +23,7 @@
                 <a [routerLink]="'/sell'">Sell Your Product</a>
               </li>
               <li>
-                <a href="contact.html">Contact</a>
+                <a [routerLink]="'/test'">Contact</a>
               </li>
             </ul>
           </div>
@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 text-center" *ngFor="let demand of demandList | paginate: { id:'demands',
+          <div class="col-md-12 text-center" id="demandbox" *ngFor="let demand of demandList | paginate: { id:'demands',
 						                                                                             itemsPerPage: 4, 
                                                                                          currentPage: dp }">
             <mat-list>
@@ -61,6 +61,8 @@
               <mat-list-item>demand Description:: {{demand.description}}</mat-list-item>
               <mat-divider></mat-divider>
               <mat-list-item>Contact Information: {{demand.contactInfo}}</mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item>Post date: {{demand.today}}</mat-list-item>
               <mat-divider></mat-divider>
             </mat-list>
           </div>
