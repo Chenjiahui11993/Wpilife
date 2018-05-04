@@ -24,6 +24,6 @@ TODO:
 version 1.1
 1.Now alow user choose the date when they upload their goods
 2.Fix bug when sometimes product-list/house/list/book/list will be disordered
-3.Add catch function when there are some error on server, giving user a friendly hint.
+3.Add catch function when there are some error on server, giving user a friendly hint
                                                                                                                  
                                                                                                                   
