@@ -76,6 +76,7 @@ export class SellComponent implements OnInit {
         this.profile = profile;
         this.ownerID = this.profile.name;
       });
+      this.selectedFile[0] = null;  // 5/4 update
     }
     // console.log(this.ownerID + 'zheshi owner ID');
   }
@@ -129,9 +130,7 @@ export class SellComponent implements OnInit {
       }
     }
     if (type === 'House') {
-      this.houseEnd = JSON.stringify(this.dateTo.value);
-      this.houseEnd = this.houseEnd.slice(1, 11);
-      //  console.log(this.houseEnd);
+    //    console.log(this.houseEnd);
       //   console.log(this.houseEnd);
       if (this.imgUrl[0] === undefined) {
         this.houseService.setNewllHouse(this.address, this.price,
@@ -234,7 +233,7 @@ export class SellComponent implements OnInit {
     // console.log(this.size);
     if (event.target.files.length === 0) { // when use click cancel when upload file
       this.selectedFile[this.userImagesNames] = null;
-      console.log('wen jian qu xiao');
+     // console.log('wen jian qu xiao');
       return 0;
     } else if (event.target.files.length !== 0 && (event.target.files[0].size / 1024) < 1024) {
       this.fileTypeError[this.userImagesNames] = this.checkTypeError(event.target.files[0].name);
@@ -264,5 +263,11 @@ export class SellComponent implements OnInit {
     } else {
       return true;
     }
+  }
+  getDate(event) {
+    this.houseEnd = JSON.stringify(event.value);
+    this.houseEnd = this.houseEnd.slice(1, 11);
+   // console.log(this.houseEnd);
+   // console.log(this.dateTo.value);
   }
 }

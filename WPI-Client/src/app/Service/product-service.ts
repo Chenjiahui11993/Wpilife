@@ -20,8 +20,6 @@ export class ProductService {
             });
     }
     getUserProduct(id: string): Promise<ProductModel[]> {
-        console.log(id);
-        console.log('xixixix');
         return this.httpClient.get(`api/v1/userproducts/${id}`)
             .toPromise()
             .then((res: any) => res)
@@ -42,7 +40,6 @@ export class ProductService {
             .toPromise()
             .then((res: any) => {
                 this._productSource.next(res);
-                this.getAllProduct();
             })
             .catch((e) => {
                 return Promise.reject(e.body || e);

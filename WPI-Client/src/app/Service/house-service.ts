@@ -34,6 +34,7 @@ export class HouseService {
     }
     setNewllHouse(address: string, price: string, ownerinfo: string, desc: string
         , contactInfo: string, img: string[], fromDate: string, toDate: string) {
+            console.log(toDate);
         const options = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
                 .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))

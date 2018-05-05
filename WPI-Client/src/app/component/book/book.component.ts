@@ -52,7 +52,7 @@ export class BookComponent implements OnInit, OnDestroy {
     this.bookService.setCurrentPage(this.bp);
     this.router.navigate(['/book-list', id]);
   }
-  onChange(value: any) {
+  onChange() {
     this.selectedBook = [];
     this.AllBooks = this.books;
     this.AllBooks.forEach((book) => {

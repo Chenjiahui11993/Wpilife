@@ -26,6 +26,7 @@ const appRouter: Routes = [
     { path: 'sell', component: SellComponent },
     { path: 'editor', component: CodingComponent },
     { path: 'book-list', component: BookComponent },
+    { path: 'texting', component: CodingComponent },
     { path: 'book-list/:id', component: BookDetailComponent },
     { path: 'house-list', component: HouseComponentComponent },
     {

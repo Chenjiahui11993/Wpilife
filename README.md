@@ -1,12 +1,12 @@
-# Wpilife-- Official WPI CSSA Website ALPHA 1.0 - 4/15/2018: http://18.221.7.15/
-# test version now 1.1 20/4/2018 
+# Wpilife-- Official WPI CSSA Website ALPHA 1.0 - 4/15/2018: http://www.wpilife.org
+# test version now 1.2 4/5/2018 
 #Client-side: 
 
 Angular, bootstrap3, html5,css3.
 
 #Back-end: 
 
-Node.js, Express MongoDB
+Node.js(Express), MongoDB
 Alpha 1.0：
 Function:
 1. Allow user to post their used things such as books cars to sell. For each post, maximum number of image is 5 and only jpg, png and common type of image are allowed to upload to website.
@@ -24,6 +24,10 @@ TODO:
 version 1.1
 1.Now alow user choose the date when they upload their goods
 2.Fix bug when sometimes product-list/house/list/book/list will be disordered
-3.Add catch function when there are some error on server, giving user a friendly hint.
+3.Add catch function when there are some error on server, giving user a friendly hint
+version1.2
+1. Fix the bug that the data of the datePicker is not binding to the value.
+2. Fix the bug which will happen when user upload image under certain condition.
+3. upload some sections in survival-guide.
                                                                                                                  
                                                                                                                   

@@ -25,12 +25,6 @@ export class HouseComponentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.activateRouter.params
-      .subscribe(
-        (params: Params) => {
-          this.id = params['id'];
-        }
-      );
     this.houseSubscription = this.houseService.getAllHouses()
       .subscribe(allHouse => {
         this.houses = allHouse;

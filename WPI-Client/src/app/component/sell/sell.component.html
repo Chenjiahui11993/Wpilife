@@ -192,9 +192,9 @@
                         <mat-icon>
                           create
                         </mat-icon>
-                        <i>Please Input the house contract date</i>
+                        <i>Please Input the house contract end date</i>
                       </mat-placeholder>
-                      <input matInput [matDatepicker]="picker4" [value]="dateTo.value">
+                      <input matInput [matDatepicker]="picker4" [value]="dateTo.value" (dateChange) ="getDate($event)">
                       <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                       <mat-datepicker #picker4></mat-datepicker>
                     </mat-form-field>

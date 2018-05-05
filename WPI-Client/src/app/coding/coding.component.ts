@@ -14,14 +14,15 @@ export class CodingComponent implements OnInit {
   languages: string[] = ['Java', 'Python'];
   language = 'Java';
   defaultContent = {
-    Java: `public class Example {
-    public static void main(String[] args) {
-        // Type your Java code here
-    }
+    Java: `
   }`,
     Python: `class Solution:
   def example():
        #Write your Python code here`
+     //  public class Example {
+       // public static void main(String[] args) {
+            // Type your Java code here
+       // }
   };
   constructor(private collaborationService: CollaborationService, private router: ActivatedRoute) { }
 
