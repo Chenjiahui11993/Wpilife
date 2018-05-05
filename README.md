@@ -25,9 +25,12 @@ version 1.1
 1.Now alow user choose the date when they upload their goods
 2.Fix bug when sometimes product-list/house/list/book/list will be disordered
 3.Add catch function when there are some error on server, giving user a friendly hint
+<<<<<<< HEAD
 version1.2
 1. Fix the bug that the data of the datePicker is not binding to the value.
 2. Fix the bug which will happen when user upload image under certain condition.
 3. upload some sections in survival-guide.
+=======
+>>>>>>> 5ad8cb323d4591fa4249e06edc4fdbb49930e44a
                                                                                                                  
                                                                                                                   
