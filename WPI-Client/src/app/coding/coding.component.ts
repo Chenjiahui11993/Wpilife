@@ -14,15 +14,14 @@ export class CodingComponent implements OnInit {
   languages: string[] = ['Java', 'Python'];
   language = 'Java';
   defaultContent = {
-    Java: `
-  }`,
+    Java: `public class Example {
+      public static void main(String[] args) {
+          // Type your Java code here
+      }
+    }`,
     Python: `class Solution:
-  def example():
-       #Write your Python code here`
-     //  public class Example {
-       // public static void main(String[] args) {
-            // Type your Java code here
-       // }
+    def example():
+         #Write your Python code here`
   };
   constructor(private collaborationService: CollaborationService, private router: ActivatedRoute) { }
 
@@ -37,7 +36,7 @@ export class CodingComponent implements OnInit {
     this.collaborationService.init(this.editor, this.sessionId);
     this.editor.lastAppliedChange = null;
     this.editor.on('change', (e) => {
-      console.log('editor change' + JSON.stringify(e));
+      // console.log('editor change' + JSON.stringify(e));
       if (this.editor.lastAppliedChange !== e) {
         this.collaborationService.change(JSON.stringify(e));
       }
