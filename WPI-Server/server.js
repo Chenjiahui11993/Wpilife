@@ -30,7 +30,7 @@ app.use((req, res) => {
 //});
 const server = http.createServer(app);
 io.attach(server);
-server.listen(80);
+server.listen(3000);
 server.on('listening', onListening);
 function onListening() {
   console.log('listening 3000');

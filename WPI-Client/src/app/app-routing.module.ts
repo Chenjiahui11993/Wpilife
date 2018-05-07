@@ -10,7 +10,7 @@ import { BookComponent } from './component/book/book.component';
 import { BookDetailComponent } from './component/book/book-detail/book-detail.component';
 import { NewStudentsComponent } from './component/new-students/new-students.component';
 import { SellComponent } from './component/sell/sell.component';
-import { CodingComponent } from './coding/coding.component';
+import { CodingComponent } from './component/coding/coding.component';
 import { CallbackComponent } from './component/callback/callback.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { AuthGuardService } from './Service/auth.guard.service';
@@ -19,6 +19,7 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
 import { ErrorComponent } from './component/error/error.component';
 import { DemandComponent } from './component/demand/demand.component';
 import { PickUpComponent } from './component/pick-up/pick-up.component';
+import { CodingStartComponent } from './component/coding/coding-start/coding-start.component';
 
 
 const appRouter: Routes = [
@@ -26,7 +27,10 @@ const appRouter: Routes = [
     { path: 'sell', component: SellComponent },
     { path: 'editor', component: CodingComponent },
     { path: 'book-list', component: BookComponent },
-    { path: 'texting', component: CodingComponent },
+    { path: 'coding', component: CodingStartComponent },
+    {
+        path: 'coding/:id', component: CodingComponent,
+    },
     { path: 'book-list/:id', component: BookDetailComponent },
     { path: 'house-list', component: HouseComponentComponent },
     {

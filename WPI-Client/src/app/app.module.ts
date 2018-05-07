@@ -33,7 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { SellComponent } from './component/sell/sell.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './component/footer/footer.component';
-import { CodingComponent } from './coding/coding.component';
+import { CodingComponent } from './component/coding/coding.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { AuthService } from './Service/auth.service';
 import { CallbackComponent } from './component/callback/callback.component';
@@ -51,6 +51,7 @@ import { DemandService } from './Service/demand.service';
 import { PickUpComponent } from './component/pick-up/pick-up.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import { CodingStartComponent } from './component/coding/coding-start/coding-start.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +78,8 @@ import { MatNativeDateModule } from '@angular/material';
     HouseSearchPipe,
     ProductSearchPipe,
     DemandComponent,
-    PickUpComponent
+    PickUpComponent,
+    CodingStartComponent
   ],
   imports: [
     BrowserModule,
