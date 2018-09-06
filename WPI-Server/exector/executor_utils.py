@@ -38,7 +38,7 @@ def load_image():
         print('image not found locally. lodaing from docker')
         client.images.pull(IMAGE_NAME)
     except APIError:
-        print('docker hub go die')
+        print('docker hub error')
         return
     print('image loaded')
 
@@ -46,7 +46,7 @@ def make_dir(dir):
     try:
         os.mkdir(dir)
     except OSError:
-        print('go die')
+        print(' file create error')
 
 def build_and_run(code, lang):
     result = {'build': None, 'run': None, 'error': None}
@@ -70,7 +70,7 @@ def build_and_run(code, lang):
             volumes={source_file_host_dir: {'bind': source_file_guest_dir, 'mode': 'rw'}},
             working_dir=source_file_guest_dir
         )
-        print('source built')
+       # print('source built')
         result['build'] = 'OK'
     except ContainerError as e:
         result['build'] = str(e.stderr, 'utf-8')

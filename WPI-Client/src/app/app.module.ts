@@ -17,6 +17,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import 'hammerjs';
 import { TestComponent } from './component/test/test.component';
 import { ProductService } from '../app/Service/product-service';
+import { PaymentService } from '../app/Service/paymentService';
 import { CollaborationService } from '../app/Service/collaboration.service';
 import { HouseService } from './Service/house-service';
 import { HouseDetailComponent } from './component/house/house-detail/house-detail.component';
@@ -52,6 +53,7 @@ import { PickUpComponent } from './component/pick-up/pick-up.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { CodingStartComponent } from './component/coding/coding-start/coding-start.component';
+import { PaymentComponent } from './component/payment/payment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +81,8 @@ import { CodingStartComponent } from './component/coding/coding-start/coding-sta
     ProductSearchPipe,
     DemandComponent,
     PickUpComponent,
-    CodingStartComponent
+    CodingStartComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +116,8 @@ import { CodingStartComponent } from './component/coding/coding-start/coding-sta
               CollaborationService,
               AuthService,
               AuthGuardService,
-              DemandService
+              DemandService,
+              PaymentService
   ],
   bootstrap: [AppComponent]
 })

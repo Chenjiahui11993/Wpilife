@@ -20,13 +20,14 @@ import { ErrorComponent } from './component/error/error.component';
 import { DemandComponent } from './component/demand/demand.component';
 import { PickUpComponent } from './component/pick-up/pick-up.component';
 import { CodingStartComponent } from './component/coding/coding-start/coding-start.component';
-
+import { PaymentComponent } from './component/payment/payment.component';
 
 const appRouter: Routes = [
     { path: '', component: HomeComponentComponent },
     { path: 'sell', component: SellComponent },
     { path: 'editor', component: CodingComponent },
     { path: 'book-list', component: BookComponent },
+    { path: 'payment', component: PaymentComponent},
     { path: 'coding', component: CodingStartComponent },
     {
         path: 'coding/:id', component: CodingComponent,

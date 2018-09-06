@@ -11,6 +11,7 @@ const bookService = require('../service/bookService');
 const houseService = require('../service/houseService');
 const demandService = require('../service/demandService');
 const codingService = require('../service/codingRoomService');
+const payService = require('../service/paymentService');
 var multer = require('multer');
 const path = require('path');
 var upload = multer({ dest: 'upload/' });
@@ -206,4 +207,19 @@ router.post('/demands', jwtCheck, jsonParser, (req, res) => {
             console.log(e);
         });
 });
+//2018.8.31 online payment
+router.post('/pay', jsonParser, (req, res) => {
+    var payInfo = payService.getPayInfo(req.body.price, req.body.type);
+  //  payService.makePayment(payInfo)
+   // .then(payinfo =>  {
+       // console.log(payinfo);
+    //    res.writeHead(200, {'Content-Type': 'text/plain;charset=utf-8'});
+    //    res.write(payinfo);
+    //    res.end();
+  //  })
+  return res.json(payInfo);
+});
+router.post('payinfo', jsonParser, (req, res) => {
+    var zhuInfo = req.body;
+})
 module.exports = router;

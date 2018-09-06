@@ -39,7 +39,6 @@
             <div class="display-t">
               <div class="display-tc animate-box" data-animate-effect="fadeIn">
                 <h1>Online Coding Judge System</h1>
-                <h1>Online chating system</h1>
               </div>
             </div>
           </div>
@@ -52,11 +51,12 @@
           <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
             <span>Enjoy Coding</span>
             <h2>Coding Section.</h2>
-            <p>This Section is under testing now, if you find some bugs or have any suggestions, please let us know. We are
-              very appriciated it.
+            <p id="ins">You could just uncomment the sample codes and click submit to see the result or input your own codes. Reminder:
+              It may need a little bit time to get the result. Also, you could open a new tab with same url to see the change
+              between two editors
             </p>
             <p *ngIf="!roomValid" id="NotexistError">
-             This room is not exist and data would not be saved, please return and create a coding room thanks.
+              This room is not exist and data would not be saved, please return and create a coding room thanks.
             </p>
           </div>
         </div>
@@ -76,8 +76,6 @@
                     Reset
                   </button>
                 </div>
-
-
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -103,12 +101,14 @@
                 <div id="editor">
                 </div>
               </div>
-              <div>
+              <mat-progress-spinner *ngIf="!showButton" class="example-margin" color="primary" mode="indeterminate" value="50">
+              </mat-progress-spinner>
+              <div id="ins">
                 {{output}}
               </div>
               <!-- This is the body -->
               <footer class="editor-footer">
-                <button type="button" class="btn btn-success pull-right" (click)="submit()">Submit Solution</button>
+                <button *ngIf="showButton" type="button" class="btn btn-success pull-right" (click)="submit()">Submit Solution</button>
               </footer>
             </section>
           </div>

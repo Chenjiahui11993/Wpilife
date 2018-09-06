@@ -1,0 +1,11 @@
+<form #form action="https://www.paypayzhu.com/api/pay" target="_blank" method="post" (ngSubmit) = "tijiao()">
+    <input id='api_user' name='api_user' type='text' [(ngModel)]='payInfo.data.api_user'/>
+    <input id='price' name='price' type='text' [(ngModel)]='payInfo.data.price' />
+    <input id='type' name='type' type='text' [(ngModel)]='payInfo.data.type'/>
+    <input id='redirect' name='redirect' type='text' [(ngModel)]='payInfo.data.redirect'/>
+    <input id='order_id' name='order_id' type='text' [(ngModel)]='payInfo.data.order_id'/>
+    <input id='order_info' name='order_info' type='text' [(ngModel)]='payInfo.data.order_info'/>
+    <input id='signature' name='signature' type='text' [(ngModel)]='payInfo.data.signature'/>
+    <button type="submit" class="btn btn-success" (click)="form.submit()">Submit</button>
+</form>
+<button class="btn btn-primary" (click)="pay()"> pay2 here</button>

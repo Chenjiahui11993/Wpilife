@@ -14,7 +14,7 @@
         <li><a pageScroll href="#works-section" >Recent Product</a></li>
         <li><a pageScroll href="#about-section" >New Students</a></li>
         <li><a pageScroll href="#testimonials-section" >Event</a></li>
-        <li><a pageScroll href="#team-section" >About us</a></li>
+        <li><a pageScroll href="#team-section" >About CSSA</a></li>
         <li  *ngIf="auth.isAuthenticated()"><a id="login" [routerLink]="['profile']" >Profile</a></li>
         <li  *ngIf="!auth.isAuthenticated()"><a id="login" (click)="auth.login()" >Login/SignUp</a></li>
         <li  *ngIf="auth.isAuthenticated()"><a id="login" (click)="auth.logout()" >Log Out</a></li>
