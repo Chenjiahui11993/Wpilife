@@ -1,11 +1,172 @@
-<form #form action="https://www.paypayzhu.com/api/pay" target="_blank" method="post" (ngSubmit) = "tijiao()">
-    <input id='api_user' name='api_user' type='text' [(ngModel)]='payInfo.data.api_user'/>
-    <input id='price' name='price' type='text' [(ngModel)]='payInfo.data.price' />
-    <input id='type' name='type' type='text' [(ngModel)]='payInfo.data.type'/>
-    <input id='redirect' name='redirect' type='text' [(ngModel)]='payInfo.data.redirect'/>
-    <input id='order_id' name='order_id' type='text' [(ngModel)]='payInfo.data.order_id'/>
-    <input id='order_info' name='order_info' type='text' [(ngModel)]='payInfo.data.order_info'/>
-    <input id='signature' name='signature' type='text' [(ngModel)]='payInfo.data.signature'/>
-    <button type="submit" class="btn btn-success" (click)="form.submit()">Submit</button>
-</form>
-<button class="btn btn-primary" (click)="pay()"> pay2 here</button>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- <link rel="stylesheet" type="text/css" href="vendors/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="vendors/css/grid.css">
+	<link rel="stylesheet" type="text/css" href="vendors/css/ionicons.min.css">
+	<link rel="stylesheet" type="text/css" href="vendors/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/style.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/queries.css"> -->
+	<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
+	<title>Mid-Autumn Party</title>
+</head>
+<body>
+	<header>
+		<nav>
+			<div class="row">
+				<div class="logo">
+					wpi
+				</div>
+				<ul class="main-nav js--main-nav">
+					<li><a href="#features">Home</a></li>
+					<li><a href="#works">Sell</a></li>
+					<li><a href="#cities">New Students</a></li>
+					<li><a href="#plans">About us</a></li>
+				</ul>
+				<a class="mobile-nav-icon js--nav-icon"><i class="ion-navicon-round"></i></a>
+			</div>
+		</nav>
+		<div class="hero-text-box">
+			<h1>Mid-Autumn Party on Sept. 30<br>Come and join us!</h1>
+			<a class="btn btn-full js--scroll-to-plans" href="#register">Register NOW</a>
+			<a class="btn btn-ghost js--scroll-to-start" href="#plans">Payment Details</a>
+		</div>
+		
+	</header>
+	
+	<section class="section-plans js--section-plans">
+		<div class="row"  id="plans">
+			<h2>Details & Notes of Payment</h2>
+		</div>
+		<div class="row">
+			<!-- <div class="col span-1-of-1"> -->
+				<div class="plan-box js--wp-4">
+					<div>
+						<h3>Mid-Autumn Party</h3>
+						<p class="plan-price">$399 <span>for fun</span></p>
+						<p class="plan-price-meal">That's only 13.30$ per meal</p>
+					</div>
+					<div>
+						<ul>
+							<li><i class="ion-ios-checkmark-empty icon-small"></i>1 meal every day</li>
+							<li><i class="ion-ios-checkmark-empty icon-small"></i>Order 24/7</li>
+							<li><i class="ion-ios-checkmark-empty icon-small"></i>Access to newest creations</li>
+							<li><i class="ion-ios-checkmark-empty icon-small"></i>Free delivery</li>
+						</ul>
+					</div>
+					<div>
+						<a href="#" class="btn btn-full">Register NOW</a>
+					</div>
+				</div>
+			<!-- </div> -->
+		</div>
+	</section>
+
+	<section class="section-form">
+		<div class="row" id="register">
+			<h2>Register the party</h2>
+		</div>
+		<div class="row">
+			<form method="post" action="#" class="contact-form">
+				<div class="row">
+					<div class="col span-1-of-3">
+						<label for="name">Name</label>
+					</div>
+					<div class="col span-2-of-3">
+						<input type="text" name="name" required="required" id="name" placeholder="Your name" required>
+					</div>
+				</div>
+				<div class="row">
+						<div class="col span-1-of-3">
+							<label for="phone-number">Phone Number</label>
+						</div>
+						<div class="col span-2-of-3">
+							<input type="text" name="phone-number" required="required" id="phone-number" placeholder="Input 10 digits" required>
+						</div>
+					</div>
+				<div class="row">
+					<div class="col span-1-of-3">
+						<label for="email">Email</label>
+					</div>
+					<div class="col span-2-of-3">
+						<input type="email" name="email" required="required" id="email" placeholder="Your email" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col span-1-of-3">
+						<label for="school">School</label>
+					</div>
+					<div class="col span-2-of-3">
+						<select name="school" id="school" required="required">
+							<option value="WPI" selected disabled>Please Select Your School</option>
+							<option value="WPI">WPI</option>
+							<option value="clark-university">Clark University</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col span-1-of-3">
+						<label>Payment Method</label>
+					</div>
+					<div class="col span-2-of-3">
+						
+							<div class="payment-method"><input type="radio" name="method" id="method"> <img src="https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png" alt="Alipay"></div>
+							<div class="payment-method"><input type='radio' name="method" id="method"> <img src="https://wx.gtimg.com/pay_en/img/common/logo.png" alt="Wechat Pay"></div>
+							<div class="payment-method"><input type='radio' name="method" id="method"> <img src="https://www.underconsideration.com/brandnew/archives/eventbrite_logo.png" alt="Everbrite"></div>
+						
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col span-1-of-3">
+						<label>&nbsp;</label>
+					</div>
+					<div class="col span-2-of-3">
+						<input type="submit" value="Pay" class="submit-btn">
+					</div>
+				</div>
+				
+			</form>
+			
+		</div>
+	</section>
+	
+	<footer>
+		<div class="row">
+			<div class="col span-1-of-2">
+				<ul class="footer-nav">
+					<li><a href="#">About us</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Press</a></li>
+					<li><a href="#">iOS App</a></li>
+					<li><a href="#">Android App</a></li>
+				</ul>
+			</div>
+			<div class="col span-1-of-2">
+				<ul class="social-links">
+					<li><a href="#"><i class="ion-social-facebook"></i></a></li>
+					<li><a href="#"><i class="ion-social-twitter"></i></a></li>
+					<li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+					<li><a href="#"><i class="ion-social-instagram"></i></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<p>
+				This webpage was created for 2018 Mid-Autumn Party register by WPILIFE TEAM. No copyrights here.<br>
+				This party is for you! So come and do whatever you want and have fun.
+			</p>
+			<p>
+				Build with <i class="ion-ios-heart" style="color: #ea0000; padding: 0 3px;"></i> in the beautiful city of Worcester, MA, United States, September 2018.
+			</p>
+		</div>
+	</footer>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
+<script src="//cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//cdn.jsdelivr.net/selectivizr/1.0.3b/selectivizr.min.js"></script>
+<script src="vendors/js/jquery.waypoints.min.js"></script>
+<script src="resources/js/script.js"></script>
+
+</body>  

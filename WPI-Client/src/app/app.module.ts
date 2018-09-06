@@ -82,7 +82,7 @@ import { PaymentComponent } from './component/payment/payment.component';
     DemandComponent,
     PickUpComponent,
     CodingStartComponent,
-    PaymentComponent
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
