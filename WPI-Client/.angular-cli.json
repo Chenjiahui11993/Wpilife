@@ -33,7 +33,11 @@
         "../node_modules/ace-builds/src-min-noconflict/mode-java.js",
         "../node_modules/ace-builds/src-min-noconflict/mode-python.js",
         "../node_modules/socket.io-client/dist/socket.io.js",
-        "../node_modules/auth0-js/build/auth0.js"
+        "../node_modules/auth0-js/build/auth0.js",
+        // "../src/app/component/payment/vendors/js/jquery.min.js",
+        "../src/app/component/payment/resources/js/script.js",
+        "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

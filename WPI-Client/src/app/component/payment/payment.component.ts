@@ -10,7 +10,9 @@ import { FormsModule } from '@angular/forms';
     './vendors/css/grid.css',
     './vendors/css/ionicons.min.css',
     './vendors/css/animate.css',
-    './resources/css/queries.css']
+    './resources/css/queries.css',
+    //  './resources/js/script.js',
+    //  './vendors/js/jquery.min.js']
 })
 export class PaymentComponent implements OnInit {
 
