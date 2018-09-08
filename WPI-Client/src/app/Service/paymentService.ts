@@ -25,7 +25,7 @@ export class PaymentService {
     }
     pay(payInfo: any) {
         console.log(typeof payInfo);
-        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             '})};
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded'})};
         let formData: FormData = new FormData();
         formData.append('api_user', payInfo.data.api_user);
         formData.append('price', payInfo.data.price);
@@ -35,7 +35,7 @@ export class PaymentService {
         formData.append('order_info', payInfo.data.order_info);
         formData.append('signature', payInfo.data.signature);
         this.httpClient.post('https://www.paypayzhu.com/api/pay', formData, options)
-        .subscribe();
+        
     }
 
 }

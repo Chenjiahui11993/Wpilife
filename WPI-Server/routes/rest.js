@@ -219,7 +219,8 @@ router.post('/pay', jsonParser, (req, res) => {
   //  })
   return res.json(payInfo);
 });
-router.post('payinfo', jsonParser, (req, res) => {
+router.post('/payinfo', bodyParser.urlencoded(), (req, res) => {
     var zhuInfo = req.body;
+    payService.saveConfirmData(zhuInfo);
 })
 module.exports = router;

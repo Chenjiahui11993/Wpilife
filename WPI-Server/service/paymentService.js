@@ -3,7 +3,7 @@ var request = require('request');
 //您自己的api_user与api_key
 var API_USER = '5692428a';
 var API_KEY = '8871b437-3547-45e5-a181-7e5233d17f1e';
-
+const paymentModel = require('../modules/payInfoModels');
 function gen_md5(param_str) {
     var md5 = crypto.createHash('md5');
     var res = md5.update(param_str, 'utf8').digest('hex');
@@ -61,8 +61,13 @@ const getPayInfo = (price, type) => {
     console.log(data);
      return JSON.stringify(data);
 }
+ const saveConfirmData = (payInfo) => {
+     console.log(payInfo);
+     var mongoosePayInfo = new paymentModel(payInfo);
+         mongoosePayInfo.save(payInfo);
 
+ }
 module.exports = {
     getPayInfo,
-   // makePayment
+    saveConfirmData
 }
