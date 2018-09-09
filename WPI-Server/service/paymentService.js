@@ -36,7 +36,7 @@ const getPayInfo = (price, type) => {
     var redirect = 'http://www.baidu.com';
 
     //您系统内部生成的订单号, 唯一标识一个订单   
-    var order_id = '123456';
+    var order_id = '123456777';
 
     //您自定义的用户信息, 方便在后台对账, 排查订单是由哪个用户发起的, 强烈建议加上
     var order_info = new Buffer('测试订单', 'utf8').toString();
@@ -59,7 +59,7 @@ const getPayInfo = (price, type) => {
         'code': 1
     }
     console.log(data);
-     return JSON.stringify(data);
+     return JSON.stringify(p);
 }
  const saveConfirmData = (payInfo) => {
      console.log(payInfo);

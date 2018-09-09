@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
 import { PaymentService } from '../../Service/paymentService';
 import { FormsModule } from '@angular/forms';
+import { NgForm } from '@angular/forms/src/directives/ng_form';
+import { paypayzhuModel } from './paypayzhuModel';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -10,25 +12,56 @@ import { FormsModule } from '@angular/forms';
     './vendors/css/grid.css',
     './vendors/css/ionicons.min.css',
     './vendors/css/animate.css',
+<<<<<<< HEAD
     './resources/css/queries.css',
     //  './resources/js/script.js',
     //  './vendors/js/jquery.min.js']
+=======
+    './resources/css/queries.css'
+  ]
+>>>>>>> Chenjiahui
 })
 export class PaymentComponent implements OnInit {
-
+   paypayzhu: paypayzhuModel;
   constructor( private paymentService: PaymentService) { }
-  payInfo: any;
+  @ViewChildren('defaultForm') defaultForm: HTMLFormElement;
+  ApiUser: string;
+  price: string;
+  redirect: string;
+  orderID: string;
+  orderInfo: string;
+  signature: string;
+  UserName: string;
+  UserEmail: string;
+  UserSchool: string;
+  PayMethod: string;
+  type: number;
+  payType: number;
+   i = 1;
   ngOnInit() {
   }
-  pay() {
-    this.paymentService.getPayInfo()
-    .then ( res => {
-      this.payInfo = JSON.parse(res);
-    });
-   
+  getInfo(type: number) {
+  //  this.ApiUser = '1234';
+   // console.log(this.defaultForm.last.nativeElement);
+    this.paymentService.getPayInfo(this.UserName, this.UserEmail, this.UserSchool, type)
+        .then (paypay => {
+     this.paypayzhu = paypay;   
+     this.ApiUser = this.paypayzhu.api_user;
+     this.price = this.paypayzhu.price;
+     this.redirect = this.paypayzhu.redirect;
+     this.orderID = this.paypayzhu.order_id;
+     this.orderInfo = this.paypayzhu.order_info;
+     this.signature = this.paypayzhu.signature;
+     this.payType = type;
+     console.log(this.defaultForm.first);
+     //this.defaultForm.first.nativeElement.submit();
+    // this.defaultForm.first.nativeElement.submit();
+    })
+    .catch((e) => {
+      console.log(e);
+    });   
   }
-  tijiao() {
-    console.log('123');
+  try() {
+    this.defaultForm.first.nativeElement.submit();
   }
-
 }
