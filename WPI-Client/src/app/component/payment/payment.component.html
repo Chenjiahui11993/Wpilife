@@ -1,11 +1,249 @@
-<form #form action="https://www.paypayzhu.com/api/pay" target="_blank" method="post" (ngSubmit) = "tijiao()">
-    <input id='api_user' name='api_user' type='text' [(ngModel)]='payInfo.data.api_user'/>
-    <input id='price' name='price' type='text' [(ngModel)]='payInfo.data.price' />
-    <input id='type' name='type' type='text' [(ngModel)]='payInfo.data.type'/>
-    <input id='redirect' name='redirect' type='text' [(ngModel)]='payInfo.data.redirect'/>
-    <input id='order_id' name='order_id' type='text' [(ngModel)]='payInfo.data.order_id'/>
-    <input id='order_info' name='order_info' type='text' [(ngModel)]='payInfo.data.order_info'/>
-    <input id='signature' name='signature' type='text' [(ngModel)]='payInfo.data.signature'/>
-    <button type="submit" class="btn btn-success" (click)="form.submit()">Submit</button>
-</form>
-<button class="btn btn-primary" (click)="pay()"> pay2 here</button>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Omnifood is a premium food delivery service with the mission to bring affordable and healty meals to as many people as possible.">
+
+    <!-- <link rel="stylesheet" type="text/css" href="vendors/css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="vendors/css/grid.css">
+        <link rel="stylesheet" type="text/css" href="vendors/css/ionicons.min.css">
+        <link rel="stylesheet" type="text/css" href="vendors/css/animate.css">
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+        <link rel="stylesheet" type="text/css" href="resources/css/queries.css"> -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
+    <title>Mid-Autumn Party</title>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/resources/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/resources/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/resources/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/resources/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/resources/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/resources/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/resources/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/resources/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/resources/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/resources/favicons/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="/resources/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/resources/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/resources/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/resources/favicons/manifest.json">
+    <link rel="shortcut icon" href="/resources/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/resources/favicons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/resources/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="row">
+                <div class="logo">
+                    wpi
+                </div>
+                <ul class="main-nav js--main-nav">
+                    <li>
+                        <a href="#features">Home</a>
+                    </li>
+                    <li>
+                        <a href="#works">Sell</a>
+                    </li>
+                    <li>
+                        <a href="#cities">New Students</a>
+                    </li>
+                    <li>
+                        <a href="#plans">Contact us</a>
+                    </li>
+                </ul>
+                <a class="mobile-nav-icon js--nav-icon">
+                    <i class="ion-navicon-round"></i>
+                </a>
+            </div>
+        </nav>
+        <div class="hero-text-box">
+            <h1>Mid-Autumn Party on Sept. 30
+                <br>Come and join us!</h1>
+            <a pageScroll class="btn btn-full js--scroll-to-plans" href="#pay-section">Register NOW!</a>
+            <a pageScroll class="btn btn-ghost js--scroll-to-start" href="#plans">More Details</a>
+        </div>
+
+    </header>
+
+    <section class="section-plans js--section-plans" id="plans">
+        <div class="row">
+            <h2>Details & Notes</h2>
+        </div>
+        <div class="row">
+            <div class="plan-box js--wp-4">
+                <div>
+                    <h3>Mid-Autumn Party</h3>
+                    <p class="plan-price">$399
+                        <span>for fun</span>
+                    </p>
+                    <!-- <p class="plan-price-meal">Super excited!</p> -->
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <i class="ion-ios-checkmark-empty icon-small"></i>1 meal every day</li>
+                        <li>
+                            <i class="ion-ios-checkmark-empty icon-small"></i>Order 24/7</li>
+                        <li>
+                            <i class="ion-ios-checkmark-empty icon-small"></i>Access to newest creations</li>
+                        <li>
+                            <i class="ion-ios-checkmark-empty icon-small"></i>Free delivery</li>
+                    </ul>
+                </div>
+                <div>
+                    <a href="#" class="btn btn-full">Sign up now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-form" id="pay-section">
+        <div class="row">
+            <h2>Join in the party</h2>
+        </div>
+        <div class="row">
+            <form  (ngSubmit)="getInfo()" #form="ngForm" >
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input type="text" name="name" id="name" [(ngModel)]="UserName" placeholder="Your name" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label for="phone-number">Phone Number</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input type="text" name="phone-number" id="phone-number" placeholder="Please input 10 digits" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input type="email" name="email" [(ngModel)]="UserEmail" id="email" placeholder="Your email" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label for="school">School</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <select ngModel name="school" [(ngModel)]="UserSchool"id="school" required>
+                            <option value="" selected disabled>Please select your school</option>
+                            <option value="WPI">WPI</option>
+                            <option value="Clark">Clark University</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label>Payment Method</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <div class="payment-method">
+                            <input type="radio" (click)="getInfo(2)" name="type1" id="method" [value] = "2" [(ngModel)]="type">
+                            <img src="https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png" alt="Alipay">
+                        </div>
+                        <div class="payment-method">
+                            <input type='radio' (click)="getInfo(1)" name="type1" id="method" [value] = "1" [(ngModel)]="type">
+                            <img src="https://wx.gtimg.com/pay_en/img/common/logo.png" alt="Wechat Pay">
+                        </div>
+                        <div class="payment-method">
+                            <input type='radio'  name="type1" id="method" [value] = "3" [(ngModel)]="type">
+                            <img src="https://www.underconsideration.com/brandnew/archives/eventbrite_logo.png" alt="Everbrite">
+                        </div>
+                    </div>
+                </div>
+            </form>
+           <form ngNoForm class="contact-form" action="https://www.paypayzhu.com/api/pay" target ="_blank" method="post" #defaultForm>
+                <input type="hidden" ngModel name="api_user" id="api_user" [(ngModel)]="ApiUser">
+                <input type="hidden" ngModel name="price" id="price" [(ngModel)]="price">
+                <input type="hidden" ngModel name="type" id="type" [(ngModel)]="payType">
+                <input type="hidden"  ngModel name="redirect" id="redirect" [(ngModel)]="redirect">
+                <input type="hidden"  ngModel name="order_id" id="order_id" [(ngModel)]="orderID">
+                <input type="hidden" ngModel name="order_info" id="order_info" [(ngModel)]="orderInfo">
+                <input type="hidden" ngModel name="signature" id="signature" [(ngModel)]="signature">
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label>&nbsp;</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input type="submit" value="Register and Pay">
+                        
+                    </div>
+                </div>
+           </form>
+        </div>
+    </section>
+    <footer>
+        <div class="row">
+            <div class="col span-1-of-2">
+                <ul class="footer-nav">
+                    <li>
+                        <a href="#">About us</a>
+                    </li>
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>
+                    <li>
+                        <a href="#">Press</a>
+                    </li>
+                    <li>
+                        <a href="#">iOS App</a>
+                    </li>
+                    <li>
+                        <a href="#">Android App</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col span-1-of-2">
+                <ul class="social-links">
+                    <li>
+                        <a href="#">
+                            <i class="ion-social-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ion-social-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ion-social-googleplus"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ion-social-instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <p>
+                This webpage was created for 2018 Mid-Autumn Party register by WPILIFE TEAM. No copyrights here.
+                <br> This party is for you! So come and do whatever you want and have fun.
+            </p>
+            <p>
+                Build with
+                <i class="ion-ios-heart" style="color: #ea0000; padding: 0 3px;"></i> in the beautiful city of Worcester, MA, United States, September 2018.
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>
