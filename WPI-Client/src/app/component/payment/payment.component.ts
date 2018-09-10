@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
 import { PaymentService } from '../../Service/paymentService';
-import { FormsModule } from '@angular/forms';
-import { NgForm } from '@angular/forms/src/directives/ng_form';
+import { FormsModule, NgForm } from '@angular/forms';
 import { paypayzhuModel } from './paypayzhuModel';
 @Component({
   selector: 'app-payment',
@@ -12,7 +11,8 @@ import { paypayzhuModel } from './paypayzhuModel';
     './vendors/css/grid.css',
     './vendors/css/ionicons.min.css',
     './vendors/css/animate.css',
-    './resources/css/queries.css'
+    './resources/css/queries.css',
+    './payment.component.css'
   ]
 })
 export class PaymentComponent implements OnInit {
@@ -31,7 +31,6 @@ export class PaymentComponent implements OnInit {
   PayMethod: string;
   type: number;
   payType: number;
-   i = 1;
   ngOnInit() {
   }
   getInfo(type: number) {

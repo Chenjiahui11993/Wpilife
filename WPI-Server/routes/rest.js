@@ -209,6 +209,7 @@ router.post('/demands', jwtCheck, jsonParser, (req, res) => {
 });
 //2018.8.31 online payment
 router.post('/pay', jsonParser, (req, res) => {
+    //TODO: create user information
     var payInfo = payService.getPayInfo(req.body.price, req.body.PayMethod);
     return res.json(payInfo);
 });

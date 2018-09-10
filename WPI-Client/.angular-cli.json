@@ -33,9 +33,7 @@
         "../node_modules/ace-builds/src-min-noconflict/mode-java.js",
         "../node_modules/ace-builds/src-min-noconflict/mode-python.js",
         "../node_modules/socket.io-client/dist/socket.io.js",
-        "../node_modules/auth0-js/build/auth0.js",
-        "../src/app/component/payment/resources/js/script.js"
-
+        "../node_modules/auth0-js/build/auth0.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
