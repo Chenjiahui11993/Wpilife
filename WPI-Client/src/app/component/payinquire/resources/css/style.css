@@ -57,7 +57,6 @@ h1,
 h2,
 h3 {
     font-weight: 300;
-    text-transform: uppercase;
 }
 
 h1 {
@@ -67,6 +66,7 @@ h1 {
     font-size: 240%;
     word-spacing: 4px;
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 h2 {
@@ -75,12 +75,15 @@ h2 {
     text-align: center;
     margin-bottom: 30px;
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 h3 {
     font-size: 110%;
     margin-bottom: 15px;
 }
+
+
 
 h2:after {
     display: block;
@@ -498,6 +501,17 @@ cite img {
     border-bottom: 1px solid #e8e8e8;
 }
 
+.submit-box {
+    width: 14%;
+    margin: 0 43%;
+}
+
+.title-box {
+    width: 40%;
+    margin: 0 30%;
+}
+
+
 .plan-box h3{
     text-align: center;
     font-size: 28px;
@@ -540,6 +554,18 @@ cite img {
     padding: 5px 0;
 }
 
+.result-box {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 60%;
+    margin: 40px 20%;
+    /* box-shadow: 0 2px 2px #efefef; */
+}
+
+.result-box h3 {
+    font-size: 100%;
+    text-align: center;
+}
 
 /* ----------------------------------------------- */
 /* FORM */

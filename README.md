@@ -40,7 +40,7 @@ version1.2
 
 1. submit提交的不是原来的表格，没有检验email的格式可能是这个原因
 2. inquire网页的row和按钮不居中
-3. nav的链接还没设置
+3. nav的链接还没设置(解决)
 4. inquire页面加“忘记邮箱/电话”按钮
 5. inquire如何查询？传值？
 6. payment页面details太长
