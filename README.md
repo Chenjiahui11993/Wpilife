@@ -35,6 +35,7 @@ version1.2
 
 
 
+<<<<<<< HEAD
  #9.9end
 
 1. submit提交的不是原来的表格，没有检验email的格式可能是这个原因
@@ -43,3 +44,11 @@ version1.2
 4. inquire页面加“忘记邮箱/电话”按钮
 5. inquire如何查询？传值？
 6. payment页面details太长
+=======
+ #Payment问题
+
+1. html 94行标明了form的action，但不论表单是否填写，点击submit按钮均无反应。
+2. 动画效果均已添加，但不知js文件要如何引用，暂时还未见效果。
+3. 网上说即使不借助js也可以完成跳转到某个锚点的功能（[js实现点击跳转到指定位置的方法 - CSDN博客](https://blog.csdn.net/web_callBack/article/details/70142556)方法一），但是我这么写，点击之后都会跳转到wpilife的主页。如果借助js，就是现在写的这样，但是还是js引用的问题。
+4. 支付成功（失败）和查询界面我尽快完成。
+>>>>>>> 4f5a946ad5c29a5fe2ca977f2ecf93b2f316597f
