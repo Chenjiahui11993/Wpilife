@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Omnifood is a premium food delivery service with the mission to bring affordable and healty meals to as many people as possible.">
+<<<<<<< HEAD
 
     <!-- <link rel="stylesheet" type="text/css" href="vendors/css/normalize.css">
         <link rel="stylesheet" type="text/css" href="vendors/css/grid.css">
@@ -15,6 +16,10 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
     <title>Mid-Autumn Party</title>
 
+=======
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
+    <title>Mid-Autumn Party</title>
+>>>>>>> 31773f04042e77eb167d5d3b307135f9c6157bdf
     <link rel="apple-touch-icon" sizes="57x57" href="/resources/favicons/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/resources/favicons/apple-touch-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/resources/favicons/apple-touch-icon-72x72.png">
@@ -35,7 +40,10 @@
     <meta name="msapplication-TileImage" content="/resources/favicons/mstile-144x144.png">
     <meta name="msapplication-config" content="/resources/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 31773f04042e77eb167d5d3b307135f9c6157bdf
 </head>
 
 <body>
@@ -47,6 +55,7 @@
                 </div>
                 <ul class="main-nav js--main-nav">
                     <li>
+<<<<<<< HEAD
                         <a href="#home">Home</a>
                     </li>
                     <li>
@@ -57,6 +66,18 @@
                     </li>
                     <li>
                         <a href="#team-section">Contact us</a>
+=======
+                        <a href="#features">Home</a>
+                    </li>
+                    <li>
+                        <a href="#works">Sell</a>
+                    </li>
+                    <li>
+                        <a href="#cities">New Students</a>
+                    </li>
+                    <li>
+                        <a href="#plans">Contact us</a>
+>>>>>>> 31773f04042e77eb167d5d3b307135f9c6157bdf
                     </li>
                 </ul>
                 <a class="mobile-nav-icon js--nav-icon">
@@ -107,40 +128,41 @@
 
     <section class="section-form" id="pay-section">
         <div class="row">
-            <h2>Join the party</h2>
+            <h2>Join in the party</h2>
         </div>
         <div class="row">
-            <form  (ngSubmit)="getInfo()" #form="ngForm" >
+            <form (ngSubmit)="getInfo()" #form="ngForm">
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label for="name">Name</label>
+                        <label for="name">Name<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="text" name="name" id="name" [(ngModel)]="UserName" placeholder="Your name" required>
+                        <input type="text" name="name" id="name" [(ngModel)]="UserName" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label for="phone-number">Phone Number</label>
+                        <label for="phone-number">Phone Number<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="text" name="phone-number" id="phone-number" placeholder="Please input 10 digits" required>
+                        <input type="text" name="phone-number" id="phone-number" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label for="email">Email</label>
+                        <label for="email">Email<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="email" name="email" [(ngModel)]="UserEmail" id="email" placeholder="Your email" required>
+                        <input type="email" name="email" [(ngModel)]="UserEmail" ngModel id="email" placeholder="please input your email" required email #email="ngModel">
+                        <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label for="school">School</label>
+                        <label for="school">School<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <select ngModel name="school" [(ngModel)]="UserSchool"id="school" required>
+                        <select ngModel name="school" [(ngModel)]="UserSchool" id="school" required>
                             <option value="" selected disabled>Please select your school</option>
                             <option value="WPI">WPI</option>
                             <option value="Clark">Clark University</option>
@@ -149,30 +171,30 @@
                 </div>
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label>Payment Method</label>
+                        <label>Payment Method<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
                         <div class="payment-method">
-                            <input type="radio" (click)="getInfo(2)" name="type1" id="method" [value] = "2" [(ngModel)]="type">
+                            <input type="radio" (click)="getInfo(2)" name="type1" id="method" [value]="2" [(ngModel)]="type">
                             <img src="https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png" alt="Alipay">
                         </div>
                         <div class="payment-method">
-                            <input type='radio' (click)="getInfo(1)" name="type1" id="method" [value] = "1" [(ngModel)]="type">
+                            <input type='radio' (click)="getInfo(1)" name="type1" id="method" [value]="1" [(ngModel)]="type">
                             <img src="https://wx.gtimg.com/pay_en/img/common/logo.png" alt="Wechat Pay">
                         </div>
                         <div class="payment-method">
-                            <input type='radio'  name="type1" id="method" [value] = "3" [(ngModel)]="type">
+                            <input type='radio' name="type1" id="method" [value]="3" [(ngModel)]="type">
                             <img src="https://www.underconsideration.com/brandnew/archives/eventbrite_logo.png" alt="Everbrite">
                         </div>
                     </div>
                 </div>
             </form>
-           <form ngNoForm class="contact-form" action="https://www.paypayzhu.com/api/pay" target ="_blank" method="post" #defaultForm>
+            <form ngNoForm class="contact-form" action="https://www.paypayzhu.com/api/pay" target="_blank" method="post" #defaultForm>
                 <input type="hidden" ngModel name="api_user" id="api_user" [(ngModel)]="ApiUser">
                 <input type="hidden" ngModel name="price" id="price" [(ngModel)]="price">
                 <input type="hidden" ngModel name="type" id="type" [(ngModel)]="payType">
-                <input type="hidden"  ngModel name="redirect" id="redirect" [(ngModel)]="redirect">
-                <input type="hidden"  ngModel name="order_id" id="order_id" [(ngModel)]="orderID">
+                <input type="hidden" ngModel name="redirect" id="redirect" [(ngModel)]="redirect">
+                <input type="hidden" ngModel name="order_id" id="order_id" [(ngModel)]="orderID">
                 <input type="hidden" ngModel name="order_info" id="order_info" [(ngModel)]="orderInfo">
                 <input type="hidden" ngModel name="signature" id="signature" [(ngModel)]="signature">
                 <div class="row">
@@ -181,10 +203,10 @@
                     </div>
                     <div class="col span-2-of-3">
                         <input type="submit" value="Register and Pay">
-                        
+
                     </div>
                 </div>
-           </form>
+            </form>
         </div>
     </section>
     <footer>

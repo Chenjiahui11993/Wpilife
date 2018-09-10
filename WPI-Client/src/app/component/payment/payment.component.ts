@@ -12,7 +12,8 @@ import { paypayzhuModel } from './paypayzhuModel';
     './vendors/css/grid.css',
     './vendors/css/ionicons.min.css',
     './vendors/css/animate.css',
-    './resources/css/queries.css'
+    './resources/css/queries.css',
+    './payment.component.css'
   ]
 })
 export class PaymentComponent implements OnInit {
