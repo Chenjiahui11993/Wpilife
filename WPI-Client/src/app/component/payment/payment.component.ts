@@ -12,14 +12,9 @@ import { paypayzhuModel } from './paypayzhuModel';
     './vendors/css/grid.css',
     './vendors/css/ionicons.min.css',
     './vendors/css/animate.css',
-<<<<<<< HEAD
     './resources/css/queries.css',
-    //  './resources/js/script.js',
-    //  './vendors/js/jquery.min.js']
-=======
-    './resources/css/queries.css'
+    './payment.component.css'
   ]
->>>>>>> Chenjiahui
 })
 export class PaymentComponent implements OnInit {
    paypayzhu: paypayzhuModel;
