@@ -21,6 +21,7 @@ import { DemandComponent } from './component/demand/demand.component';
 import { PickUpComponent } from './component/pick-up/pick-up.component';
 import { CodingStartComponent } from './component/coding/coding-start/coding-start.component';
 import { PaymentComponent } from './component/payment/payment.component';
+import { PaysuccessComponent } from './component/paysuccess/paysuccess.component';
 
 const appRouter: Routes = [
     { path: '', component: HomeComponentComponent },
@@ -54,6 +55,7 @@ const appRouter: Routes = [
     { path: 'success', component: SuccessComponent },
     { path: 'Not-found', component: NotFoundComponent },
     { path: 'error', component: ErrorComponent },
+    { path: 'paysuccess', component: PaysuccessComponent },
     { path: '**', component: NotFoundComponent }
 ];
 @NgModule({

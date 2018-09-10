@@ -54,6 +54,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { CodingStartComponent } from './component/coding/coding-start/coding-start.component';
 import { PaymentComponent } from './component/payment/payment.component';
+import { PaysuccessComponent } from './component/paysuccess/paysuccess.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,6 +84,7 @@ import { PaymentComponent } from './component/payment/payment.component';
     PickUpComponent,
     CodingStartComponent,
     PaymentComponent,
+    PaysuccessComponent,
   ],
   imports: [
     BrowserModule,
