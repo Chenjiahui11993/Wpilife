@@ -209,17 +209,11 @@ router.post('/demands', jwtCheck, jsonParser, (req, res) => {
 });
 //2018.8.31 online payment
 router.post('/pay', jsonParser, (req, res) => {
-    var payInfo = payService.getPayInfo(req.body.price, req.body.type);
-  //  payService.makePayment(payInfo)
-   // .then(payinfo =>  {
-       // console.log(payinfo);
-    //    res.writeHead(200, {'Content-Type': 'text/plain;charset=utf-8'});
-    //    res.write(payinfo);
-    //    res.end();
-  //  })
-  return res.json(payInfo);
+    var payInfo = payService.getPayInfo(req.body.price, req.body.PayMethod);
+    return res.json(payInfo);
 });
-router.post('payinfo', jsonParser, (req, res) => {
+router.post('/payinfo', bodyParser.urlencoded(), (req, res) => {
     var zhuInfo = req.body;
+    payService.saveConfirmData(zhuInfo);
 })
 module.exports = router;

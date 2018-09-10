@@ -3,7 +3,7 @@ var request = require('request');
 //您自己的api_user与api_key
 var API_USER = '5692428a';
 var API_KEY = '8871b437-3547-45e5-a181-7e5233d17f1e';
-
+const paymentModel = require('../modules/payInfoModels');
 function gen_md5(param_str) {
     var md5 = crypto.createHash('md5');
     var res = md5.update(param_str, 'utf8').digest('hex');
@@ -36,7 +36,7 @@ const getPayInfo = (price, type) => {
     var redirect = 'http://www.baidu.com';
 
     //您系统内部生成的订单号, 唯一标识一个订单   
-    var order_id = '123456';
+    var order_id = '123456777';
 
     //您自定义的用户信息, 方便在后台对账, 排查订单是由哪个用户发起的, 强烈建议加上
     var order_info = new Buffer('测试订单', 'utf8').toString();
@@ -59,10 +59,15 @@ const getPayInfo = (price, type) => {
         'code': 1
     }
     console.log(data);
-     return JSON.stringify(data);
+     return JSON.stringify(p);
 }
+ const saveConfirmData = (payInfo) => {
+     console.log(payInfo);
+     var mongoosePayInfo = new paymentModel(payInfo);
+         mongoosePayInfo.save(payInfo);
 
+ }
 module.exports = {
     getPayInfo,
-   // makePayment
+    saveConfirmData
 }
