@@ -40,7 +40,6 @@
 
 <body>
     <header>
-        <nav>
             <div class="row">
                 <div class="logo">
                     wpi
@@ -63,17 +62,53 @@
                     <i class="ion-navicon-round"></i>
                 </a>
             </div>
-        </nav>
-        <div class="hero-text-box">
-            <h1>Payment Complete :)
-                <br>See you in WPI</h1>
-            <div class="btn-mid">
-                <a pageScroll class="btn btn-full js--scroll-to-plans" href="/payment">Go Back</a>
-            </div>
-            
-        </div>
-
     </header>
+
+    <section class="section-form" id="pay-section">
+        <div class="row">
+            <h2>Check status</h2>
+        </div>
+        <div class="row">
+            <form  (ngSubmit)="getInfo()" #form="ngForm" >
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label for="phone-number">Phone Number</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input type="text" name="phone-number" id="phone-number" placeholder="Please input 10 digits" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input type="email" name="email" [(ngModel)]="UserEmail" id="email" placeholder="Your email" required>
+                    </div>
+                </div>
+            </form>
+           <form ngNoForm class="contact-form" action="https://www.paypayzhu.com/api/pay" target ="_blank" method="post" #defaultForm>
+                <input type="hidden" ngModel name="api_user" id="api_user" [(ngModel)]="ApiUser">
+                <input type="hidden" ngModel name="price" id="price" [(ngModel)]="price">
+                <input type="hidden" ngModel name="type" id="type" [(ngModel)]="payType">
+                <input type="hidden"  ngModel name="redirect" id="redirect" [(ngModel)]="redirect">
+                <input type="hidden"  ngModel name="order_id" id="order_id" [(ngModel)]="orderID">
+                <input type="hidden" ngModel name="order_info" id="order_info" [(ngModel)]="orderInfo">
+                <input type="hidden" ngModel name="signature" id="signature" [(ngModel)]="signature">
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label>&nbsp;</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input type="submit" value="Inquire">
+                        
+                    </div>
+                </div>
+           </form>
+        </div>
+    </section>
+
+
 </body>
 
 </html>

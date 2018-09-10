@@ -55,6 +55,8 @@ import { MatNativeDateModule } from '@angular/material';
 import { CodingStartComponent } from './component/coding/coding-start/coding-start.component';
 import { PaymentComponent } from './component/payment/payment.component';
 import { PaysuccessComponent } from './component/paysuccess/paysuccess.component';
+import { PayfailedComponent } from './component/payfailed/payfailed.component';
+import { PayinquireComponent } from './component/payinquire/payinquire.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,6 +87,8 @@ import { PaysuccessComponent } from './component/paysuccess/paysuccess.component
     CodingStartComponent,
     PaymentComponent,
     PaysuccessComponent,
+    PayfailedComponent,
+    PayinquireComponent,
   ],
   imports: [
     BrowserModule,
