@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
 import { PaymentService } from '../../Service/paymentService';
 import { FormsModule } from '@angular/forms';
-import { NgForm } from '@angular/forms/src/directives/ng_form';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { paypayzhuModel } from './paypayzhuModel';
 @Component({
   selector: 'app-payment',
@@ -34,10 +34,21 @@ export class PaymentComponent implements OnInit {
   payType: number;
    i = 1;
   ngOnInit() {
+    this.type = 0;
   }
+  nameValidator = new FormControl('valid', [
+    Validators.required
+  ]);
+  schoolValidator = new FormControl('valid', [
+    Validators.required
+  ]);
+  typeValidator = new FormControl('valid', [
+    Validators.required
+  ]);
+  //checkPayMethod() {
+ //   if (this.PayMethod)
+  //}
   getInfo(type: number) {
-  //  this.ApiUser = '1234';
-   // console.log(this.defaultForm.last.nativeElement);
     this.paymentService.getPayInfo(this.UserName, this.UserEmail, this.UserSchool, type)
         .then (paypay => {
      this.paypayzhu = paypay;   

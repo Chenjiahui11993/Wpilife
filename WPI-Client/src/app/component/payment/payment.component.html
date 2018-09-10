@@ -107,7 +107,7 @@
                         <label for="name">Name<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="text" name="name" id="name" [(ngModel)]="UserName" required>
+                        <input type="text" [formControl]="nameValidator" name="name" id="name" [(ngModel)]="UserName">
                     </div>
                 </div>
                 <div class="row">
@@ -115,7 +115,7 @@
                         <label for="phone-number">Phone Number<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="text" name="phone-number" id="phone-number" required>
+                        <input type="text"  name="phone-number" id="phone-number" required>
                     </div>
                 </div>
                 <div class="row">
@@ -124,7 +124,7 @@
                     </div>
                     <div class="col span-2-of-3">
                         <input type="email" name="email" [(ngModel)]="UserEmail" ngModel id="email" placeholder="please input your email" required email #email="ngModel">
-                        <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
+                        <span name="help-block"  class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
                     </div>
                 </div>
                 <div class="row">
@@ -132,10 +132,10 @@
                         <label for="school">School<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <select ngModel name="school" [(ngModel)]="UserSchool" id="school" required>
-                            <option value="" selected disabled>Please select your school</option>
-                            <option value="WPI">WPI</option>
-                            <option value="Clark">Clark University</option>
+                        <select  name="school" [formControl]="schoolValidator" [(ngModel)]="UserSchool" id="school">
+                            <option name="school" value="" selected disabled>Please select your school</option>
+                            <option name="school" value="WPI">WPI</option>
+                            <option name="school" value="Clark">Clark University</option>
                         </select>
                     </div>
                 </div>
@@ -145,17 +145,25 @@
                     </div>
                     <div class="col span-2-of-3">
                         <div class="payment-method">
-                            <input type="radio" (click)="getInfo(2)" name="type1" id="method" [value]="2" [(ngModel)]="type">
+                            <input type="radio" (click)="getInfo(2)" name="type1" id="method" [value]="2" [(ngModel)]="type" [formControl]="typeValidator">
                             <img src="https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png" alt="Alipay">
                         </div>
                         <div class="payment-method">
-                            <input type='radio' (click)="getInfo(1)" name="type1" id="method" [value]="1" [(ngModel)]="type">
+                            <input type='radio' (click)="getInfo(1)" name="type1" id="method" [value]="1" [(ngModel)]="type" [formControl]="typeValidator">
                             <img src="https://wx.gtimg.com/pay_en/img/common/logo.png" alt="Wechat Pay">
                         </div>
                         <div class="payment-method">
-                            <input type='radio' name="type1" id="method" [value]="3" [(ngModel)]="type">
-                            <img src="https://www.underconsideration.com/brandnew/archives/eventbrite_logo.png" alt="Everbrite">
+                            <input type='radio' name="type1" id="method" [value]="3" [(ngModel)]="type" [formControl]="typeValidator">
+                            <img src="https://www.underconsideration.com/brandnew/archives/eventbrite_logo.png" alt="Everbrite" >
                         </div>
+                    </div>
+                </div>
+                <div *ngIf="type==3" class="row">
+                    <div class="col span-1-of-3">
+                        <label>&nbsp;</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input  name="submit" type="submit" [disabled]="schoolValidator.hasError('required')|| typeValidator.hasError('required')||nameValidator.hasError('required')||!email.valid" value="Register and Pay2">
                     </div>
                 </div>
             </form>
@@ -167,13 +175,12 @@
                 <input type="hidden" ngModel name="order_id" id="order_id" [(ngModel)]="orderID">
                 <input type="hidden" ngModel name="order_info" id="order_info" [(ngModel)]="orderInfo">
                 <input type="hidden" ngModel name="signature" id="signature" [(ngModel)]="signature">
-                <div class="row">
+                <div *ngIf="type==0 || type == 1 || type == 2" class="row">
                     <div class="col span-1-of-3">
                         <label>&nbsp;</label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="submit" value="Register and Pay">
-
+                        <input  name="submit" type="submit" [disabled]="schoolValidator.hasError('required')|| typeValidator.hasError('required')||nameValidator.hasError('required')||!email.valid" value="Register and Pay">
                     </div>
                 </div>
             </form>
