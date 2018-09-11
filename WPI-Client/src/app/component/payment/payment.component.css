@@ -1,3 +1,6 @@
 input.ng-inalid.ng-touched {
     border: 1px solid red;
 }
+.required, .help-block{
+    color:red;
+}

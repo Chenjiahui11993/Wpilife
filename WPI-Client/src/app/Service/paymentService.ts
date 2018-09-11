@@ -7,12 +7,12 @@ export class PaymentService {
     constructor (private httpClient: HttpClient) { }
     payment: PaymentModel;
     payInfo: any;
-    getPayInfo(UserName: string, UserEmail: string, UserSchool: string, payMethod: number): Promise<paypayzhuModel> { 
+    getPayInfo(UserName: string, UserEmail: string, UserSchool: string, payMethod: number, userPhone: string): Promise<paypayzhuModel> { 
         const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) };
-        this.payment = new PaymentModel(UserName, UserSchool, '0.10', payMethod, UserEmail);
+        this.payment = new PaymentModel(UserName, UserSchool, '0.10', payMethod, UserEmail, userPhone);
        return  this.httpClient.post('api/v1/pay', this.payment, options)
         .toPromise()
-        .then((res: any) => {                                   
+        .then((res: any) => {                             
             return JSON.parse(res);
         })
         .catch(error => {

@@ -210,10 +210,21 @@ router.post('/demands', jwtCheck, jsonParser, (req, res) => {
 //2018.8.31 online payment
 router.post('/pay', jsonParser, (req, res) => {
     //TODO: create user information
-    var payInfo = payService.getPayInfo(req.body.price, req.body.PayMethod);
+    console.log(req.body);
+    var payInfo = payService.getPayInfo(req.body);
     return res.json(payInfo);
 });
-router.post('/payinfo', bodyParser.urlencoded(), (req, res) => {
+router.post('/paymentinfo', jsonParser, (req, res) => {
+    payService.queryData(req.body.email)
+    .then((data) => {
+        res.json(data);
+    })
+    .catch((e) => {
+        console.log(e);
+    })
+
+})
+router.post('/paypayzhuinfo', bodyParser.urlencoded(), (req, res) => {
     var zhuInfo = req.body;
     payService.saveConfirmData(zhuInfo);
 })

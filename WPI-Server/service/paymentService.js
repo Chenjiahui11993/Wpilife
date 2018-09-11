@@ -29,24 +29,27 @@ function gen_signature(api_user, price, type, redirect, order_id, order_info) {
     sign = gen_md5(param_str);
     return sign;
 }
-const getPayInfo = (price, type) => {
+const getPayInfo = (req) => {
+    console.log(req.PayMethod);
     var api_user = API_USER;
 
     //用户支付成功之后, 跳转到的页面 
     var redirect = 'http://www.baidu.com';
 
-    //您系统内部生成的订单号, 唯一标识一个订单   
-    var order_id = '123456777';
+    //您系统内部生成的订单号, 唯一标识一个订单 
+    var orderID = Math.floor(Math.random() * 1000000);  
+    var order_id = orderID.toString();
 
     //您自定义的用户信息, 方便在后台对账, 排查订单是由哪个用户发起的, 强烈建议加上
-    var order_info = new Buffer('测试订单', 'utf8').toString();
+    var userInfo = `${req.school}/${req.name}/${req.email}/${req.userPhone}`
+    var order_info = new Buffer(userInfo, 'utf8').toString();
 
-    var signature = gen_signature(api_user, price, type, redirect, order_id, order_info)
+    var signature = gen_signature(api_user, req.price, req.PayMethod, redirect, order_id, order_info)
 
     var p = {
         'api_user': api_user,
-        'price': price,
-        'type': type,
+        'price': req.price,
+        'type': req.PayMethod,
         'redirect': redirect,
         'order_id': order_id,
         'order_info': order_info,
@@ -62,12 +65,34 @@ const getPayInfo = (price, type) => {
      return JSON.stringify(p);
 }
  const saveConfirmData = (payInfo) => {
-     console.log(payInfo);
-     var mongoosePayInfo = new paymentModel(payInfo);
-         mongoosePayInfo.save(payInfo);
-
+     
+     var orderInfo = payInfo.order_info.toString().split('/');
+     var email = orderInfo[2];
+     var info = {
+         'ppz_order_id': payInfo.ppz_order_id,
+         'order_id': payInfo.order_id,
+         'price': payInfo.price,
+         'real_price': payInfo.real_price,
+         'order_info': payInfo.order_info,
+         'signature': payInfo.signature,
+         'email': email
+     }
+     var mongoosePayInfo = new paymentModel(info);
+         mongoosePayInfo.save(info);
+ }
+ const queryData = (userEmail) => {
+    return new Promise((resolve, reject) => {
+        paymentModel.find({email: userEmail}, (err, payInfo) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(payInfo);
+            }
+        });
+    });
  }
 module.exports = {
     getPayInfo,
-    saveConfirmData
+    saveConfirmData,
+    queryData
 }

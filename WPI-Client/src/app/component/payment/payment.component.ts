@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { PaymentService } from '../../Service/paymentService';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { paypayzhuModel } from './paypayzhuModel';
 @Component({
   selector: 'app-payment',
@@ -16,8 +17,8 @@ import { paypayzhuModel } from './paypayzhuModel';
   ]
 })
 export class PaymentComponent implements OnInit {
-   paypayzhu: paypayzhuModel;
-  constructor( private paymentService: PaymentService) { }
+  paypayzhu: paypayzhuModel;
+  constructor(private paymentService: PaymentService) { }
   @ViewChildren('defaultForm') defaultForm: HTMLFormElement;
   ApiUser: string;
   price: string;
@@ -31,30 +32,41 @@ export class PaymentComponent implements OnInit {
   PayMethod: string;
   type: number;
   payType: number;
+  UserPhone: string;
   ngOnInit() {
   }
-  getInfo(type: number) {
-  //  this.ApiUser = '1234';
-   // console.log(this.defaultForm.last.nativeElement);
-    this.paymentService.getPayInfo(this.UserName, this.UserEmail, this.UserSchool, type)
-        .then (paypay => {
-     this.paypayzhu = paypay;   
-     this.ApiUser = this.paypayzhu.api_user;
-     this.price = this.paypayzhu.price;
-     this.redirect = this.paypayzhu.redirect;
-     this.orderID = this.paypayzhu.order_id;
-     this.orderInfo = this.paypayzhu.order_info;
-     this.signature = this.paypayzhu.signature;
-     this.payType = type;
-     console.log(this.defaultForm.first);
-     //this.defaultForm.first.nativeElement.submit();
-    // this.defaultForm.first.nativeElement.submit();
-    })
-    .catch((e) => {
-      console.log(e);
-    });   
-  }
-  try() {
-    this.defaultForm.first.nativeElement.submit();
+  nameValidator = new FormControl('valid', [
+    Validators.required
+  ]);
+  schoolValidator = new FormControl('valid', [
+    Validators.required
+  ]);
+  typeValidator = new FormControl('valid', [
+    Validators.required
+  ]);
+  getInfo() {
+    if (this.type == 3) {
+
+    } else {
+      this.paymentService.getPayInfo(this.UserName, this.UserEmail, this.UserSchool, this.type, this.UserPhone)
+        .then(paypay => {
+          this.paypayzhu = paypay;
+          this.ApiUser = this.paypayzhu.api_user;
+          this.price = this.paypayzhu.price;
+          this.redirect = this.paypayzhu.redirect;
+          this.orderID = this.paypayzhu.order_id;
+          this.orderInfo = this.paypayzhu.order_info;
+          this.signature = this.paypayzhu.signature;
+          this.payType = this.type;
+          setTimeout(() => {  // angular needs some time to bind data ?
+            this.defaultForm.first.nativeElement.submit();
+          }, 500)
+
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+    }
   }
 }

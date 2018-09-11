@@ -97,13 +97,13 @@
             <h2>Join in the party</h2>
         </div>
         <div class="row">
-            <form  (ngSubmit)="getInfo()" >
+            <form (ngSubmit)="getInfo()" #form="ngForm">
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label for="name">Name</label>
+                        <label for="name">Name<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="text" name="name" id="name" [(ngModel)]="UserName" ngModel placeholder="Your name" required>
+                        <input type="text" [formControl]="nameValidator" name="name" id="name" [(ngModel)]="UserName">
                     </div>
                 </div>
                 <div class="row">
@@ -111,67 +111,67 @@
                         <label for="phone-number">Phone Number</label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="text" name="phone-number" id="phone-number" ngModel placeholder="Please input 10 digits" required>
+                        <input type="text"  name="phone-number" id="phone-number" [(ngModel)]='UserPhone'>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label for="email">Email</label>
+                        <label for="email">Email<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="email" name="email" [(ngModel)]="UserEmail" id="email" ngModel  email required #email="ngModel">
-                        <p *ngIf="email.valid">email is necessary!</p>
+                        <input type="email" name="email" [(ngModel)]="UserEmail" ngModel id="email" placeholder="please input your email" required email #email="ngModel">
+                        <span name="help-block"  class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label for="school">School</label>
+                        <label for="school">School<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <select ngModel name="school" [(ngModel)]="UserSchool"id="school" required>
-                            <option value="" selected disabled>Please select your school</option>
-                            <option value="WPI">WPI</option>
-                            <option value="Clark">Clark University</option>
+                        <select  name="school" [formControl]="schoolValidator" [(ngModel)]="UserSchool" id="school">
+                            <option name="school" value="" selected disabled>Please select your school</option>
+                            <option name="school" value="WPI">WPI</option>
+                            <option name="school" value="Clark">Clark University</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label>Payment Method</label>
+                        <label>Payment Method<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
                         <div class="payment-method">
-                            <input type="radio" (click)="getInfo(2)" name="type1" id="method" [value] = "2" [(ngModel)]="type">
+                            <input type="radio" name="type1" id="method" [value]="2" [(ngModel)]="type" [formControl]="typeValidator">
                             <img src="https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png" alt="Alipay">
                         </div>
                         <div class="payment-method">
-                            <input type='radio' (click)="getInfo(1)" name="type1" id="method" [value] = "1" [(ngModel)]="type">
+                            <input type='radio'  name="type1" id="method" [value]="1" [(ngModel)]="type" [formControl]="typeValidator">
                             <img src="https://wx.gtimg.com/pay_en/img/common/logo.png" alt="Wechat Pay">
                         </div>
                         <div class="payment-method">
-                            <input type='radio'  name="type1" id="method" [value] = "3" [(ngModel)]="type">
-                            <img src="https://www.underconsideration.com/brandnew/archives/eventbrite_logo.png" alt="Everbrite">
+                            <input type='radio' name="type1" id="method" [value]="3" [(ngModel)]="type" [formControl]="typeValidator">
+                            <img src="https://www.underconsideration.com/brandnew/archives/eventbrite_logo.png" alt="Everbrite" >
                         </div>
                     </div>
                 </div>
-            </form>
-           <form ngNoForm class="contact-form" action="https://www.paypayzhu.com/api/pay" target ="_blank" method="post" #defaultForm>
-                <input type="hidden"  name="api_user" id="api_user" [(ngModel)]="ApiUser">
-                <input type="hidden"  name="price" id="price" [(ngModel)]="price">
-                <input type="hidden"  name="type" id="type" [(ngModel)]="payType">
-                <input type="hidden"   name="redirect" id="redirect" [(ngModel)]="redirect">
-                <input type="hidden"   name="order_id" id="order_id" [(ngModel)]="orderID">
-                <input type="hidden"  name="order_info" id="order_info" [(ngModel)]="orderInfo">
-                <input type="hidden"  name="signature" id="signature" [(ngModel)]="signature">
-                <div class="row">
+                <div  class="row">
                     <div class="col span-1-of-3">
                         <label>&nbsp;</label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="submit" value="Register and Pay">                       
+                        <input  name="submit2" type="submit"  value="Register and Pay">
                     </div>
                 </div>
-           </form>
+            </form>
+            <form ngNoForm class="contact-form" action="https://www.paypayzhu.com/api/pay" target="_blank" method="post" #defaultForm>
+                <input type="hidden"  name="api_user" id="api_user" [(ngModel)]="ApiUser" [value]="ApiUser">
+                <input type="hidden"  name="price" id="price" [(ngModel)]="price" [value]="price">
+                <input type="hidden"  name="type" id="type" [(ngModel)]="payType" [value]="payType">
+                <input type="hidden"  name="redirect" id="redirect" [(ngModel)]="redirect" [value]="redirect" >
+                <input type="hidden"  name="order_id" id="order_id" [(ngModel)]="orderID" [value]="orderID" >
+                <input type="hidden"  name="order_info" id="order_info" [(ngModel)]="orderInfo" [value]="orderInfo" >
+                <input type="hidden"  name="signature" id="signature" [(ngModel)]="signature" [value]="signature">
+            </form>
         </div>
     </section>
     <footer>
@@ -227,7 +227,8 @@
             </p>
             <p>
                 Build with
-                <i class="ion-ios-heart" style="color: #ea0000; padding: 0 3px;"></i> in the beautiful city of Worcester, MA, United States, September 2018.
+                <i class="ion-ios-heart" style="color: #ea0000; padding: 0 3px;"></i> in the beautiful city of Worcester,
+                MA, United States, September 2018.
             </p>
         </div>
     </footer>

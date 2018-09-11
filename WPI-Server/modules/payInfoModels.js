@@ -6,6 +6,7 @@ const paymentSchema = mongoose.Schema({
     signature: String,
     price: Number,
     real_price: Number,
+    email: String
 });
 const paymentModel = mongoose.model('paymentmodels', paymentSchema);
 module.exports = paymentModel;
