@@ -4,13 +4,13 @@ import { HomeComponentComponent } from './component/home-page/home-component.com
 import { HouseComponentComponent } from './component/house/house-component.component';
 import { ProductComponent } from './component/product/product.component';
 import { ProductDetailComponent } from './component/product/product-detail/product-detail.component';
-import { TestComponent } from './test/test.component';
+import { TestComponent } from './component/test/test.component';
 import { HouseDetailComponent } from './component/house/house-detail/house-detail.component';
 import { BookComponent } from './component/book/book.component';
 import { BookDetailComponent } from './component/book/book-detail/book-detail.component';
 import { NewStudentsComponent } from './component/new-students/new-students.component';
 import { SellComponent } from './component/sell/sell.component';
-import { CodingComponent } from './coding/coding.component';
+import { CodingComponent } from './component/coding/coding.component';
 import { CallbackComponent } from './component/callback/callback.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { AuthGuardService } from './Service/auth.guard.service';
@@ -19,6 +19,12 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
 import { ErrorComponent } from './component/error/error.component';
 import { DemandComponent } from './component/demand/demand.component';
 import { PickUpComponent } from './component/pick-up/pick-up.component';
+import { CodingStartComponent } from './component/coding/coding-start/coding-start.component';
+import { PaymentComponent } from './component/payment/payment.component';
+import { PaysuccessComponent } from './component/paysuccess/paysuccess.component';
+import { PayfailedComponent } from './component/payfailed/payfailed.component';
+import { PayinquireComponent } from './component/payinquire/payinquire.component';
+
 
 
 const appRouter: Routes = [
@@ -26,6 +32,11 @@ const appRouter: Routes = [
     { path: 'sell', component: SellComponent },
     { path: 'editor', component: CodingComponent },
     { path: 'book-list', component: BookComponent },
+    { path: 'payment', component: PaymentComponent},
+    { path: 'coding', component: CodingStartComponent },
+    {
+        path: 'coding/:id', component: CodingComponent,
+    },
     { path: 'book-list/:id', component: BookDetailComponent },
     { path: 'house-list', component: HouseComponentComponent },
     {
@@ -48,6 +59,9 @@ const appRouter: Routes = [
     { path: 'success', component: SuccessComponent },
     { path: 'Not-found', component: NotFoundComponent },
     { path: 'error', component: ErrorComponent },
+    { path: 'paymentsuccess', component: PaysuccessComponent },
+    { path: 'paymentfailed', component: PayfailedComponent },
+    { path: 'paymentinquire', component: PayinquireComponent},
     { path: '**', component: NotFoundComponent }
 ];
 @NgModule({

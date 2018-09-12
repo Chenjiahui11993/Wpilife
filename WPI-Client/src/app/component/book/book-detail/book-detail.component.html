@@ -12,11 +12,11 @@
           <div class="col-md-6 col-xs-6 text-center menu-1">
             <ul>
               <li>
-                <a [routerLink]="''">Home</a>								
+                <a [routerLink]="''">Home</a>
               </li>
               <li>
-                  <a [routerLink]="'/house-list'">House</a>
-                </li>
+                <a [routerLink]="'/house-list'">House</a>
+              </li>
               <li>
                 <a [routerLink]="'/survival-guide'">New Students</a>
               </li>
@@ -24,7 +24,7 @@
                 <a [routerLink]="'/sell'">Sell Your Product</a>
               </li>
               <li>
-                <a href="contact.html">Contact</a>
+                <a [routerLink]="'/test'">Contact</a>
               </li>
             </ul>
           </div>
@@ -52,7 +52,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
-          
+
             <div>
               <ngx-carousel [inputs]="Config">
                 <ngx-item *ngFor="let bookImg of imgurl" class="bannerStyle " NgxCarouselItem>
@@ -61,7 +61,7 @@
                 <i NgxCarouselPrev class="leftRs fa fa-arrow-left fa-3x" aria-hidden="true"></i>
                 <i NgxCarouselNext class="rightRs fa fa-arrow-right fa-3x" aria-hidden="true"></i>
               </ngx-carousel>
-            </div>         
+            </div>
             <div class="row animate-box">
               <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
                 <h2>{{department}}</h2>
@@ -78,26 +78,26 @@
             <ul class="nav nav-tabs">
               <mat-tab-group>
                 <mat-tab label="Book detail">
-                  <div class="col-md-8 ">
+                  <div class="col-md-12 ">
                     <mat-list>
                       <mat-list-item>Book Name: {{name}}</mat-list-item>
                       <mat-divider></mat-divider>
-                      <mat-list-item>Book Price : {{price}}$</mat-list-item>
+                      <mat-list-item>Book Price: {{price}}$</mat-list-item>
                       <mat-divider></mat-divider>
                       <mat-list-item>Book department: {{department}}</mat-list-item>
-                    </mat-list>    
+                    </mat-list>
                   </div>
                 </mat-tab>
                 <mat-tab label="Contact Info">
-                  <div class="col-md-8">
+                  <div class="col-md-12">
                     <mat-list>
                       <mat-list-item>Contact information: {{contactInfo}}</mat-list-item>
                       <mat-divider></mat-divider>
-                      <mat-list-item>Owner information: {{ownerID}}</mat-list-item>
+                      <mat-list-item>Post date: {{date}}</mat-list-item>
                       <mat-divider></mat-divider>
                       <mat-list-item>Book Description: {{desc}}</mat-list-item>
                       <mat-divider></mat-divider>
-                    </mat-list>               
+                    </mat-list>
                   </div>
                 </mat-tab>
               </mat-tab-group>
@@ -107,5 +107,5 @@
       </div>
     </div>
   </div>
-<app-footer></app-footer>
+  <app-footer></app-footer>
 </body>

@@ -11,7 +11,7 @@ export class NewStudentsComponent implements OnInit {
     'Introduction',
     'Before come to America',
     'Flight',
-    'After Arrival',
+    'Before Term Begins',
     'Life in WPI',
     'Come back to China',
     'Postscript',

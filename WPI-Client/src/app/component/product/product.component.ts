@@ -5,30 +5,29 @@ import { FormControl } from '@angular/forms';
 import { ProductModel } from '../product/product-model';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/debounceTime';
-import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeStyle } from '@angular/platform-browser';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
-  providers: []
 })
 export class ProductComponent implements OnInit, OnDestroy {
-  searchBox: FormControl = new FormControl();
   searchValue = '';
    p: number;
   temp: number;
-  user_photo: SafeUrl;
+  allProducts: ProductModel[] = [];
+  searchBox: FormControl = new FormControl();
   subscriptionProducts: Subscription;
   subscriptionInput: Subscription;
   constructor(private productService: ProductService, private router: Router,
-    private activatedRouter: ActivatedRoute, private sanitization: DomSanitizer) {
+    private activatedRouter: ActivatedRoute) {
     this.p = this.productService.getCurrentPage();
-    console.log(this.p);
   }
-  allProducts: ProductModel[] = [];
   ngOnInit() {
     this.subscriptionProducts = this.productService.getAllProduct()
-      .subscribe(allProducts => this.allProducts = allProducts);
+      .subscribe(allProducts => {
+        this.allProducts = allProducts;
+        this.allProducts = this.allProducts.reverse();
+      });
       this.subscriptionInput = this.searchBox
       .valueChanges
       .debounceTime(200)
@@ -40,6 +39,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.subscriptionProducts.unsubscribe();
+    this.subscriptionInput.unsubscribe();
   }
   ToProductDetail(id: number) {
     this.productService.setCurrentPage(this.p);
@@ -48,6 +48,5 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
   getPageNumber(event) {
     this.p = event;
-  //  console.log(event);
   }
 }

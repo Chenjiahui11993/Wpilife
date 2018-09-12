@@ -20,8 +20,6 @@ export class ProductService {
             });
     }
     getUserProduct(id: string): Promise<ProductModel[]> {
-        console.log(id);
-        console.log('xixixix');
         return this.httpClient.get(`api/v1/userproducts/${id}`)
             .toPromise()
             .then((res: any) => res)
@@ -34,7 +32,7 @@ export class ProductService {
             .toPromise()
             .then((res: any) => {
                 this.router.navigate(['/']);
-                console.log(res);
+            //    console.log(res);
             });
     }
     getAllProduct(): Observable<ProductModel[]> {
@@ -49,13 +47,13 @@ export class ProductService {
         return this._productSource.asObservable();
     }
     setProduct(name: string, price: string, ownerID: string,
-        desc: string, contactInfo: string, img: string[], type: Boolean): Promise<ProductModel> { // TODO AUTH
+        desc: string, contactInfo: string, img: string[], type: Boolean, today: string): Promise<ProductModel> { // TODO AUTH
         const options = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
                 .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
         };
         type = true;
-        this.newProduct = new ProductModel(name, price, ownerID, desc, contactInfo, img, type);
+        this.newProduct = new ProductModel(name, price, ownerID, desc, contactInfo, img, type, today);
         return this.httpClient.post('api/v1/products', this.newProduct, options)
             .toPromise()
             .then((newProducts: any) => {

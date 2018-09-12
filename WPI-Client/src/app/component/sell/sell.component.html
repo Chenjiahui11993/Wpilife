@@ -23,7 +23,7 @@
                 <a [routerLink]="'/sell'">Sell Your Product</a>
               </li>
               <li>
-                <a href="contact.html">Contact</a>
+                <a [routerLink]="'/test'">Contact</a>
               </li>
             </ul>
           </div>
@@ -56,10 +56,10 @@
             </p>
           </div>
         </div>
-        <div *ngIf="authService.isAuthenticated() else login" class="row">
+        <div class="row">
           <div class="container">
             <div class="row">
-              <div class="col-lg-12 ">
+              <div class="col-lg-12" *ngIf="authService.isAuthenticated() else login">
                 <mat-form-field class="form-group">
                   <mat-select placeholder="Product Type" [formControl]="selected" [errorStateMatcher]="matcher" [(ngModel)]="type" [(value)]="type"
                     required>
@@ -105,19 +105,34 @@
                     </mat-form-field>
                     <mat-form-field class="form-group" [floatLabel]="'always'">
                       <mat-placeholder>
+                        <mat-icon>
+                          create
+                        </mat-icon>
+                        <i>Please Input the date of today</i>
+                      </mat-placeholder>
+                      <input matInput [matDatepicker]="picker3" [value]="date.value">
+                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                      <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="form-group" [floatLabel]="'always'">
+                      <mat-placeholder>
                         <mat-icon>create</mat-icon>
                         <i> A Good Description make your product easy to sell</i>
                       </mat-placeholder>
                       <textarea [(ngModel)]="desc" matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" name="productDescp">
-                             </textarea>
+                      </textarea>
                     </mat-form-field>
                     <input type="file" name="0" (change)="onFileSelect($event)">
-                    <p *ngIf="fileSizeError[0]">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
-                    <p *ngIf="fileTypeError[0]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
+                    <p *ngIf="fileSizeError[0]" id="fileError">File error, file size must smaller than 1 MB, this file would not be uploaded, please select your file
+                      again, thanks</p>
+                    <p *ngIf="fileTypeError[0]" id="fileError">File error, file type must be jpg, png, bpm, this file would not be uploaded, jpeg, please select your
+                      file again, thanks</p>
                     <div *ngFor="let time of names">
                       <input type="file" [name]="time" (change)="onFileSelect($event)">
-                      <p *ngIf="checkFileError(time)">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
-                      <p *ngIf="fileTypeError[time]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
+                      <p *ngIf="checkFileError(time)" id="fileError">File error, file size must smaller than 1 MB, this file would not be uploaded, please select your file
+                        again, thanks</p>
+                      <p *ngIf="fileTypeError[time]" id="fileError">File error, file type must be jpg, png, bpm, this file would not be uploaded, jpeg, please select your
+                        file again, thanks</p>
                     </div>
                     <div *ngIf="plusSignal" class="plus">
                       <i class="fa fa-plus" aria-hidden="true" (click)="onSecondSelect()"></i>
@@ -163,6 +178,28 @@
                     </mat-form-field>
                     <mat-form-field class="form-group" [floatLabel]="'always'">
                       <mat-placeholder>
+                        <mat-icon>
+                          create
+                        </mat-icon>
+                        <i>Please Input the house available date</i>
+                      </mat-placeholder>
+                      <input matInput [matDatepicker]="picker3" [value]="date.value">
+                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                      <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="form-group" [floatLabel]="'always'">
+                      <mat-placeholder>
+                        <mat-icon>
+                          create
+                        </mat-icon>
+                        <i>Please Input the house contract end date</i>
+                      </mat-placeholder>
+                      <input matInput [matDatepicker]="picker4" [value]="dateTo.value" (dateChange) ="getDate($event)">
+                      <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                      <mat-datepicker #picker4></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="form-group" [floatLabel]="'always'">
+                      <mat-placeholder>
                         <mat-icon>create</mat-icon>
                         <i> You can provide other information which you think is necessary at here</i>
                       </mat-placeholder>
@@ -170,12 +207,14 @@
                              </textarea>
                     </mat-form-field>
                     <input type="file" name="0" (change)="onFileSelect($event)">
-                    <p *ngIf="fileSizeError[0]">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
-                    <p *ngIf="fileTypeError[0]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
+                    <p *ngIf="fileSizeError[0]" id="fileError">File error, file size must smaller than 1 MB, this file would not be uploaded,please select your file
+                      again, thanks</p>
+                    <p *ngIf="fileTypeError[0]" id="fileError">File error, file type must be jpg, png, this file would not be uploaded, bpm, jpeg, please select your
+                      file again, thanks</p>
                     <div *ngFor="let time of names">
                       <input type="file" [name]="time" (change)="onFileSelect($event)">
-                      <p *ngIf="checkFileError(time)">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
-                      <p *ngIf="fileTypeError[time]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
+                      <p *ngIf="checkFileError(time)" id="fileError">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
+                      <p *ngIf="fileTypeError[time]" id="fileError">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
                     </div>
                     <div *ngIf="plusSignal" class="plus">
                       <i class="fa fa-plus" aria-hidden="true" (click)="onSecondSelect()"></i>
@@ -217,6 +256,17 @@
                       </mat-placeholder>
                       <textarea [(ngModel)]="desc" matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" name="productDescp">
                              </textarea>
+                    </mat-form-field>
+                    <mat-form-field class="form-group" [floatLabel]="'always'">
+                      <mat-placeholder>
+                        <mat-icon>
+                          create
+                        </mat-icon>
+                        <i>Please Input the date of today</i>
+                      </mat-placeholder>
+                      <input matInput [matDatepicker]="picker3" [value]="date.value">
+                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                      <mat-datepicker #picker3></mat-datepicker>
                     </mat-form-field>
                     <button *ngIf="!uploadProcess" class="btn btn-primary" (click)="addProduct(type)" [disabled]="isDemandDisable()">Submit</button>
                     <h3>
@@ -270,6 +320,17 @@
                     </mat-form-field>
                     <mat-form-field class="form-group" [floatLabel]="'always'">
                       <mat-placeholder>
+                        <mat-icon>
+                          create
+                        </mat-icon>
+                        <i>Please Input the date of today</i>
+                      </mat-placeholder>
+                      <input matInput [matDatepicker]="picker3" [value]="date.value">
+                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                      <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="form-group" [floatLabel]="'always'">
+                      <mat-placeholder>
                         <mat-icon>create</mat-icon>
                         <i> You can provide other information which you think is necessary at here</i>
                       </mat-placeholder>
@@ -277,12 +338,14 @@
                              </textarea>
                     </mat-form-field>
                     <input type="file" name="0" (change)="onFileSelect($event)">
-                    <p *ngIf="fileSizeError[0]">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
-                    <p *ngIf="fileTypeError[0]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
+                    <p *ngIf="fileSizeError[0]" id="fileError">File error, file size must smaller than 1 MB, this file would not be uploaded, please select your file
+                      again, thanks</p>
+                    <p *ngIf="fileTypeError[0]" id="fileError">File error, file type must be jpg, png, bpm, this file would not be uploaded, jpeg, please select your
+                      file again, thanks</p>
                     <div *ngFor="let time of names">
                       <input type="file" [name]="time" (change)="onFileSelect($event)">
-                      <p *ngIf="checkFileError(time)">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
-                      <p *ngIf="fileTypeError[time]">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
+                      <p *ngIf="checkFileError(time)" id="fileError">File error, file size must smaller than 1 MB, please select your file again, thanks</p>
+                      <p *ngIf="fileTypeError[time]" id="fileError">File error, file type must be jpg, png, bpm, jpeg, please select your file again, thanks</p>
                     </div>
                     <div *ngIf="plusSignal" class="plus" (click)="onSecondSelect(i)">
                       <i class="fa fa-plus" aria-hidden="true"></i>

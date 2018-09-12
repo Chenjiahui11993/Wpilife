@@ -23,7 +23,7 @@
                 <a [routerLink]="'/sell'">Sell Your Product</a>
               </li>
               <li>
-                <a href="contact.html">Contact</a>
+                <a [routerLink]="'/test'">Contact</a>
               </li>
             </ul>
           </div>
@@ -51,22 +51,22 @@
         <div class="row animate-box">
           <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
             <h2>AirPort Pick up!</h2>
-            <p>If you find some bug or have some suggestions, please contack us at: hbchenjh@gmail.com. We are hearing all the
+            <p>If you find some bugs or have some suggestions, please contack us at: hbchenjh@gmail.com. We are hearing all the
               time. your feedback makes our website better!
             </p>
           </div>
         </div>
         <div *ngIf="authService.isAuthenticated() else login">
           <h1>
-            For your safety, please add our CSSA member at: She will try her best to help you! Thanks!
+            For your safety, please add our CSSA member at:szx19951014 or L-T-H-123456. He will try his best to help you! Thanks!
           </h1>
         </div>
         <ng-template #login>
-            <h4>
-              Please
-              <a id="login" (click)="authService.login()">Login</a> First to watch this section
-            </h4>
-          </ng-template>
+          <h4>
+            Please
+            <a id="login" (click)="authService.login()">Login</a> First to watch this section
+          </h4>
+        </ng-template>
       </div>
     </div>
     <app-footer></app-footer>

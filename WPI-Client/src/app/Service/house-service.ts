@@ -33,12 +33,13 @@ export class HouseService {
             .then((res: any) => res);
     }
     setNewllHouse(address: string, price: string, ownerinfo: string, desc: string
-        , contactInfo: string, img: string[]) {
+        , contactInfo: string, img: string[], fromDate: string, toDate: string) {
+            console.log(toDate);
         const options = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
                 .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
         };
-        this.newHouse = new HouseModel(address, price, ownerinfo, desc, contactInfo, img, true);
+        this.newHouse = new HouseModel(address, price, ownerinfo, desc, contactInfo, img, true, fromDate, toDate);
         return this.httpClient.post('api/v1/houses', this.newHouse, options)
             .toPromise()
             .then((newHouses) => {
@@ -54,7 +55,7 @@ export class HouseService {
             .toPromise()
             .then((res: any) => {
                 this.router.navigate(['/']);
-                console.log(res);
+               // console.log(res);
             });
     }
     setCurrentPage(currentPage: number) {

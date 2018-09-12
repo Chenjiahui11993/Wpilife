@@ -44,21 +44,19 @@ export class BookService {
             .toPromise()
             .then((res: any) => {
                 this.router.navigate(['/']);
-                console.log(res);
             });
     }
     setBook(name: string, price: string, ownerID: string, desc: string,
-        contactInfo: string, img: string[], department: string) {
+        contactInfo: string, img: string[], department: string, today: string) {
         const options = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
                 .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
         };
-        console.log(localStorage.getItem('access_token'));
-        this.newBook = new BookModel(name, price, ownerID, desc, contactInfo, img, department, true);
+        this.newBook = new BookModel(name, price, ownerID, desc, contactInfo, img, department, true, today);
         return this.httpClient.post('api/v1/books', this.newBook, options)
             .toPromise()
             .then((newBook) => {
-                // this.getALLBooks().subscribe();
+                 this.getALLBooks();
                 this.router.navigate(['/success']);
             })
             .catch((e) => {

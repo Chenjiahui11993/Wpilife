@@ -1,0 +1,120 @@
+<body>
+  <div class="fh5co-loader"></div>
+  <div id="page">
+    <nav class="fh5co-nav" role="navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-xs-2">
+            <div id="fh5co-logo">
+              <a routerLink="">WPI.</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-xs-6 text-center menu-1">
+            <ul>
+              <li>
+                <a [routerLink]="''">Home</a>
+              </li>
+              <li>
+                <a [routerLink]="'/house-list'">House</a>
+              </li>
+              <li>
+                <a [routerLink]="'/survival-guide'">New Students</a>
+              </li>
+              <li>
+                <a [routerLink]="'/sell'">Sell Your Product</a>
+              </li>
+              <li>
+                <a [routerLink]="'/test'">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(../../../assets/img_bg_2.jpg);">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 text-center">
+            <div class="display-t">
+              <div class="display-tc animate-box" data-animate-effect="fadeIn">
+                <h1>Online Coding Judge System</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div id="fh5co-product">
+      <div class="container">
+        <div class="row animate-box">
+          <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+            <span>Enjoy Coding</span>
+            <h2>Coding Section.</h2>
+            <p id="ins">You could just uncomment the sample codes and click submit to see the result or input your own codes. Reminder:
+              It may need a little bit time to get the result. Also, you could open a new tab with same url to see the change
+              between two editors
+            </p>
+            <p *ngIf="!roomValid" id="NotexistError">
+              This room is not exist and data would not be saved, please return and create a coding room thanks.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            <section>
+              <header class="editor-header">
+                <div class="select">
+                  <select class="form-control lang-select" name="language" [(ngModel)]="language" (change)="setLanguage(language)">
+                    <option *ngFor="let language of languages" [value]="language">
+                      {{language}}
+                    </option>
+                  </select>
+                  <!--reset button -->
+                  <!-- Button trigger modal -->
+                  <button type="button" id="reset" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    Reset
+                  </button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        You will lose current code in the editor, are you sure?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="resetEditor()">Reset</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </header>
+              <div class="row">
+                <div id="editor">
+                </div>
+              </div>
+              <mat-progress-spinner *ngIf="!showButton" class="example-margin" color="primary" mode="indeterminate" value="50">
+              </mat-progress-spinner>
+              <div id="ins">
+                {{output}}
+              </div>
+              <!-- This is the body -->
+              <footer class="editor-footer">
+                <button *ngIf="showButton" type="button" class="btn btn-success pull-right" (click)="submit()">Submit Solution</button>
+              </footer>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</body>

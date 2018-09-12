@@ -9,8 +9,9 @@ export class BookModel {
   imgUrl: string[];
   type: Boolean;
   description: string;
+  today: string;
   constructor(name: string, price: string, ownerID: string, desc: string,
-    contactInfo: string, img: string[], department: string, type: Boolean) {
+    contactInfo: string, img: string[], department: string, type: Boolean, today: string) {
 this.name = name;
 this.department = department;
 this.ownerID = ownerID;
@@ -19,5 +20,6 @@ this.contactInfo = contactInfo;
 this.description = desc;
 this.imgUrl = img;
 this.type = type;
+this.today = today;
 }
 }

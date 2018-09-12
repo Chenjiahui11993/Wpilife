@@ -1,4 +1,3 @@
-
 .clx {
     clear: both;
 }
@@ -26,4 +25,7 @@
     }
     .mat-tab-label{
         margin: 0 30px;
+    }
+    mat-list-item{
+        display: block;
     }

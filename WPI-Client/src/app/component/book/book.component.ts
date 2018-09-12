@@ -32,7 +32,9 @@ export class BookComponent implements OnInit, OnDestroy {
     this.subscriptionBooks = this.bookService.getALLBooks()
       .subscribe((allBooks) => {
         this.AllBooks = allBooks;
+        this.AllBooks = this.AllBooks.reverse();
         this.books = allBooks;
+        this.books = this.books.reverse();
       });
     this.subscriptionInput = this.searchBox
       .valueChanges
@@ -50,7 +52,7 @@ export class BookComponent implements OnInit, OnDestroy {
     this.bookService.setCurrentPage(this.bp);
     this.router.navigate(['/book-list', id]);
   }
-  onChange(value: any) {
+  onChange() {
     this.selectedBook = [];
     this.AllBooks = this.books;
     this.AllBooks.forEach((book) => {
@@ -62,7 +64,6 @@ export class BookComponent implements OnInit, OnDestroy {
       return 0;
     }
     this.AllBooks = this.selectedBook;
-    console.log(this.AllBooks);
   }
   getPageNumber(event) {
     this.bp = event;

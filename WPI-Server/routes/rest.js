@@ -11,9 +11,17 @@ const bookService = require('../service/bookService');
 const houseService = require('../service/houseService');
 const demandService = require('../service/demandService');
 const codingService = require('../service/codingRoomService');
+<<<<<<< HEAD
 var multer = require('multer');
 const path = require('path');
 var upload = multer({ dest: '/mnt/image/others' });
+=======
+const payService = require('../service/paymentService');
+const errorHandler = require('../service/errorHandleService');
+var multer = require('multer');
+const path = require('path');
+var upload = multer({ dest: 'upload/' });
+>>>>>>> 21aae07e8f3da4303ccfb012b97e24b8c414cf33
 const nodeRestClient = require('node-rest-client').Client;
 const restClient = new nodeRestClient();
 EXECUTOR_SERVER_URL = 'http://localhost:5000/build_and_run'; // change due to
@@ -174,8 +182,13 @@ router.post('/image', jwtCheck, upload.array('logo', 5), function (req, res, nex
     files.forEach((file, index) => {
         name = file.originalname;
         extensionName = name.split('.');
+<<<<<<< HEAD
         newfilename =`${file.filename}.${extensionName[1]}`;
         fs.renameSync(`/mnt/image/others/${file.filename}`, `/mnt/image/others/${newfilename}`);
+=======
+        newfilename = `${file.filename}.${extensionName[1]}`;
+        fs.renameSync(path.join(__dirname, `../upload/${file.filename}`), path.join(__dirname, `../upload/${newfilename}`));
+>>>>>>> 21aae07e8f3da4303ccfb012b97e24b8c414cf33
         file.filename = newfilename;
         resFiles.push(file.filename);
     });
@@ -187,7 +200,11 @@ router.post('/image', jwtCheck, upload.array('logo', 5), function (req, res, nex
 });
 router.get('/images/:id', (req, res) => {
     var id = req.params['id'];
+<<<<<<< HEAD
     var img = fs.readFileSync(`/mnt/image/others/${id}`, 'binary');
+=======
+    var img = fs.readFileSync(path.join(__dirname, `../upload/${id}`), 'binary');
+>>>>>>> 21aae07e8f3da4303ccfb012b97e24b8c414cf33
     res.writeHead(200, { 'Content-Type': 'image/png' });
     res.end(img, 'binary')
     //res.sendFile('index.html', {root: path.join(__dirname, '../../public/')})
@@ -206,4 +223,28 @@ router.post('/demands', jwtCheck, jsonParser, (req, res) => {
             console.log(e);
         });
 });
+//2018.8.31 online payment
+router.post('/pay', jsonParser, (req, res) => {
+    //TODO: create user information
+    console.log(req.body);
+    var payInfo = payService.getPayInfo(req.body);
+    return res.json(payInfo);
+});
+router.post('/paymentinfo', jsonParser, (req, res) => {
+    payService.queryData(req.body.email)
+    .then((data) => {
+        res.json(data);
+    })
+    .catch((e) => {
+        console.log(e);
+    })
+
+})
+router.post('/paypayzhuinfo', bodyParser.urlencoded(), (req, res) => {
+    var zhuInfo = req.body;
+    payService.saveConfirmData(zhuInfo);
+})
+router.post('/try', bodyParser.urlencoded(), (req, res) => {
+    errorHandler.saveError('abc');
+})
 module.exports = router;

@@ -39,6 +39,10 @@ export class SellComponent implements OnInit {
   fd = new FormData();
   size = 0;
   userImagesNames: number;
+  date = new FormControl(new Date());
+  dateTo = new FormControl(new Date());
+  houseAvailable: string;
+  houseEnd: string;
   fileSizeError = [];
   fileTypeError = [];
   uploadProcess = false;
@@ -66,17 +70,18 @@ export class SellComponent implements OnInit {
     if (this.authService.userProfile && this.authService.isAuthenticated()) {
       this.profile = this.authService.userProfile;
       this.ownerID = this.profile.name;
-      console.log(this.profile);
+      // console.log(this.profile);
     } else if (this.authService.isAuthenticated()) {
       this.authService.getProfile((err, profile) => {
         this.profile = profile;
         this.ownerID = this.profile.name;
       });
+      this.selectedFile[0] = null;  // 5/4 update
     }
-    console.log(this.ownerID + 'zheshi owner ID');
   }
   upload() {
-    console.log(this.selectedFile + 'shang chuan wenjian');
+    this.houseAvailable = JSON.stringify(this.date.value);
+    this.houseAvailable = this.houseAvailable.slice(1, 11);
     for (const file of this.selectedFile) {
       if (file !== null) {
         this.fd.append('logo', file[0], file.name);
@@ -90,43 +95,78 @@ export class SellComponent implements OnInit {
       .subscribe((res: any) => {
         if (res.type === HttpEventType.UploadProgress) {
           this.uploadProcess = true;
-          console.log('uploading');
-          console.log(res);
+          //   console.log('uploading');
+          //   console.log(res);
         } else if (res instanceof HttpResponse) {
-          console.log('upload successful');
-          console.log(res);
+          //   console.log('upload successful');
+          //   console.log(res);
           for (let i = 0; i < res.body.length; i++) {
             this.imgUrl[i] = `${window.location.origin}/api/v1/images/${res.body[i]}`;
-            console.log(this.imgUrl[i]);
+            //     console.log(this.imgUrl[i]);
           }
           this.addProduct(this.type);
         }
+      }, (error: any) => {
+        this.router.navigate(['/error']);
       });
   }
   addProduct(type) {
     if (type === 'Others') {
-      this.productService.setProduct(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, true)
-      .catch(e => {
-        this.router.navigate(['/error']);
-      });
+      if (this.imgUrl[0] === undefined) {
+        this.productService.setProduct(this.name, this.price, this.ownerID,
+          this.desc, this.contactInfo, ['http://18.221.7.15/api/v1/images/c3925836f35ecbe9881dba8d0d445627.png'], true, this.houseAvailable)
+          .catch(e => {
+            this.router.navigate(['/error']);
+          });
+      } else {
+        this.productService.setProduct(this.name, this.price, this.ownerID,
+          this.desc, this.contactInfo, this.imgUrl, true, this.houseAvailable)
+          .catch(e => {
+            this.router.navigate(['/error']);
+          });
+      }
     }
     if (type === 'House') {
-      this.houseService.setNewllHouse(this.address, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl)
-      .catch(e => {
-        this.router.navigate(['/error']);
-      });
+    //    console.log(this.houseEnd);
+      //   console.log(this.houseEnd);
+      if (this.imgUrl[0] === undefined) {
+        this.houseService.setNewllHouse(this.address, this.price,
+          this.ownerID, this.desc, this.contactInfo,
+          ['http://18.221.7.15/api/v1/images/c3925836f35ecbe9881dba8d0d445627.png'], this.houseAvailable, this.houseEnd)
+          .catch(e => {
+            this.router.navigate(['/error']);
+          });
+      } else {
+        this.houseService.setNewllHouse(this.address, this.price, this.ownerID,
+          this.desc, this.contactInfo, this.imgUrl, this.houseAvailable, this.houseEnd)
+          .catch(e => {
+            this.router.navigate(['/error']);
+          });
+      }
     }
     if (type === 'Book') {
-      this.bookService.setBook(this.name, this.price, this.ownerID, this.desc, this.contactInfo, this.imgUrl, this.department)
-      .catch(e => {
-        this.router.navigate(['/error']);
-      });
+      if (this.imgUrl[0] === undefined) {
+        this.bookService.setBook(this.name, this.price, this.ownerID,
+          this.desc, this.contactInfo, ['http://18.221.7.15/api/v1/images/c3925836f35ecbe9881dba8d0d445627.png'],
+          this.department, this.houseAvailable)
+          .catch(e => {
+            this.router.navigate(['/error']);
+          });
+      } else {
+        this.bookService.setBook(this.name, this.price, this.ownerID, this.desc,
+          this.contactInfo, this.imgUrl, this.department, this.houseAvailable)
+          .catch(e => {
+            this.router.navigate(['/error']);
+          });
+      }
     }
     if (type === 'Demand') {
-      this.demandService.setDemandList(this.name, this.contactInfo, this.desc, this.ownerID)
-      .catch(e => {
-        this.router.navigate(['/error']);
-      });
+      this.houseAvailable = JSON.stringify(this.date.value);
+      this.houseAvailable = this.houseAvailable.slice(1, 11);
+      this.demandService.setDemandList(this.name, this.contactInfo, this.desc, this.ownerID, this.houseAvailable)
+        .catch(e => {
+          this.router.navigate(['/error']);
+        });
     }
   }
   isOthers(option) {
@@ -167,7 +207,7 @@ export class SellComponent implements OnInit {
   }
   isDemandDisable() {
     if (this.productNameError.hasError('required') || this.productContactError.hasError('required') ||
-       this.selected.hasError('require')) {
+      this.selected.hasError('require')) {
       return true;
     } else {
       return false;
@@ -178,19 +218,19 @@ export class SellComponent implements OnInit {
     if (this.i <= 4) {
       this.names.push(this.i);
       this.selectedFile[this.i] = null;
-      console.log(this.names);
+      //   console.log(this.names);
     } else {
       this.plusSignal = false;
     }
   }
   onFileSelect(event) {
-    console.log(event);
+    //   console.log(event);
     // this.size = event.target.files[0].size / 1024;
     this.userImagesNames = event.target.name;
     // console.log(this.size);
     if (event.target.files.length === 0) { // when use click cancel when upload file
       this.selectedFile[this.userImagesNames] = null;
-      console.log('wen jian qu xiao');
+     // console.log('wen jian qu xiao');
       return 0;
     } else if (event.target.files.length !== 0 && (event.target.files[0].size / 1024) < 1024) {
       this.fileTypeError[this.userImagesNames] = this.checkTypeError(event.target.files[0].name);
@@ -198,14 +238,14 @@ export class SellComponent implements OnInit {
       // this.userImagesNames = event.target.name;
       if (!this.fileTypeError[this.userImagesNames]) {
         this.selectedFile[this.userImagesNames] = event.target.files;
-        console.log(this.selectedFile[this.userImagesNames][0]);
-        console.log(this.selectedFile);
+        //    console.log(this.selectedFile[this.userImagesNames][0]);
+        //    console.log(this.selectedFile);
       }
       //  console.log(this.selectedFile);
     } else if ((event.target.files[0].size / 1024) > 1024) {
       this.fileSizeError[this.userImagesNames] = true;
-      console.log(+this.userImagesNames);
-      console.log('image are to large !');
+      //    console.log(+this.userImagesNames);
+      //    console.log('image are to large !');
       return 0;
     }
   }
@@ -215,10 +255,16 @@ export class SellComponent implements OnInit {
   checkTypeError(filename: string) {
     let fileType = filename.toLocaleLowerCase().split('.');
     if (fileType[1].includes('jpg') || fileType[1].includes('png') || fileType[1].includes('bmp') || fileType[1].includes('jpeg')) {
-      console.log(fileType[1]);
+      // console.log(fileType[1]);
       return false;
     } else {
       return true;
     }
+  }
+  getDate(event) {
+    this.houseEnd = JSON.stringify(event.value);
+    this.houseEnd = this.houseEnd.slice(1, 11);
+   // console.log(this.houseEnd);
+   // console.log(this.dateTo.value);
   }
 }

@@ -19,6 +19,7 @@ export class ProductDetailComponent implements OnInit {
   desc: string;
   ownerID: string;
   contactInfo: string;
+  date: string;
   imgUrl = [];
   constructor(private productService: ProductService, private activateRouter: ActivatedRoute, private router: Router ) {
     this.Config = {
@@ -46,6 +47,7 @@ export class ProductDetailComponent implements OnInit {
       this.contactInfo = this.ProductDetail.contactInfo;
       this.imgUrl = this.ProductDetail.imgUrl;
       this.ownerID = this.ProductDetail.ownerID;
+      this.date = this.ProductDetail.today;
     })
     .catch((e) => {
       this.router.navigate(['/Not-found']);

@@ -15,8 +15,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxCarouselModule } from 'ngx-carousel';
 import {NgxPaginationModule} from 'ngx-pagination';
 import 'hammerjs';
-import { TestComponent } from './test/test.component';
+import { TestComponent } from './component/test/test.component';
 import { ProductService } from '../app/Service/product-service';
+import { PaymentService } from '../app/Service/paymentService';
 import { CollaborationService } from '../app/Service/collaboration.service';
 import { HouseService } from './Service/house-service';
 import { HouseDetailComponent } from './component/house/house-detail/house-detail.component';
@@ -33,7 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { SellComponent } from './component/sell/sell.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './component/footer/footer.component';
-import { CodingComponent } from './coding/coding.component';
+import { CodingComponent } from './component/coding/coding.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { AuthService } from './Service/auth.service';
 import { CallbackComponent } from './component/callback/callback.component';
@@ -49,6 +50,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { DemandComponent } from './component/demand/demand.component';
 import { DemandService } from './Service/demand.service';
 import { PickUpComponent } from './component/pick-up/pick-up.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
+import { CodingStartComponent } from './component/coding/coding-start/coding-start.component';
+import { PaymentComponent } from './component/payment/payment.component';
+import { PaysuccessComponent } from './component/paysuccess/paysuccess.component';
+import { PayfailedComponent } from './component/payfailed/payfailed.component';
+import { PayinquireComponent } from './component/payinquire/payinquire.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +84,11 @@ import { PickUpComponent } from './component/pick-up/pick-up.component';
     ProductSearchPipe,
     DemandComponent,
     PickUpComponent,
+    CodingStartComponent,
+    PaymentComponent,
+    PaysuccessComponent,
+    PayfailedComponent,
+    PayinquireComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,7 +111,9 @@ import { PickUpComponent } from './component/pick-up/pick-up.component';
     MatInputModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
               ProductService,
@@ -107,7 +122,8 @@ import { PickUpComponent } from './component/pick-up/pick-up.component';
               CollaborationService,
               AuthService,
               AuthGuardService,
-              DemandService
+              DemandService,
+              PaymentService
   ],
   bootstrap: [AppComponent]
 })

@@ -6,8 +6,8 @@ import { BookModel } from '../component/book/book-model';
 export class SearchPipe implements PipeTransform {
 
   transform(books: BookModel[], term: string): BookModel[] {
-    console.log(term);
-    console.log(books);
+  //  console.log(term);
+   // console.log(books);
     return books.filter(book => book.name.trim().toLocaleLowerCase().includes(term.toLocaleLowerCase()));
     // console.log(book.name);
   }
