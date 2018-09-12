@@ -8,8 +8,8 @@ var transporter = nodemailer.createTransport({
     "port": 25,
     "secureConnection": true, // use SSL
     "auth": {
-        "user": 'admin@wpilife.org', // user name
-        "pass": 'CHen1993820'         // password
+        "user": '', // user name
+        "pass": ''         // password
     }
 });
 //您自己的api_user与api_key
@@ -42,7 +42,7 @@ function gen_signature(api_user, price, type, redirect, order_id, order_info) {
     return sign;
 }
 const getPayInfo = (req) => {
-    console.log(req.PayMethod);
+    //console.log(req.PayMethod);
     var api_user = API_USER;
 
     //用户支付成功之后, 跳转到的页面 
@@ -73,7 +73,7 @@ const getPayInfo = (req) => {
         'data': p,
         'code': 1
     }
-    console.log(data);
+   // console.log(data);
     return JSON.stringify(p);
 }
 const saveConfirmData = (payInfo) => {
