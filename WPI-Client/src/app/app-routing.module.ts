@@ -59,9 +59,9 @@ const appRouter: Routes = [
     { path: 'success', component: SuccessComponent },
     { path: 'Not-found', component: NotFoundComponent },
     { path: 'error', component: ErrorComponent },
-    { path: 'paysuccess', component: PaysuccessComponent },
-    { path: 'payfailed', component: PayfailedComponent },
-    { path: 'payinquire', component: PayinquireComponent},
+    { path: 'paymentsuccess', component: PaysuccessComponent },
+    { path: 'paymentfailed', component: PayfailedComponent },
+    { path: 'paymentinquire', component: PayinquireComponent},
     { path: '**', component: NotFoundComponent }
 ];
 @NgModule({

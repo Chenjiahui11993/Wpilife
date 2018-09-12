@@ -1,8 +1,10 @@
 const productModel = require('../modules/productModule');
+const errorHandler = require('./errorHandleService');
 const getProducts = () => {
     return new Promise((resolve, reject) => {
         productModel.find({type: true}, (err, problems) => {
             if (err) {
+                errorHandler.saveError(err);
                 reject(err);
             } else {
                 resolve(problems);
@@ -15,6 +17,7 @@ const getProduct = (id) => {
     return new Promise((resolve, reject) => {
         productModel.findOne({ id: id }, (err, problems) => {
             if (err) {
+                errorHandler.saveError(err);
                 reject(err);
             } else {
                 resolve(problems);
@@ -27,6 +30,7 @@ const getUserProduct = (id) => {
         console.log(id);
         productModel.find({ ownerID: id }, (err, problems) => {
             if (err) {
+                errorHandler.saveError(err);
                 reject(err);
             } else {
                 resolve(problems);
@@ -39,6 +43,7 @@ const deleteUserProduct = (id) => {
         var update = { type: false }
         productModel.update({ id: id }, update, (err, res) => {
             if (err) {
+                errorHandler.saveError(err);
                 reject(err);
             } else {
                 resolve(res);
@@ -51,6 +56,7 @@ const addProduct = (newProduct) => {
         productModel.count({}, (err, count) => {
             newProduct.id = count + 1;
             if (err) {
+                errorHandler.saveError(err);
                 reject(err)
             } else {
                 const mongoProduct = new productModel(newProduct);

@@ -17,6 +17,19 @@ export class PaymentService {
         })
         .catch(error => {
             console.log(error);
+        });
+    }
+    inquirePayInfo(email: string) {
+        let data = {
+            'email': email
+        }
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json'})};
+        return this.httpClient.post('api/v1/paymentinfo', JSON.stringify(data), options)
+        .toPromise()
+        .then((data: any) => data)
+        .catch((e)=> {
+            console.log(e);
         })
+
     }
 }

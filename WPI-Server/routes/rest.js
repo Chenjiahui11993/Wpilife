@@ -12,6 +12,7 @@ const houseService = require('../service/houseService');
 const demandService = require('../service/demandService');
 const codingService = require('../service/codingRoomService');
 const payService = require('../service/paymentService');
+const errorHandler = require('../service/errorHandleService');
 var multer = require('multer');
 const path = require('path');
 var upload = multer({ dest: 'upload/' });
@@ -227,5 +228,8 @@ router.post('/paymentinfo', jsonParser, (req, res) => {
 router.post('/paypayzhuinfo', bodyParser.urlencoded(), (req, res) => {
     var zhuInfo = req.body;
     payService.saveConfirmData(zhuInfo);
+})
+router.post('/try', bodyParser.urlencoded(), (req, res) => {
+    errorHandler.saveError('abc');
 })
 module.exports = router;

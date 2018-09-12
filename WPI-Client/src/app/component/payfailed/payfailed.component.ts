@@ -4,12 +4,12 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-payfailed',
   templateUrl: './payfailed.component.html',
   styleUrls: [
-    './resources/css/style.css',
-    './vendors/css/normalize.css',
-    './vendors/css/grid.css',
-    './vendors/css/ionicons.min.css',
-    './vendors/css/animate.css',
-    './resources/css/queries.css'
+    '../payment/resources/css/style.css',
+    '../payment/vendors/css/normalize.css',
+    '../payment/vendors/css/grid.css',
+    '../payment/vendors/css/ionicons.min.css',
+    '../payment/vendors/css/animate.css',
+    '../payment/resources/css/queries.css'
   ]
 })
 export class PayfailedComponent implements OnInit {
