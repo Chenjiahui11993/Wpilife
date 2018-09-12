@@ -7,7 +7,9 @@ const houseSchema = mongoose.Schema({
     description: String,
     Address: String,
     contactInfo: String,
-    imgUrl: []
+    imgUrl: [],
+    fromDate: String,
+    toDate: String
 });
 const houseModel = mongoose.model('housemodels', houseSchema);
 module.exports = houseModel;

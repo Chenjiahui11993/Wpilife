@@ -10,10 +10,15 @@ const problemService = require('../service/productService');
 const bookService = require('../service/bookService');
 const houseService = require('../service/houseService');
 const demandService = require('../service/demandService');
-var multer  = require('multer');
+const codingService = require('../service/codingRoomService');
+var multer = require('multer');
 const path = require('path');
-var upload = multer({ dest: 'upload/' });
-
+var upload = multer({ dest: '/mnt/image/others' });
+const nodeRestClient = require('node-rest-client').Client;
+const restClient = new nodeRestClient();
+EXECUTOR_SERVER_URL = 'http://localhost:5000/build_and_run'; // change due to
+restClient.registerMethod('build_and_run', EXECUTOR_SERVER_URL, 'POST');
+ // EXECUTOR_SERVER_URL = 'http://executor/build_and_run'; nginx setup
 var jwtCheck = jwt({
     secret: jwks.expressJwtSecret({
         cache: true,
@@ -126,18 +131,54 @@ router.post('/houses', jwtCheck, jsonParser, (req, res) => {
             console.log(e);
         });
 });
-router.post('/image', jwtCheck, upload.array('logo', 5), function(req, res, next){
+router.post('/coding', jsonParser, (req, res) => {
+    codingService.addCodingRoom(req.body)
+        .then((newCodingRoom) => res.json(newCodingRoom))
+        .catch((e) => {
+            console.log(e);
+        })
+});
+router.post('/result', jsonParser, (req, res) => {
+    const userCodes = req.body.userCodes;
+    const lang = req.body.lang;
+    console.log('lang' + lang);
+    console.log(userCodes);
+    restClient.methods.build_and_run({
+     data: {code: userCodes, lang: lang},
+     headers: {'Content-Type': 'application/json'}
+    },
+    (data, response) => {
+        //build:xxx, run:xxx
+        const text = `Build output: ${data['build']}. Execute ouput:${data['run']}`;
+        data['text'] = text;
+        res.json(data);
+    }
+    )
+});
+
+router.get('/coding/:id', (req, res) => {
+    var id = req.params['id'];
+    codingService.getCodingRoom(id)
+        .then((room) => res.json(room)
+        )
+        .catch((e) => {
+            console.log(e);
+        });
+});
+
+
+router.post('/image', jwtCheck, upload.array('logo', 5), function (req, res, next) {
     var files = req.files;
     console.log(files);
     var resFiles = [];
     files.forEach((file, index) => {
-     name = file.originalname;
-     extensionName = name.split('.');
-     newfilename =`${file.filename}.${extensionName[1]}`;
-     fs.renameSync(path.join(__dirname, `../upload/${file.filename}`),  path.join(__dirname, `../upload/${newfilename}`));
-     file.filename = newfilename;
-     resFiles.push(file.filename);
-    }); 
+        name = file.originalname;
+        extensionName = name.split('.');
+        newfilename =`${file.filename}.${extensionName[1]}`;
+        fs.renameSync(`/mnt/image/others/${file.filename}`, `/mnt/image/others/${newfilename}`);
+        file.filename = newfilename;
+        resFiles.push(file.filename);
+    });
     console.log(resFiles);
     res.send(resFiles);
     console.log(files);
@@ -146,8 +187,8 @@ router.post('/image', jwtCheck, upload.array('logo', 5), function(req, res, next
 });
 router.get('/images/:id', (req, res) => {
     var id = req.params['id'];
-    var img = fs.readFileSync(path.join(__dirname, `../upload/${id}`), 'binary');
-    res.writeHead(200, {'Content-Type': 'image/png' });
+    var img = fs.readFileSync(`/mnt/image/others/${id}`, 'binary');
+    res.writeHead(200, { 'Content-Type': 'image/png' });
     res.end(img, 'binary')
     //res.sendFile('index.html', {root: path.join(__dirname, '../../public/')})
 });

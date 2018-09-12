@@ -5,7 +5,8 @@ const demandSchema = mongoose.Schema({
     name: String,
     ownerID: String,
     description: String,
-    contactInfo: String
+    contactInfo: String,
+    today: String
 });
 const demandModel = mongoose.model('demandmodels', demandSchema);
 module.exports = demandModel;
