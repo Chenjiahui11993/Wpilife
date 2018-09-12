@@ -1,4 +1,5 @@
 const redisClient = require('../modules/redisClient');
+const errorHandler = require('./errorHandleService');
 const TIMEOUT_IN_SECONDS = 3600;
 module.exports = function(io) {
     // collaboraiton sessions
@@ -33,13 +34,13 @@ module.exports = function(io) {
         } else {
             redisClient.get(sessionPath + '/' + sessionId, data => {
                 if (data) {
-                    console.log('session terminated perviously, pulling back from redis');
+                   // console.log('session terminated perviously, pulling back from redis');
                     collaboraitons[sessionId] = {
                         'cachaedInstructions': JSON.parse(data),
                         'participants': []
                     };
                 } else {
-                    console.log('creating new session');
+                 //   console.log('creating new session');
                     collaboraitons[sessionId] = {
                         'cachaedInstructions': [],
                         'participants': []
@@ -63,7 +64,7 @@ module.exports = function(io) {
                     }
                 }
             } else {
-                console.error('error');
+                errorHandler.saveError('error from editor socket');
             }
         });
 
@@ -96,7 +97,7 @@ module.exports = function(io) {
                 }
             }
             if (!foundAndRemove) {
-                console.error('warning');
+                errorHandler.saveError('error from editor socket still has some user please check code');
             }
         });
     });

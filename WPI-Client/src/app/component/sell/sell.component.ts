@@ -78,13 +78,10 @@ export class SellComponent implements OnInit {
       });
       this.selectedFile[0] = null;  // 5/4 update
     }
-    // console.log(this.ownerID + 'zheshi owner ID');
   }
   upload() {
     this.houseAvailable = JSON.stringify(this.date.value);
     this.houseAvailable = this.houseAvailable.slice(1, 11);
-    // console.log(this.houseAvailable + '"???"');
-    //  console.log(this.selectedFile[0] + 'shang chuan wenjian');
     for (const file of this.selectedFile) {
       if (file !== null) {
         this.fd.append('logo', file[0], file.name);

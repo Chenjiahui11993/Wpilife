@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Omnifood is a premium food delivery service with the mission to bring affordable and healty meals to as many people as possible.">
-
-    <!-- <link rel="stylesheet" type="text/css" href="vendors/css/normalize.css">
-        <link rel="stylesheet" type="text/css" href="vendors/css/grid.css">
-        <link rel="stylesheet" type="text/css" href="vendors/css/ionicons.min.css">
-        <link rel="stylesheet" type="text/css" href="vendors/css/animate.css">
-        <link rel="stylesheet" type="text/css" href="resources/css/style.css">
-        <link rel="stylesheet" type="text/css" href="resources/css/queries.css"> -->
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
     <title>Mid-Autumn Party</title>
 
@@ -35,7 +25,6 @@
     <meta name="msapplication-TileImage" content="/resources/favicons/mstile-144x144.png">
     <meta name="msapplication-config" content="/resources/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-
 </head>
 
 <body>
@@ -47,16 +36,16 @@
                 </div>
                 <ul class="main-nav js--main-nav">
                     <li>
-                        <a href="#features">Home</a>
+                        <a href="#home">Home</a>
                     </li>
                     <li>
-                        <a href="#works">Sell</a>
+                        <a href="#services-section">Sell</a>
                     </li>
                     <li>
-                        <a href="#cities">New Students</a>
+                        <a href="#about-section">New Students</a>
                     </li>
                     <li>
-                        <a href="#plans">Contact us</a>
+                        <a href="#team-section">Contact us</a>
                     </li>
                 </ul>
                 <a class="mobile-nav-icon js--nav-icon">
@@ -81,42 +70,41 @@
             <div class="plan-box js--wp-4">
                 <div>
                     <h3>Mid-Autumn Party</h3>
-                    <p class="plan-price">$399
-                        <span>for fun</span>
+                    <p class="plan-price">$11
+                        <span>or &yen;70</span>
                     </p>
                     <!-- <p class="plan-price-meal">Super excited!</p> -->
                 </div>
                 <div>
                     <ul>
                         <li>
-                            <i class="ion-ios-checkmark-empty icon-small"></i>1 meal every day</li>
+                            <i class="icon-small ion-android-compass"></i><a href="https://www.wpi.edu/about/locations/alden-memorial" target="_blank">@Alden Memorial, WPI</a></li>
                         <li>
-                            <i class="ion-ios-checkmark-empty icon-small"></i>Order 24/7</li>
+                            <i class="icon-small ion-android-time"></i>Sept. 30, 2018</li>
                         <li>
-                            <i class="ion-ios-checkmark-empty icon-small"></i>Access to newest creations</li>
+                            <i class="icon-small ion-social-yen"></i>$11 or &yen;75</li>
                         <li>
-                            <i class="ion-ios-checkmark-empty icon-small"></i>Free delivery</li>
+                            <i class="icon-small ion-email"></i>Any payment problems, contact <a href="mailto:hbchenjh@gmail.com">hbchenjh@gmail.com</a></li>
                     </ul>
                 </div>
                 <div>
-                    <a href="#" class="btn btn-full">Sign up now</a>
+                    <a pageScroll href="#pay-section" class="btn btn-full js--scroll-to-plans">Sign up now</a>
                 </div>
             </div>
         </div>
     </section>
-
     <section class="section-form" id="pay-section">
         <div class="row">
             <h2>Join in the party</h2>
         </div>
         <div class="row">
-            <form  (ngSubmit)="getInfo()" #form="ngForm" >
+            <form (ngSubmit)="getInfo()" #form="ngForm">
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label for="name">Name</label>
+                        <label for="name">Name<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="text" name="name" id="name" [(ngModel)]="UserName" placeholder="Your name" required>
+                        <input type="text" [formControl]="nameValidator" name="name" id="name" [(ngModel)]="UserName">
                     </div>
                 </div>
                 <div class="row">
@@ -124,67 +112,67 @@
                         <label for="phone-number">Phone Number</label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="text" name="phone-number" id="phone-number" placeholder="Please input 10 digits" required>
+                        <input type="text"  name="phone-number" id="phone-number" [(ngModel)]='UserPhone'>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label for="email">Email</label>
+                        <label for="email">Email<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="email" name="email" [(ngModel)]="UserEmail" id="email" placeholder="Your email" required>
+                        <input type="email" name="email" [(ngModel)]="UserEmail" ngModel id="email" placeholder="please input your email" required email #email="ngModel">
+                        <span name="help-block"  class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label for="school">School</label>
+                        <label for="school">School<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
-                        <select ngModel name="school" [(ngModel)]="UserSchool"id="school" required>
-                            <option value="" selected disabled>Please select your school</option>
-                            <option value="WPI">WPI</option>
-                            <option value="Clark">Clark University</option>
+                        <select  name="school" [formControl]="schoolValidator" [(ngModel)]="UserSchool" id="school">
+                            <option name="school" value="" selected disabled>Please select your school</option>
+                            <option name="school" value="WPI">WPI</option>
+                            <option name="school" value="Clark">Clark University</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col span-1-of-3">
-                        <label>Payment Method</label>
+                        <label>Payment Method<span class="required">*</span></label>
                     </div>
                     <div class="col span-2-of-3">
                         <div class="payment-method">
-                            <input type="radio" (click)="getInfo(2)" name="type1" id="method" [value] = "2" [(ngModel)]="type">
+                            <input type="radio" name="type1" id="method" [value]="2" [(ngModel)]="type" [formControl]="typeValidator">
                             <img src="https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png" alt="Alipay">
                         </div>
                         <div class="payment-method">
-                            <input type='radio' (click)="getInfo(1)" name="type1" id="method" [value] = "1" [(ngModel)]="type">
+                            <input type='radio'  name="type1" id="method" [value]="1" [(ngModel)]="type" [formControl]="typeValidator">
                             <img src="https://wx.gtimg.com/pay_en/img/common/logo.png" alt="Wechat Pay">
                         </div>
                         <div class="payment-method">
-                            <input type='radio'  name="type1" id="method" [value] = "3" [(ngModel)]="type">
-                            <img src="https://www.underconsideration.com/brandnew/archives/eventbrite_logo.png" alt="Everbrite">
+                            <input type='radio' name="type1" id="method" [value]="3" [(ngModel)]="type" [formControl]="typeValidator">
+                            <img src="https://www.underconsideration.com/brandnew/archives/eventbrite_logo.png" alt="Everbrite" >
                         </div>
                     </div>
                 </div>
-            </form>
-           <form ngNoForm class="contact-form" action="https://www.paypayzhu.com/api/pay" target ="_blank" method="post" #defaultForm>
-                <input type="hidden" ngModel name="api_user" id="api_user" [(ngModel)]="ApiUser">
-                <input type="hidden" ngModel name="price" id="price" [(ngModel)]="price">
-                <input type="hidden" ngModel name="type" id="type" [(ngModel)]="payType">
-                <input type="hidden"  ngModel name="redirect" id="redirect" [(ngModel)]="redirect">
-                <input type="hidden"  ngModel name="order_id" id="order_id" [(ngModel)]="orderID">
-                <input type="hidden" ngModel name="order_info" id="order_info" [(ngModel)]="orderInfo">
-                <input type="hidden" ngModel name="signature" id="signature" [(ngModel)]="signature">
-                <div class="row">
+                <div  class="row">
                     <div class="col span-1-of-3">
                         <label>&nbsp;</label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="submit" value="Register and Pay">
-                        
+                        <input [disabled]="typeValidator.hasError('required')||schoolValidator.hasError('required')||nameValidator.hasError('required') ||!email.valid"  name="submit2" type="submit"  value="Register and Pay">
                     </div>
                 </div>
-           </form>
+            </form>
+            <form ngNoForm class="contact-form" action="https://www.paypayzhu.com/api/pay" target="_blank" method="post" #defaultForm>
+                <input type="hidden"  name="api_user" id="api_user" [(ngModel)]="ApiUser" [value]="ApiUser">
+                <input type="hidden"  name="price" id="price" [(ngModel)]="price" [value]="price">
+                <input type="hidden"  name="type" id="type" [(ngModel)]="payType" [value]="payType">
+                <input type="hidden"  name="redirect" id="redirect" [(ngModel)]="redirect" [value]="redirect" >
+                <input type="hidden"  name="order_id" id="order_id" [(ngModel)]="orderID" [value]="orderID" >
+                <input type="hidden"  name="order_info" id="order_info" [(ngModel)]="orderInfo" [value]="orderInfo" >
+                <input type="hidden"  name="signature" id="signature" [(ngModel)]="signature" [value]="signature">
+            </form>
         </div>
     </section>
     <footer>
@@ -192,42 +180,26 @@
             <div class="col span-1-of-2">
                 <ul class="footer-nav">
                     <li>
-                        <a href="#">About us</a>
+                        <a href="#team-section">About us</a>
                     </li>
                     <li>
-                        <a href="#">Blog</a>
+                        <a href="https://www.facebook.com/WPI-CSSA-506053402753513/">Blog</a>
                     </li>
                     <li>
-                        <a href="#">Press</a>
-                    </li>
-                    <li>
-                        <a href="#">iOS App</a>
-                    </li>
-                    <li>
-                        <a href="#">Android App</a>
+                        <a href="https://www.facebook.com/WPI-CSSA-506053402753513/">Press</a>
                     </li>
                 </ul>
             </div>
             <div class="col span-1-of-2">
                 <ul class="social-links">
                     <li>
-                        <a href="#">
+                        <a href="https://www.facebook.com/WPI-CSSA-506053402753513/">
                             <i class="ion-social-facebook"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="https://twitter.com/wpicssa">
                             <i class="ion-social-twitter"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="ion-social-googleplus"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="ion-social-instagram"></i>
                         </a>
                     </li>
                 </ul>
@@ -235,8 +207,8 @@
         </div>
         <div class="row">
             <p>
-                This webpage was created for 2018 Mid-Autumn Party register by WPILIFE TEAM. No copyrights here.
-                <br> This party is for you! So come and do whatever you want and have fun.
+                This webpage was created for 2018 Mid-Autumn Party by WPILIFE TEAM. No copyrights here.
+                <br> This party is for you! Come and have fun.
             </p>
             <p>
                 Build with
@@ -245,5 +217,3 @@
         </div>
     </footer>
 </body>
-
-</html>

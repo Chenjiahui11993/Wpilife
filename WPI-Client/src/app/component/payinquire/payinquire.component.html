@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Omnifood is a premium food delivery service with the mission to bring affordable and healty meals to as many people as possible.">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
+    <title>Mid-Autumn Party</title>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/resources/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/resources/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/resources/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/resources/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/resources/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/resources/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/resources/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/resources/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/resources/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/resources/favicons/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="/resources/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/resources/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/resources/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/resources/favicons/manifest.json">
+    <link rel="shortcut icon" href="/resources/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/resources/favicons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/resources/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+    <header>
+            <div class="row">
+                <div class="logo">
+                    wpi
+                </div>
+                <ul class="main-nav js--main-nav">
+                    <li>
+                        <a href="#home">Home</a>
+                    </li>
+                    <li>
+                        <a href="#services-section">Sell</a>
+                    </li>
+                    <li>
+                        <a href="#about-section">New Students</a>
+                    </li>
+                    <li>
+                        <a href="#team-section">Contact us</a>
+                    </li>
+                </ul>
+                <a class="mobile-nav-icon js--nav-icon">
+                    <i class="ion-navicon-round"></i>
+                </a>
+            </div>
+    </header>
+
+    <section class="section-form" id="pay-section">
+        <div class="row">
+            <div class="title-box">
+                <h2>Check status</h2>
+            </div>
+        </div>
+        <div class="row">
+            <form  (ngSubmit)="getInfo()" #form="ngForm" >
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="col span-2-of-3">
+                        <input type="email" name="email" [(ngModel)]="userEmail" id="email" placeholder="Your email" required>
+                    </div>
+                </div>
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                    <div class="col span-1-of-3">
+                        <label>&nbsp;</label>
+                    </div>
+                    <div class="submit-box">
+                        <input type="submit" value="Submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="status == true" class="row">
+            <div class="result-box">
+                <h2>Result</h2>
+                <h3>Payment information:</h3>
+                <div *ngFor="let info of personData">
+                    <h3>Order ID: {{info.orderID}}</h3>
+                    <h3>name: {{info.name}}</h3>
+                    <h3>school: {{info.school}}</h3>
+                    <h3>price: {{info.price}}</h3>
+                    <h3>email: {{info.email}}</h3>           
+                    <hr style="height:1px;border:none;border-top:1px solid #555555;" /> 
+                </div>
+                <h4>if there is something wrong, please contact our crew at weChat: chenjiahui11993</h4>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+
+</html>

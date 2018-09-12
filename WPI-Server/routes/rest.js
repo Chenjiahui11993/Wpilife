@@ -12,6 +12,7 @@ const houseService = require('../service/houseService');
 const demandService = require('../service/demandService');
 const codingService = require('../service/codingRoomService');
 const payService = require('../service/paymentService');
+const errorHandler = require('../service/errorHandleService');
 var multer = require('multer');
 const path = require('path');
 var upload = multer({ dest: 'upload/' });
@@ -209,11 +210,26 @@ router.post('/demands', jwtCheck, jsonParser, (req, res) => {
 });
 //2018.8.31 online payment
 router.post('/pay', jsonParser, (req, res) => {
-    var payInfo = payService.getPayInfo(req.body.price, req.body.PayMethod);
+    //TODO: create user information
+    console.log(req.body);
+    var payInfo = payService.getPayInfo(req.body);
     return res.json(payInfo);
 });
-router.post('/payinfo', bodyParser.urlencoded(), (req, res) => {
+router.post('/paymentinfo', jsonParser, (req, res) => {
+    payService.queryData(req.body.email)
+    .then((data) => {
+        res.json(data);
+    })
+    .catch((e) => {
+        console.log(e);
+    })
+
+})
+router.post('/paypayzhuinfo', bodyParser.urlencoded(), (req, res) => {
     var zhuInfo = req.body;
     payService.saveConfirmData(zhuInfo);
+})
+router.post('/try', bodyParser.urlencoded(), (req, res) => {
+    errorHandler.saveError('abc');
 })
 module.exports = router;
