@@ -1,8 +1,5 @@
 const redisClient = require('../modules/redisClient');
-<<<<<<< HEAD
-=======
 const errorHandler = require('./errorHandleService');
->>>>>>> 21aae07e8f3da4303ccfb012b97e24b8c414cf33
 const TIMEOUT_IN_SECONDS = 3600;
 module.exports = function(io) {
     // collaboraiton sessions
@@ -37,21 +34,13 @@ module.exports = function(io) {
         } else {
             redisClient.get(sessionPath + '/' + sessionId, data => {
                 if (data) {
-<<<<<<< HEAD
-                    console.log('session terminated perviously, pulling back from redis');
-=======
                    // console.log('session terminated perviously, pulling back from redis');
->>>>>>> 21aae07e8f3da4303ccfb012b97e24b8c414cf33
                     collaboraitons[sessionId] = {
                         'cachaedInstructions': JSON.parse(data),
                         'participants': []
                     };
                 } else {
-<<<<<<< HEAD
-                    console.log('creating new session');
-=======
                  //   console.log('creating new session');
->>>>>>> 21aae07e8f3da4303ccfb012b97e24b8c414cf33
                     collaboraitons[sessionId] = {
                         'cachaedInstructions': [],
                         'participants': []
@@ -75,11 +64,7 @@ module.exports = function(io) {
                     }
                 }
             } else {
-<<<<<<< HEAD
-                console.error('error');
-=======
                 errorHandler.saveError('error from editor socket');
->>>>>>> 21aae07e8f3da4303ccfb012b97e24b8c414cf33
             }
         });
 
@@ -112,16 +97,8 @@ module.exports = function(io) {
                 }
             }
             if (!foundAndRemove) {
-<<<<<<< HEAD
-                console.error('warning');
-            }
-        });
-    });
-}
-=======
                 errorHandler.saveError('error from editor socket still has some user please check code');
             }
         });
     });
 }
->>>>>>> 21aae07e8f3da4303ccfb012b97e24b8c414cf33
