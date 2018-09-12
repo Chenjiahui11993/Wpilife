@@ -7,7 +7,7 @@ const saveError = (error) => {
         'error': error
     }
    try {    
-        fs.appendFile('../error.json', JSON.stringify(error), function(err){
+        fs.appendFile('/mnt/log/error.json', JSON.stringify(error), function(err){
             if(err) {
                 console.log('error happen')
             } else {
@@ -26,7 +26,7 @@ const saveData =(data) => {
         'data': data
     }
     try {    
-        fs.appendFile('../emaildata.json', JSON.stringify(error), function(err){
+        fs.appendFile('/mnt/log/emaildata.json', JSON.stringify(error), function(err){
             if(err) {
                 console.log('error happen')
             } else {
