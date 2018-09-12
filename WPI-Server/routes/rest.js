@@ -227,7 +227,8 @@ router.post('/paymentinfo', jsonParser, (req, res) => {
 })
 router.post('/paypayzhuinfo', bodyParser.urlencoded(), (req, res) => {
     var zhuInfo = req.body;
-    payService.saveConfirmData(zhuInfo);
+    payService.saveConfirmData(zhuInfo)
+    .then((data)=> res.json(data));
 })
 router.post('/try', bodyParser.urlencoded(), (req, res) => {
     errorHandler.saveError('abc');

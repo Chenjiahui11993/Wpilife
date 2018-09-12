@@ -77,47 +77,50 @@ const getPayInfo = (req) => {
     return JSON.stringify(p);
 }
 const saveConfirmData = (payInfo) => {
-
-    var orderInfo = payInfo.order_info.toString().split('/');
-    var email = orderInfo[2];
-    var name = orderInfo[0];
-    var orderID = payInfo.order_id;
-    var info = {
-        'ppz_order_id': payInfo.ppz_order_id,
-        'order_id': payInfo.order_id,
-        'price': payInfo.price,
-        'real_price': payInfo.real_price,
-        'order_info': payInfo.order_info,
-        'signature': payInfo.signature,
-        'email': email
-    }
-    var mailOptions = {
-        from: 'WPICSSA<admin@wpilife.org>', // sender address mailfrom must be same with the user
-        to: email, // list of receivers
-        // cc:'haha<xxx@xxx.com>', // copy for receivers
-        // bcc:'haha<xxxx@xxxx.com>', // secret copy for receivers
-        subject: '感谢您参加WPI&Clark中秋晚会', // Subject line
-       // text: 'Hello world', // plaintext body
-        html: ` <p>亲爱的：${name} 同学</p>
-        <br>
-        <p style="text-indent:2em;">您好， 首先非常感谢您参加我们的中秋晚会，您的订单号是：<b style="font-size: 40px">${orderID}</b>, 订单号是您当天入场的唯一凭证，请妥善保存。 我们的晚会将会于2018年9月30号晚上6点在WPI学校的<b style="font-size: 20px">Alden-memorial</b>准时开始，非常期待您的光临。
-            如您当天有事情不能到来，请最晚于2018/10/1日之前内添加微信：chenjiahui11993，我们会尽快帮您办理退款。</p>
-            <p>任何有关WPILIFE网站或者CSSA的建议，请您发送到：hbchenjh@gmail.com，为您提供便利与服务是我们WPICSSA的荣幸。</p>
-            <br>
-            <p style="text-indent:2em;">WPICSSA祝您学习进步，生活愉快！</p>
-            <br>
-            <p style="text-indent:2em;">WPICSSA全体成员敬上</p>`, // html body
-    };
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            errorHandler.saveError(error);
+    return new Promise((resolve, reject) => {
+        var orderInfo = payInfo.order_info.toString().split('/');
+        var email = orderInfo[2];
+        var name = orderInfo[0];
+        var orderID = payInfo.order_id;
+        var info = {
+            'ppz_order_id': payInfo.ppz_order_id,
+            'order_id': payInfo.order_id,
+            'price': payInfo.price,
+            'real_price': payInfo.real_price,
+            'order_info': payInfo.order_info,
+            'signature': payInfo.signature,
+            'email': email
         }
-        console.log('Message sent: ' + info);
-        errorHandler.saveData(info.response);
-    });
-    var mongoosePayInfo = new paymentModel(info);
-    mongoosePayInfo.save();
-
+        var mailOptions = {
+            from: 'WPICSSA<admin@wpilife.org>', // sender address mailfrom must be same with the user
+            to: email, // list of receivers
+            // cc:'haha<xxx@xxx.com>', // copy for receivers
+            // bcc:'haha<xxxx@xxxx.com>', // secret copy for receivers
+            subject: '感谢您参加WPI&Clark中秋晚会', // Subject line
+           // text: 'Hello world', // plaintext body
+            html: ` <p>亲爱的：${name} 同学</p>
+            <br>
+            <p style="text-indent:2em;">您好， 首先非常感谢您参加我们的中秋晚会，您的订单号是：<b style="font-size: 40px">${orderID}</b>, 订单号是您当天入场的唯一凭证，请妥善保存。 我们的晚会将会于2018年9月30号晚上6点在WPI学校的<b style="font-size: 20px">Alden-memorial</b>准时开始，非常期待您的光临。
+                如您当天有事情不能到来，请最晚于2018/10/1日之前内添加微信：chenjiahui11993，我们会尽快帮您办理退款。</p>
+                <p>任何有关WPILIFE网站或者CSSA的建议，请您发送到：hbchenjh@gmail.com，为您提供便利与服务是我们WPICSSA的荣幸。</p>
+                <br>
+                <p style="text-indent:2em;">WPICSSA祝您学习进步，生活愉快！</p>
+                <br>
+                <p style="text-indent:2em;">WPICSSA全体成员敬上</p>`, // html body
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                errorHandler.saveError(error);
+                reject(error);
+            } else {
+                console.log('Message sent: ' + info);
+                errorHandler.saveData(info.response);
+                var mongoosePayInfo = new paymentModel(info);
+                mongoosePayInfo.save();
+                resolve('OK');
+            }          
+        });       
+    }); 
 }
 const queryData = (userEmail) => {
     return new Promise((resolve, reject) => {
